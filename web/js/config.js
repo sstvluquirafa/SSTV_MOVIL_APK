@@ -7,8 +7,8 @@ window.GK_CONFIG = {
   "logo": "assets/img/logo.svg",
   "iteraciones": 100000,
   "firebase": {
-    "apiKey": "",
-    "databaseURL": ""
+    "apiKey": "AIzaSyB4FD4ZORNiyV7iNAYGrj6ov46zQZ1tkh4",
+    "databaseURL": "https://gymkhana-sstv-default-rtdb.europe-west1.firebasedatabase.app"
   },
   "mapa": {
     "imagen": "assets/img/mapa.jpg",

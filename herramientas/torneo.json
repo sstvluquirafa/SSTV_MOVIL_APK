@@ -41,7 +41,7 @@
   "ntfy_servidor": "https://ntfy.sh",
 
   "firebase": {
-    "apiKey": "",
-    "databaseURL": ""
+    "apiKey": "AIzaSyB4FD4ZORNiyV7iNAYGrj6ov46zQZ1tkh4",
+    "databaseURL": "https://gymkhana-sstv-default-rtdb.europe-west1.firebasedatabase.app"
   }
 }
