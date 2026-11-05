@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>Ranking · Gymkhana SSTV · GranaSAT</title>
+  <link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/ranking.css">
+</head>
+<body class="ranking">
+  <div id="banda-demo" class="banda-demo oculto">MODO DEMO · LOS DATOS SOLO ESTÁN EN ESTE NAVEGADOR</div>
+  <header class="cabecera">
+    <div class="cabecera-int">
+      <a class="marca" href="./" aria-label="Volver a la app">
+        <img id="logo" alt="Logo de GranaSAT" src="assets/img/logo.svg">
+        <div>
+          <div class="marca-nombre">GRANASAT</div>
+          <div class="marca-sub" id="marca-sub">Gymkhana SSTV</div>
+        </div>
+      </a>
+      <div class="cabecera-der">
+        <span class="chip" id="chip-estado"><span class="led"></span>CONECTANDO</span>
+        <button class="chip boton-chip" id="pantalla-completa" title="Pantalla completa (F)">⛶ PANTALLA COMPLETA</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="tablero">
+    <section class="encabezado">
+      <div>
+        <p class="antetitulo" id="lugar"></p>
+        <h1 class="titulo">Ranking en <span class="ambar">directo</span></h1>
+      </div>
+      <div class="reloj-grande">
+        <span class="etiqueta">Tiempo de misión</span>
+        <span class="mono" id="reloj">--:--</span>
+      </div>
+    </section>
+
+    <section class="podio" id="podio" aria-label="Podio: los tres primeros"></section>
+    <section class="resto" aria-label="Resto de equipos">
+      <div class="ventana">
+        <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · CLASIFICACIÓN</span></div>
+        <ol class="lista" id="lista"></ol>
+      </div>
+    </section>
+  </main>
+  <div id="avisos" class="avisos" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/iconos.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/fondo.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/constelacion.js"></script>
+  <script src="js/ranking.js"></script>
+  <script src="js/inicio.js"></script>
+</body>
+</html>

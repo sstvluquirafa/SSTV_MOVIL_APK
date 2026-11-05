@@ -1,0 +1,14 @@
+# Códigos en claro, datos para Firebase e imprimibles: NUNCA se suben
+privado/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+__pycache__/
+*.pyc
+node_modules/
+
+# Imagen grande que se regenera (se copia a Web_Hackathon a mano)
+generado/mapa_con_estaciones.png

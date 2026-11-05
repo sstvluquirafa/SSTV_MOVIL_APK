@@ -1,0 +1,41 @@
+/* Panel de organización (usa también las estrellas de ranking.css). */
+.org-vista { max-width: 1200px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 18px; }
+.org-entrada { max-width: 440px; margin: 6vh auto 0; width: 100%; }
+.org-entrada .titulo { font-size: 2rem; }
+.nota { font-size: .85rem; margin: 12px 0 0; }
+.org-cabecera { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.org-cabecera .titulo { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0; }
+.org-estado { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; padding: 14px 18px; }
+.org-estado .etiqueta { margin: 0 0 4px; }
+.estado-reloj { font-size: 1.6rem; font-weight: 700; color: var(--ambar); }
+.org-botones { display: flex; gap: 8px; }
+.tabla-envoltura { overflow-x: auto; }
+.tabla-org { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.tabla-org th { text-align: left; font-family: var(--mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--texto-2); padding: 10px 12px; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+.tabla-org td { padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, .1); vertical-align: middle; }
+.tabla-org tr.terminado td:first-child b { color: #6ee7b7; }
+.tabla-org .estrellas { flex-wrap: nowrap; }
+.estrellas span.manual { outline: 2px dashed #f87171; outline-offset: 1px; }
+.acciones { white-space: nowrap; }
+.boton-sec.mini { min-height: 38px; padding: 6px 10px; }
+.boton-sec.mini .icono { width: 18px; height: 18px; }
+.boton-sec:disabled { opacity: .35; cursor: default; }
+.zona-peligro { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-color: rgba(248, 113, 113, .3); }
+.zona-peligro p { margin: 0; }
+.modal-caja .titulo { font-size: 1.4rem; }
+
+/* Peticiones de ayuda */
+.ventana-alerta { border-color: rgba(248, 113, 113, .6); box-shadow: 0 0 0 1px rgba(248, 113, 113, .3), 0 0 40px rgba(248, 113, 113, .18), var(--sombra); }
+.ventana-alerta .ventana-barra { background: rgba(127, 29, 29, .7); color: #fecaca; }
+.lista-ayudas { list-style: none; margin: 0; padding: 0; }
+.lista-ayudas li { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid rgba(148, 163, 184, .12); }
+.lista-ayudas li:last-child { border-bottom: 0; }
+.lista-ayudas .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+.boton.mini { min-height: 38px; padding: 6px 14px; font-size: .9rem; }
+.tabla-org tr.atascado td { background: rgba(248, 113, 113, .08); }
+.tabla-org tr.atascado td:nth-child(6) { color: #fca5a5; font-weight: 700; }
+.enlace { background: none; border: 0; padding: 0; color: var(--ambar); font: inherit; cursor: pointer; text-decoration: underline dotted; }
+.org-ntfy { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.org-ntfy p { margin: 0; max-width: 760px; }
+.acciones .icono { width: 18px; height: 18px; }
+select.campo { appearance: auto; }

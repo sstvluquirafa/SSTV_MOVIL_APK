@@ -1,0 +1,4 @@
+Fuentes (de fontsource, subconjunto latin), todas con licencia SIL Open Font License 1.1:
+- Inter (Rasmus Andersson)
+- Merriweather (Sorkin Type)
+- JetBrains Mono (JetBrains)

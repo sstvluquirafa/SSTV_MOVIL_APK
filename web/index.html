@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Gymkhana SSTV · GranaSAT</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/icono-192.png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app">
+  <div id="banda-demo" class="banda-demo oculto">MODO DEMO · LOS DATOS SOLO ESTÁN EN ESTE NAVEGADOR</div>
+  <header class="cabecera">
+    <div class="cabecera-int">
+      <a class="marca" href="#/" aria-label="Ir a mi ruta">
+        <img id="logo" alt="Logo de GranaSAT" src="assets/img/logo.svg">
+        <div>
+          <div class="marca-nombre">GRANASAT</div>
+          <div class="marca-sub" id="marca-sub">Gymkhana SSTV</div>
+        </div>
+      </a>
+      <div class="cabecera-der">
+        <span class="chip chip-ambar oculto" id="chip-equipo"></span>
+        <span class="chip oculto" id="chip-progreso"></span>
+        <span class="chip" id="chip-red"><span class="led"></span></span>
+      </div>
+    </div>
+  </header>
+
+  <main id="vista" class="vista" aria-live="polite"></main>
+
+  <div id="sin-cripto" class="aviso aviso-error oculto" style="margin:16px">
+    Este navegador no permite comprobar los códigos. Abrid la app con Chrome o Safari actualizados.
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/iconos.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/fondo.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/constelacion.js"></script>
+  <script src="js/mapa.js"></script>
+  <script src="js/escaner.js"></script>
+  <script src="vendor/jsQR.js" defer></script>
+  <script src="js/pruebas/registro.js"></script>
+  <!-- Pruebas: añade aquí un <script> por cada archivo de js/pruebas/ (y su ruta en sw.js) -->
+  <script src="js/pruebas/codigo_estacion.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/inicio.js"></script>
+</body>
+</html>

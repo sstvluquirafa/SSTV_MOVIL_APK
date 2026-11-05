@@ -1,0 +1,4 @@
+Librerías incluidas en vendor/
+
+jsQR.js — https://github.com/cozmo/jsQR — Licencia Apache 2.0
+qrcode.js — https://github.com/kazuhikoarase/qrcode-generator — Licencia MIT (c) 2009 Kazuhiko Arase

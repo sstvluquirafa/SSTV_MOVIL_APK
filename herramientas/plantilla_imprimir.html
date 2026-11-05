@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imprimibles · Gymkhana SSTV</title>
+<!-- GENERADO por herramientas/generar_torneo.py. CONTIENE CÓDIGOS SECRETOS: no lo subas ni lo compartas. -->
+<style>
+  @font-face { font-family: 'Inter'; font-weight: 400; src: url('../web/assets/fonts/inter-latin-400-normal.woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 700; src: url('../web/assets/fonts/inter-latin-700-normal.woff2'); }
+  @font-face { font-family: 'Merriweather'; font-weight: 900; src: url('../web/assets/fonts/merriweather-latin-900-normal.woff2'); }
+  @font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('../web/assets/fonts/jetbrains-mono-latin-700-normal.woff2'); }
+  :root { --marino: #0f172a; --naranja: #d97706; --ambar: #fbbf24; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--marino); background: #e2e8f0; }
+  .barra { position: sticky; top: 0; z-index: 5; background: var(--marino); color: #f8fafc; border-bottom: 3px solid var(--naranja); padding: 12px 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .barra b { font-family: Merriweather, serif; margin-right: auto; }
+  .barra button { font: inherit; font-weight: 700; padding: 10px 14px; border-radius: 10px; border: 0; cursor: pointer; background: var(--ambar); color: #1c1305; }
+  .barra .aviso { width: 100%; font-size: .85rem; color: #fde68a; }
+  .hoja { width: 210mm; min-height: 297mm; margin: 16px auto; background: #fff; box-shadow: 0 6px 24px rgba(0,0,0,.15); position: relative; overflow: hidden; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .titulo { font-family: Merriweather, serif; font-weight: 900; }
+  .ambar { color: var(--naranja); }
+
+  /* Cartel de estación */
+  .cartel { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 18mm 14mm; }
+  .cartel-cab { align-self: stretch; margin: 0 -18mm 10mm; background: var(--marino); color: #fff; border-bottom: 2.5mm solid var(--naranja); padding: 7mm 18mm; display: flex; justify-content: space-between; align-items: center; }
+  .cartel-cab .mono { letter-spacing: .25em; font-size: 11pt; }
+  .cartel-num { width: 52mm; height: 52mm; border-radius: 50%; display: grid; place-items: center; font-family: Merriweather, serif; font-weight: 900; font-size: 66pt;
+    background: radial-gradient(circle at 35% 30%, #fde68a, #fbbf24 45%, #d97706); color: #1c1305; border: 2mm solid var(--marino); }
+  .cartel h1 { font-size: 30pt; margin: 8mm 0 2mm; }
+  .cartel .qr { width: 118mm; height: 118mm; margin: 6mm 0; padding: 4mm; border: 1.2mm solid var(--marino); border-radius: 6mm; }
+  .cartel .qr svg { width: 100%; height: 100%; display: block; }
+  .cartel p { font-size: 15pt; margin: 2mm 0; }
+  .cartel .pie { position: absolute; bottom: 8mm; left: 0; right: 0; font-size: 8pt; color: #64748b; }
+
+  /* Tarjetas de equipo: 4 por hoja */
+  .rejilla { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 297mm; }
+  .tarjeta { border: .3mm dashed #94a3b8; padding: 9mm; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .tarjeta .cab { align-self: stretch; background: var(--marino); color: #fff; border-bottom: 1.5mm solid var(--naranja); padding: 3mm; font-size: 8pt; letter-spacing: .2em; }
+  .tarjeta h2 { font-size: 22pt; margin: 5mm 0 1mm; }
+  .tarjeta .qr { width: 52mm; height: 52mm; margin: 3mm 0; }
+  .tarjeta .qr svg { width: 100%; height: 100%; display: block; }
+  .tarjeta .codigo { font-size: 20pt; letter-spacing: .3em; border: .6mm solid var(--marino); border-radius: 3mm; padding: 1.5mm 4mm; margin: 2mm 0; }
+  .tarjeta .ruta { font-size: 9.5pt; margin-top: auto; }
+  .tarjeta .ruta b { display: block; font-size: 8pt; letter-spacing: .18em; color: var(--naranja); margin-bottom: 1mm; }
+  .tarjeta small { font-size: 8pt; color: #475569; }
+
+  /* Etiquetas de código para esconder: 10 por hoja */
+  .etiquetas { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 57mm; padding: 6mm; gap: 0; }
+  .etiqueta-cod { border: .4mm dashed #94a3b8; display: flex; align-items: center; gap: 6mm; padding: 6mm; }
+  .etiqueta-cod .letra { flex: none; width: 24mm; height: 24mm; border-radius: 50%; display: grid; place-items: center; font-family: Merriweather, serif; font-weight: 900; font-size: 26pt;
+    background: radial-gradient(circle at 35% 30%, #fde68a, #fbbf24 45%, #d97706); border: 1mm solid var(--marino); }
+  .etiqueta-cod small { display: block; font-size: 8pt; letter-spacing: .2em; color: var(--naranja); font-weight: 700; }
+  .etiqueta-cod .cod { font-size: 24pt; letter-spacing: .25em; font-weight: 700; }
+  .etiqueta-cod p { margin: 1mm 0 0; font-size: 9pt; color: #475569; }
+
+  /* Hoja de organización */
+  .monitores { padding: 16mm; }
+  .monitores h1 { font-size: 22pt; margin: 0 0 2mm; }
+  .monitores table { width: 100%; border-collapse: collapse; margin: 4mm 0 6mm; font-size: 10.5pt; }
+  .monitores th { text-align: left; background: var(--marino); color: #fff; padding: 2.5mm 3mm; font-size: 9pt; letter-spacing: .1em; }
+  .monitores td { border-bottom: .3mm solid #cbd5e1; padding: 1.6mm 3mm; }
+  .monitores td.mono { font-size: 13pt; letter-spacing: .2em; }
+  .monitores .ntfy { display: flex; gap: 5mm; align-items: center; margin: 4mm 0; font-size: 10pt; }
+  .monitores .qr-peq { width: 26mm; height: 26mm; flex: none; }
+  .monitores .qr-peq svg { width: 100%; height: 100%; display: block; }
+  .monitores table.rutas td { padding: 2.5mm 3mm; }
+  .monitores .secreto { background: #fef3c7; border-left: 2mm solid var(--naranja); padding: 3mm 4mm; font-size: 10pt; }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .barra { display: none; }
+    .hoja { margin: 0; box-shadow: none; page-break-after: always; break-after: page; height: 297mm; min-height: 0; }
+    .hoja:last-child { page-break-after: auto; break-after: auto; }
+    body.solo-carteles .hoja:not(.cartel), body.solo-etiquetas .hoja:not(.hoja-etiquetas), body.solo-tarjetas .hoja:not(.hoja-tarjetas), body.solo-monitores .hoja:not(.monitores) { display: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="barra">
+    <b>Imprimibles de la gymkhana</b>
+    <button data-solo="carteles">Imprimir carteles</button>
+    <button data-solo="tarjetas">Imprimir tarjetas</button>
+    <button data-solo="etiquetas">Imprimir etiquetas de código</button>
+    <button data-solo="monitores">Imprimir hoja de organización</button>
+    <button data-solo="">Imprimir todo</button>
+    <div class="aviso">⚠ Este archivo contiene los códigos de equipos, estaciones y organización. No lo compartas ni lo subas a GitHub.
+      Las etiquetas de código se esconden en cada estación (para la prueba de relleno «codigo_estacion»).</div>
+  </div>
+  <div id="hojas"></div>
+
+<script src="../web/vendor/qrcode.js"></script>
+<script>
+const D = /*__DATOS__*/null;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function qr(texto) {
+  const q = qrcode(0, 'M');
+  q.addData(texto);
+  q.make();
+  return q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+}
+const tituloHTML = esc(D.titulo).replace(esc(D.tituloDestacado), `<span class="ambar">${esc(D.tituloDestacado)}</span>`);
+let html = '';
+
+for (const e of D.estaciones) {
+  html += `<section class="hoja cartel">
+    <div class="cartel-cab"><span class="mono">GRANASAT · ESTACIÓN</span><span class="titulo">${tituloHTML}</span></div>
+    <div class="cartel-num">${esc(e.letra)}</div>
+    <h1 class="titulo">${esc(e.nombre)}</h1>
+    <div class="qr">${qr(e.url)}</div>
+    <p><b>Escanead este QR</b> con la app de la gymkhana</p>
+    <p>(o con la cámara del móvil)</p>
+    ${e.tipo === 'codigo_estacion' ? '<p style="font-size:12pt;color:#475569">Después, buscad la etiqueta con el código escondida cerca.</p>' : ''}
+    <div class="pie">${esc(D.lugar)}</div>
+  </section>`;
+}
+
+const conEtiqueta = D.estaciones.filter((e) => e.tipo === 'codigo_estacion');
+for (let i = 0; i < conEtiqueta.length; i += 10) {
+  html += '<section class="hoja hoja-etiquetas"><div class="etiquetas">';
+  for (const e of conEtiqueta.slice(i, i + 10)) {
+    html += `<div class="etiqueta-cod"><div class="letra">${esc(e.letra)}</div>
+      <div><small>CÓDIGO DE LA ESTACIÓN ${esc(e.letra)}</small><div class="cod mono">${esc(e.clave)}</div>
+      <p>Escribidlo en la app para superar la estación.</p></div></div>`;
+  }
+  html += '</div></section>';
+}
+
+for (let i = 0; i < D.equipos.length; i += 4) {
+  html += '<section class="hoja hoja-tarjetas"><div class="rejilla">';
+  for (const eq of D.equipos.slice(i, i + 4)) {
+    html += `<div class="tarjeta">
+      <div class="cab mono">GRANASAT · TARJETA DE EQUIPO</div>
+      <h2 class="titulo">${esc(eq.nombre)}</h2>
+      <small>Escanead este QR para uniros al equipo</small>
+      <div class="qr">${qr(eq.url)}</div>
+      <small>o elegid el equipo ${eq.id} y escribid el código:</small>
+      <div class="codigo mono">${esc(eq.codigo)}</div>
+      <div class="ruta"><b>¡CUANTO ANTES OS UNÁIS, MÁS CORTA SERÁ VUESTRA RUTA!</b></div>
+    </div>`;
+  }
+  html += '</div></section>';
+}
+
+html += `<section class="hoja monitores">
+  <h1 class="titulo">Hoja de <span class="ambar">organización</span></h1>
+  <p>${tituloHTML} · ${esc(D.lugar)}</p>
+  <div class="secreto">Código del panel de organización (<span class="mono">organizacion.html</span>): <b class="mono">${esc(D.organizacion)}</b></div>
+  <div class="ntfy">
+    <div class="qr-peq">${qr(D.ntfy)}</div>
+    <div><b>Avisos de ayuda en vuestro móvil.</b> Instalad la app <b>ntfy</b> y suscribíos al tema
+      <b class="mono">${esc(D.ntfyTema)}</b> (o escanead este QR). Os llegará un aviso cuando un equipo pulse «Pedir ayuda»
+      o lleve demasiado rato sin completar una estación.</div>
+  </div>
+  <table><thead><tr><th>ESTACIÓN</th><th>NOMBRE</th><th>PRUEBA</th><th>CÓDIGO / CLAVE</th></tr></thead><tbody>
+  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${esc(e.clave)}</td></tr>`).join('')}
+  </tbody></table>
+  <table><thead><tr><th>EQUIPO</th><th>CÓDIGO</th><th>RUTA (por orden de llegada)</th><th>RECORRIDO</th></tr></thead><tbody>
+  ${D.equipos.map((e) => `<tr><td><b>${esc(e.nombre)}</b></td><td class="mono">${esc(e.codigo)}</td><td></td><td></td></tr>`).join('')}
+  </tbody></table>
+  <p style="font-size:9pt;color:#475569">Enlace de la app: ${esc(D.base)} · Ranking: ${esc(D.base)}ranking.html · Panel: ${esc(D.base)}organizacion.html</p>
+</section>
+<section class="hoja monitores">
+  <h1 class="titulo">Las <span class="ambar">rutas</span></h1>
+  <p>Se reparten por orden de llegada: la ruta 1 (la más corta) para el primer equipo que se une con el mapa montado, la 2 para el segundo…
+    En ningún paso coinciden dos equipos en la misma estación. Distancias aproximadas, en línea recta sobre el mapa.</p>
+  <table class="rutas"><thead><tr><th>RUTA</th><th>≈ DISTANCIA</th><th>ORDEN DE ESTACIONES</th></tr></thead><tbody>
+  ${D.rutas.map((r) => `<tr><td><b>${r.id}</b></td><td class="mono" style="font-size:10pt;letter-spacing:0">${r.metros} m</td><td class="mono" style="font-size:10pt;letter-spacing:.05em">${r.letras.join(' → ')}</td></tr>`).join('')}
+  </tbody></table>
+</section>`;
+
+document.getElementById('hojas').innerHTML = html;
+document.querySelectorAll('[data-solo]').forEach((b) => b.addEventListener('click', () => {
+  document.body.className = b.dataset.solo ? 'solo-' + b.dataset.solo : '';
+  window.print();
+}));
+</script>
+</body>
+</html>

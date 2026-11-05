@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editor de estaciones · Gymkhana SSTV</title>
+<!-- Ábrelo con doble clic. Lee el mapa y las posiciones actuales de web/ (ejecuta antes generar_torneo.py). -->
+<link rel="stylesheet" href="../web/css/base.css">
+<style>
+  body { background: #0b1226; }
+  .editor { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 16px; padding: 16px; max-width: 1800px; margin: 0 auto; }
+  @media (max-width: 1000px) { .editor { grid-template-columns: 1fr; } }
+  .lienzo { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); background: #e8edf2; cursor: crosshair; user-select: none; }
+  .lienzo img { display: block; width: 100%; height: auto; pointer-events: none; }
+  .lienzo svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .marca { cursor: grab; }
+  .marca circle { fill: #0f172a; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .marca path { fill: #fbbf24; }
+  .marca.sel circle { stroke: #fb923c; stroke-width: 5; }
+  .marca text { font-family: var(--titulo); font-weight: 900; text-anchor: middle; fill: #0f172a; pointer-events: none; }
+  .lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .lista li { display: grid; grid-template-columns: 36px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 10px; border: 1px solid var(--borde); background: rgba(2, 6, 23, .5); cursor: pointer; }
+  .lista li.sel { border-color: var(--ambar); background: var(--ambar-suave); }
+  .lista .l { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--ambar); color: #1c1305; font-family: var(--titulo); font-weight: 900; }
+  .lista input { width: 100%; background: transparent; border: 0; color: var(--texto); font: inherit; padding: 4px; border-bottom: 1px dashed var(--borde); }
+  .lista .xy { font-family: var(--mono); font-size: .72rem; color: var(--texto-3); }
+  textarea { width: 100%; min-height: 220px; background: rgba(2, 6, 23, .8); color: #a7f3d0; border: 1px solid var(--borde); border-radius: 10px; font-family: var(--mono); font-size: .75rem; padding: 10px; }
+  .botones { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .ayuda { font-size: .9rem; color: var(--texto-2); }
+  .ayuda ol { padding-left: 18px; margin: 6px 0; }
+</style>
+</head>
+<body>
+  <header class="cabecera"><div class="cabecera-int"><div class="marca-nombre">EDITOR DE ESTACIONES</div><div class="cabecera-der"><span class="chip chip-ambar" id="estado">—</span></div></div></header>
+  <main class="editor">
+    <section>
+      <div class="lienzo" id="lienzo"><img id="mapa" alt="Mapa del Parque"><svg id="svg"></svg></div>
+      <p class="ayuda">Selecciona una estación en la lista y <b>haz clic en el mapa</b> para colocarla, o <b>arrástrala</b>. Las letras amarillas son las estaciones; los números negros del mapa son los pabellones del Parque.</p>
+    </section>
+    <aside>
+      <div class="tarjeta">
+        <p class="antetitulo">Estaciones</p>
+        <ul class="lista" id="lista"></ul>
+        <div class="botones">
+          <button class="boton-sec" id="anadir">+ Añadir estación</button>
+          <button class="boton-sec boton-peligro" id="quitar">Quitar la seleccionada</button>
+        </div>
+      </div>
+      <div class="tarjeta" style="margin-top:14px">
+        <p class="antetitulo">Guardar</p>
+        <div class="ayuda"><ol>
+          <li>Pulsa <b>Copiar</b>.</li>
+          <li>En <span class="mono">herramientas/torneo.json</span>, sustituye la lista <span class="mono">"estaciones": [ … ]</span> por lo copiado.</li>
+          <li>Ejecuta <span class="mono">python herramientas/generar_torneo.py</span>: recalcula las rutas, el mapa de la app y el mapa con las estaciones para los fragmentos SSTV.</li>
+        </ol></div>
+        <textarea id="salida" readonly></textarea>
+        <div class="botones"><button class="boton" id="copiar">Copiar</button></div>
+      </div>
+    </aside>
+  </main>
+<script src="../web/js/config.js"></script>
+<script>
+(function () {
+  const C = window.GK_CONFIG;
+  const M = C.mapa;
+  const LETRAS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let est = C.estaciones.map((e) => ({ id: e.id, letra: e.letra, nombre: e.nombre, x: e.x, y: e.y, prueba: e.prueba }));
+  let sel = est.length ? est[0].id : null;
+  const $ = (s) => document.querySelector(s);
+  const svg = $('#svg');
+  $('#mapa').src = '../web/' + M.imagen;
+  svg.setAttribute('viewBox', `0 0 ${M.ancho} ${M.alto}`);
+  const R = Math.round(M.ancho * 0.022);
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function estrella(x, y, r) {
+    let d = '';
+    for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + (i * Math.PI) / 5, rr = i % 2 ? r * 0.5 : r; d += (i ? 'L' : 'M') + (x + Math.cos(a) * rr) + ',' + (y + Math.sin(a) * rr); }
+    return d + 'Z';
+  }
+  function pintar() {
+    svg.innerHTML = est.map((e) => `<g class="marca${e.id === sel ? ' sel' : ''}" data-id="${e.id}">
+      <circle cx="${e.x}" cy="${e.y}" r="${R}"/><path d="${estrella(e.x, e.y, R * 0.92)}"/>
+      <text x="${e.x}" y="${e.y}" dy=".36em" style="font-size:${R}px">${esc(e.letra)}</text></g>`).join('');
+    $('#lista').innerHTML = est.map((e) => `<li class="${e.id === sel ? 'sel' : ''}" data-id="${e.id}">
+      <span class="l">${esc(e.letra)}</span>
+      <span><input value="${esc(e.nombre)}" data-nombre="${e.id}" aria-label="Nombre de la estación ${esc(e.letra)}"><span class="xy">x ${Math.round(e.x)} · y ${Math.round(e.y)}</span></span>
+      <span></span></li>`).join('');
+    $('#lista').querySelectorAll('li').forEach((li) => li.addEventListener('click', (ev) => { if (ev.target.tagName !== 'INPUT') { sel = Number(li.dataset.id); pintar(); } }));
+    $('#lista').querySelectorAll('[data-nombre]').forEach((i) => i.addEventListener('input', () => { est.find((e) => e.id === Number(i.dataset.nombre)).nombre = i.value; salida(); }));
+    salida();
+  }
+  function salida() {
+    const filas = est.map((e) => `    { "id": ${e.id}, "letra": ${JSON.stringify(e.letra)}, "nombre": ${JSON.stringify(e.nombre)}, "x": ${Math.round(e.x)}, "y": ${Math.round(e.y)}, "prueba": ${JSON.stringify(e.prueba || { tipo: 'codigo_estacion' })} }`);
+    $('#salida').value = `"estaciones": [\n${filas.join(',\n')}\n  ],`;
+    $('#estado').textContent = `${est.length} ESTACIONES`;
+  }
+  function punto(ev) {
+    const r = svg.getBoundingClientRect();
+    return { x: ((ev.clientX - r.left) / r.width) * M.ancho, y: ((ev.clientY - r.top) / r.height) * M.alto };
+  }
+  let arrastre = null;
+  svg.addEventListener('pointerdown', (ev) => {
+    const g = ev.target.closest('.marca');
+    if (g) { sel = Number(g.dataset.id); arrastre = sel; svg.setPointerCapture(ev.pointerId); pintar(); return; }
+    const e = est.find((x) => x.id === sel);
+    if (!e) return;
+    Object.assign(e, punto(ev));
+    pintar();
+  });
+  svg.addEventListener('pointermove', (ev) => {
+    if (arrastre == null) return;
+    Object.assign(est.find((x) => x.id === arrastre), punto(ev));
+    pintar();
+  });
+  svg.addEventListener('pointerup', () => { arrastre = null; });
+  $('#anadir').onclick = () => {
+    const id = Math.max(0, ...est.map((e) => e.id)) + 1;
+    const letra = LETRAS.split('').find((l) => !est.some((e) => e.letra === l)) || String(id);
+    est.push({ id, letra, nombre: `Estación ${letra}`, x: M.ancho / 2, y: M.alto / 2, prueba: { tipo: 'codigo_estacion' } });
+    sel = id;
+    pintar();
+  };
+  $('#quitar').onclick = () => {
+    if (!sel) return;
+    est = est.filter((e) => e.id !== sel);
+    sel = est.length ? est[est.length - 1].id : null;
+    pintar();
+  };
+  $('#copiar').onclick = async () => {
+    const t = $('#salida');
+    t.select();
+    try { await navigator.clipboard.writeText(t.value); } catch (e) { document.execCommand('copy'); }
+    $('#copiar').textContent = '¡Copiado!';
+    setTimeout(() => { $('#copiar').textContent = 'Copiar'; }, 1500);
+  };
+  pintar();
+})();
+</script>
+</body>
+</html>

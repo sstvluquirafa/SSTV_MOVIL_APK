@@ -1,0 +1,117 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "secretos": {
+      ".read": false,
+      ".write": false
+    },
+    "vivo": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).exists()",
+      "estado": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).exists()"
+      },
+      "asignacion": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).exists()",
+        "equipos": {
+          "$equipo": {
+            ".write": "auth != null && !data.exists() && root.child('miembros').child($equipo).child(auth.uid).exists() && newData.isString() && newData.parent().parent().child('rutas').child(newData.val()).val() === $equipo",
+            ".validate": "newData.isString() && root.child('rutas').child(newData.val()).exists()"
+          }
+        },
+        "rutas": {
+          "$ruta": {
+            ".write": "auth != null && !data.exists() && newData.isString() && root.child('miembros').child(newData.val()).child(auth.uid).exists() && root.child('orden_rutas').child($ruta).exists() && (root.child('orden_rutas').child($ruta).val() === 'inicio' || root.child('vivo/asignacion/rutas').child(root.child('orden_rutas').child($ruta).val()).exists()) && newData.parent().parent().child('equipos').child(newData.val()).val() === $ruta",
+            ".validate": "newData.isString()"
+          }
+        }
+      },
+      "progreso": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).exists()",
+        "$equipo": {
+          "$estacion": {
+            ".write": "auth != null && !data.exists() && root.child('miembros').child($equipo).child(auth.uid).exists() && root.child('vivo/estado/iniciada').val() === true && root.child('vivo/asignacion/equipos').child($equipo).exists() && root.child('rutas').child(root.child('vivo/asignacion/equipos').child($equipo).val()).child($estacion).exists() && (root.child('rutas').child(root.child('vivo/asignacion/equipos').child($equipo).val()).child($estacion).child('anterior').val() === 'inicio' || data.parent().child(root.child('rutas').child(root.child('vivo/asignacion/equipos').child($equipo).val()).child($estacion).child('anterior').val()).exists()) && newData.parent().parent().parent().parent().child('pruebas').child($equipo).child($estacion).child('token').val() === root.child('secretos/estaciones').child($estacion).child('token').val() && newData.parent().parent().parent().parent().child('pruebas').child($equipo).child($estacion).child('clave').val() === root.child('secretos/estaciones').child($estacion).child('clave').val()",
+            ".validate": "newData.hasChildren(['t']) && newData.child('t').isNumber() && newData.child('t').val() <= now",
+            "t": {
+              ".validate": true
+            },
+            "manual": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$otro": {
+              ".validate": false
+            }
+          }
+        }
+      },
+      "ayudas": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).exists()",
+        "$equipo": {
+          "$id": {
+            ".write": "auth != null && !data.exists() && root.child('miembros').child($equipo).child(auth.uid).exists()",
+            ".validate": "newData.hasChildren(['t', 'motivo']) && newData.child('t').isNumber() && newData.child('t').val() <= now && newData.child('motivo').isString() && newData.child('motivo').val().length <= 40",
+            "t": {
+              ".validate": true
+            },
+            "motivo": {
+              ".validate": true
+            },
+            "estacion": {
+              ".validate": "newData.isNumber()"
+            },
+            "paso": {
+              ".validate": "newData.isNumber()"
+            },
+            "resuelta": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$otro": {
+              ".validate": false
+            }
+          }
+        }
+      },
+      "mensajes": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).exists()"
+      }
+    },
+    "equipos": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).exists()"
+    },
+    "rutas": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).exists()"
+    },
+    "orden_rutas": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).exists()"
+    },
+    "admins": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid && newData.isString() && newData.val() === root.child('secretos/organizacion').val()"
+      }
+    },
+    "miembros": {
+      ".write": "auth != null && root.child('admins').child(auth.uid).exists()",
+      "$equipo": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid && newData.isString() && newData.val() === root.child('secretos/equipos').child($equipo).val()"
+        }
+      }
+    },
+    "pruebas": {
+      ".read": false,
+      ".write": "auth != null && root.child('admins').child(auth.uid).exists()",
+      "$equipo": {
+        "$estacion": {
+          ".write": "auth != null && root.child('miembros').child($equipo).child(auth.uid).exists() && !root.child('vivo/progreso').child($equipo).child($estacion).exists()",
+          ".validate": "newData.hasChildren(['token', 'clave']) && newData.child('token').isString() && newData.child('clave').isString()"
+        }
+      }
+    }
+  }
+}

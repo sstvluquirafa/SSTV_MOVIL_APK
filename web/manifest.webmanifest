@@ -1,0 +1,17 @@
+{
+  "name": "Gymkhana SSTV · GranaSAT",
+  "short_name": "Gymkhana SSTV",
+  "description": "Ruta de estaciones de la gymkhana del Hackathon SSTV de GranaSAT.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    { "src": "assets/img/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/img/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/img/icono.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

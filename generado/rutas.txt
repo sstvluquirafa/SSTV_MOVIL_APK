@@ -1,0 +1,15 @@
+Rutas (de la más corta a la más larga). La 1 es para el primer equipo que llega con el mapa montado.
+
+Ruta  1  ≈  603 m   A → B → H → E → F → J → I → D → G → C
+Ruta  2  ≈  647 m   G → C → B → A → H → I → J → E → F → D
+Ruta  3  ≈  649 m   J → I → F → D → B → A → G → C → E → H
+Ruta  4  ≈  670 m   D → F → E → I → J → G → H → A → C → B
+Ruta  5  ≈  676 m   I → J → A → B → C → H → E → F → D → G
+Ruta  6  ≈  685 m   B → A → C → G → E → D → F → I → H → J
+Ruta  7  ≈  692 m   C → H → J → F → I → E → D → G → B → A
+Ruta  8  ≈  695 m   F → E → D → C → G → B → A → H → J → I
+Ruta  9  ≈  723 m   E → D → G → H → A → C → B → J → I → F
+Ruta 10  ≈  734 m   H → G → I → J → D → F → C → B → A → E
+
+Coincidencias (dos equipos en la misma estación en el mismo paso): 0
+Distancias en línea recta sobre el mapa: orientativas.
