@@ -56,7 +56,9 @@
         await org.entrar(cod);
         panel();
       } catch (e) {
-        entrada('El código es correcto, pero el servidor no lo acepta: ' + e.message + '. ¿Has importado los secretos en Firebase?');
+        entrada(e.estado === 0
+          ? 'El código es correcto, pero ahora mismo no hay conexión con Firebase. Comprueba internet y prueba otra vez en unos segundos.'
+          : 'El código es correcto, pero el servidor no lo acepta (' + e.message + '). ¿Has importado firebase_importar.json en Firebase?');
       }
     });
   }
@@ -66,7 +68,8 @@
       await fn();
       if (okTexto) nota(okTexto, 'ok');
     } catch (e) {
-      nota('No se ha podido: ' + e.message + (e.estado === 403 || e.estado === 401 ? ' (permiso denegado: vuelve a entrar con el código)' : ''), 'error');
+      nota(e.estado === 0 ? 'No hay conexión con Firebase ahora mismo: prueba otra vez en unos segundos.'
+        : 'No se ha podido: ' + e.message + (e.estado === 403 || e.estado === 401 ? ' (permiso denegado: pulsa SALIR y vuelve a entrar con el código)' : ''), 'error');
     }
   }
   function nota(texto, tipo) {
@@ -276,12 +279,12 @@
     r.textContent = GK.formatoTiempo(GK.tiempoJuego(estado, Date.now()));
   }, 500);
 
-  $('#salir').onclick = () => { GK.borrar('organizacion'); entrada(); };
+  $('#salir').onclick = () => { org.salir(); entrada(); };
   GK.datos.escuchar('estado', (v) => { estado = v; pintarEstado(); });
   GK.datos.escuchar('progreso', (v) => { progreso = v || {}; pintar(); });
   GK.datos.escuchar('asignacion', () => pintar());
   GK.datos.escuchar('ayudas', (v) => { ayudas = v || {}; pintarAyudas(); });
   GK.datos.escuchar('mensajes', (v) => { mensajes = v || {}; pintar(); });
   setInterval(() => { if (!document.querySelector('.modal')) pintar(); }, 30000); // «sin avanzar» y «hace X min»
-  if (GK.leer('organizacion', false)) panel(); else entrada();
+  if (org.activa()) panel(); else entrada();
 })();

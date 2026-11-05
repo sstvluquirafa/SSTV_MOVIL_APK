@@ -36,7 +36,7 @@
       if (s && !forzar && s.expira - 60000 > ahora) return s;
       let r;
       if (s && s.refreshToken) {
-        r = await fetch(`https://securetoken.googleapis.com/v1/token?key=${FB.apiKey}`, {
+        r = await fetchReintentando(`https://securetoken.googleapis.com/v1/token?key=${FB.apiKey}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `grant_type=refresh_token&refresh_token=${encodeURIComponent(s.refreshToken)}`,
@@ -48,7 +48,7 @@
           return s;
         }
       }
-      r = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FB.apiKey}`, {
+      r = await fetchReintentando(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FB.apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ returnSecureToken: true }),
@@ -68,12 +68,25 @@
     return e;
   }
 
-  /** Petición REST a la base de datos con reintento si el token ha caducado. */
+  /** fetch que reintenta si la red corta la petición (a veces falla un momento y vuelve). */
+  async function fetchReintentando(url, opciones) {
+    const esperas = [700, 2000, 4000];
+    for (let i = 0; ; i++) {
+      try {
+        return await fetch(url, opciones);
+      } catch (e) {
+        if (i >= esperas.length) throw errorHttp(0, 'No hay conexión con el servidor. Probad otra vez en unos segundos.');
+        await new Promise((r) => setTimeout(r, esperas[i]));
+      }
+    }
+  }
+
+  /** Petición REST a la base de datos con reintento si el token ha caducado o la red falla un momento. */
   async function rest(metodo, ruta, cuerpo, conAuth = true) {
     for (let intento = 0; intento < 2; intento++) {
       let url = `${URL_BD}/${ruta}.json`;
       if (conAuth) url += `?auth=${(await token(intento > 0)).idToken}`;
-      const r = await fetch(url, {
+      const r = await fetchReintentando(url, {
         method: metodo,
         headers: cuerpo !== undefined ? { 'Content-Type': 'application/json' } : undefined,
         body: cuerpo !== undefined ? JSON.stringify(cuerpo) : undefined,
@@ -381,8 +394,12 @@
       const s = await token();
       await rest('PUT', `admins/${s.uid}`, GK.normalizar(codigo));
     }
-    GK.guardar('organizacion', true);
+    // Se recuerda en este navegador (el de la organización) para volver a registrarse solo si se pierde el permiso.
+    GK.guardar('organizacion', MODO);
+    GK.guardar('orgCodigo', GK.normalizar(codigo));
   }
+  /** ¿Este navegador ya entró como organización en el modo actual (demo o Firebase)? */
+  const organizacionActiva = () => GK.leer('organizacion', null) === MODO && !!GK.leer('orgCodigo', null);
   async function escribirAdmin(cambios) {
     if (MODO === 'demo') {
       let bd = demo.leer();
@@ -393,10 +410,22 @@
       demo.escribir(limpiarNulos(bd));
       return;
     }
-    await rest('PATCH', '', cambios);
+    try {
+      await rest('PATCH', '', cambios);
+    } catch (e) {
+      // Permiso perdido (se reimportaron los datos en Firebase, sesión anónima nueva…): se vuelve a registrar
+      // como organización con el código guardado y se repite una vez.
+      const cod = GK.leer('orgCodigo', null);
+      if ((e.estado !== 401 && e.estado !== 403) || !cod) throw e;
+      const s = await token();
+      await rest('PUT', `admins/${s.uid}`, cod);
+      await rest('PATCH', '', cambios);
+    }
   }
   const organizacion = {
     entrar: entrarOrganizacion,
+    activa: organizacionActiva,
+    salir: () => { GK.borrar('organizacion'); GK.borrar('orgCodigo'); },
     iniciar: () => escribirAdmin({ 'vivo/estado': { iniciada: true, inicio: SELLO } }),
     // Cada pausa se guarda con su principio y su final: el reloj y los tiempos del ranking las descuentan.
     parar: () => {
