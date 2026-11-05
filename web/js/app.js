@@ -146,7 +146,8 @@
     const sit = situacion();
     if (!eq || !sit || !sit.ruta || sit.terminado || !estadoTorneo || !estadoTorneo.iniciada || !estadoTorneo.inicio) return;
     const desde = Math.max(estadoTorneo.inicio, sit.ultima || 0);
-    if (Date.now() - desde < C.avisos.atascoMin * 60000) return;
+    // Tiempo de juego sin avanzar (sin contar las pausas)
+    if (GK.tiempoJuego(estadoTorneo, Date.now()) - GK.tiempoJuego(estadoTorneo, desde) < C.avisos.atascoMin * 60000) return;
     const avisados = GK.leer('avisosAtasco', {});
     if (avisados[sit.siguiente]) return;
     avisados[sit.siguiente] = Date.now();
@@ -286,8 +287,8 @@
       tarjeta = `
         <div class="tarjeta tarjeta-espera">
           <div class="radar" aria-hidden="true"></div>
-          <div><p class="antetitulo">${estadoTorneo && estadoTorneo.fin ? 'Gymkhana en pausa' : 'Esperando la salida'}</p>
-          <p>Vuestra primera estación es la <b>${GK.html(GK.letra(sit.orden[0]))}</b>. ${estadoTorneo && estadoTorneo.fin ? 'La organización ha parado el juego un momento.' : 'Mirad dónde está en el mapa: cuando la organización dé la salida, id hacia ella.'}</p></div>
+          <div><p class="antetitulo">${GK.enPausa(estadoTorneo) ? 'Gymkhana en pausa' : 'Esperando la salida'}</p>
+          <p>Vuestra primera estación es la <b>${GK.html(GK.letra(sit.orden[0]))}</b>. ${GK.enPausa(estadoTorneo) ? 'La organización ha parado el juego un momento.' : 'Mirad dónde está en el mapa: cuando la organización dé la salida, id hacia ella.'}</p></div>
         </div>`;
     } else {
       tarjeta = `
@@ -336,10 +337,7 @@
     const tic = () => {
       const r = $('#reloj');
       if (!r) return;
-      const inicio = estadoTorneo && estadoTorneo.inicio;
-      if (!inicio) { r.textContent = '--:--'; return; }
-      const fin = sit.terminado ? sit.ultima : (estadoTorneo.fin && !estadoTorneo.iniciada ? estadoTorneo.fin : Date.now());
-      r.textContent = GK.formatoTiempo(fin - inicio);
+      r.textContent = GK.formatoTiempo(GK.tiempoJuego(estadoTorneo, sit.terminado ? sit.ultima : Date.now()));
     };
     tic();
     relojId = setInterval(tic, 1000);

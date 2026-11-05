@@ -114,6 +114,22 @@
 
   GK.metros = (m) => (m >= 1000 ? (m / 1000).toFixed(1).replace('.', ',') + ' km' : m + ' m');
 
+  /**
+   * Tiempo de juego transcurrido hasta el instante t (ms), descontando las pausas.
+   * Una pausa sin «hasta» sigue en marcha: cuenta hasta t (el reloj queda parado).
+   */
+  GK.tiempoJuego = function (estado, t) {
+    if (!estado || !estado.inicio || t == null) return null;
+    let total = t - estado.inicio;
+    for (const p of Object.values(estado.pausas || {})) {
+      if (!p || p.desde == null) continue;
+      const hasta = p.hasta != null ? p.hasta : t;
+      total -= Math.max(0, Math.min(hasta, t) - Math.max(p.desde, estado.inicio));
+    }
+    return Math.max(0, total);
+  };
+  GK.enPausa = (estado) => !!(estado && estado.inicio && !estado.iniciada);
+
   GK.formatoTiempo = function (ms) {
     if (ms == null || ms < 0 || !isFinite(ms)) return '--:--';
     const s = Math.floor(ms / 1000);

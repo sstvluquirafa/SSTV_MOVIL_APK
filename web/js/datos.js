@@ -110,11 +110,15 @@
    * Suscripciones en tiempo real (lectura pública)
    * ====================================================================== */
   function aplicar(arbol, ruta, valor, fusionar) {
-    const partes = ruta.split('/').filter(Boolean);
-    if (!partes.length) {
-      if (fusionar) return Object.assign(arbol && typeof arbol === 'object' ? { ...arbol } : {}, valor);
-      return valor;
+    if (fusionar) {
+      // Un «patch» de Firebase reemplaza cada hijo indicado. En las escrituras a varias rutas a la vez, las
+      // claves llegan como rutas relativas («estado/iniciada», «progreso/3/7»): hay que bajar por ellas.
+      let t = arbol;
+      for (const [k, v] of Object.entries(valor || {})) t = aplicar(t, ruta.replace(/\/+$/, '') + '/' + k, v, false);
+      return t;
     }
+    const partes = ruta.split('/').filter(Boolean);
+    if (!partes.length) return valor;
     const raiz = arbol && typeof arbol === 'object' ? { ...arbol } : {};
     let nodo = raiz;
     for (let i = 0; i < partes.length - 1; i++) {
@@ -122,8 +126,7 @@
       nodo = nodo[partes[i]];
     }
     const ult = partes[partes.length - 1];
-    if (fusionar) nodo[ult] = Object.assign(nodo[ult] && typeof nodo[ult] === 'object' ? { ...nodo[ult] } : {}, valor);
-    else if (valor === null) delete nodo[ult];
+    if (valor === null) delete nodo[ult];
     else nodo[ult] = valor;
     return raiz;
   }
@@ -395,8 +398,16 @@
   const organizacion = {
     entrar: entrarOrganizacion,
     iniciar: () => escribirAdmin({ 'vivo/estado': { iniciada: true, inicio: SELLO } }),
-    reanudar: (inicio) => escribirAdmin({ 'vivo/estado/iniciada': true, 'vivo/estado/fin': null, 'vivo/estado/inicio': inicio ?? SELLO }),
-    parar: () => escribirAdmin({ 'vivo/estado/iniciada': false, 'vivo/estado/fin': SELLO }),
+    // Cada pausa se guarda con su principio y su final: el reloj y los tiempos del ranking las descuentan.
+    parar: () => {
+      const id = Date.now().toString(36);
+      return escribirAdmin({ 'vivo/estado/iniciada': false, 'vivo/estado/pausaActual': id, [`vivo/estado/pausas/${id}`]: { desde: SELLO } });
+    },
+    reanudar: (estado) => {
+      const c = { 'vivo/estado/iniciada': true, 'vivo/estado/pausaActual': null };
+      if (estado && estado.pausaActual) c[`vivo/estado/pausas/${estado.pausaActual}/hasta`] = SELLO;
+      return escribirAdmin(c);
+    },
     /** Da la ruta `ruta` al equipo; si la tenía otro equipo, intercambian. */
     asignarRuta(equipo, ruta) {
       const A = GK.asignacion;

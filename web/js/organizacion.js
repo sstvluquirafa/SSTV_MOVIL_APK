@@ -220,7 +220,7 @@
     } else if (estado && estado.inicio) {
       t.innerHTML = '<span class="chip chip-ambar"><span class="led"></span>EN PAUSA</span>';
       b.innerHTML = `<button class="boton" id="b-reanudar">${GK.icono('play')} Reanudar</button>`;
-      $('#b-reanudar').onclick = () => accion(() => org.reanudar(estado.inicio), 'Gymkhana reanudada.');
+      $('#b-reanudar').onclick = () => accion(() => org.reanudar(estado), 'Gymkhana reanudada.');
     } else {
       t.innerHTML = '<span class="chip"><span class="led"></span>SIN EMPEZAR</span>';
       b.innerHTML = `<button class="boton" id="b-salida">${GK.icono('play')} Dar la salida</button>`;
@@ -241,9 +241,9 @@
       const sit = GK.situacion(e.id, progreso[e.id]);
       const p = progreso[e.id] || {};
       const desde = sit.ruta && inicio && estado.iniciada && !sit.terminado ? Math.max(inicio, sit.ultima || 0) : null;
-      const quieto = desde ? Date.now() - desde : null;
+      const quieto = desde ? GK.tiempoJuego(estado, Date.now()) - GK.tiempoJuego(estado, desde) : null;
       const tarde = quieto != null && quieto > ATASCO * 60000;
-      const tiempoFinal = sit.terminado && inicio ? GK.formatoTiempo(sit.ultima - inicio) : null;
+      const tiempoFinal = sit.terminado && inicio ? GK.formatoTiempo(GK.tiempoJuego(estado, sit.ultima)) : null;
       const msj = mensajes[e.id];
       return `<tr class="${sit.terminado ? 'terminado' : ''}${tarde ? ' atascado' : ''}">
         <td><b>${GK.html(e.nombre)}</b>${msj ? ` <span title="Tiene un mensaje: ${GK.html(msj.texto)}">${GK.icono('mensaje')}</span>` : ''}</td>
@@ -273,8 +273,7 @@
   setInterval(() => {
     const r = $('#reloj');
     if (!r) return;
-    if (!estado || !estado.inicio) { r.textContent = '--:--'; return; }
-    r.textContent = GK.formatoTiempo((estado.iniciada ? Date.now() : estado.fin || Date.now()) - estado.inicio);
+    r.textContent = GK.formatoTiempo(GK.tiempoJuego(estado, Date.now()));
   }, 500);
 
   $('#salir').onclick = () => { GK.borrar('organizacion'); entrada(); };

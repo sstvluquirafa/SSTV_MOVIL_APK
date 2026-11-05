@@ -25,7 +25,7 @@
       .join('')}</div>`;
   }
   /** Tiempo total de un equipo que ha terminado (desde la salida hasta su última estación). */
-  const tiempo = (sit) => (sit.terminado && estado && estado.inicio ? GK.formatoTiempo(sit.ultima - estado.inicio) : null);
+  const tiempo = (sit) => (sit.terminado && estado && estado.inicio ? GK.formatoTiempo(GK.tiempoJuego(estado, sit.ultima)) : null);
   function faltan(sit) {
     if (!sit.ruta) return 'Esperando a que llegue con el mapa';
     if (sit.terminado) return `<span class="completo">MISIÓN COMPLETA · ${tiempo(sit) || ''}</span>`;
@@ -139,13 +139,12 @@
   function pintarEstado() {
     const chip = $('#chip-estado');
     if (estado && estado.iniciada) { chip.className = 'chip chip-verde'; chip.innerHTML = '<span class="led"></span>EN DIRECTO'; }
-    else if (estado && estado.fin) { chip.className = 'chip chip-ambar'; chip.innerHTML = '<span class="led"></span>EN PAUSA'; }
+    else if (GK.enPausa(estado)) { chip.className = 'chip chip-ambar'; chip.innerHTML = '<span class="led"></span>EN PAUSA'; }
     else { chip.className = 'chip'; chip.innerHTML = '<span class="led"></span>ESPERANDO LA SALIDA'; }
   }
   setInterval(() => {
     const r = $('#reloj');
-    if (!estado || !estado.inicio) { r.textContent = '--:--'; return; }
-    r.textContent = GK.formatoTiempo((estado.iniciada || !estado.fin ? Date.now() : estado.fin) - estado.inicio);
+    r.textContent = GK.formatoTiempo(GK.tiempoJuego(estado, Date.now()));
   }, 500);
 
   GK.datos.escuchar('progreso', (v) => { progreso = v || {}; pintar(); });
