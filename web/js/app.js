@@ -60,6 +60,12 @@
   function comprobarRonda() {
     const eq = miEquipo();
     if (!eq || (eq.ronda || 0) >= ronda) return;
+    desvincular('avisoReinicio');
+  }
+  /** Saca este móvil de su equipo (sin tocar nada del servidor) y lleva a la pantalla de unirse con un aviso. */
+  function desvincular(motivo) {
+    const eq = miEquipo();
+    if (!eq) return;
     GK.borrar('equipo');
     GK.borrar('progreso:' + eq.id);
     GK.borrar('avisosAtasco');
@@ -68,9 +74,11 @@
     cancelar = [];
     progresoServidor = {};
     mensajeOrg = null;
-    GK.guardar('avisoReinicio', true);
+    GK.guardar('avisoReinicio', motivo);
     ir('#/unirse');
   }
+  // El servidor no acepta el código de este equipo: hay que volver a unirse con la tarjeta.
+  GK.datos.onExpulsion(() => desvincular('avisoExpulsion'));
 
   /* ---------- Cabecera y mensajes ---------- */
   function pintarCabecera() {
@@ -211,7 +219,9 @@
     vista.innerHTML = `
       <section class="pantalla">
         ${cabeceraPantalla(C.lugar || 'Gymkhana', C.titulo, C.tituloDestacado)}
-        ${reinicio ? '<div class="aviso aviso-info">La organización ha reiniciado la gymkhana: volved a uniros con vuestra tarjeta.</div>' : ''}
+        ${reinicio ? `<div class="aviso aviso-info">${reinicio === 'avisoExpulsion'
+          ? 'Vuestro móvil se ha desconectado del equipo. Volved a uniros con vuestra tarjeta: no perdéis nada de lo que llevéis hecho.'
+          : 'La organización ha reiniciado la gymkhana: volved a uniros con vuestra tarjeta.'}</div>` : ''}
         <p class="texto-2 entradilla">Escanead el QR de vuestra <b>tarjeta de equipo</b> o elegid vuestro número y escribid el código.
           <b>Cuanto antes os unáis, más corta será vuestra ruta.</b></p>
         ${eq ? `<div class="aviso aviso-info">Este móvil ya está en el <b>${GK.html(GK.equipo(eq.id).nombre)}</b>. Si os unís a otro equipo, dejará de estar en ese.</div>` : ''}
@@ -316,7 +326,10 @@
           <div><b>${sit.total - sit.hechas}</b><span>faltan</span></div>
           <div><b class="mono" id="reloj">--:--</b><span>tiempo</span></div>
         </div>
-        <div id="aviso-cola" class="aviso aviso-error oculto">Hay un avance guardado que el servidor aún no ha aceptado. Pulsad «Pedir ayuda» si no se arregla solo.</div>
+        <div id="aviso-cola" class="aviso aviso-error aviso-reconectar oculto">
+          <span>Vuestro móvil no consigue sincronizar con la organización. Ya les hemos avisado.</span>
+          <button class="boton-sec mini" type="button" id="reconectar">Reconectar</button>
+        </div>
         ${atascado ? '<div class="aviso aviso-info">Lleváis un rato en esta estación: <b>ya hemos avisado a la organización</b>. Si necesitáis algo más, pulsad «Pedir ayuda».</div>' : ''}
         ${tarjeta}
         ${sit.ruta ? `<ol class="ruta-lista" aria-label="Orden de vuestra ruta">
@@ -330,6 +343,7 @@
       </section>`;
     GK.activarMapa(vista);
     $('#ayuda').onclick = pedirAyuda;
+    $('#reconectar').onclick = () => { GK.datos.reconectar(); $('#aviso-cola').classList.add('oculto'); };
     $('#salir').onclick = async () => {
       const ok = await GK.modal('<p>¿Seguro que queréis cambiar de equipo en este móvil?</p><p class="texto-2">El progreso de vuestro equipo no se pierde.</p>',
         [['Cancelar', false], ['Cambiar', true, 'boton']]);

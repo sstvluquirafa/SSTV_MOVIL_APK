@@ -357,19 +357,33 @@
           guardarCola(c);
           avisarEstado({ enLinea: true, ultimoError: null });
         } catch (e) {
-          if ((e.estado === 403 || e.estado === 401) && op.tipo === 'completar' && !op.reunido) {
-            // Puede que el servidor ya no tenga este móvil como miembro (por ejemplo, tras un reinicio):
-            // se vuelve a unir con el código guardado y se reintenta una vez.
-            const eq = GK.leer('equipo', null);
+          const rechazo = e.estado === 403 || e.estado === 401;
+          const eq = GK.leer('equipo', null);
+          if (rechazo && op.tipo === 'unirse') {
+            // El servidor no acepta el código de este equipo: este móvil tiene que volver a unirse con la tarjeta.
+            guardarCola([]);
+            oyentesExpulsion.forEach((f) => { try { f(op); } catch (x) { console.error(x); } });
+            break;
+          }
+          if (rechazo && ['asignar', 'completar', 'ayuda'].includes(op.tipo) && !op.reunido) {
+            // Lo más habitual: el servidor ya no tiene este móvil como miembro del equipo (reinicio, datos
+            // reimportados…). Se vuelve a unir con el código guardado y se reintenta una vez, sin molestar a nadie.
             c = cola().map((o) => (o.id === op.id ? { ...o, reunido: true } : o));
             if (eq && eq.codigo && eq.id === op.equipo) c.unshift({ tipo: 'unirse', equipo: eq.id, codigo: eq.codigo, id: 'unirse:' + eq.id + ':' + Date.now(), creada: Date.now() });
             guardarCola(c);
             continue;
           }
-          if (e.estado === 403 || e.estado === 401) {
-            // El servidor la rechaza (partida sin empezar, fuera de orden, código mal...). Se reintenta más tarde
-            // por si la organización arranca la partida o corrige el progreso; la app lo muestra como aviso.
+          if (rechazo) {
+            // Sigue rechazándose (partida en pausa, sin rutas libres…). Se reintenta más tarde y se avisa una vez a
+            // la organización por ntfy para que lo revise desde el panel.
             c = cola().map((o) => (o.id === op.id ? { ...o, rechazada: true, intentos: (o.intentos || 0) + 1 } : o));
+            if (!op.avisado && eq && C.avisos && C.avisos.tema && op.tipo !== 'ntfy') {
+              c = c.map((o) => (o.id === op.id ? { ...o, avisado: true } : o));
+              const nombre = (GK.equipo(eq.id) || {}).nombre || 'Un equipo';
+              const que = { asignar: 'recibir su ruta', completar: `registrar la estación ${GK.letra(op.estacion)}`, ayuda: 'pedir ayuda' }[op.tipo] || op.tipo;
+              c.push({ tipo: 'ntfy', id: 'ntfy:rechazo:' + op.id, titulo: `${nombre}: su móvil no consigue sincronizar`,
+                texto: `No consigue ${que} (${e.message}). Revisadlo en el panel; si hace falta, marcadle la estación a mano.`, prioridad: 4, etiquetas: 'warning' });
+            }
             guardarCola(c);
             avisarEstado({ ultimoError: e.message });
           } else {
@@ -382,6 +396,17 @@
       procesando = false;
       if (cola().length) temporizador = setTimeout(procesar, MODO === 'demo' ? 3000 : 15000);
     }
+  }
+  const oyentesExpulsion = new Set();
+
+  /** «Reconectar»: vuelve a unirse con el código guardado y reintenta todo lo pendiente. */
+  function reconectar() {
+    const eq = GK.leer('equipo', null);
+    let c = cola().map((o) => ({ ...o, rechazada: false, reunido: false }));
+    if (eq && eq.codigo) c = [{ tipo: 'unirse', equipo: eq.id, codigo: eq.codigo, id: 'unirse:' + eq.id + ':' + Date.now(), creada: Date.now() }, ...c.filter((o) => o.tipo !== 'unirse')];
+    guardarCola(c);
+    clearTimeout(temporizador);
+    procesar();
   }
   window.addEventListener('online', () => { avisarEstado({ enLinea: true }); procesar(); });
   window.addEventListener('offline', () => avisarEstado({ enLinea: false }));
@@ -475,6 +500,8 @@
     organizacion,
     onEstado(f) { oyentesEstado.add(f); f({ ...estadoConexion, pendientes: cola().length, rechazadas: cola().filter((o) => o.rechazada).length }); return () => oyentesEstado.delete(f); },
     pendientes: () => cola(),
+    reconectar,
+    onExpulsion(f) { oyentesExpulsion.add(f); return () => oyentesExpulsion.delete(f); },
     vaciarCola: () => guardarCola([]),
   };
 
