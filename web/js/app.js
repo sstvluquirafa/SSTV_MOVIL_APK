@@ -193,6 +193,7 @@
       if (mapaPrevio && $('.mapa-marco')) GK.activarMapa(vista, mapaPrevio);
     } else window.scrollTo(0, 0);
     pintarMensaje();
+    if (GK.pintarInstalar) GK.pintarInstalar();
   }
   window.addEventListener('hashchange', () => refrescar(true));
 
@@ -306,6 +307,7 @@
     vista.innerHTML = `
       <section class="pantalla">
         <div id="mensaje-org"></div>
+        <div id="instalar"></div>
         ${cabeceraPantalla(e.nombre, sit.terminado ? 'Misión completada' : 'Vuestra ruta', sit.terminado ? 'completada' : 'ruta')}
         ${sit.ruta ? `<p class="ruta-info"><span class="chip chip-ambar">RUTA ${sit.ruta.id} DE ${C.rutas.length}</span> <span class="mono">≈ ${GK.metros(sit.ruta.metros)}</span>${sit.ruta.id === 1 ? ' <span class="chip chip-verde">LA MÁS CORTA</span>' : ''}</p>` : ''}
         ${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas })}

@@ -155,3 +155,16 @@
 .mensaje-org .boton-sec { margin-left: auto; flex: none; }
 .boton-sec.mini { min-height: 36px; padding: 6px 10px; font-size: .85rem; }
 @keyframes entra-msj { from { opacity: 0; transform: translateY(-8px); } }
+
+/* Instalar la app */
+.instalar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border-color: rgba(251, 191, 36, .45); padding: 14px; }
+.instalar img { border-radius: 12px; flex: none; }
+.instalar-texto { flex: 1 1 150px; }
+.instalar-texto p { margin: 0; }
+.instalar-botones { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+.instalar-botones .boton { min-height: 44px; padding: 8px 18px; }
+.instalar-ios { display: block; }
+.instalar-cab { display: flex; gap: 12px; align-items: center; }
+.instalar-pasos { margin: 12px 0; padding: 0; list-style: none; counter-reset: paso; display: grid; gap: 10px; }
+.instalar-pasos li { display: flex; gap: 10px; align-items: flex-start; font-size: .95rem; }
+.paso-ico { flex: none; width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: var(--ambar-suave); color: var(--ambar); border: 1px solid rgba(251, 191, 36, .4); }
