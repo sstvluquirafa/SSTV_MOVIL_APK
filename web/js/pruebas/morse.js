@@ -16,8 +16,12 @@
     ['Y', '-.--'], ['Z', '--..'], ['0', '-----'], ['1', '.----'], ['2', '..---'], ['3', '...--'], ['4', '....-'],
     ['5', '.....'], ['6', '-....'], ['7', '--...'], ['8', '---..'], ['9', '----.'],
   ];
-  // Puntos y rayas más visibles que «.» y «-»
-  const dibujar = (c) => c.replace(/\./g, '•').replace(/-/g, '−');
+  // Cada símbolo, dibujado como un pulso de radio: punto = pulso corto, raya = pulso largo
+  const pulsos = (c) => c.split('').map((s) => `<i class="${s === '.' ? 'p-punto' : 'p-raya'}"></i>`).join('');
+  const leer = (c) => c.replace(/\./g, 'punto ').replace(/-/g, 'raya ').trim();
+  // Al tocar una tecla, el móvil vibra como sonaría: corto = 70 ms, largo = 220 ms (si el móvil lo permite)
+  const UNIDAD = 70;
+  const patron = (c) => c.split('').flatMap((s, i) => [...(i ? [UNIDAD] : []), s === '.' ? UNIDAD : UNIDAD * 3]);
 
   GK.pruebas.registrar('morse', {
     titulo: 'Código Morse',
@@ -29,13 +33,16 @@
             <p class="reto-intro">El cartel de la estación trae una <b>pregunta en Morse</b>.<br>
               Letras separadas por espacios; palabras separadas por <b>/</b>.<br>
               Descifradla con la tabla y escribid la <b>respuesta</b> (no la pregunta).</p>
-            <details class="plegable tabla-morse-caja" open>
-              <summary><span class="antetitulo">Tabla Morse</span></summary>
-              <div class="tabla-morse" role="list">
-                ${TABLA.map(([l, c]) => `<div role="listitem" aria-label="${l}: ${c.replace(/\./g, 'punto ').replace(/-/g, 'raya ')}"><b>${l}</b><span class="mono">${dibujar(c)}</span></div>`).join('')}
+            <section class="radio-panel" aria-label="Tabla Morse">
+              <div class="radio-cab">
+                <span class="radio-titulo">Tabla Morse</span>
+                <span class="radio-leyenda" aria-hidden="true"><i class="p-punto"></i> corto <i class="p-raya"></i> largo</span>
               </div>
-              <p class="texto-2 nota">• = punto (corto) · − = raya (largo)</p>
-            </details>
+              <div class="tabla-morse">
+                ${TABLA.map(([l, c]) => `<button type="button" class="tecla-morse" data-c="${c}" aria-label="${l}: ${leer(c)}"><b>${l}</b><span class="pulsos" aria-hidden="true">${pulsos(c)}</span></button>`).join('')}
+              </div>
+              <p class="radio-nota">Tocad una letra para sentir su ritmo.</p>
+            </section>
             <form autocomplete="off">
               <label class="etiqueta" for="resp-morse">Respuesta a la pregunta</label>
               <input id="resp-morse" class="campo" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="Vuestra respuesta" required>
@@ -43,6 +50,10 @@
             </form>
           </div>
         </div>`;
+      contenedor.querySelectorAll('.tecla-morse').forEach((b) => b.addEventListener('click', () => {
+        try { if (navigator.vibrate) navigator.vibrate(patron(b.dataset.c)); } catch (e) { /* sin vibración */ }
+        b.classList.remove('emitiendo'); void b.offsetWidth; b.classList.add('emitiendo');
+      }));
       const form = contenedor.querySelector('form');
       const campo = contenedor.querySelector('input');
       form.addEventListener('submit', async (ev) => {

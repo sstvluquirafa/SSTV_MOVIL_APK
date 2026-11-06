@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v14';
+const VERSION = 'gk-v17';
 const ARCHIVOS = [
   './',
   'index.html',
@@ -34,14 +34,16 @@ const ARCHIVOS = [
   'js/pruebas/caja_fuerte.js',
   'js/pruebas/hackeo.js',
   'js/pruebas/bulo_verdad.js',
-  'assets/img/pruebas/geo1.svg',
-  'assets/img/pruebas/geo2.svg',
-  'assets/img/pruebas/geo3.svg',
-  'assets/img/pruebas/ia1.svg',
-  'assets/img/pruebas/ia2.svg',
-  'assets/img/pruebas/ia3.svg',
-  'assets/img/pruebas/ia4.svg',
+  'assets/img/pruebas/geo1.jpg',
+  'assets/img/pruebas/geo2.jpg',
+  'assets/img/pruebas/geo3.jpg',
+  'assets/img/pruebas/ia-a.jpg',
+  'assets/img/pruebas/ia-b.jpg',
+  'assets/img/pruebas/ia-c.jpg',
+  'assets/img/pruebas/ia-d.jpg',
+  'assets/img/pruebas/ia-pendiente.svg',
   'js/mapa.js',
+  'js/orbita.js',
   'js/instalar.js',
   'assets/img/icono-maskable-512.png',
   'assets/img/icono-apple-180.png',

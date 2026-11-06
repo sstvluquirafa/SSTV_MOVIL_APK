@@ -18,7 +18,10 @@
       contenedor.innerHTML = `
         <div class="hack-rejilla">
           <div class="ventana hack-terminal">
-            <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>SSH · ${GK.html(P.sistema || 'GranaSAT-II')}</span></div>
+            <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>Control de misión · ${GK.html(P.sistema || 'GranaSAT-II')}</span></div>
+            <div class="telemetria mono" aria-label="Telemetría del satélite">
+              <span>BAT <b>7,9 V</b></span><span>TEMP <b>21 °C</b></span><span>ALT <b>512 km</b></span><span>ENLACE <b class="tlm-bloq">bloqueado</b></span>
+            </div>
             <div class="ventana-cuerpo">
               <p class="terminal">&gt; Conectando con ${GK.html(P.sistema || 'el satélite')}…<br>&gt; <b>Identificaos</b> para tomar el control.</p>
               <form autocomplete="off" id="hack-form">
@@ -57,6 +60,15 @@
         const clave = campo.value;
         if (await ctx.intentar(clave, { quedarse: true })) {
           terminal.classList.add('concedido');
+          // «ACCESO CONCEDIDO» llena la pantalla un segundo (no tapa los toques: pointer-events none)
+          const total = document.createElement('div');
+          total.className = 'acceso-total';
+          total.setAttribute('role', 'status');
+          total.innerHTML = '<p class="mono">ACCESO<br>CONCEDIDO</p>';
+          document.body.appendChild(total);
+          temporizador = setTimeout(() => total.remove(), 1100);
+          const enlace = terminal.querySelector('.tlm-bloq');
+          if (enlace) { enlace.textContent = 'abierto'; enlace.classList.add('tlm-ok'); }
           terminal.querySelector('.ventana-cuerpo').innerHTML = `
             <div class="hack-ok">
               <p class="hack-ok-titulo mono">ACCESO CONCEDIDO</p>
@@ -73,7 +85,7 @@
         log.textContent = `$ login ${P.usuario || ''}\n> ACCESO DENEGADO (intento ${intentos})\n` + log.textContent.split('\n').slice(0, 4).join('\n');
         terminal.classList.remove('denegado'); void terminal.offsetWidth; terminal.classList.add('denegado');
       });
-      return () => clearTimeout(temporizador);
+      return () => { clearTimeout(temporizador); document.querySelectorAll('.acceso-total').forEach((x) => x.remove()); };
     },
   });
 })();

@@ -9,6 +9,8 @@
   'use strict';
   const GK = window.GK;
   const LETRAS = 'abcdefgh';
+  // Telemetría decorativa del marco (altura y hora del pase). No son coordenadas: no deben dar pistas del sitio.
+  const telemetria = (i) => `ALT ${408 + i * 5} km · ${String(10 + i * 2).padStart(2, '0')}:${String((17 + i * 23) % 60).padStart(2, '0')} UTC`;
 
   GK.pruebas.registrar('geoguessr', {
     titulo: 'GeoGuessr desde satélite',
@@ -22,8 +24,12 @@
               ¿Dónde está cada una? Elegid una opción en cada foto y pulsad <b>Comprobar</b>.</p>
             ${imagenes.map((im, i) => `
               <figure class="geo-foto">
-                <div class="geo-cab"><span class="chip chip-ambar">Foto ${i + 1} de ${imagenes.length}</span></div>
-                <img src="${GK.html(im.src)}" alt="Foto ${i + 1} tomada desde un satélite" loading="lazy">
+                <div class="visor-sat">
+                  <img src="${GK.html(im.src)}" alt="Foto ${i + 1} de ${imagenes.length}, tomada desde el espacio" loading="lazy">
+                  <i class="esq esq-1"></i><i class="esq esq-2"></i><i class="esq esq-3"></i><i class="esq esq-4"></i>
+                  <span class="visor-dato visor-pase mono" aria-hidden="true">PASE ${i + 1}/${imagenes.length}</span>
+                  <span class="visor-dato visor-tel mono" aria-hidden="true">${telemetria(i)}</span>
+                </div>
                 ${im.credito ? `<figcaption class="credito">${GK.html(im.credito)}</figcaption>` : ''}
                 <div class="opciones" role="radiogroup" aria-label="¿Dónde está la foto ${i + 1}?">
                   ${(im.opciones || []).map((o, j) => `<button type="button" role="radio" aria-checked="false" class="opcion" data-i="${i}" data-j="${j}"><span class="opcion-letra">${LETRAS[j].toUpperCase()}</span>${GK.html(o)}</button>`).join('')}

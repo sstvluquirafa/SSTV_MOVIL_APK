@@ -78,7 +78,8 @@ web/                       ← lo que se publica en GitHub Pages
     util.js                normalización, huellas, rutas asignadas, clasificación
     datos.js               Firebase (API REST + tiempo real), modo demo, cola sin conexión, reparto de rutas, ntfy
     app.js                 pantallas del móvil
-    mapa.js                el mapa del Parque con la ruta dibujada
+    mapa.js                el mapa del Parque con la ruta dibujada (visor: arrastrar, pellizcar, + / −)
+    orbita.js              el progreso como una órbita: el CubeSat y una marca por estación
     constelacion.js        la ruta como constelación (podio del ranking)
     escaner.js             escáner de QR con la cámara
     ranking.js, organizacion.js, fondo.js, iconos.js, inicio.js
@@ -89,7 +90,7 @@ web/                       ← lo que se publica en GitHub Pages
       morse.js, sstv_mano.js, binario.js, qr_escondido.js         pruebas de papel
       wordle.js, geoguessr.js, real_o_ia.js, caja_fuerte.js,
       hackeo.js, bulo_verdad.js                                    pruebas de la app
-  assets/img/pruebas/      imágenes de GeoGuessr y ¿Real o IA? (ahora, provisionales)
+  assets/img/pruebas/      imágenes de GeoGuessr y ¿Real o IA?
   vendor/                  jsQR (leer QR) y qrcode-generator (crear QR); licencias en LICENCIAS.txt
   assets/img/mapa.jpg      GENERADO: el mapa del Parque, ligero (≈190 KB)
 herramientas/
@@ -264,12 +265,16 @@ Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].pr
 | D | QR escondido (`qr_escondido`) | cartel + QR + app | `escondite`: pista del cartel | `qr` y `clave` (los genera el script) |
 | E | Wordle (`wordle`) | app | — | `clave`: palabra de 5 letras |
 | F | GeoGuessr (`geoguessr`) | app | `imagenes`: `[{ src, credito, opciones: [4] }]` | `clave`: letras de las correctas (por ejemplo «cab») |
-| G | ¿Real o IA? (`real_o_ia`) | app | `imagenes`: `[{ src, credito }]` (4) | `clave`: letra de la falsa; `explicaciones` |
+| G | ¿Real o IA? (`real_o_ia`) | app | `imagenes`: `[{ src }]` (4, nombres neutros), `nota` | `clave`: letra de la falsa; `explicaciones`: `[explicación, [créditos]]` |
 | H | Caja fuerte (`caja_fuerte`) | app | `pistas`: `[{ codigo, texto }]` | `clave`: el código |
 | I | Hackea el satélite (`hackeo`) | app | `sistema`, `usuario`, `ayudaContrasena`, `perfil`, `leccion` | `clave`: la contraseña |
 | J | ¿Bulo o verdad? (`bulo_verdad`) | app | `afirmaciones` (textos), `leccion` | `clave`: patrón de b/v; `explicaciones` (una por afirmación) |
 
 Todas llevan además `pista` en `torneo.json`: el texto del botón «Pista» de los 60 s.
+
+Y cada estación tiene en `privado/secretos.json` un **`dato`**: un dato real y corto (máximo 160 caracteres) que sale
+en «¡Estación superada!». Va **cifrado con la respuesta** porque alguno delataría la respuesta de su prueba,
+así que solo se lee al acertar. Si una estación la marca la organización, no sale el dato.
 
 - **Las respuestas solo van en `privado/secretos.json`.** Se comparan en minúsculas, sin tildes ni espacios.
 - **Letras y palabra final:** `torneo.json` → `palabra_final` (`palabra`, `pista` y la letra de cada estación).
@@ -280,7 +285,10 @@ Todas llevan además `pista` en `torneo.json`: el texto del botón «Pista» de 
   - con licencia libre, o citando la fuente en `credito`;
   - poned su ruta en `src`, añadidla a `ARCHIVOS` de `web/sw.js` y subid `VERSION`.
 
-  Las que hay ahora son provisionales («Imagen pendiente»).
+  - GeoGuessr: fotos reales (PNOA del IGN y NASA), con su crédito.
+  - ¿Real o IA?: tres fotos reales de NASA. **La falsa la generáis vosotros**: instrucciones en
+    `web/assets/img/pruebas/ia-falsa-AQUI.txt` (no se sube a GitHub). Guardadla como `ia-falsa.jpg` en esa carpeta y
+    el generador la copia con un nombre neutro. Mientras falte, la app enseña «Foto en revelado» y el panel avisa.
 - **Cambiar una prueba por otra:** cambiad el `tipo` y sus opciones en `torneo.json` y la `clave` en
   `secretos.json`, y ejecutad el generador.
 - **Después de cualquier cambio:**

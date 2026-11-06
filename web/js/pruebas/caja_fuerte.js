@@ -1,14 +1,14 @@
 /*
- * Prueba ABRE LA CAJA FUERTE (app). Una caja con 3 ruedas de dígitos (0–9) y las pistas del acertijo
+ * Prueba ABRE LA CAJA FUERTE (app), con aspecto de escotilla de nave. Una escotilla con 3 ruedas de dígitos (0–9) y las pistas del acertijo
  * (torneo.json → prueba.pistas = [{ codigo: "632", texto: "Una cifra es correcta…" }]). Con el código correcto
- * (la «clave» en privado/secretos.json) la caja se abre. Sin espera tras fallo: probar los 1000 códigos no compensa.
+ * (la «clave» en privado/secretos.json) la compuerta se desliza y se abre. Sin espera tras fallo: probar los 1000 códigos no compensa.
  */
 (function () {
   'use strict';
   const GK = window.GK;
 
   GK.pruebas.registrar('caja_fuerte', {
-    titulo: 'Abre la caja fuerte',
+    titulo: 'Abre la escotilla',
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       const n = Math.max(1, Math.min(6, Number(P.cifras) || 3));
@@ -16,11 +16,12 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">La caja fuerte tiene un código de <b>${n} cifras</b>.<br>Estas pistas os dirán cuál es:</p>
+            <p class="reto-intro">La escotilla de la nave se abre con un código de <b>${n} cifras</b>.<br>Estas pistas os dirán cuál es:</p>
             <ul class="caja-pistas">
               ${(P.pistas || []).map((p) => `<li><span class="caja-cod mono" aria-label="Código ${GK.html(String(p.codigo).split('').join(' '))}">${String(p.codigo).split('').map((d) => `<i>${GK.html(d)}</i>`).join('')}</span><span>${GK.html(p.texto)}</span></li>`).join('')}
             </ul>
             <div class="caja" id="caja">
+              ${Array.from({ length: 8 }, (_, k) => `<i class="perno" style="--a:${k * 45 + 22.5}deg" aria-hidden="true"></i>`).join('')}
               <div class="caja-puerta">
                 <div class="caja-ruedas">
                   ${ruedas.map((_, i) => `
@@ -34,7 +35,7 @@
               </div>
               <div class="caja-interior" aria-hidden="true">${GK.icono('satelite')}</div>
             </div>
-            <button class="boton boton-ancho" type="button" id="caja-abrir">Abrir la caja</button>
+            <button class="boton boton-ancho" type="button" id="caja-abrir">Abrir la escotilla</button>
           </div>
         </div>`;
       const caja = contenedor.querySelector('#caja');
@@ -64,13 +65,13 @@
         if (await ctx.intentar(codigo, { quedarse: true })) {
           caja.classList.add('abierta');
           boton.textContent = '¡Abierta!';
-          ctx.ayuda('¡Clic! La caja se abre…', 'ok');
+          ctx.ayuda('¡Clic! La compuerta se desliza…', 'ok');
           temporizador = setTimeout(() => ctx.continuar(), GK.menosMovimiento() ? 600 : 2000);
           return;
         }
         boton.disabled = false;
         caja.classList.remove('temblor'); void caja.offsetWidth; caja.classList.add('temblor');
-        ctx.ayuda(`La caja no se abre con ${codigo}. Repasad las pistas una a una.`);
+        ctx.ayuda(`La escotilla no se abre con ${codigo}. Repasad las pistas una a una.`);
       });
       return () => clearTimeout(temporizador);
     },

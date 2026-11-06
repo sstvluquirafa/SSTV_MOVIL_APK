@@ -1,4 +1,9 @@
-/* Cielo estrellado de fondo (ligero: se dibuja en un <canvas> y titila despacio). */
+/*
+ * Cielo de fondo: estrellas de distinto brillo en 3 capas de profundidad (lejanas, medias y cercanas) dibujadas en un
+ * <canvas>. Al hacer scroll, cada capa se desplaza un poco a su velocidad (paralaje): las cercanas, más.
+ * No hay animación propia (nada titila): solo se repinta al hacer scroll o al cambiar el tamaño de la ventana.
+ * Con «reducir movimiento» el cielo se queda quieto.
+ */
 (function () {
   'use strict';
   const lienzo = document.createElement('canvas');
@@ -7,43 +12,66 @@
   document.body.prepend(lienzo);
   const ctx = lienzo.getContext('2d');
   const quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let estrellas = [];
-  let ancho = 0, alto = 0, dpr = 1;
+
+  // Densidad (px² por estrella), radios, brillo y cuánto se mueven con el scroll
+  const CAPAS = [
+    { densidad: 2600, r: [0.35, 0.7], a: [0.25, 0.5], paralaje: 0.03 },
+    { densidad: 9000, r: [0.6, 1.1], a: [0.45, 0.75], paralaje: 0.07 },
+    { densidad: 38000, r: [1.1, 1.8], a: [0.75, 1], paralaje: 0.14 },
+  ];
+  // Casi todas blancas; algunas azuladas o cálidas, como en una foto de verdad
+  const color = () => (Math.random() < 0.1 ? '255,226,170' : Math.random() < 0.22 ? '190,214,255' : '255,255,255');
+  const entre = ([a, b]) => a + Math.random() * (b - a);
+
+  let capas = [];
+  let ancho = 0, alto = 0, dpr = 1, pendiente = false;
 
   function crear() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     ancho = window.innerWidth; alto = window.innerHeight;
     lienzo.width = ancho * dpr; lienzo.height = alto * dpr;
-    const n = Math.round((ancho * alto) / 5200);
-    estrellas = Array.from({ length: n }, () => ({
-      x: Math.random() * ancho,
-      y: Math.random() * alto,
-      r: Math.random() < 0.08 ? 1.3 + Math.random() * 0.9 : 0.4 + Math.random() * 0.8,
-      f: Math.random() * Math.PI * 2,
-      v: 0.4 + Math.random() * 1.2,
-      c: Math.random() < 0.12 ? '253,230,138' : Math.random() < 0.2 ? '186,214,255' : '255,255,255',
+    capas = CAPAS.map((c) => ({
+      ...c,
+      estrellas: Array.from({ length: Math.round((ancho * alto) / c.densidad) }, () => ({
+        x: Math.random() * ancho, y: Math.random() * alto, r: entre(c.r), a: entre(c.a), c: color(),
+      })),
     }));
-    dibujar(0);
+    dibujar();
   }
 
-  function dibujar(t) {
+  function dibujar() {
+    pendiente = false;
+    const sy = quieto ? 0 : window.scrollY || 0;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, ancho, alto);
-    for (const e of estrellas) {
-      const a = quieto ? 0.7 : 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(e.f + (t / 1000) * e.v));
-      ctx.fillStyle = `rgba(${e.c},${a.toFixed(3)})`;
-      ctx.beginPath();
-      ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-      ctx.fill();
+    for (const capa of capas) {
+      const dy = (sy * capa.paralaje) % alto;
+      for (const e of capa.estrellas) {
+        let y = e.y - dy;
+        if (y < 0) y += alto;
+        ctx.fillStyle = `rgba(${e.c},${e.a.toFixed(2)})`;
+        ctx.beginPath();
+        ctx.arc(e.x, y, e.r, 0, Math.PI * 2);
+        ctx.fill();
+        // Las más brillantes, con un halo suave
+        if (e.r > 1.4) {
+          ctx.fillStyle = `rgba(${e.c},0.12)`;
+          ctx.beginPath();
+          ctx.arc(e.x, y, e.r * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
     }
   }
+  const repintar = () => { if (!pendiente) { pendiente = true; requestAnimationFrame(dibujar); } };
 
-  let ultimo = 0;
-  function bucle(t) {
-    if (t - ultimo > 80) { dibujar(t); ultimo = t; } // ~12 fps: suficiente y gasta poca batería
-    requestAnimationFrame(bucle);
-  }
-  window.addEventListener('resize', crear);
+  // En el móvil, la barra del navegador cambia el alto al hacer scroll: entonces no se crean estrellas nuevas
+  window.addEventListener('resize', () => {
+    if (window.innerWidth !== ancho) return crear();
+    alto = window.innerHeight;
+    lienzo.height = alto * dpr;
+    dibujar();
+  });
+  if (!quieto) window.addEventListener('scroll', repintar, { passive: true });
   crear();
-  if (!quieto) requestAnimationFrame(bucle);
 })();

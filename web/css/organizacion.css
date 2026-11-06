@@ -40,3 +40,7 @@
 .acciones .icono { width: 18px; height: 18px; }
 select.campo { appearance: auto; }
 .final-estado .chip { white-space: nowrap; }
+
+/* Contenido que falta por poner (escondite del QR, imagen de IA) */
+#pendientes .aviso { display: flex; gap: 8px; align-items: flex-start; }
+#pendientes .icono { flex: none; width: 18px; height: 18px; margin-top: 2px; }

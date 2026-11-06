@@ -22,7 +22,7 @@
       let celdas = '<span class="sstv-esquina" aria-hidden="true"></span>';
       for (let c = 1; c <= cols; c++) celdas += `<span class="sstv-num" aria-hidden="true">${c}</span>`;
       for (let f = 1; f <= filas; f++) {
-        celdas += `<span class="sstv-num" aria-hidden="true">${f}</span>`;
+        celdas += `<span class="sstv-num" data-f="${f}" aria-hidden="true">${f}</span>`;
         for (let c = 1; c <= cols; c++) {
           const id = `${f}-${c}`;
           celdas += `<button type="button" class="sstv-celda${pintadas.has(id) ? ' on' : ''}" data-c="${id}" aria-pressed="${pintadas.has(id)}" aria-label="Fila ${f}, casilla ${c}"></button>`;
@@ -34,7 +34,10 @@
             <p class="reto-intro">Así viaja una imagen SSTV: <b>línea a línea, de arriba abajo</b>.<br>
               El cartel dice qué casillas se pintan en cada fila.<br>
               Pintadlas tocando (otra vez = borrar) y decid <b>qué es</b> el dibujo.</p>
-            <div class="sstv-rejilla" style="--cols:${cols}">${celdas}</div>
+            <div class="monitor-rx">
+              <div class="monitor-cab"><span>Monitor de recepción</span><span class="mono" id="sstv-fila" aria-live="polite">Esperando la fila 1</span></div>
+              <div class="sstv-rejilla" style="--cols:${cols}">${celdas}</div>
+            </div>
             <div class="sstv-acciones">
               <span class="texto-2 mono" id="sstv-cuenta"></span>
               <button type="button" class="boton-sec mini" id="sstv-borrar">Borrar todo</button>
@@ -49,8 +52,19 @@
       const rejilla = contenedor.querySelector('.sstv-rejilla');
       const cuenta = contenedor.querySelector('#sstv-cuenta');
       const contar = () => { cuenta.textContent = `${pintadas.size} casillas pintadas`; };
+      const indicador = contenedor.querySelector('#sstv-fila');
+      let filaActiva = 0;
+      /** Resalta la fila que se está pintando, como la línea que llega en un monitor SSTV. */
+      const resaltar = (f) => {
+        if (f === filaActiva) return;
+        rejilla.querySelectorAll('.fila-activa').forEach((x) => x.classList.remove('fila-activa'));
+        rejilla.querySelectorAll(`[data-c^="${f}-"], .sstv-num[data-f="${f}"]`).forEach((x) => x.classList.add('fila-activa'));
+        indicador.textContent = `Fila ${f} de ${filas}`;
+        filaActiva = f;
+      };
       const poner = (b, on) => {
         const id = b.dataset.c;
+        resaltar(Number(id.split('-')[0]));
         if (on) pintadas.add(id); else pintadas.delete(id);
         b.classList.toggle('on', on);
         b.setAttribute('aria-pressed', String(on));

@@ -259,6 +259,9 @@ window.GK_CONFIG = {
         "tipo": "morse",
         "cartel": "-. --- -- -... .-. . / -.-. --- -- ..- -. / -.. . .-.. / .... ..--- ---",
         "pista": "La pregunta empieza por «NOMBRE…». Pensad en química básica.",
+        "datoCifrado": [
+          "V6/iXwGpfhTkC4owltbyfo88k7zBdQ71tW1PVX5s/y/MTbtMd1nhF75aKJ8WPv56toTPmNv2pvXl1u3NVHIhITo5qoe7J+gBvREBaivwxW5MkAkon6/nWVGZtehO+VtZwqODShHpMArGKLTPo/XQg9gEAxx6C4y24tcyQezzyT5+0ybMYp+oGtoyuFPBrwJotkXnjuKc38YoWnog"
+        ],
         "huellaPregunta": "bc09fdb27151ec82811d3dfadbefbca0f6d1d3282e8031eb6a5af40a39d7ca6c"
       },
       "letraPalabra": "A",
@@ -353,6 +356,12 @@ window.GK_CONFIG = {
           "f1502f7bcb780115709bbe800a600eaea184f37af5af8818843620c137c17d61",
           "6f8a69d3c48778d8a8a53b79b65a51a680114e5b7701ab9bbcf943ea1831f945",
           "08d8b4c854e90acd4b9af384e1b334e1f6f0c765e64f05269916e7186838b4a5"
+        ],
+        "datoCifrado": [
+          "CEBGk6D+RMuYePAXTNm1LhJWPz5GUdNLvv79gHf9Ol+yxyve/+7MaHAK/NGoPnxYRzyUZs/UDNumD5Mjm9MPj8PfTANC0Z42/xkW4eYtAtYDYhw+0LkOkGTOx6Iz225hAila8I6bAqWSU8sYrHdg2NGvFOvk09llAwquqQqt6DAESVnUEoc39xsXuPHBy9lDfq7Gt8q2hVph",
+          "pzKRjXJ6D8iWd1N8/AAvRPVt7BGCrOxsFaKje2aQUSrEpQ8LfDtysnoZLnMxpfM3gJyU3UQsqjXymxlyzFji0dqqiUPwwlRRg8HfQzIy/UcGzze94UiUzooRUmXJNScKwC+DuIONzSLfT3+oAV68J6m/AlEV1buXddHIuDJoSoG7HPYxAopbGnlvmx226AAzuRgT3rxEDmP3",
+          "cIQcyT6l45uZGkSedTBmzEGoQRxtseZ2s4qMHwdyBSPWETv6RyYc+iyFGClj5i+0L7fRez1Ey0lOgAAuSal+Eb1ahLESzAXpZ05MGkRb8WVVPE+6VnMyIAf0gauT9qsxWm1yMD1ILVsPtBSG56DTg2RV7J67EEQ5a6K3UpuyVAX+FWB87nOSREIo6d78vckP7TTNNtPxd3J2",
+          "DjFPTKb2CuKFNxvKYwqFlYQWUQ9AnMZylqPKKiO/xqaAwWurtHcBXe2U2+woS6O3P8u+LuRO0/N9NFTnTWE9z6DVJRIpl5Vh2Q/eVNg/pdhKtBgP6tmRESIa9LOUg2GRwniCDxSeeMVZrtc1hZFjX8RKO8d1NtHtLo8Oanrt83KjbJuWmha90WoZlrgfcpV3dcqkEIqf2Awq"
         ]
       },
       "letraPalabra": "S",
@@ -374,7 +383,10 @@ window.GK_CONFIG = {
           "01110",
           "00001"
         ],
-        "pista": "Cada bombilla vale 16, 8, 4, 2 y 1. Sumad las encendidas"
+        "pista": "Cada bombilla vale 16, 8, 4, 2 y 1. Sumad las encendidas",
+        "datoCifrado": [
+          "IlM2oXOYh5OVc3ipf9flpPMmkhyYGbCWNmwbXvpuKed3xWXAgRUkYn3MNcFio/Glwy5+rZDkGyptiaDiQZgaeIjIfAqLMllKM+E5iWUN8NLB/lLsMoVuz8cv1Bde2MIV5tP8Ebv0S2COQMe7iOzRF45gqFE8CUtCQyr4RAsSneD6TAjCb/P70Jri5HQ="
+        ]
       },
       "letraPalabra": "T",
       "token": "6a0c4e7ad7d858d348ce13240d184b24d539e692ad1f06c0552831c5cc06fe54",
@@ -389,8 +401,11 @@ window.GK_CONFIG = {
       "y": 729,
       "prueba": {
         "tipo": "qr_escondido",
-        "escondite": "PROVISIONAL: a menos de 15 pasos de este cartel, a la altura de vuestras rodillas.",
-        "pista": "PROVISIONAL: escribid aquí una pista más concreta del escondite."
+        "escondite": "ESCRIBE AQUÍ la pista del cartel: dónde está el QR escondido (a menos de 15 pasos), por ejemplo «Bajo el banco que mira al pabellón 3».",
+        "pista": "ESCRIBE AQUÍ una pista más concreta del escondite (sale con el botón «Pista» a los 60 s).",
+        "datoCifrado": [
+          "GaIkRBIz216vmYeX4lvr8c3VSiWgj48Px90hLflPogrMme+szzIRVnQ/m1nLomBzOQKzu7GN1y/3kqSw8TCKwbcofDGMufo+XUuZjeRHQsMEdN2BYZJ2n7uUVINQlgNVn6842LCuFhLt5X7pU/mDGxeejAOCqTZcZvNfGskWqwPUEtDFPrR9hWV5yx5EVSK1HXerFwg="
+        ]
       },
       "letraPalabra": "R",
       "token": "9b1c1dabd1d5ab959b07ebdb6dea753de442da7c2946d87cbd9f23b87f47ee2d",
@@ -407,7 +422,10 @@ window.GK_CONFIG = {
         "tipo": "wordle",
         "pista": "Es un planeta",
         "salPalabra": "3e5c51c9a62f9b9b",
-        "palabra": "cx0DneM="
+        "palabra": "cx0DneM=",
+        "datoCifrado": [
+          "lzKRe68gIR8iVeOaipkXn6ZMrlgcU/bNWH925Ts84Em0Xlqc/wZRcsTFi7lEOfEBG4EOFpfF1Iwl50YzxVcd9exjD0BWargyj/HLqyKVDI07JmlmtL4N+zHkXK6s0XNPVrVD8I4mPiDAUiEIcQZclwBy6emycJP9DnFeB+QMG6et0g=="
+        ]
       },
       "letraPalabra": "O",
       "token": "f078011428a6a41370013c819255130325ad9b33f260682a91975385f527a1ee",
@@ -424,8 +442,8 @@ window.GK_CONFIG = {
         "tipo": "geoguessr",
         "imagenes": [
           {
-            "src": "assets/img/pruebas/geo1.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente",
+            "src": "assets/img/pruebas/geo1.jpg",
+            "credito": "PNOA cedido por © Instituto Geográfico Nacional",
             "opciones": [
               "Mezquita de Córdoba",
               "Alhambra",
@@ -434,18 +452,18 @@ window.GK_CONFIG = {
             ]
           },
           {
-            "src": "assets/img/pruebas/geo2.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente",
+            "src": "assets/img/pruebas/geo2.jpg",
+            "credito": "NASA · tripulación de la Expedición 22 (ISS022-E-024940)",
             "opciones": [
-              "Estadio Santiago Bernabéu",
-              "Plaza de toros de Las Ventas",
-              "Arena de Verona",
-              "Coliseo de Roma"
+              "Venecia (Italia)",
+              "Palm Jumeirah (Dubái)",
+              "Mónaco",
+              "Isla de Sentosa (Singapur)"
             ]
           },
           {
-            "src": "assets/img/pruebas/geo3.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente",
+            "src": "assets/img/pruebas/geo3.jpg",
+            "credito": "NASA · tripulación de la Expedición 32 (ISS032-E-009123)",
             "opciones": [
               "Pirámides de Guiza",
               "Teotihuacán",
@@ -454,12 +472,15 @@ window.GK_CONFIG = {
             ]
           }
         ],
-        "pista": "Una está en Granada"
+        "pista": "Una está en Granada",
+        "datoCifrado": [
+          "rbnaD82CMRFLHcu4oZV9ysbYoShEf/Eo+DsD2GX4HnWYuRARI75tn8d4/C/8EXMfX0HorT6MVxliKM7QCJ2TY/U1A15zrG3iTDkQNF8Be7a2x3uE1t/7cQyZ5tXJ5/sPz50qThbzid8gftkTFsEXHeaqzeewcyRdPeIwOcPc+BsR077+ho3FBgwe"
+        ]
       },
       "letraPalabra": "N",
       "token": "396324581565b8ba1791ce25af3df0705e5e8e537f0650a5e9eae7a65d86cf17",
       "sal": "57f3ed71d0efc55a42a360d04059f61d",
-      "huella": "4413230b2976b45204439c0761c89c6294088cd37fa28018bae85d1575097fb2"
+      "huella": "dd2eb301e990af36368ad4506b5a0f6a53b4dded419aac80c28d4a831368eded"
     },
     {
       "id": 7,
@@ -469,31 +490,32 @@ window.GK_CONFIG = {
       "y": 409,
       "prueba": {
         "tipo": "real_o_ia",
+        "_ayuda": "Nombres neutros (ia-a…ia-d) y sin crédito por foto: así no se delata cuál es la falsa. Los créditos de cada foto van cifrados en privado/secretos.json → explicaciones y salen al acertar. La falsa: ver web/assets/img/pruebas/ia-falsa-AQUI.txt.",
         "imagenes": [
           {
-            "src": "assets/img/pruebas/ia1.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente"
+            "src": "assets/img/pruebas/ia-a.jpg"
           },
           {
-            "src": "assets/img/pruebas/ia2.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente"
+            "src": "assets/img/pruebas/ia-b.jpg"
           },
           {
-            "src": "assets/img/pruebas/ia3.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente"
+            "src": "assets/img/pruebas/ia-c.jpg"
           },
           {
-            "src": "assets/img/pruebas/ia4.svg",
-            "credito": "PROVISIONAL: poned la imagen y su fuente"
+            "src": "assets/img/pruebas/ia-d.jpg"
           }
         ],
+        "nota": "Las fotos reales son del archivo de la NASA (dominio público). El crédito de cada una sale al acertar.",
         "pista": "Fijaos en los detalles: letras, banderas, sombras, manos",
-        "explicacionesCifradas": "vYkolR3gMCtGrmWnqOH5zU8jxvAirsKMB8hsLi9Ox3k3+67qBdZhpHlz1+E0tmZVD1iLIH4AkTjKJU43jzSc6DoxHdzFUmbJX/4QyARR0IGXY/XFROXmOLAWG0ik1gagn5ujo8Y9JwTVgPG0AZpuiAIC73ZQrfGPJibxsb6Vbg=="
+        "explicacionesCifradas": "yuFyrpugZNZ3Ja+FaaFeDaKmHwGNS3vYuw0ofLVml67ZGgWIN7rEXgKml3KtKRDdqg2lFMA4BP2O8Aah4It5y/HLKvsfjdB9PcauaztzIyaEIXEaBhFIo+jFVtEp70ER3P/HXnObvACwkc5Dj8Rhq1Lw58Qu9nxj1969IJn3pFzBwectF2TCaxq7lRqTUMzqBtFttkoi4N8CjjjBeFltvGN8i5j7EZ4LCuXndhzyz4zQS+GjD/Mmr7FvfgVHTNGYFiuPRHUsFDOQiiCXMS6P0zzGE2ZMelAHDsorOgAqb2W87DJwP7mcLKY48du8UhZ53Rq31hvCgTtqC1c2GuGEOYHb0N3lSWs6tUocA9QcNjE7d0423L3Xgt2DDQ3CfWFyzhFg0WOuVqmJsNwc4CNqKrg1wyp3HTwgz0Us9IRBZBR2Xf36sCg9kXZ/krjNgdIVV/2Mc1eNATCIMMLCVvuVLo4M70ERLP3UrKraQGjLX6GOvpe2WRhUsmxJ5IXsmH6tSHg=",
+        "datoCifrado": [
+          "9qgEg4mgZNhuJa/EIaJSEaz1WwfCZDf1iEQ1KbVk0qyYXCiRNbqWEgbo33e4NRD3qhCoWO0vGrTa7gy79dAqm/GZaP8ChpVsPcbnOiB5IyCKeCIZSQlCtaaBUZgN8wBC2+LFUmbarkytJwZNwfgk/V/758Yksm91kdq5KZHy6xnIj6ohCCnbIgW1g1XXWszMH9Rxq0F/"
+        ]
       },
       "letraPalabra": "A",
       "token": "fc1be9180901d10ba28d12ca570f4ac1e6bce0dcea82912bc0ab01b28be18c8f",
       "sal": "d28cd0dbb8fa53446914cb4d59c47be8",
-      "huella": "989eb7ca64148dfc2e97ca2e642b2ef1b4dc9d91719cca71885df56591806d4e"
+      "huella": "73c2280dd509059cd4b2355b5a17108d4dfb1ed55d16a8c73b10e05132f65215"
     },
     {
       "id": 8,
@@ -525,7 +547,10 @@ window.GK_CONFIG = {
             "texto": "Una cifra es correcta pero está mal colocada"
           }
         ],
-        "pista": "Empezad por la pista en la que no hay ninguna cifra correcta: tachad esas cifras de todas las demás"
+        "pista": "Empezad por la pista en la que no hay ninguna cifra correcta: tachad esas cifras de todas las demás",
+        "datoCifrado": [
+          "aNWHabyNM4IoNIxXsXAvhnYOOlgNLFUklqTNjHneZeYTUiaQhG219rEc0eE2Q/HZ4Fk1sUcJ49Ibc46+uW+FXlEhsw5/G1M0GjN+Go//CsaHMqiFnV7hl4g0hiLyR91ShrsqyUSVcpahazqKBbMbgfftcW0jclGYkNQ2ZWYYwu9be2yj4W5uNwCnvRCGGisUfzukjcQ="
+        ]
       },
       "letraPalabra": "U",
       "token": "df21695ce8d3e59a9abe802f0724752682ef84ba1eb556441ce8fb31389defbd",
@@ -571,7 +596,10 @@ window.GK_CONFIG = {
           ]
         },
         "leccion": "Así se adivinan muchas contraseñas reales: no uséis datos que publicáis en redes.",
-        "pista": "La pista dice «mi peque»: ¿quién es la peque de Lucía? ¿Y qué año fue especial?"
+        "pista": "La pista dice «mi peque»: ¿quién es la peque de Lucía? ¿Y qué año fue especial?",
+        "datoCifrado": [
+          "3ergW21DqSaOnXzxqMCEHjey0t1a3B8aIxJmvRacGWIp1i75YFC4qlV55z02DYMALgRIrp3j47fiOaZPjZxr33asXDawiBblqvtYCE56lbx66K1boYsmtAMbPHavQ3IdlJU+O/cJv9qjn2THV+zn7dZD9ZD7phEUIRkAYAm58AYKYgfpDKf6VCvwp4xZQmnZ/+L6fFcdCum/74Q="
+        ]
       },
       "letraPalabra": "T",
       "token": "f5300e1f76b42e49d1e80d4215e6289178f8a577c18f0e3c47cbe100afd3e869",
@@ -595,7 +623,10 @@ window.GK_CONFIG = {
         ],
         "leccion": "Así se detecta un bulo: buscad la fuente y desconfiad de lo que suena demasiado sorprendente.",
         "pista": "Dos son bulos muy famosos en internet",
-        "explicacionesCifradas": "trNg82uLFi+UavxsCF5JjaxtXlXf7RSZQtzOqlzoLZfhTbbiRUjpEmyt5wmhCizFNGfdu/cyiUYbTYGKWUxmcCrz5295zdd/Ea8NFvuK2rlvG3+M8juzK2XaXdBzcZwz+ilqKylyYAnfssF3d0qJUbcXDNCjhfLXStcl3BoSshjB4x43MJ7/jytBuoBjutMjbESnsBCg9HSGSMeUzaQf/ElQza+55zGtKYa0yQFRbzT5xQ9ngvkGctcqC+hqqOUsZL3BPkaqc/g4TLnh36SkFXFVi1dQ2N73GMkHsfCcKPOAM0Ac1wNOpQ8EMCPL6vFw1o9psRmepKggR98apnFECH4Z/t3yh63W3PLXrv/4GrD7gX6nNelOp8C7upwHc3CnwAph/XjSJhuee+ELFh0Tm7lt22FnDjaz6UphMB3tDFGz41MvU0ZFaR0kmBdDM3dd4jidv3+3A6bleDN18ydgFFU3zQTaHHv2+rmO8Sz4qsaLC7Xq6IAE/6S/+9G8tg35ioqwpynKZ54kUshtf0eAQTQRfUY2A4gXxOirhLoVrDeUfS1SpePuRQzux2ZZBAOj6rbZr7Th7oc8y7Sc+HN8RNSV357JY3NEyy2lS4hrjyhV2L6Q7Hgtm3kUkcpY1A=="
+        "explicacionesCifradas": "trNg82uLFi+UavxsCF5JjaxtXlXf7RSZQtzOqlzoLZfhTbbiRUjpEmyt5wmhCizFNGfdu/cyiUYbTYGKWUxmcCrz5295zdd/Ea8NFvuK2rlvG3+M8juzK2XaXdBzcZwz+ilqKylyYAnfssF3d0qJUbcXDNCjhfLXStcl3BoSshjB4x43MJ7/jytBuoBjutMjbESnsBCg9HSGSMeUzaQf/ElQza+55zGtKYa0yQFRbzT5xQ9ngvkGctcqC+hqqOUsZL3BPkaqc/g4TLnh36SkFXFVi1dQ2N73GMkHsfCcKPOAM0Ac1wNOpQ8EMCPL6vFw1o9psRmepKggR98apnFECH4Z/t3yh63W3PLXrv/4GrD7gX6nNelOp8C7upwHc3CnwAph/XjSJhuee+ELFh0Tm7lt22FnDjaz6UphMB3tDFGz41MvU0ZFaR0kmBdDM3dd4jidv3+3A6bleDN18ydgFFU3zQTaHHv2+rmO8Sz4qsaLC7Xq6IAE/6S/+9G8tg35ioqwpynKZ54kUshtf0eAQTQRfUY2A4gXxOirhLoVrDeUfS1SpePuRQzux2ZZBAOj6rbZr7Th7oc8y7Sc+HN8RNSV357JY3NEyy2lS4hrjyhV2L6Q7Hgtm3kUkcpY1A==",
+        "datoCifrado": [
+          "ivoY6kbkYXqIZLBzDF58gOVtVlXW4QOYB4nMpA8LqMXuBKbmRUvmG2XiplDyFyjQNmfdqPJhnkhMApfPTk1vcDL3tVFpzdlpEbQdB/+E2rBvBnSa/C2vO2fndaJEVarKdy0maDVwYUDftJJte0eLV7cRTYWszPDXBpBwnVVR4BqE+gk8Kt8="
+        ]
       },
       "letraPalabra": "A",
       "token": "7a10bc19c311340ab132f889b79c4a320c284bef4b46649ce5e6065999a2c282",

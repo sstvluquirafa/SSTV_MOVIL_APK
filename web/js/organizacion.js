@@ -80,6 +80,35 @@
     nota.t = setTimeout(() => { n.innerHTML = ''; }, 5000);
   }
 
+  /** Contenido que todavía falta por poner (lo que depende del sitio real o de la organización). */
+  function avisarPendientes() {
+    const caja = $('#pendientes');
+    if (!caja) return;
+    const faltan = [];
+    const pintar = () => {
+      caja.innerHTML = faltan.map((t) => `<div class="aviso aviso-info">${GK.icono('campana')} ${GK.html(t)}</div>`).join('');
+    };
+    for (const e of C.estaciones) {
+      const p = e.prueba || {};
+      if (p.tipo === 'qr_escondido' && [p.escondite, p.pista].some((t) => !t || /^\s*ESCRIBE AQU/i.test(t))) {
+        faltan.push(`Falta el escondite de la estación ${e.letra}: escribidlo en torneo.json (escondite y pista).`);
+      }
+      if (p.tipo === 'real_o_ia') {
+        // Las imágenes que no cargan (la falsa la genera la organización): ver ia-falsa-AQUI.txt
+        (p.imagenes || []).forEach((im) => {
+          const img = new Image();
+          img.onerror = () => {
+            const t = `Falta una imagen de la estación ${e.letra} (¿Real o IA?): leed web/assets/img/pruebas/ia-falsa-AQUI.txt.`;
+            if (!faltan.includes(t)) faltan.push(t);
+            pintar();
+          };
+          img.src = im.src;
+        });
+      }
+    }
+    pintar();
+  }
+
   function panel() {
     $('#salir').classList.remove('oculto');
     vista.innerHTML = `
@@ -95,6 +124,7 @@
         </div>
       </section>
       <div id="nota" aria-live="polite"></div>
+      <div id="pendientes"></div>
       <section id="ayudas" class="ayudas" aria-live="polite"></section>
       <section class="ventana">
         <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · EQUIPOS</span></div>
@@ -123,6 +153,7 @@
         <button class="boton-sec boton-peligro" id="reiniciar">${GK.icono('reinicio')} Reiniciar todo</button>
       </section>`;
 
+    avisarPendientes();
     $('#reiniciar').onclick = async () => {
       const ok = await GK.modal(
         '<h2 class="titulo">¿Reiniciar todo?</h2><p>Se borrará el progreso de los equipos. No se puede deshacer.</p>' +

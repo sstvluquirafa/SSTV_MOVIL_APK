@@ -23,6 +23,7 @@
     bandera: '<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>',
     flecha: '<path d="M9 5l7 7-7 7"/>',
     reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    centrar: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
   };
   GK.icono = (n) =>
     `<svg class="icono" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n] || ''}</svg>`;

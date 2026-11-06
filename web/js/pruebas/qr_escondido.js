@@ -16,6 +16,10 @@
             <p class="reto-intro">Cerca de esta estación hay un <b>QR escondido</b>.<br>
               El cartel os dice dónde buscar.<br>
               Encontradlo y escaneadlo <b>desde aquí</b>.</p>
+            <div class="radar-caja" id="qr-radar">
+              <div class="radar-baliza" aria-hidden="true"><i class="radar-barrido"></i><i class="radar-eco"></i></div>
+              <p class="radar-texto">Buscando la baliza…</p>
+            </div>
             <div id="qr-visor"></div>
             <button class="boton boton-ancho boton-grande" type="button" id="qr-escanear">${GK.icono('qr')} Escanear QR escondido</button>
             <button class="boton-sec boton-ancho oculto" type="button" id="qr-parar">Cancelar</button>
@@ -33,6 +37,7 @@
       const visor = contenedor.querySelector('#qr-visor');
       const bEscanear = contenedor.querySelector('#qr-escanear');
       const bParar = contenedor.querySelector('#qr-parar');
+      const radar = contenedor.querySelector('#qr-radar');
       let parar = null;
       let activo = false;
       const cerrar = () => {
@@ -41,6 +46,7 @@
         visor.innerHTML = '';
         bEscanear.classList.remove('oculto');
         bParar.classList.add('oculto');
+        radar.classList.remove('oculto');
       };
       const comprobar = async (texto) => {
         // Un QR de otra estación o de la meta (lleva «#/») tampoco es este
@@ -54,6 +60,7 @@
         ctx.ayuda('');
         bEscanear.classList.add('oculto');
         bParar.classList.remove('oculto');
+        radar.classList.add('oculto'); // el radar deja sitio al escáner
         activo = true;
         const f = await GK.escanear(visor, async (texto) => {
           cerrar();

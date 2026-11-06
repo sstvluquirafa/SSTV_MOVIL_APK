@@ -109,9 +109,7 @@
 .ruta-info { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: -4px 0 0 !important; color: var(--texto-2); font-size: .85rem; }
 .mapa-caja { position: relative; border-radius: var(--radio); border: 1px solid var(--borde); overflow: hidden; background: #e8edf2; box-shadow: var(--sombra); }
 .mapa-marco { overflow: hidden; }
-.mapa-caja[data-zoom="3"] .mapa-marco { overflow: auto; max-height: 62vh; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .mapa-lienzo { position: relative; width: 100%; }
-.mapa-caja[data-zoom="3"] .mapa-lienzo { width: 300%; }
 .mapa-lienzo img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
 .mapa-lienzo svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .mapa-zoom {
@@ -135,9 +133,6 @@
 .m-siguiente .m-estrella { fill: #fb923c; }
 .m-siguiente .m-fondo { stroke: #fb923c; stroke-width: 3; }
 .m-neutra { opacity: .55; }
-/* Al ampliar, las marcas se encogen para no tapar el mapa */
-.m { transform-box: fill-box; transform-origin: center; transition: transform .2s; }
-.mapa-caja[data-zoom="3"] .m { transform: scale(.55); }
 .m-pulso { fill: rgba(251, 146, 60, .45); transform-box: fill-box; transform-origin: center; animation: pulso 1.6s ease-out infinite; }
 
 /* Ayuda y mensajes */
@@ -269,6 +264,8 @@
 .error-suave { color: #fca5a5; font-weight: 600; }
 .ok-suave { color: #6ee7b7; }
 .credito { display: block; font-size: .72rem; color: var(--texto-3); margin-top: 4px; }
+.credito:empty { display: none; }
+.ia-nota { margin: 0 0 12px; text-align: center; }
 @keyframes temblor { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 .temblor { animation: temblor .4s; }
 
@@ -534,12 +531,32 @@ body.con-pestanas .vista { padding-bottom: calc(var(--alto-tabs) + 32px + env(sa
 
 /* ---------- Mapa a pantalla completa ---------- */
 .pantalla-mapa > * + * { margin-top: 12px; }
-.mapa-completo .mapa-marco { overflow: auto !important; max-height: none !important; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-.mapa-completo .mapa-lienzo { width: 300% !important; }
-.mapa-completo .mapa-caja[data-zoom="3"] .mapa-lienzo { width: 600% !important; }
-.mapa-completo .m { transform: scale(.5); }
-.mapa-completo .mapa-caja[data-zoom="3"] .m { transform: scale(.3); }
-.mapa-completo .mapa-caja::after { content: 'Desliza para ver todo el Parque'; position: absolute; left: 10px; bottom: 10px; padding: 5px 10px; border-radius: 999px; background: rgba(15, 23, 42, .85); color: var(--texto-2); font-size: .74rem; font-weight: 600; pointer-events: none; }
+/* ---------- Visor del mapa (js/mapa.js → activarMapa) ----------
+   El marco tiene un tamaño fijo y el lienzo (el mapa a su tamaño original) se mueve y se escala con transform.
+   Las marcas se escalan alrededor de su punto (transform-origin en línea) con --m para verse siempre igual. */
+.m { transform-box: view-box; }
+.mapa-activo .mapa-marco {
+  position: relative; overflow: hidden; height: clamp(220px, 46vh, 420px);
+  background: #0b1226; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none;
+}
+.mapa-activo.moviendo .mapa-marco { cursor: grabbing; }
+.mapa-activo .mapa-lienzo { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.mapa-activo .mapa-lienzo img { pointer-events: none; }
+.mapa-activo .m { transform: scale(var(--m, 1)); }
+.mapa-controles { position: absolute; right: 8px; bottom: 8px; z-index: 2; display: flex; flex-direction: column; gap: 6px; }
+.mapa-boton {
+  width: 48px; height: 48px; display: grid; place-items: center; padding: 0; border-radius: 14px; cursor: pointer;
+  background: rgba(10, 17, 40, .9); color: var(--texto, #f8fafc); border: 1px solid rgba(255, 255, 255, .16);
+}
+.mapa-boton:disabled { opacity: .4; cursor: default; }
+.mapa-boton .icono { width: 22px; height: 22px; }
+.mapa-completo .mapa-activo .mapa-marco { height: calc(100vh - 340px); height: calc(100dvh - 340px); min-height: 260px; touch-action: none; }
+.mapa-completo .mapa-activo::after {
+  content: 'Arrastra y pellizca'; position: absolute; left: 10px; bottom: 10px; max-width: calc(100% - 76px);
+  padding: 5px 10px; border-radius: 999px; background: rgba(15, 23, 42, .85); color: var(--texto-2); font-size: .74rem; font-weight: 600;
+  pointer-events: none; transition: opacity .3s;
+}
+.mapa-completo .mapa-activo.tocado::after { opacity: 0; }
 .mapa-leyenda { display: flex; justify-content: center; gap: 16px; font-size: .78rem; color: var(--texto-3); }
 .mapa-leyenda span { display: inline-flex; align-items: center; gap: 6px; }
 .mapa-leyenda i { width: 10px; height: 10px; border-radius: 50%; }
@@ -904,3 +921,298 @@ body.app {
   background: var(--ambar); color: #1b1203; font-family: var(--display); font-weight: 800;
   box-shadow: 0 0 0 6px var(--cielo), 0 0 0 8px rgba(255, 182, 39, .4); border: 0; text-shadow: none;
 }
+
+/* =====================================================================
+ * Misión espacial (fase 2): la app es el cuaderno de a bordo de una misión de GranaSAT.
+ * Paleta: espacio profundo, órbita baja, atmósfera (azul: «en el aire»), señal (ámbar: acción),
+ * fósforo (acierto) e interferencia (error). Contraste ≥ 4.5:1 en todos los textos.
+ * Movimiento solo en: banda SSTV al entrar, letra recibida al superar y satélite que avanza en su órbita.
+ * ===================================================================== */
+body.app {
+  --cielo: #070b1f;
+  --superficie: #111a3a;
+  --superficie-2: #1a2550;
+  --linea: rgba(141, 160, 214, .16);
+  --atmosfera: #3d8bff;
+  --atmosfera-texto: #6fa8ff;
+  --atmosfera-suave: rgba(61, 139, 255, .14);
+  --texto-3: #8a95b8;
+  background: var(--cielo) radial-gradient(120% 60% at 50% -10%, #111d48 0%, #0a1130 45%, var(--cielo) 100%) fixed;
+}
+body.app #cielo { opacity: 1; }
+.app .barra-estado.est-verde .punto { background: var(--atmosfera); box-shadow: 0 0 6px var(--atmosfera); }
+.app .en-directo i { background: var(--atmosfera); }
+.app .seccion-cab a { color: var(--atmosfera-texto); }
+
+/* ---------- Borde de la Tierra (abajo en «Ruta»), como en las fotos desde la Estación Espacial ---------- */
+.tierra {
+  position: relative; height: 170px; overflow: hidden; pointer-events: none;
+  margin: 28px -16px calc(-1 * (var(--alto-tabs, 64px) + 32px + env(safe-area-inset-bottom)));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+@media (max-width: 600px) { .tierra { -webkit-mask-image: none; mask-image: none; } }
+.tierra::before {
+  content: ''; position: absolute; left: -70%; right: -70%; top: 54px; height: 1100px; border-radius: 50%;
+  background: radial-gradient(ellipse 48% 22% at 50% 0%, #1b4aa0 0%, #0e2a6b 40%, #0a1640 70%, var(--cielo) 100%);
+  box-shadow:
+    0 0 0 1.5px rgba(150, 196, 255, .9),
+    0 -6px 18px 1px rgba(61, 139, 255, .6),
+    0 -22px 60px 8px rgba(61, 139, 255, .25);
+}
+
+/* ---------- Tarjeta principal: la órbita ---------- */
+.app .foco { background: var(--superficie); }
+.foco-orbita { margin: 10px -8px -2px; }
+.orbita { display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto; overflow: visible; }
+.o-linea { fill: none; stroke: rgba(111, 168, 255, .6); stroke-width: 1.4; }
+.o-linea-atras { stroke: rgba(111, 168, 255, .25); stroke-dasharray: 3 4; }
+.o-atmosfera { fill: rgba(61, 139, 255, .16); stroke: rgba(111, 168, 255, .55); stroke-width: 1.2; }
+.o-tierra-luz { fill: rgba(126, 196, 150, .3); }
+.o-marca { stroke-width: 1.3; }
+.o-hecha { fill: var(--fosforo); stroke: #b8fff3; filter: drop-shadow(0 0 4px rgba(94, 230, 208, .75)); }
+.o-pendiente { fill: var(--superficie); stroke: var(--texto-3); }
+.o-actual { fill: none; stroke: var(--ambar); }
+.o-cuerpo { fill: var(--ambar); stroke: #fff2c7; stroke-width: .8; }
+.o-panel { fill: #1d4fbf; stroke: var(--atmosfera-texto); stroke-width: .8; }
+.o-antena { stroke: var(--ambar); stroke-width: 1.4; stroke-linecap: round; }
+.o-sat { filter: drop-shadow(0 0 5px rgba(255, 182, 39, .55)); }
+
+/* Anillo de la cabecera: la misma órbita, con el satélite como punto */
+.app .anillo-fondo { stroke: rgba(111, 168, 255, .35); stroke-width: 1.6; stroke-dasharray: 1.6 3.1; }
+.app .anillo-valor { stroke: var(--fosforo); }
+.anillo-sat { fill: var(--ambar); stroke: var(--cielo); stroke-width: 1.6; }
+
+/* ---------- ¡Estación superada!: la letra llega como una foto SSTV ---------- */
+.app .superada > .antetitulo { color: var(--fosforo); }
+.app .destello { animation: none; background: radial-gradient(circle, rgba(94, 230, 208, .16), transparent 65%); }
+.foto-sstv { position: relative; width: 210px; margin: 8px auto 12px; border-radius: 18px; overflow: hidden; border: 1px solid var(--linea); background: #04071a; }
+.foto-sstv-imagen {
+  position: relative; height: 160px; display: grid; place-items: center;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 50% 62%, #16224a 0%, #070b1f 72%);
+}
+.foto-sstv-barras { position: absolute; inset: 0 0 auto; height: 24px; display: grid; grid-template-columns: repeat(7, 1fr); }
+.foto-sstv-barras::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(4, 7, 26, .35) 0 1px, transparent 1px 3px); }
+.foto-sstv-barras i:nth-child(1) { background: #e9e9e2; }
+.foto-sstv-barras i:nth-child(2) { background: #f2cf4a; }
+.foto-sstv-barras i:nth-child(3) { background: #59d2d9; }
+.foto-sstv-barras i:nth-child(4) { background: #62cf83; }
+.foto-sstv-barras i:nth-child(5) { background: #cf63cc; }
+.foto-sstv-barras i:nth-child(6) { background: #e45b55; }
+.foto-sstv-barras i:nth-child(7) { background: #5670e0; }
+.app .foto-sstv .letra-grande { width: 86px; height: 98px; margin: 22px 0 0; font-size: 3.8rem; border-radius: 16px; box-shadow: 0 0 34px rgba(255, 182, 39, .35); animation: none; }
+.foto-sstv-linea { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: #fff; box-shadow: 0 0 10px #fff, 0 0 2px #fff; opacity: 0; pointer-events: none; }
+.foto-sstv.recibiendo .foto-sstv-imagen { animation: recibir 1.9s steps(40, end) var(--retraso, .25s) both; }
+.foto-sstv.recibiendo .foto-sstv-linea { animation: barrido 1.9s linear var(--retraso, .25s) both; }
+.letra-ganada p b { color: var(--ambar); }
+@media (prefers-reduced-motion: reduce) {
+  .foto-sstv.recibiendo .foto-sstv-imagen, .foto-sstv.recibiendo .foto-sstv-linea { animation: none; }
+}
+
+/* Dato real de la estación */
+.dato { text-align: left; margin-top: 18px; padding: 14px 16px; border-radius: 18px; background: var(--superficie); border: 1px solid rgba(61, 139, 255, .35); }
+.dato-titulo { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; color: var(--atmosfera-texto); font-weight: 600; font-size: .92rem; }
+.dato-titulo .icono { width: 18px; height: 18px; }
+.dato-texto { margin: 0; color: var(--texto); line-height: 1.5; }
+
+/* Fila de letras: las 10 en una sola línea también a 360 px */
+.letras-palabra .letras-fila { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; max-width: 380px; margin-inline: auto; }
+.letras-palabra .letra-ficha { width: auto; height: 38px; }
+
+/* =====================================================================
+ * Pruebas con temática espacial (fase 2). Cada una cambia solo de aspecto: mismo funcionamiento y respuestas.
+ * ===================================================================== */
+
+/* ---------- Morse: la tabla como un panel de radio ---------- */
+.radio-panel { padding: 14px 12px 12px; border-radius: 18px; background: linear-gradient(180deg, #151f45, var(--superficie)); border: 1px solid var(--linea); }
+.radio-cab { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 4px 12px; }
+.radio-titulo { font-family: var(--display); font-weight: 800; font-size: 1.05rem; }
+.radio-leyenda { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; color: var(--texto-2); }
+.radio-leyenda .p-raya { margin-left: 6px; }
+.app .tabla-morse { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.tecla-morse {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  min-height: 56px; padding: 6px 2px; border-radius: 12px; cursor: pointer; font: inherit; color: var(--texto);
+  background: #0a1129; border: 1px solid rgba(141, 160, 214, .14); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .35);
+}
+.tecla-morse b { font-family: var(--display); font-weight: 800; font-size: 1.1rem; line-height: 1; }
+.pulsos { display: flex; align-items: center; gap: 2.5px; height: 8px; max-width: 100%; }
+.p-punto, .p-raya { display: inline-block; height: 6px; border-radius: 3px; background: var(--ambar); box-shadow: 0 0 6px rgba(255, 182, 39, .45); }
+.p-punto { width: 6px; }
+.p-raya { width: 11px; }
+.tecla-morse:active, .tecla-morse.emitiendo { border-color: var(--ambar); background: #1a2550; }
+.radio-nota { margin: 10px 4px 0; font-size: .85rem; color: var(--texto-3); }
+
+/* ---------- SSTV a mano: el monitor de recepción de la estación de tierra ---------- */
+.monitor-rx { border-radius: 18px; background: #03060f; border: 1px solid var(--linea); overflow: hidden; }
+.monitor-cab { display: flex; justify-content: space-between; gap: 10px; padding: 10px 14px; font-size: .85rem; color: var(--texto-2); border-bottom: 1px solid rgba(141, 160, 214, .1); }
+.monitor-cab .mono { color: var(--fosforo); }
+.app .monitor-rx .sstv-rejilla { margin: 0; border: 0; border-radius: 0; background: transparent; }
+.app .monitor-rx .sstv-rejilla::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 3px);
+}
+.app .monitor-rx .sstv-celda { background: #0d1530; }
+.app .monitor-rx .sstv-celda.fila-activa { background: #1a2a55; }
+.app .monitor-rx .sstv-celda.on { background: var(--ambar); }
+.app .monitor-rx .sstv-num.fila-activa { color: var(--fosforo); font-weight: 700; }
+
+/* ---------- Binario: LED de estado de un CubeSat sobre su placa ---------- */
+.placa {
+  position: relative; padding: 14px 12px 14px; border-radius: 18px; text-align: center; overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 0 22%, rgba(140, 214, 160, .08) 22% 23%, transparent 23% 61%, rgba(140, 214, 160, .08) 61% 62%, transparent 62%),
+    linear-gradient(0deg, transparent 0 70%, rgba(140, 214, 160, .08) 70% 71.5%, transparent 71.5%),
+    #0b2a1f;
+  border: 1px solid #1d4a37;
+}
+.placa::before, .placa::after { content: ''; position: absolute; width: 9px; height: 9px; border-radius: 50%; border: 2px solid #b8a05a; top: 10px; }
+.placa::before { left: 10px; }
+.placa::after { right: 10px; }
+.placa-rotulo { margin: 0 0 12px; font-size: .74rem; color: #d7e8dc; }
+.app .placa .bin-fila { gap: 12px; }
+.app .placa .bin-valor { color: #f4f7f2; }
+.led { width: 30px; height: 20px; border-radius: 5px; background: #13261e; border: 2px solid #3d5a4c; }
+.led.on { background: radial-gradient(ellipse at 50% 40%, #fff6da, #ffd36b 45%, #ff9d00); border-color: #ffe39a; box-shadow: 0 0 16px rgba(255, 182, 39, .8), 0 0 4px #fff3c4; }
+.led-nombre { font-size: .66rem; color: #a9c4b4; }
+.placa-texto { margin: 12px 0 0; color: #e6efe8; font-size: .95rem; }
+.placa-texto .ambar { color: var(--ambar); }
+
+/* ---------- QR escondido: un radar buscando la baliza ---------- */
+.radar-caja { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 0 6px; }
+.radar-baliza {
+  position: relative; width: min(220px, 62vw); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  background:
+    radial-gradient(circle, transparent 0 24%, rgba(94, 230, 208, .28) 24.5% 25%, transparent 25.5% 49%, rgba(94, 230, 208, .28) 49.5% 50%, transparent 50.5% 74%, rgba(94, 230, 208, .28) 74.5% 75%, transparent 75.5%),
+    linear-gradient(0deg, transparent calc(50% - .5px), rgba(94, 230, 208, .22) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)),
+    linear-gradient(90deg, transparent calc(50% - .5px), rgba(94, 230, 208, .22) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)),
+    radial-gradient(circle, #0b1d2a, #040b16 75%);
+  border: 1.5px solid rgba(94, 230, 208, .45);
+}
+.radar-barrido {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(94, 230, 208, .42), rgba(94, 230, 208, 0) 70deg, transparent 360deg);
+  animation: barrer-radar 4.5s linear infinite;
+}
+.radar-eco { position: absolute; left: 66%; top: 30%; width: 9px; height: 9px; border-radius: 50%; background: var(--ambar); box-shadow: 0 0 10px var(--ambar); }
+.radar-texto { margin: 0; color: var(--texto-2); font-size: .95rem; }
+@keyframes barrer-radar { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .radar-barrido { animation: none; } }
+
+/* ---------- Wordle: cada casilla es un panel solar; al revelar la letra, el panel se despliega girando ---------- */
+.app .w-casilla {
+  position: relative; border: 2px solid #2b3b78; border-radius: 6px; color: var(--texto);
+  background:
+    linear-gradient(90deg, transparent calc(50% - .5px), rgba(160, 190, 255, .16) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)),
+    linear-gradient(0deg, transparent calc(33% - .5px), rgba(160, 190, 255, .16) calc(33% - .5px) calc(33% + .5px), transparent calc(33% + .5px) calc(66% - .5px), rgba(160, 190, 255, .16) calc(66% - .5px) calc(66% + .5px), transparent calc(66% + .5px)),
+    linear-gradient(160deg, #1c2d6b, #0f1a45);
+}
+.app .w-casilla.escrita { border-color: #7f8fc4; }
+.app .w-casilla.ok, .app .w-casilla.casi, .app .w-casilla.no { background-blend-mode: normal; }
+.app .w-casilla.ok { background-color: var(--fosforo); background-image: linear-gradient(90deg, transparent calc(50% - .5px), rgba(4, 33, 28, .18) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)); color: #04211c; border-color: #a6fff0; }
+.app .w-casilla.casi { background-color: var(--ambar); background-image: linear-gradient(90deg, transparent calc(50% - .5px), rgba(27, 18, 3, .18) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)); color: #1b1203; border-color: #ffe0a0; }
+.app .w-casilla.no, .app .w-tecla.no { background: #222b4a; border-color: #222b4a; color: #b3bcd6; }
+/* La bisagra del panel, a la izquierda */
+.app .w-casilla::before { content: ''; position: absolute; left: -2px; top: 22%; bottom: 22%; width: 3px; border-radius: 2px; background: #8a95b8; opacity: .7; }
+.app .w-casilla.girar { transform-origin: left center; animation: desplegar .55s cubic-bezier(.2, .8, .3, 1) backwards; }
+@keyframes desplegar { from { transform: perspective(300px) rotateY(-95deg); } to { transform: none; } }
+
+/* ---------- GeoGuessr: cada foto, como una imagen de satélite en su visor ---------- */
+.visor-sat { position: relative; border-radius: 16px; overflow: hidden; background: var(--superficie-2); }
+.app .visor-sat img { border-radius: 0; }
+.visor-sat::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), inset 0 0 60px rgba(4, 7, 26, .55); }
+.esq { position: absolute; width: 20px; height: 20px; border: 2px solid rgba(255, 255, 255, .85); pointer-events: none; }
+.esq-1 { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.esq-2 { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.esq-3 { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+.esq-4 { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+.visor-dato { position: absolute; z-index: 1; padding: 3px 7px; border-radius: 6px; background: rgba(4, 7, 26, .78); color: #f1f4fb; font-size: .72rem; line-height: 1.3; }
+.visor-pase { top: 14px; left: 36px; color: var(--ambar); font-weight: 700; }
+.visor-tel { bottom: 14px; left: 36px; }
+.app .geo-foto .credito { margin-top: 6px; }
+
+/* ---------- ¿Real o IA?: diapositivas del archivo de la misión, con sello de «revisada» ---------- */
+.app .ia-rejilla { gap: 12px; }
+.app .ia-foto { padding: 7px 7px 0; border: 0; border-radius: 10px; background: #e9e5d8; color: #1c1a14; box-shadow: 0 2px 0 #b8b2a0; overflow: visible; }
+.diapo-ventana { position: relative; display: block; border-radius: 4px; overflow: hidden; background: #111; }
+.app .ia-foto img { border-radius: 0; }
+.diapo-rotulo { display: flex; align-items: center; gap: 6px; padding: 6px 2px; font-size: .68rem; color: #4a4636; }
+.app .ia-letra { position: static; width: 22px; height: 22px; flex: none; background: #1c1a14; color: #f3efe2; font-size: .85rem; }
+.app .ia-foto .credito { padding: 0 2px 7px; color: #4a4636; font-size: .7rem; }
+.sello {
+  position: absolute; left: 50%; top: 50%; padding: 4px 10px; border: 3px solid currentColor; border-radius: 8px;
+  font-family: var(--display); font-weight: 800; font-size: 1rem; line-height: 1.1; white-space: nowrap;
+  color: var(--ambar); background: rgba(10, 12, 30, .55); transform: translate(-50%, -50%) rotate(-12deg) scale(1.6); opacity: 0;
+  transition: opacity .15s, transform .2s cubic-bezier(.3, 1.5, .5, 1); pointer-events: none;
+}
+.app .ia-foto.elegida { border: 0; box-shadow: 0 0 0 3px var(--ambar); }
+.app .ia-foto.elegida .ia-letra { background: var(--ambar); color: #1b1203; }
+.ia-foto.elegida .sello { opacity: 1; transform: translate(-50%, -50%) rotate(-12deg); }
+.app .ia-foto.acierto { box-shadow: 0 0 0 3px var(--fosforo); }
+.ia-foto.acierto .sello { color: var(--fosforo); }
+@media (prefers-reduced-motion: reduce) { .sello { transition: none; } .app .w-casilla.girar { animation: none; } }
+
+/* ---------- Caja fuerte: una escotilla de nave con tres ruedas; al abrirse, la compuerta se desliza ---------- */
+.app .caja {
+  width: min(300px, 100%); max-width: none; aspect-ratio: 1; padding: 0; border-radius: 50%; overflow: hidden;
+  display: grid; place-items: center; container-type: inline-size;
+  background: radial-gradient(circle, #2b3456 0 58%, #4a5579 58.5% 63%, #2a3150 63.5% 100%);
+  box-shadow: inset 0 0 0 3px #5d6a96, inset 0 0 0 10px #1b2242, 0 0 0 1px var(--linea);
+}
+.perno { position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px; border-radius: 50%; z-index: 2;
+  background: radial-gradient(circle at 35% 30%, #e7ebf6, #7a86ad 60%, #3b4569); transform: rotate(var(--a)) translateY(-44cqw); }
+.app .caja-puerta {
+  position: absolute; inset: 17%; z-index: 1; border-radius: 50%; padding: 0; display: grid; place-items: center; align-content: center; gap: 8px;
+  background: radial-gradient(circle at 40% 30%, #6b779f, #3a4469 70%); border: 0;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .25), inset 0 -6px 14px rgba(0, 0, 0, .35), 0 6px 18px rgba(0, 0, 0, .45);
+  transition: transform .9s cubic-bezier(.6, 0, .3, 1);
+}
+.app .caja-ruedas { flex: none; gap: 6px; }
+.app .caja .rueda-b { width: 46px; height: 34px; }
+.app .caja .rueda-n { width: 46px; height: 52px; font-size: 1.6rem; }
+/* La «manilla» de la escotilla */
+.app .caja-pomo { width: 74px; height: 10px; border-radius: 5px; border: 0; background: linear-gradient(180deg, #e3e7f3, #8a95b8); box-shadow: 0 2px 0 #283055; }
+.app .caja-interior {
+  position: absolute; inset: 17%; border-radius: 50%; color: var(--fosforo);
+  background: radial-gradient(circle at 50% 40%, rgba(94, 230, 208, .35), #050a1d 70%);
+}
+.app .caja.abierta .caja-puerta { transform: translateX(-125%); }
+@media (prefers-reduced-motion: reduce) { .app .caja-puerta { transition: none; } }
+
+/* ---------- Hackea el satélite: terminal de control de misión ---------- */
+.telemetria { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 8px 14px; font-size: .74rem; color: #8fd8cb; background: #071022; border-bottom: 1px solid rgba(94, 230, 208, .18); }
+.telemetria b { color: var(--fosforo); font-weight: 700; }
+.telemetria .tlm-bloq { color: var(--interferencia); }
+.telemetria .tlm-ok { color: var(--fosforo); }
+.acceso-total {
+  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; pointer-events: none; text-align: center;
+  background: rgba(2, 8, 14, .94); animation: acceso 1.1s ease both;
+}
+.acceso-total p { margin: 0; font-size: clamp(2.2rem, 12vw, 4.5rem); font-weight: 700; line-height: 1.1; color: var(--fosforo); text-shadow: 0 0 24px rgba(94, 230, 208, .7); }
+.acceso-total::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(94, 230, 208, .05) 0 1px, transparent 1px 3px); }
+@keyframes acceso { 0% { opacity: 0; } 10%, 80% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .acceso-total { animation: none; } }
+
+/* ---------- ¿Bulo o verdad?: partes de noticias de la misión con un interruptor de dos posiciones ---------- */
+.app .bulo { display: flex; flex-direction: column; border-left: 4px solid var(--atmosfera); }
+.parte-cab { order: -1; display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: .8rem; color: var(--atmosfera-texto); font-weight: 600; }
+.parte-cab .icono { width: 16px; height: 16px; }
+.app .bulo > p:first-child { font-family: var(--display); font-weight: 600; font-size: 1.08rem; line-height: 1.35; color: var(--texto); }
+.app .bulo > p:first-child::before { content: none; }
+.app .bulo-botones { position: relative; isolation: isolate; }
+.app .bulo-botones::before {
+  content: ''; position: absolute; z-index: -1; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 11px;
+  opacity: 0; transition: transform .2s ease, background .2s, opacity .15s;
+}
+.app .bulo[data-marca] .bulo-botones::before { opacity: 1; }
+.app .bulo[data-marca="b"] .bulo-botones::before { background: var(--interferencia); }
+.app .bulo[data-marca="v"] .bulo-botones::before { background: var(--fosforo); transform: translateX(100%); }
+.app .bulo-b { position: relative; min-height: 48px; }
+.app .bulo-b.b-bulo.elegida, .app .bulo-b.b-verdad.elegida { background: none; }
+.app .bulo-b.b-bulo.elegida { color: #2a0703; }
+.app .bulo-b.b-verdad.elegida { color: #04211c; }
+.app .bulo.es-bulo { border-left-color: var(--interferencia); }
+.app .bulo.es-verdad { border-left-color: var(--fosforo); }
+@media (prefers-reduced-motion: reduce) { .app .bulo-botones::before { transition: none; } }

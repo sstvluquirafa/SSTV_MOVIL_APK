@@ -24,6 +24,7 @@
               ${afirmaciones.map((a, i) => `
                 <li class="bulo" data-i="${i}">
                   <p>${GK.html(a)}</p>
+                  <p class="parte-cab" aria-hidden="true">${GK.icono('satelite')} Parte ${i + 1} de ${afirmaciones.length} · noticias de la misión</p>
                   <div class="bulo-botones" role="radiogroup" aria-label="Afirmación ${i + 1}">
                     <button type="button" role="radio" aria-checked="false" class="bulo-b b-bulo" data-v="b">Bulo</button>
                     <button type="button" role="radio" aria-checked="false" class="bulo-b b-verdad" data-v="v">Verdad</button>
@@ -47,6 +48,7 @@
       contenedor.querySelectorAll('.bulo').forEach((li) => li.querySelectorAll('.bulo-b').forEach((b) => b.addEventListener('click', () => {
         if (hecho) return;
         marcas[Number(li.dataset.i)] = b.dataset.v;
+        li.dataset.marca = b.dataset.v; // mueve el interruptor
         li.querySelectorAll('.bulo-b').forEach((x) => {
           x.classList.toggle('elegida', x === b);
           x.setAttribute('aria-checked', String(x === b));

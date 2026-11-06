@@ -121,6 +121,13 @@ def prueba_publica(e, s):
     # publican cifradas con la respuesta, así que solo se pueden leer después de acertar.
     if s.get("explicaciones") is not None:
         p["explicacionesCifradas"] = cifrar(json.dumps(s["explicaciones"], ensure_ascii=False), s["clave"], s["sal"])
+    # Dato real que sale en «¡Estación superada!» (secretos → «dato», máx. 160 caracteres). Va cifrado porque alguno
+    # delataría la respuesta. Uno por cada respuesta que vale (clave y sinónimos); «gk:» delante para saber en el móvil
+    # cuál se ha descifrado bien.
+    if s.get("dato"):
+        if len(s["dato"]) > 160:
+            print(f"  · OJO: el dato de la estación {e['letra']} pasa de 160 caracteres ({len(s['dato'])}).")
+        p["datoCifrado"] = [cifrar("gk:" + s["dato"], k, s["sal"]) for k in [s["clave"], *s.get("alternativas", [])]]
     if p.get("tipo") == "morse" and p.get("cartel"):
         pregunta = descifrar_morse(p["cartel"])
         if "?" in pregunta:
@@ -263,6 +270,35 @@ def generar_mapas(torneo):
 
 
 # ---------------------------------------------------------------------------------------------
+def colocar_imagen_falsa(est, sec):
+    """«¿Real o IA?»: la organización deja la foto hecha con IA como web/assets/img/pruebas/ia-falsa.jpg (no se sube a
+    GitHub) y aquí se copia con el nombre neutro de su posición (el «src» de la imagen cuya letra es la clave), para
+    que el nombre del archivo no delate cuál es la falsa. Instrucciones en ia-falsa-AQUI.txt, en esa misma carpeta."""
+    origen = WEB / "assets" / "img" / "pruebas" / "ia-falsa.jpg"
+    for e in est:
+        p = e.get("prueba") or {}
+        if p.get("tipo") != "real_o_ia":
+            continue
+        clave = normalizar(sec["estaciones"][str(e["id"])]["clave"])
+        imgs = p.get("imagenes") or []
+        i = "abcdefgh".find(clave) if len(clave) == 1 else -1
+        if not 0 <= i < len(imgs):
+            print(f"  · OJO: la clave de «¿Real o IA?» (estación {e['letra']}) no es la letra de una de sus imágenes.")
+            continue
+        destino = WEB / imgs[i]["src"]
+        if origen.exists():
+            if origen.stat().st_size > 200_000:
+                print(f"  · OJO: ia-falsa.jpg pesa {origen.stat().st_size // 1000} KB (máximo 200 KB).")
+            if not destino.exists() or destino.read_bytes() != origen.read_bytes():
+                destino.write_bytes(origen.read_bytes())
+                print(f"  · Imagen falsa de la estación {e['letra']} copiada como {imgs[i]['src']} "
+                      "(sube VERSION en web/sw.js).")
+        elif not destino.exists():
+            print(f"  · FALTA la imagen falsa de la estación {e['letra']}: lee "
+                  "web/assets/img/pruebas/ia-falsa-AQUI.txt. Mientras, la app enseña «Foto en revelado».")
+
+
+# ---------------------------------------------------------------------------------------------
 def main():
     try:  # la consola de Windows no siempre entiende «≈» o «·»
         sys.stdout.reconfigure(encoding="utf-8")
@@ -348,8 +384,10 @@ def main():
         print("  · OJO: estas estaciones tienen una prueba con respuesta pero su «clave» en privado/secretos.json sigue "
               "siendo un código al azar: " + ", ".join(claves_azar) + ". Escribid la respuesta y volved a ejecutar el script.")
 
+    colocar_imagen_falsa(est, sec)
+
     # ---------- rutas ----------
-    mpp = float(torneo["mapa"].get("metros_por_pixel", 0.12))
+    mpp =float(torneo["mapa"].get("metros_por_pixel", 0.12))
     pos = {e["id"]: (e["x"], e["y"]) for e in est}
     d = {a: {b: math.dist(pos[a], pos[b]) * mpp for b in ids} for a in ids}
     if torneo.get("rutas_manuales"):

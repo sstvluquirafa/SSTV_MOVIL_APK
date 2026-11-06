@@ -22,3 +22,11 @@ PRUEBAS.md
 
 # Registros de la herramienta de navegador usada en las pruebas
 .playwright-mcp/
+
+# Especificación con las imágenes correctas de las pruebas (el repositorio es público)
+MISION_ESPACIAL.md
+
+# Imagen falsa de «¿Real o IA?»: su nombre y sus instrucciones delatan la respuesta.
+# El generador la copia con un nombre neutro (ia-a … ia-d), que sí se publica.
+web/assets/img/pruebas/ia-falsa.jpg
+web/assets/img/pruebas/ia-falsa-AQUI.txt

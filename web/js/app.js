@@ -85,12 +85,14 @@
   /** Pantallas principales (con barra de pestañas abajo). El resto son «detalle»: flecha atrás y sin pestañas. */
   const PESTANAS = { '': 'ruta', mapa: 'mapa', escanear: 'escanear', ranking: 'ranking', ayuda: 'ayuda' };
 
-  /** Anillo de progreso de la cabecera (hechas / total). */
+  /** Anillo de la cabecera: una órbita con el satélite como punto (hechas / total). */
   function anillo(hechas, total) {
     const r = 15, l = 2 * Math.PI * r, f = total ? hechas / total : 0;
+    const a = 2 * Math.PI * f;
     return `<span class="anillo" role="img" aria-label="${hechas} de ${total} estaciones">
       <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="anillo-fondo" cx="18" cy="18" r="${r}"/>
-      ${f > 0 ? `<circle class="anillo-valor" cx="18" cy="18" r="${r}" stroke-dasharray="${(l * f).toFixed(1)} ${l.toFixed(1)}"/>` : ''}</svg>
+      ${f > 0 ? `<circle class="anillo-valor" cx="18" cy="18" r="${r}" stroke-dasharray="${(l * f).toFixed(1)} ${l.toFixed(1)}"/>` : ''}
+      <circle class="anillo-sat" cx="${(18 + r * Math.cos(a)).toFixed(2)}" cy="${(18 + r * Math.sin(a)).toFixed(2)}" r="3.2"/></svg>
       <b>${hechas}<small>/${total}</small></b></span>`;
   }
 
@@ -231,7 +233,7 @@
       case 'superada': pantallaSuperada(r.args[0] === 'final' ? 'final' : Number(r.args[0])); break;
       case 'final': pantallaFinal(); break;
       case 'meta': pantallaMeta(r.args[0]); break;
-      case 'mapa': if (eq) pantallaMapa(!!forzar || !mapaPrevio); else pantallaUnirse(); break;
+      case 'mapa': if (eq) pantallaMapa(); else pantallaUnirse(); break;
       case 'ranking': if (eq) pantallaRanking(); else pantallaUnirse(); break;
       case 'ayuda': if (eq) pantallaAyuda(); else pantallaUnirse(); break;
       default: if (eq) pantallaRuta(); else pantallaUnirse();
@@ -396,9 +398,8 @@
   }
 
   /* ---------- Pantalla: mi ruta (inicio) ---------- */
-  /** Barra de progreso por segmentos: uno por estación. */
-  const segmentos = (sit) => `<div class="segmentos" aria-hidden="true">${sit.orden.map((s, i) =>
-    `<i class="${i < sit.hechas ? 'on' : i === sit.hechas && !sit.completas ? 'sig' : ''}"></i>`).join('')}</div>`;
+  /** El progreso como una órbita (js/orbita.js): una marca por estación y el CubeSat en el paso actual. */
+  const segmentos = (sit) => `<div class="foco-orbita">${GK.orbita(sit.hechas, sit.total)}</div>`;
 
   function pantallaRuta() {
     const eq = miEquipo();
@@ -414,7 +415,7 @@
     if (!sit.ruta) {
       foco = `<article class="foco">
         <div class="foco-cuerpo"><div class="radar" aria-hidden="true"></div>
-          <div><p class="foco-ante">Un momento</p><h1 class="foco-titulo">Recibiendo vuestra ruta…</h1>
+          <div><p class="foco-ante">Un momento</p><h1 class="foco-titulo">Adquiriendo señal…</h1>
           <p class="foco-texto">Se reparte por orden de llegada. Necesitáis conexión un momento.</p></div></div>
       </article>`;
     } else if (sit.terminado) {
@@ -481,7 +482,10 @@
         </div>
         <div class="seccion">${filaLetras(sit)}</div>` : ''}
         <div id="instalar"></div>
+        <div class="tierra" aria-hidden="true"></div>
       </section>`;
+    vista.querySelector('.pantalla').classList.add('pantalla-ruta');
+    if (sit.ruta) GK.animarOrbita(vista, `${eq.id}:${sit.ruta.id}`);
     $('#reconectar').onclick = () => { GK.datos.reconectar(); $('#aviso-cola').classList.add('oculto'); };
     GK.datos.onEstado(() => {}); // actualiza el aviso de la cola recién pintado
     const tic = () => {
@@ -494,7 +498,7 @@
   }
 
   /* ---------- Pantalla: mapa a pantalla completa ---------- */
-  function pantallaMapa(centrar) {
+  function pantallaMapa() {
     const sit = situacion();
     const sig = sit.siguiente != null ? GK.estacion(sit.siguiente) : null;
     const destino = !sit.ruta ? null
@@ -512,19 +516,8 @@
           ${sit.terminado ? '' : `<a class="boton mini-boton" href="${sit.completas && !sit.palabraHecha ? '#/final' : '#/escanear'}" aria-label="Escanear">${GK.icono('qr')}</a>`}
         </div>` : ''}
       </section>`;
-    const caja = $('.mapa-completo .mapa-caja');
+    // El visor se centra solo en la siguiente estación (o la última hecha)
     GK.activarMapa(vista);
-    if (centrar && caja) {
-      // Centrar en la siguiente estación (o la última hecha) al abrir el mapa.
-      requestAnimationFrame(() => {
-        const marco = caja.querySelector('.mapa-marco');
-        const m = caja.querySelector('.m-siguiente') || [...caja.querySelectorAll('.m-hecha')].pop();
-        if (!m || !marco) return;
-        const lienzo = marco.querySelector('.mapa-lienzo');
-        marco.scrollLeft = (Number(m.dataset.x) / C.mapa.ancho) * lienzo.clientWidth - marco.clientWidth / 2;
-        marco.scrollTop = (Number(m.dataset.y) / C.mapa.alto) * lienzo.clientHeight - marco.clientHeight / 2;
-      });
-    }
   }
 
   /* ---------- Pantalla: ranking dentro de la app ---------- */
@@ -532,7 +525,7 @@
     const eq = miEquipo();
     vista.innerHTML = `
       <section class="pantalla">
-        <div class="pantalla-cab"><h1 class="titulo">Ranking</h1><span class="en-directo"><i></i>En directo</span></div>
+        <div class="pantalla-cab"><h1 class="titulo">Telemetría</h1><span class="en-directo"><i></i>En directo</span></div>
         <ol class="clasif" id="clasif" aria-label="Clasificación"><li class="clasif-cargando">Cargando…</li></ol>
         <a class="enlace-sec" href="ranking.html">${GK.icono('pantalla')} Abrir el ranking en pantalla grande</a>
       </section>`;
@@ -708,6 +701,7 @@
         if (!GK.normalizar(respuesta)) return false;
         const h = await GK.huella(respuesta, est.sal);
         if (h !== est.huella && !(datosPrueba.huellasAlternativas || []).includes(h)) return false;
+        await guardarDato(eq.id, est.id, datosPrueba, respuesta, est.sal);
         completar(eq.id, est.id, token, GK.normalizar(respuesta), opciones && opciones.quedarse);
         return true;
       },
@@ -735,6 +729,19 @@
     if (estacionEnCurso.id === 'final') { if (sit.palabraHecha) ir('#/superada/final'); return; }
     const pos = sit.orden.indexOf(estacionEnCurso.id);
     if (pos > -1 && pos < sit.hechas) ir('#/superada/' + estacionEnCurso.id);
+  }
+
+  /**
+   * Dato real de la estación (privado/secretos.json → «dato»). Se publica cifrado con la respuesta (alguno la
+   * delataría), así que se descifra al acertar y se guarda en el móvil para la pantalla de «superada».
+   */
+  async function guardarDato(idEq, idEst, prueba, respuesta, sal) {
+    for (const c of prueba.datoCifrado || []) {
+      try {
+        const t = await GK.descifrar(c, respuesta, sal);
+        if (t && t.startsWith('gk:')) { GK.guardar(`dato:${idEq}:${idEst}`, t.slice(3)); return; }
+      } catch (e) { /* sin dato */ }
+    }
   }
 
   function completar(idEq, idEst, token, clave, quedarse) {
@@ -789,16 +796,31 @@
       return;
     }
     const letra = GK.letraPalabra(idEst);
+    // La letra llega como una foto SSTV, línea a línea: solo la primera vez que se ve esta pantalla
+    // (si la pantalla se repinta a mitad, p. ej. al sincronizar, la animación sigue por donde iba)
+    const claveRecibida = `recibida:${eq.id}:${idEst}`;
+    let recibidaEn = Number(GK.leer(claveRecibida, 0)) || 0;
+    if (!recibidaEn) { recibidaEn = Date.now(); GK.guardar(claveRecibida, recibidaEn); }
+    const transcurrido = Date.now() - recibidaEn;
+    const recibiendo = transcurrido < 2100;
+    const dato = GK.leer(`dato:${eq.id}:${idEst}`, '');
     vista.innerHTML = `
       <section class="pantalla superada">
         <div class="destello" aria-hidden="true"></div>
         <p class="antetitulo">Estación ${GK.html(GK.letra(idEst))} · señal recibida</p>
         <h1 class="titulo">${GK.tituloHTML('¡Estación superada!', 'superada!')}</h1>
         ${letra ? `<div class="letra-ganada">
-          <p>Habéis conseguido la letra</p>
-          <div class="letra-grande">${GK.html(letra)}</div>
+          <div class="foto-sstv${recibiendo ? ' recibiendo' : ''}" style="--retraso:${250 - transcurrido}ms" role="img" aria-label="Letra recibida: ${GK.html(letra)}">
+            <div class="foto-sstv-imagen">
+              <div class="foto-sstv-barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="letra-grande">${GK.html(letra)}</div>
+            </div>
+            <i class="foto-sstv-linea" aria-hidden="true"></i>
+          </div>
+          <p>Habéis conseguido la letra <b>${GK.html(letra)}</b></p>
         </div>
         ${filaLetras(sit)}` : ''}
+        ${dato ? `<aside class="dato"><p class="dato-titulo">${GK.icono('satelite')} Dato real</p><p class="dato-texto">${GK.html(dato)}</p></aside>` : ''}
         ${sit.completas
           ? `<div class="tarjeta siguiente"><div class="siguiente-num insignia-final" aria-hidden="true">${GK.icono('satelite')}</div><div class="siguiente-texto"><p class="antetitulo">¡Todas las estaciones!</p><p class="siguiente-nombre">Última transmisión</p><p class="texto-2">Ordenad las ${sit.total} letras para descifrar la palabra secreta.</p></div></div>
              <a class="boton boton-ancho boton-grande" href="#/final">${GK.icono('satelite')} Descifrar la palabra</a>`
