@@ -29,12 +29,11 @@
         }
       }
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_SSTV · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Así viaja una imagen SSTV: <b>línea a línea, de arriba abajo</b>.<br>
-              &gt; El cartel dice qué casillas se pintan en cada fila.<br>
-              &gt; Pintadlas tocando (otra vez = borrar) y decid <b>qué es</b> el dibujo.</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Así viaja una imagen SSTV: <b>línea a línea, de arriba abajo</b>.<br>
+              El cartel dice qué casillas se pintan en cada fila.<br>
+              Pintadlas tocando (otra vez = borrar) y decid <b>qué es</b> el dibujo.</p>
             <div class="sstv-rejilla" style="--cols:${cols}">${celdas}</div>
             <div class="sstv-acciones">
               <span class="texto-2 mono" id="sstv-cuenta"></span>

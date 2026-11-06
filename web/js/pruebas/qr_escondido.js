@@ -11,12 +11,11 @@
     titulo: 'QR escondido',
     montar(contenedor, ctx) {
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_BUSQUEDA · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Cerca de esta estación hay un <b>QR escondido</b>.<br>
-              &gt; El cartel os dice dónde buscar.<br>
-              &gt; Encontradlo y escaneadlo <b>desde aquí</b>.</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Cerca de esta estación hay un <b>QR escondido</b>.<br>
+              El cartel os dice dónde buscar.<br>
+              Encontradlo y escaneadlo <b>desde aquí</b>.</p>
             <div id="qr-visor"></div>
             <button class="boton boton-ancho boton-grande" type="button" id="qr-escanear">${GK.icono('qr')} Escanear QR escondido</button>
             <button class="boton-sec boton-ancho oculto" type="button" id="qr-parar">Cancelar</button>

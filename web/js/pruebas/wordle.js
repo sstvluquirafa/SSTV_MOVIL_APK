@@ -49,11 +49,10 @@
       const guardar = () => GK.guardar(claveGuardado, estado);
 
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_WORDLE · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Adivinad la palabra secreta de <b>${N} letras</b> en ${INTENTOS} intentos.<br>
-              &gt; <span class="w-ej ok">A</span> letra en su sitio · <span class="w-ej casi">A</span> está, pero en otro sitio · <span class="w-ej no">A</span> no está.</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Adivinad la palabra secreta de <b>${N} letras</b> en ${INTENTOS} intentos.<br>
+              <span class="w-ej ok">A</span> letra en su sitio · <span class="w-ej casi">A</span> está, pero en otro sitio · <span class="w-ej no">A</span> no está.</p>
             <p class="texto-2 mono w-ronda" id="w-ronda"></p>
             <div class="w-tablero" id="w-tablero" style="--n:${N}" role="grid" aria-label="Tablero"></div>
             <p class="w-msg" id="w-msg" aria-live="polite"></p>

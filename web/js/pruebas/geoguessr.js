@@ -16,14 +16,13 @@
       const imagenes = ctx.estacion.prueba.imagenes || [];
       const elegidas = Array(imagenes.length).fill(null);
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_SATELITE · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Nuestro satélite ha hecho ${imagenes.length} fotos desde el espacio.<br>
-              &gt; ¿Dónde está cada una? Elegid una opción en cada foto y pulsad <b>Comprobar</b>.</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Nuestro satélite ha hecho ${imagenes.length} fotos desde el espacio.<br>
+              ¿Dónde está cada una? Elegid una opción en cada foto y pulsad <b>Comprobar</b>.</p>
             ${imagenes.map((im, i) => `
               <figure class="geo-foto">
-                <div class="geo-cab"><span class="chip chip-ambar">FOTO ${i + 1} DE ${imagenes.length}</span></div>
+                <div class="geo-cab"><span class="chip chip-ambar">Foto ${i + 1} de ${imagenes.length}</span></div>
                 <img src="${GK.html(im.src)}" alt="Foto ${i + 1} tomada desde un satélite" loading="lazy">
                 ${im.credito ? `<figcaption class="credito">${GK.html(im.credito)}</figcaption>` : ''}
                 <div class="opciones" role="radiogroup" aria-label="¿Dónde está la foto ${i + 1}?">

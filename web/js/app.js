@@ -669,15 +669,22 @@
     vista.innerHTML = `
       <section class="pantalla">
         <div id="mensaje-org"></div>
-        <div class="estacion-cabecera">
-          ${insignia(est.id, 'estacion-num')}
-          <div>${cabeceraPantalla(`Paso ${sit.hechas + 1} de ${sit.total}`, est.nombre, '')}</div>
-        </div>
+        <header class="senal" style="--barras:${est.id}">
+          <div class="senal-banda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="senal-cuerpo">
+            ${insignia(est.id, 'senal-letra')}
+            <div>
+              <p class="senal-paso">${GK.html(est.nombre)} · paso ${sit.hechas + 1} de ${sit.total}</p>
+              <h1 class="senal-titulo">${GK.html(prueba.titulo || est.nombre)}</h1>
+            </div>
+          </div>
+        </header>
         <div id="prueba"></div>
         <div id="ayuda-prueba" aria-live="polite"></div>
         <div id="pista"></div>
-        <button class="boton-sec boton-ancho boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda a la organización</button>
-        <a class="boton-sec boton-ancho" href="#/">Volver a la ruta</a>
+        <div class="reto-pie">
+          <button class="enlace-ayuda" type="button" id="ayuda">${GK.icono('ayuda')} ¿Atascados? Avisar a la organización</button>
+        </div>
       </section>`;
     $('#ayuda').onclick = pedirAyuda;
     pintarMensaje();
@@ -832,14 +839,19 @@
     vista.innerHTML = `
       <section class="pantalla">
         <div id="mensaje-org"></div>
-        <div class="estacion-cabecera">
-          <div class="estacion-num insignia-final" aria-hidden="true">${GK.icono('satelite')}</div>
-          <div>${cabeceraPantalla('Paso final', 'Última transmisión', 'transmisión')}</div>
-        </div>
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · TRANSMISIÓN FINAL</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Señal recibida de las ${sit.total} estaciones.<br>&gt; Las letras llegan <b>desordenadas</b>: ordenadlas para descifrar la palabra secreta.</p>
+        <header class="senal senal-final">
+          <div class="senal-banda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="senal-cuerpo">
+            <div class="senal-letra insignia-final" aria-hidden="true">${GK.icono('satelite')}</div>
+            <div>
+              <p class="senal-paso">Paso final</p>
+              <h1 class="senal-titulo">Última transmisión</h1>
+            </div>
+          </div>
+        </header>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Señal recibida de las ${sit.total} estaciones. Las letras llegan <b>desordenadas</b>: ordenadlas para descifrar la palabra secreta.</p>
             <div class="letras-fila letras-final" aria-label="Letras: ${GK.html(letras.join(', '))}">${letras.map((l) => `<span class="letra-ficha">${GK.html(l)}</span>`).join('')}</div>
             <form id="form-final" autocomplete="off">
               <label class="etiqueta" for="palabra-final">La palabra secreta (${F.longitud} letras)</label>
@@ -850,8 +862,9 @@
         </div>
         <div id="ayuda-prueba" aria-live="polite"></div>
         <div id="pista"></div>
-        <button class="boton-sec boton-ancho boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda a la organización</button>
-        <a class="boton-sec boton-ancho" href="#/">Volver a la ruta</a>
+        <div class="reto-pie">
+          <button class="enlace-ayuda" type="button" id="ayuda">${GK.icono('ayuda')} ¿Atascados? Avisar a la organización</button>
+        </div>
       </section>`;
     $('#ayuda').onclick = pedirAyuda;
     pintarMensaje();

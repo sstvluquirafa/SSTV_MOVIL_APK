@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v13';
+const VERSION = 'gk-v14';
 const ARCHIVOS = [
   './',
   'index.html',
@@ -47,6 +47,8 @@ const ARCHIVOS = [
   'assets/img/icono-apple-180.png',
   'assets/img/mapa.jpg',
   'vendor/jsQR.js',
+  'assets/fonts/bricolage-grotesque-latin-600-normal.woff2',
+  'assets/fonts/bricolage-grotesque-latin-800-normal.woff2',
   'assets/fonts/inter-latin-400-normal.woff2',
   'assets/fonts/inter-latin-600-normal.woff2',
   'assets/fonts/inter-latin-700-normal.woff2',

@@ -645,3 +645,262 @@ body.con-pestanas .vista { padding-bottom: calc(var(--alto-tabs) + 32px + env(sa
 @media (prefers-reduced-motion: reduce) { .vista.entra, .clasif-fila, .app .modal-caja { animation: none; } }
 .app .visor { max-height: 50vh; aspect-ratio: 1; }
 .foco-titulo { margin: 0; }
+
+/* =====================================================================
+ * Identidad «Señal SSTV»: estación de tierra que recibe imágenes línea a línea.
+ * Paleta: cielo nocturno, ámbar de señal (GranaSAT), fósforo (acierto) e interferencia (error).
+ * Tipografía: Bricolage Grotesque para títulos y letras; Inter para leer; JetBrains Mono solo para datos.
+ * Un único momento memorable: la banda de barras de color que «se recibe» al entrar en una estación.
+ * ===================================================================== */
+@font-face { font-family: 'Bricolage Grotesque'; font-weight: 600; font-display: swap; src: url('../assets/fonts/bricolage-grotesque-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Bricolage Grotesque'; font-weight: 800; font-display: swap; src: url('../assets/fonts/bricolage-grotesque-latin-800-normal.woff2') format('woff2'); }
+
+body.app {
+  --cielo: #0a1128;
+  --superficie: #121a35;
+  --superficie-2: #1a2447;
+  --linea: rgba(163, 173, 201, .15);
+  --ambar: #ffb627;
+  --ambar-suave: rgba(255, 182, 39, .13);
+  --fosforo: #5ee6d0;
+  --fosforo-suave: rgba(94, 230, 208, .13);
+  --interferencia: #ff6b5b;
+  --interferencia-suave: rgba(255, 107, 91, .13);
+  --verde: var(--fosforo);
+  --rojo: var(--interferencia);
+  --texto: #eef1fa;
+  --texto-2: #b3bcd6;
+  --texto-3: #7c87a8;
+  --borde: var(--linea);
+  --display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+  --titulo: var(--display);
+  background: var(--cielo) radial-gradient(130% 70% at 50% -20%, #1b2a5c 0%, #0d1533 50%, #080d20 100%) fixed;
+}
+.app ::selection { background: rgba(255, 182, 39, .35); }
+.app :focus-visible { outline: 2px solid var(--ambar); outline-offset: 2px; }
+
+/* Títulos con carácter; etiquetas en minúscula normal (sin mayúsculas espaciadas) */
+.app .titulo, .app .foco-titulo, .app .senal-titulo, .app .seccion-cab h2, .app .destino-nombre { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; }
+.app .barra-titulo { font-family: var(--display); font-weight: 800; letter-spacing: -.01em; font-size: 1.08rem; }
+.app .antetitulo, .app .etiqueta, .app .foco-ante, .app .seccion-titulo, .app .separador {
+  text-transform: none; letter-spacing: 0; font-family: var(--cuerpo); font-weight: 600;
+}
+.app .antetitulo, .app .foco-ante { font-size: .86rem; color: var(--ambar); }
+.app .etiqueta { font-size: .9rem; color: var(--texto-2); }
+.app .seccion-titulo { font-size: .92rem; color: var(--texto-3); }
+.app .separador { font-size: .85rem; }
+.app .chip { text-transform: none; letter-spacing: 0; font-family: var(--cuerpo); font-weight: 600; }
+.app .pantalla .titulo { font-size: clamp(1.8rem, 8vw, 2.3rem); line-height: 1.05; }
+
+/* Letras de estación: fichas con la tipografía display */
+.app .foco-letra, .app .destino-letra, .app .siguiente-num, .app .estacion-num, .app .letra-ficha, .app .ruta-lista li, .app .w-casilla {
+  font-family: var(--display); font-weight: 800;
+}
+.app .foco-letra, .app .destino-letra, .app .siguiente-num, .app .estacion-num, .app .senal-letra {
+  background: var(--ambar); color: #1b1203; box-shadow: none;
+}
+.app .foco { background: var(--superficie); border: 1px solid var(--linea); box-shadow: none; position: relative; overflow: hidden; }
+.app .foco::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, #e9e9e2 0 14.28%, #f2cf4a 0 28.57%, #59d2d9 0 42.85%, #62cf83 0 57.14%, #cf63cc 0 71.42%, #e45b55 0 85.71%, #5670e0 0); opacity: .9; }
+.app .foco-verde { border-color: rgba(94, 230, 208, .35); }
+.app .foco-verde .foco-ante { color: var(--fosforo); }
+.app .segmentos i.on { background: var(--ambar); }
+.app .segmentos i.sig { background: var(--fosforo); }
+.app .boton { background: var(--ambar); color: #1b1203; box-shadow: none; }
+.app .boton:disabled { background: #3a4466; color: #8e98b8; }
+.app .boton-verde { background: var(--fosforo); color: #04211c; }
+.app .tab-fab { background: var(--ambar); box-shadow: 0 0 0 5px var(--cielo); color: #1b1203; }
+.app .tabbar a.tab-escanear.activa .tab-fab { box-shadow: 0 0 0 5px var(--cielo), 0 0 0 7px rgba(255, 182, 39, .5); }
+.app .avatar-equipo { background: var(--ambar); box-shadow: none; color: #1b1203; font-family: var(--display); font-weight: 800; }
+.app .anillo-valor { stroke: var(--ambar); }
+.app .clasif-fila.yo { background: var(--superficie); border-color: var(--ambar); }
+.app .clasif-puesto.p1 { background: var(--ambar); }
+.app .ruta-lista li.actual { background: var(--fosforo-suave); border-color: var(--fosforo); color: var(--fosforo); box-shadow: none; }
+.app .ruta-lista li.hecha { background: var(--ambar); border-color: var(--ambar); color: #1b1203; }
+.app .barra-estado.est-verde .punto { background: var(--fosforo); box-shadow: 0 0 6px var(--fosforo); }
+.app .ruta-corta { color: var(--fosforo); }
+
+/* ---------- Cabecera de estación: la señal SSTV ---------- */
+.senal { position: relative; border-radius: 22px; background: var(--superficie); border: 1px solid var(--linea); overflow: hidden; }
+.senal-banda {
+  position: relative; height: 64px; display: grid; grid-template-columns: repeat(7, 1fr);
+  animation: recibir 1.15s steps(26, end) both;
+}
+.senal-banda i { display: block; }
+.senal-banda i:nth-child(1) { background: #e9e9e2; }
+.senal-banda i:nth-child(2) { background: #f2cf4a; }
+.senal-banda i:nth-child(3) { background: #59d2d9; }
+.senal-banda i:nth-child(4) { background: #62cf83; }
+.senal-banda i:nth-child(5) { background: #cf63cc; }
+.senal-banda i:nth-child(6) { background: #e45b55; }
+.senal-banda i:nth-child(7) { background: #5670e0; }
+/* Líneas de barrido + un poco de grano: parece una imagen recibida por radio */
+.senal-banda::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(10, 17, 40, .38) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, transparent 40%, rgba(18, 26, 53, .85) 100%);
+}
+/* Línea que se está recibiendo */
+.senal-banda::before {
+  content: ''; position: absolute; left: 0; right: 0; height: 2px; z-index: 1; background: #fff; box-shadow: 0 0 10px #fff;
+  animation: barrido 1.15s linear both;
+}
+@keyframes recibir { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes barrido { from { top: 0; opacity: 1; } 95% { top: 100%; opacity: 1; } to { top: 100%; opacity: 0; } }
+.senal-cuerpo { display: flex; align-items: flex-start; gap: 14px; padding: 0 16px 16px; position: relative; }
+.senal-cuerpo > div:last-child { padding-top: 10px; min-width: 0; }
+.senal-letra {
+  flex: none; width: 68px; height: 68px; border-radius: 18px; display: grid; place-items: center;
+  font-family: var(--display); font-weight: 800; font-size: 2.3rem; line-height: 1;
+  border: 4px solid var(--superficie); margin-top: -30px; position: relative; z-index: 1;
+}
+.senal-letra .icono { width: 32px; height: 32px; }
+.senal-cuerpo p { margin: 0; }
+.senal-paso { font-size: .86rem; font-weight: 600; color: var(--texto-3); }
+.senal-titulo { margin: 2px 0 0; font-size: clamp(1.5rem, 6.6vw, 1.85rem); line-height: 1.08; }
+@media (prefers-reduced-motion: reduce) { .senal-banda, .senal-banda::before { animation: none; } .senal-banda::before { display: none; } }
+
+/* ---------- Cuerpo de la prueba: sin marco de «ventana», contenido directo ---------- */
+.app .reto { background: none; border: 0; box-shadow: none; padding: 0; }
+.app .reto-cuerpo { padding: 0; }
+.app .reto-cuerpo > * + * { margin-top: 16px; }
+.app .reto-intro { font-family: var(--cuerpo); font-size: 1.04rem; line-height: 1.55; color: var(--texto-2); margin: 4px 2px 0; }
+.app .reto-intro b { color: var(--texto); font-weight: 700; }
+.app .reto form > * + * { margin-top: 10px; }
+.app .reto .etiqueta { display: block; margin-bottom: 6px; }
+.app .campo { min-height: 54px; font-size: 1.1rem; background: var(--superficie); border: 1.5px solid var(--linea); border-radius: 14px; }
+.app .campo:focus { border-color: var(--ambar); outline: none; box-shadow: 0 0 0 4px var(--ambar-suave); }
+.app .aviso-error { background: var(--interferencia-suave); border-color: rgba(255, 107, 91, .4); color: #ffc2ba; }
+.app .aviso-ok { background: var(--fosforo-suave); border-color: rgba(94, 230, 208, .4); color: #b5f5ea; }
+.app .aviso-info { background: var(--ambar-suave); border-color: rgba(255, 182, 39, .35); color: #ffe2a6; }
+.app .error-suave { color: #ffb0a6; }
+.app .ok-suave { color: var(--fosforo); }
+
+/* Pista y ayuda */
+.app .pista-espera { color: var(--texto-3); }
+.app .pista-espera b { color: var(--texto-2); }
+.app .pista { border: 1.5px dashed rgba(255, 182, 39, .5); border-radius: 16px; background: var(--ambar-suave); padding: 14px 16px; }
+.app .pista .antetitulo { font-size: .9rem; }
+.app .boton-pista { border: 1.5px solid rgba(255, 182, 39, .5); background: var(--ambar-suave); color: var(--ambar); }
+.reto-pie { text-align: center; padding-top: 4px; }
+.enlace-ayuda { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 0; border-radius: 999px; background: none; color: var(--texto-3); font: inherit; font-size: .92rem; font-weight: 600; cursor: pointer; }
+.enlace-ayuda .icono { width: 18px; height: 18px; }
+.enlace-ayuda:active { background: rgba(255, 255, 255, .06); }
+
+/* ---------- Morse: libro de códigos con puntos y rayas reales ---------- */
+.app .tabla-morse-caja { border: 0; margin: 0; padding: 14px; border-radius: 18px; background: var(--superficie); }
+.app .tabla-morse-caja summary .antetitulo { font-size: .98rem; color: var(--texto); font-weight: 700; }
+.app .tabla-morse { grid-template-columns: repeat(3, 1fr); gap: 4px 10px; }
+.app .tabla-morse div { background: none; border: 0; border-bottom: 1px solid var(--linea); border-radius: 0; padding: 7px 2px; }
+.app .tabla-morse b { font-family: var(--display); font-weight: 800; color: var(--texto); font-size: 1.05rem; }
+.app .tabla-morse span { color: var(--ambar); letter-spacing: .18em; font-size: 1.05rem; }
+.app .tabla-morse-caja .nota { margin: 10px 0 0; color: var(--texto-3); }
+
+/* ---------- SSTV a mano: pantalla de recepción ---------- */
+.app .sstv-rejilla { padding: 10px; border-radius: 18px; background: #050a1a; border: 1px solid var(--linea); gap: 3px; position: relative; max-width: none; }
+.app .sstv-celda { border-radius: 4px; border: 0; background: #17213f; }
+.app .sstv-celda.on { background: var(--ambar); box-shadow: 0 0 8px rgba(255, 182, 39, .55); }
+.app .sstv-num, .app .sstv-esquina { color: var(--texto-3); font-size: .62rem; }
+.app .sstv-acciones { margin: 10px 0 0; font-family: var(--cuerpo); color: var(--texto-2); }
+
+/* ---------- Binario: bombillas de verdad ---------- */
+.app .bin-ejemplo { border: 0; border-radius: 18px; background: var(--superficie); padding: 16px; }
+.app .bin-fila { gap: 14px; }
+.app .bin-valor { font-family: var(--mono); color: var(--texto-3); font-weight: 700; }
+.app .bombilla { width: 38px; height: 38px; border: 2px solid #33406b; background: #0b1230; }
+.app .bombilla.on { border-color: #ffd36b; background: radial-gradient(circle at 40% 35%, #fff8e1, #ffd36b 45%, #ff9d00); box-shadow: 0 0 18px rgba(255, 182, 39, .7); }
+.app .abc-numerado span { background: var(--superficie); border: 0; border-radius: 10px; padding: 6px 0; }
+.app .abc-numerado b { font-family: var(--display); font-weight: 800; }
+.app .abc-numerado i { color: var(--texto-3); font-family: var(--mono); }
+
+/* ---------- Wordle ---------- */
+.app .w-casilla { border: 2px solid #2a3560; background: var(--superficie); border-radius: 12px; font-size: 1.65rem; }
+.app .w-casilla.escrita { border-color: #6d7aa6; }
+.app .w-ej.ok, .app .w-casilla.ok, .app .w-tecla.ok { background: var(--fosforo); border-color: var(--fosforo); color: #04211c; }
+.app .w-ej.casi, .app .w-casilla.casi, .app .w-tecla.casi { background: var(--ambar); border-color: var(--ambar); color: #1b1203; }
+.app .w-ej.no, .app .w-casilla.no, .app .w-tecla.no { background: #2a3456; border-color: #2a3456; color: #8d97b8; }
+.app .w-tecla { background: #26305a; border: 0; border-radius: 9px; height: 52px; font-family: var(--cuerpo); }
+.app .w-ronda { color: var(--texto-3); font-size: .86rem; }
+.app .w-msg.ok { color: var(--fosforo); }
+
+/* ---------- GeoGuessr ---------- */
+.app .geo-foto { border: 0; padding: 0; background: none; margin-bottom: 22px; }
+.app .geo-foto img, .app .ia-foto img { border-radius: 16px; background: var(--superficie-2); }
+.app .geo-cab { margin-bottom: 10px; }
+.app .geo-cab .chip { background: none; border: 0; padding: 0; font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--texto); }
+.app .opciones { gap: 8px; }
+.app .opcion { border: 1.5px solid var(--linea); background: var(--superficie); border-radius: 14px; min-height: 54px; font-size: .93rem; }
+.app .opcion-letra { border: 0; background: var(--superficie-2); color: var(--texto-2); font-family: var(--display); font-weight: 800; }
+.app .opcion.elegida { border-color: var(--ambar); background: var(--ambar-suave); }
+.app .opcion.elegida .opcion-letra { background: var(--ambar); color: #1b1203; }
+.app .geo-falta { color: var(--texto-3); }
+
+/* ---------- ¿Real o IA? ---------- */
+.app .ia-rejilla { gap: 10px; }
+.app .ia-foto { padding: 0; border: 3px solid transparent; border-radius: 19px; background: none; overflow: hidden; }
+.app .ia-foto img { border-radius: 16px; }
+.app .ia-foto .credito { padding: 4px 6px 6px; }
+.app .ia-letra { top: 8px; left: 8px; background: rgba(10, 17, 40, .8); border: 0; font-family: var(--display); font-weight: 800; }
+.app .ia-foto.elegida { border-color: var(--ambar); box-shadow: none; }
+.app .ia-foto.acierto { border-color: var(--fosforo); box-shadow: none; }
+.app .ia-foto.acierto .ia-letra { background: var(--fosforo); color: #04211c; }
+
+/* ---------- Caja fuerte: acero y ruedas ---------- */
+.app .caja-pistas { gap: 6px; margin: 0; }
+.app .caja-pistas li { padding: 10px 12px; border-radius: 14px; background: var(--superficie); font-size: .95rem; color: var(--texto-2); }
+.app .caja-cod i { background: #0b1230; border: 0; color: var(--texto); font-family: var(--mono); font-size: 1.05rem; width: 28px; height: 34px; border-radius: 8px; }
+.app .caja { max-width: 330px; border-radius: 22px; padding: 12px; background: linear-gradient(160deg, #3b4568, #1e2645); border: 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 20px 40px -20px rgba(0, 0, 0, .8); }
+.app .caja-puerta { border-radius: 16px; background: linear-gradient(160deg, #5c6890, #343f66); border: 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), inset 0 -2px 0 rgba(0, 0, 0, .25); }
+.app .rueda-b { background: #1b2447; border: 0; border-radius: 10px; color: var(--texto-2); }
+.app .rueda-n { background: #070c1f; border: 2px solid rgba(255, 182, 39, .7); color: var(--ambar); font-family: var(--mono); border-radius: 12px; }
+.app .caja-pomo { background: radial-gradient(circle at 35% 30%, #f3f5fb, #8792b5); border-color: #283055; }
+.app .caja-interior { background: radial-gradient(circle, rgba(94, 230, 208, .45), #0a1128 70%); color: var(--fosforo); }
+
+/* ---------- ¿Bulo o verdad? ---------- */
+.app .bulos { gap: 10px; margin: 0; }
+.app .bulo { border: 1.5px solid var(--linea); background: var(--superficie); border-radius: 18px; padding: 14px; }
+.app .bulo > p:first-child { font-size: 1rem; line-height: 1.45; }
+.app .bulo > p:first-child::before { color: var(--texto-3); font-family: var(--display); font-weight: 800; }
+.app .bulo-botones { gap: 0; padding: 4px; border-radius: 14px; background: #0b1230; }
+.app .bulo-b { border: 0; border-radius: 11px; background: none; color: var(--texto-3); font-family: var(--cuerpo); letter-spacing: 0; font-weight: 700; font-size: .95rem; min-height: 42px; transition: background .15s, color .15s; }
+.app .bulo-b.b-bulo.elegida { background: var(--interferencia); color: #2a0703; border: 0; }
+.app .bulo-b.b-verdad.elegida { background: var(--fosforo); color: #04211c; border: 0; }
+.app .bulo.es-bulo { border-color: rgba(255, 107, 91, .55); }
+.app .bulo.es-verdad { border-color: rgba(94, 230, 208, .55); }
+
+/* ---------- Hackea el satélite: aquí la terminal SÍ es el tema ---------- */
+.app .hack-terminal { border-radius: 18px; background: #040814; border: 1px solid rgba(94, 230, 208, .35); overflow: hidden; }
+.app .hack-terminal .ventana-barra { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #0b1428; border-bottom: 1px solid rgba(94, 230, 208, .2); font-family: var(--mono); font-size: .78rem; color: var(--fosforo); }
+.app .hack-terminal .puntos { display: inline-flex; gap: 5px; }
+.app .hack-terminal .puntos i { width: 9px; height: 9px; border-radius: 50%; background: #2b3a5c; }
+.app .hack-terminal .ventana-cuerpo { padding: 16px 14px; }
+.app .hack-terminal .terminal { font-family: var(--mono); font-size: .86rem; color: #a6f3e6; margin: 0 0 12px; line-height: 1.6; }
+.app .hack-terminal .terminal b { color: var(--fosforo); }
+.app .hack-terminal .etiqueta { font-family: var(--mono); font-size: .78rem; color: var(--texto-3); }
+.app .hack-terminal .campo { font-family: var(--mono); background: #0b1428; border-color: rgba(94, 230, 208, .25); }
+.app .hack-terminal .campo:focus { border-color: var(--fosforo); box-shadow: 0 0 0 4px var(--fosforo-suave); }
+.app .hack-terminal .boton { background: var(--fosforo); color: #04211c; font-family: var(--mono); }
+.app .hack-ayuda { color: var(--fosforo); font-family: var(--mono); }
+.app .hack-log { color: var(--interferencia); font-family: var(--mono); }
+.app .hack-ok-titulo { color: var(--fosforo); font-family: var(--mono); }
+/* Perfil de red social, en oscuro como cualquier app */
+.app .perfil-red { background: var(--superficie); color: var(--texto); border: 1px solid var(--linea); padding: 16px; }
+.app .perfil-red .antetitulo { color: var(--texto-3); }
+.app .perfil-cab b { color: var(--texto); }
+.app .perfil-cab .texto-2, .app .perfil-bio { color: var(--texto-2); }
+.app .perfil-avatar { background: linear-gradient(135deg, #cf63cc, #5670e0); font-family: var(--display); }
+.app .perfil-posts { gap: 0; margin-top: 12px; border-top: 1px solid var(--linea); }
+.app .perfil-posts li { background: none; border: 0; border-bottom: 1px solid var(--linea); border-radius: 0; padding: 12px 2px; color: var(--texto); }
+.app .perfil-posts li .mono, .app .perfil-posts li small { color: var(--texto-3); }
+
+/* ---------- QR escondido ---------- */
+.app .plegable-simple summary { color: var(--texto-3); }
+.app .perfil-posts li p { margin: 4px 0 0; } .app .perfil-cab span { display: block; }
+
+/* Títulos sin una palabra resaltada en otro color: la jerarquía la da el tamaño */
+.app .titulo .ambar { color: inherit; }
+/* Letra conseguida: ficha plana con la banda de color debajo, como un fotograma recibido */
+.app .letra-grande {
+  background: var(--ambar); color: #1b1203; font-family: var(--display); font-weight: 800;
+  box-shadow: 0 0 0 6px var(--cielo), 0 0 0 8px rgba(255, 182, 39, .4); border: 0; text-shadow: none;
+}

@@ -24,12 +24,11 @@
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MORSE · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; El cartel de la estación trae una <b>pregunta en Morse</b>.<br>
-              &gt; Letras separadas por espacios; palabras separadas por <b>/</b>.<br>
-              &gt; Descifradla con la tabla y escribid la <b>respuesta</b> (no la pregunta).</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">El cartel de la estación trae una <b>pregunta en Morse</b>.<br>
+              Letras separadas por espacios; palabras separadas por <b>/</b>.<br>
+              Descifradla con la tabla y escribid la <b>respuesta</b> (no la pregunta).</p>
             <details class="plegable tabla-morse-caja" open>
               <summary><span class="antetitulo">Tabla Morse</span></summary>
               <div class="tabla-morse" role="list">

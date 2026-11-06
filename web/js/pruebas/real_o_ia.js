@@ -17,12 +17,11 @@
       const imagenes = P.imagenes || [];
       let elegida = null;
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_IMAGEN · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Hemos recibido ${imagenes.length} fotos del espacio.<br>
-              &gt; ${imagenes.length - 1} son <b>reales</b> y una está <b>hecha con IA</b>.<br>
-              &gt; Tocad la falsa y pulsad Comprobar.</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Hemos recibido ${imagenes.length} fotos del espacio.<br>
+              ${imagenes.length - 1} son <b>reales</b> y una está <b>hecha con IA</b>.<br>
+              Tocad la falsa y pulsad Comprobar.</p>
             <div class="ia-rejilla" role="radiogroup" aria-label="¿Cuál está hecha con IA?">
               ${imagenes.map((im, i) => `
                 <button type="button" class="ia-foto" role="radio" aria-checked="false" data-i="${i}">

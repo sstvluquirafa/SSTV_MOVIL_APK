@@ -17,17 +17,16 @@
       const afirmaciones = (P.afirmaciones || []).map((a) => (typeof a === 'string' ? a : a.texto));
       const marcas = Array(afirmaciones.length).fill(null);
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_VERIFICA · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Nos llegan estas noticias del espacio.<br>&gt; ¿Cuáles son <b>bulos</b> y cuáles son <b>verdad</b>?</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Nos llegan estas noticias del espacio.<br>¿Cuáles son <b>bulos</b> y cuáles son <b>verdad</b>?</p>
             <ol class="bulos">
               ${afirmaciones.map((a, i) => `
                 <li class="bulo" data-i="${i}">
                   <p>${GK.html(a)}</p>
                   <div class="bulo-botones" role="radiogroup" aria-label="Afirmación ${i + 1}">
-                    <button type="button" role="radio" aria-checked="false" class="bulo-b b-bulo" data-v="b">BULO</button>
-                    <button type="button" role="radio" aria-checked="false" class="bulo-b b-verdad" data-v="v">VERDAD</button>
+                    <button type="button" role="radio" aria-checked="false" class="bulo-b b-bulo" data-v="b">Bulo</button>
+                    <button type="button" role="radio" aria-checked="false" class="bulo-b b-verdad" data-v="v">Verdad</button>
                   </div>
                   <p class="bulo-expl oculto"></p>
                 </li>`).join('')}

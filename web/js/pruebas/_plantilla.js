@@ -22,10 +22,9 @@
       // ctx.estacion.prueba trae las opciones que pusiste en torneo.json (por ejemplo, una pregunta)
       const pregunta = ctx.estacion.prueba.pregunta || '¿…?';
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; ${GK.html(pregunta)}</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">${GK.html(pregunta)}</p>
             <form autocomplete="off">
               <input class="campo" placeholder="Vuestra respuesta" required>
               <button class="boton boton-ancho" type="submit">Comprobar</button>

@@ -13,12 +13,11 @@
     titulo: 'Binario',
     montar(contenedor, ctx) {
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_BINARIO · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; Cada fila de bombillas del cartel es un <b>número en binario</b>.<br>
-              &gt; Encendida = 1 · apagada = 0. Cada número es una letra: <b>A=1, B=2 … Z=26</b>.<br>
-              &gt; Juntad las letras y escribid la palabra.</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">Cada fila de bombillas del cartel es un <b>número en binario</b>.<br>
+              Encendida = 1 · apagada = 0. Cada número es una letra: <b>A=1, B=2 … Z=26</b>.<br>
+              Juntad las letras y escribid la palabra.</p>
             <div class="bin-ejemplo" aria-label="Ejemplo: encendidas las bombillas que valen 8, 2 y 1: 8 más 2 más 1 son 11, la letra K">
               <div class="bin-fila">${[16, 8, 4, 2, 1].map((v) => `<div class="bin-col"><span class="mono bin-valor">${v}</span><span class="bombilla${[8, 2, 1].includes(v) ? ' on' : ''}"></span></div>`).join('')}</div>
               <p class="texto-2"><b>Ejemplo:</b> encendidas 8, 2 y 1 → 8 + 2 + 1 = <b>11</b> → <b class="ambar">K</b></p>

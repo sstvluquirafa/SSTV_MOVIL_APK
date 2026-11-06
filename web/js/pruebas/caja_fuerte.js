@@ -14,10 +14,9 @@
       const n = Math.max(1, Math.min(6, Number(P.cifras) || 3));
       const ruedas = Array(n).fill(0);
       contenedor.innerHTML = `
-        <div class="ventana">
-          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_CAJA · EST_${GK.html(ctx.estacion.letra)}</span></div>
-          <div class="ventana-cuerpo">
-            <p class="terminal">&gt; La caja fuerte tiene un código de <b>${n} cifras</b>.<br>&gt; Estas pistas os dirán cuál es:</p>
+        <div class="reto">
+          <div class="reto-cuerpo">
+            <p class="reto-intro">La caja fuerte tiene un código de <b>${n} cifras</b>.<br>Estas pistas os dirán cuál es:</p>
             <ul class="caja-pistas">
               ${(P.pistas || []).map((p) => `<li><span class="caja-cod mono" aria-label="Código ${GK.html(String(p.codigo).split('').join(' '))}">${String(p.codigo).split('').map((d) => `<i>${GK.html(d)}</i>`).join('')}</span><span>${GK.html(p.texto)}</span></li>`).join('')}
             </ul>
