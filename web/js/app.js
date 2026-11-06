@@ -82,22 +82,46 @@
   GK.datos.onExpulsion(() => desvincular('avisoExpulsion'));
 
   /* ---------- Cabecera y mensajes ---------- */
+  /** Pantallas principales (con barra de pestañas abajo). El resto son «detalle»: flecha atrás y sin pestañas. */
+  const PESTANAS = { '': 'ruta', mapa: 'mapa', escanear: 'escanear', ranking: 'ranking', ayuda: 'ayuda' };
+
+  /** Anillo de progreso de la cabecera (hechas / total). */
+  function anillo(hechas, total) {
+    const r = 15, l = 2 * Math.PI * r, f = total ? hechas / total : 0;
+    return `<span class="anillo" role="img" aria-label="${hechas} de ${total} estaciones">
+      <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="anillo-fondo" cx="18" cy="18" r="${r}"/>
+      ${f > 0 ? `<circle class="anillo-valor" cx="18" cy="18" r="${r}" stroke-dasharray="${(l * f).toFixed(1)} ${l.toFixed(1)}"/>` : ''}</svg>
+      <b>${hechas}<small>/${total}</small></b></span>`;
+  }
+
   function pintarCabecera() {
     const eq = miEquipo();
-    const chipEq = $('#chip-equipo');
-    const chipProg = $('#chip-progreso');
-    if (!eq) { chipEq.classList.add('oculto'); chipProg.classList.add('oculto'); return; }
+    const r = ruta();
+    const pestana = eq ? PESTANAS[r.nombre] : null;
+    const detalle = !!eq && !pestana && r.nombre !== 'unirse';
+    document.body.classList.toggle('con-pestanas', !!pestana);
+    $('#tabbar').classList.toggle('oculto', !pestana);
+    $('#tabbar').querySelectorAll('a').forEach((a) => a.classList.toggle('activa', a.dataset.tab === pestana));
+    $('#atras').classList.toggle('oculto', !detalle);
+    const avatar = $('#avatar');
+    if (!eq) {
+      avatar.className = 'avatar';
+      if (!avatar.querySelector('img')) avatar.innerHTML = `<img alt="" src="${GK.html(C.logo || 'assets/img/logo.svg')}">`;
+      $('#barra-titulo').textContent = C.titulo || 'Gymkhana';
+      $('#barra-der').innerHTML = '';
+      return;
+    }
     const sit = situacion();
-    chipEq.classList.remove('oculto');
-    chipProg.classList.remove('oculto');
-    chipEq.textContent = GK.equipo(eq.id).nombre.toUpperCase();
-    chipProg.textContent = `${sit.hechas}/${sit.total}`;
+    avatar.className = 'avatar avatar-equipo';
+    avatar.textContent = eq.id;
+    $('#barra-titulo').textContent = GK.equipo(eq.id).nombre;
+    $('#barra-der').innerHTML = sit.ruta ? anillo(sit.hechas, sit.total) : '';
   }
   GK.datos.onEstado((e) => {
     const chip = $('#chip-red');
     const pend = e.pendientes;
-    chip.className = 'chip ' + (pend ? (e.rechazadas ? 'chip-rojo' : 'chip-ambar') : e.enLinea ? 'chip-verde' : 'chip-ambar');
-    chip.innerHTML = `<span class="led"></span>${pend ? `${pend} PEND.` : e.enLinea ? 'EN LÍNEA' : 'SIN RED'}`;
+    chip.className = 'barra-estado ' + (pend ? (e.rechazadas ? 'est-rojo' : 'est-ambar') : e.enLinea ? 'est-verde' : 'est-ambar');
+    chip.innerHTML = `<i class="punto"></i><span>${pend ? `${pend} ${pend === 1 ? 'avance' : 'avances'} por enviar` : e.enLinea ? 'En línea' : 'Sin cobertura'}</span>`;
     chip.title = e.ultimoError || (pend ? 'Hay avances guardados en el móvil que se enviarán al recuperar la cobertura' : 'Conectado');
     const aviso = $('#aviso-cola');
     if (aviso) aviso.classList.toggle('oculto', !e.rechazadas);
@@ -138,14 +162,17 @@
     });
   }
 
-  async function pedirAyuda() {
+  async function pedirAyuda(motivoDado) {
     const ultima = GK.leer('ultimaAyuda', 0);
     if (Date.now() - ultima < 120000) {
       return GK.modal('<p>Ya habéis avisado hace un momento. <b>La organización está en camino</b> o os escribirá aquí.</p>', [['Vale', true, 'boton']]);
     }
-    const motivo = await GK.modal(
-      '<h2 class="titulo">¿Qué os pasa?</h2><p class="texto-2">Avisaremos a la organización en su móvil.</p>',
-      [...MOTIVOS.map((m) => [m, m, 'boton-sec boton-motivo']), ['Cancelar', null, 'boton-sec']]);
+    const motivo = typeof motivoDado === 'string'
+      ? await GK.modal(`<h2 class="titulo">¿Avisamos a la organización?</h2><p class="texto-2">Motivo: <b>${GK.html(motivoDado)}</b>. Les llegará al móvil al momento.</p>`,
+        [['Cancelar', null, 'boton-sec'], ['Avisar', motivoDado, 'boton']])
+      : await GK.modal(
+        '<h2 class="titulo">¿Qué os pasa?</h2><p class="texto-2">Avisaremos a la organización en su móvil.</p>',
+        [...MOTIVOS.map((m) => [m, m, 'boton-sec boton-motivo']), ['Cancelar', null, 'boton-sec']]);
     if (!motivo) return;
     GK.guardar('ultimaAyuda', Date.now());
     enviarAviso(motivo, false);
@@ -183,8 +210,12 @@
     // Pantallas con interacción en curso: solo se redibujan si cambia la ruta.
     if (!forzar && vista.dataset.ruta === location.hash) {
       if ((r.nombre === 'e' || r.nombre === 'final') && estacionEnCurso) { actualizarEstacionEnCurso(); return; }
-      if (r.nombre === 'escanear' || r.nombre === 'unirse') return;
+      if (r.nombre === 'escanear' || r.nombre === 'unirse' || r.nombre === 'ranking') return;
       if (document.querySelector('.modal')) return;
+    }
+    if (vista.dataset.ruta !== location.hash) {
+      // Transición suave al cambiar de pantalla (como en una app nativa)
+      vista.classList.remove('entra'); void vista.offsetWidth; vista.classList.add('entra');
     }
     vista.dataset.ruta = location.hash;
     if (limpiarVista) { try { limpiarVista(); } catch (e) { /* */ } limpiarVista = null; }
@@ -200,8 +231,12 @@
       case 'superada': pantallaSuperada(r.args[0] === 'final' ? 'final' : Number(r.args[0])); break;
       case 'final': pantallaFinal(); break;
       case 'meta': pantallaMeta(r.args[0]); break;
+      case 'mapa': if (eq) pantallaMapa(!!forzar || !mapaPrevio); else pantallaUnirse(); break;
+      case 'ranking': if (eq) pantallaRanking(); else pantallaUnirse(); break;
+      case 'ayuda': if (eq) pantallaAyuda(); else pantallaUnirse(); break;
       default: if (eq) pantallaRuta(); else pantallaUnirse();
     }
+    pintarCabecera();
     // Si solo se ha actualizado la misma pantalla, se conserva el scroll y el zoom del mapa.
     if (!forzar) {
       window.scrollTo(0, y);
@@ -360,109 +395,94 @@
     if (idEq && codigo) intentar();
   }
 
-  /* ---------- Pantalla: mi ruta ---------- */
+  /* ---------- Pantalla: mi ruta (inicio) ---------- */
+  /** Barra de progreso por segmentos: uno por estación. */
+  const segmentos = (sit) => `<div class="segmentos" aria-hidden="true">${sit.orden.map((s, i) =>
+    `<i class="${i < sit.hechas ? 'on' : i === sit.hechas && !sit.completas ? 'sig' : ''}"></i>`).join('')}</div>`;
+
   function pantallaRuta() {
     const eq = miEquipo();
-    const e = GK.equipo(eq.id);
     const sit = situacion();
     const iniciada = !!(estadoTorneo && estadoTorneo.iniciada);
     const sig = sit.siguiente != null ? GK.estacion(sit.siguiente) : null;
     const atascado = sit.ruta && sig && GK.leer('avisosAtasco', {})[sig.id];
+    const reloj = `<span class="foco-reloj">${GK.icono('reloj')}<b class="mono" id="reloj">--:--</b></span>`;
+    const icoGrande = (n, clase) => `<div class="foco-insignia ${clase || ''}" aria-hidden="true">${GK.icono(n)}</div>`;
 
-    let tarjeta;
+    // Tarjeta principal: lo que el equipo tiene que hacer AHORA.
+    let foco;
     if (!sit.ruta) {
-      tarjeta = `
-        <div class="tarjeta tarjeta-espera">
-          <div class="radar" aria-hidden="true"></div>
-          <div><p class="antetitulo">Recibiendo vuestra ruta…</p>
-          <p>Se reparte por orden de llegada. Necesitáis conexión un momento.</p></div>
-        </div>`;
+      foco = `<article class="foco">
+        <div class="foco-cuerpo"><div class="radar" aria-hidden="true"></div>
+          <div><p class="foco-ante">Un momento</p><h1 class="foco-titulo">Recibiendo vuestra ruta…</h1>
+          <p class="foco-texto">Se reparte por orden de llegada. Necesitáis conexión un momento.</p></div></div>
+      </article>`;
     } else if (sit.terminado) {
-      tarjeta = `
-        <div class="tarjeta tarjeta-final">
-          <p class="antetitulo">Misión completada</p>
-          <p>¡Habéis llegado a la meta en <b class="mono">${GK.formatoTiempo(GK.tiempoJuego(estadoTorneo, sit.ultima))}</b>! Mirad el ranking para ver vuestro puesto.</p>
-        </div>`;
+      foco = `<article class="foco foco-verde">
+        <div class="foco-cab"><span class="foco-ante">Gymkhana terminada</span>${reloj}</div>
+        <div class="foco-cuerpo">${icoGrande('bandera', 'insignia-meta')}
+          <div><h1 class="foco-titulo">Misión completada</h1><p class="foco-texto">¡Habéis llegado a la meta! Mirad el ranking para ver vuestro puesto.</p></div></div>
+        <a class="boton boton-ancho" href="#/ranking">${GK.icono('podio')} Ver el ranking</a>
+      </article>`;
     } else if (sit.completas && !sit.palabraHecha) {
-      tarjeta = `
-        <div class="tarjeta siguiente">
-          <div class="siguiente-num insignia-final" aria-hidden="true">${GK.icono('satelite')}</div>
-          <div class="siguiente-texto">
-            <p class="antetitulo">Paso final</p>
-            <p class="siguiente-nombre">Última transmisión</p>
-            <p class="texto-2">Tenéis las ${sit.total} letras. Ordenadlas para descifrar la palabra secreta.</p>
-          </div>
-        </div>
-        <a class="boton boton-ancho boton-grande" href="#/final">${GK.icono('satelite')} Descifrar la palabra</a>`;
+      foco = `<article class="foco">
+        <div class="foco-cab"><span class="foco-ante">Paso final</span>${reloj}</div>
+        <div class="foco-cuerpo">${icoGrande('satelite', 'insignia-final')}
+          <div><h1 class="foco-titulo">Última transmisión</h1><p class="foco-texto">Tenéis las ${sit.total} letras. Ordenadlas para descifrar la palabra secreta.</p></div></div>
+        ${segmentos(sit)}
+        <a class="boton boton-ancho boton-grande" href="#/final">${GK.icono('satelite')} Descifrar la palabra</a>
+      </article>`;
     } else if (sit.palabraHecha) {
-      tarjeta = `
-        <div class="tarjeta siguiente tarjeta-meta">
-          <div class="siguiente-num insignia-meta" aria-hidden="true">${GK.icono('bandera')}</div>
-          <div class="siguiente-texto">
-            <p class="antetitulo">Siguiente</p>
-            <p class="siguiente-nombre">${GK.html(C.meta.nombre)}</p>
-            <p class="texto-2">Id a la meta y escanead su QR. ¡Ya aparece en el mapa!</p>
-          </div>
-        </div>
-        <a class="boton boton-ancho boton-grande" href="#/escanear">${GK.icono('qr')} Escanear QR de la meta</a>`;
+      foco = `<article class="foco foco-verde">
+        <div class="foco-cab"><span class="foco-ante">Último paso</span>${reloj}</div>
+        <div class="foco-cuerpo">${icoGrande('bandera', 'insignia-meta')}
+          <div><h1 class="foco-titulo">${GK.html(C.meta.nombre)}</h1><p class="foco-texto">Id a la meta y escanead su QR. ¡Ya aparece en el mapa!</p></div></div>
+        <a class="boton boton-ancho boton-grande boton-verde" href="#/escanear">${GK.icono('qr')} Escanear QR de la meta</a>
+      </article>`;
     } else if (!iniciada) {
-      tarjeta = `
-        <div class="tarjeta tarjeta-espera">
-          <div class="radar" aria-hidden="true"></div>
-          <div><p class="antetitulo">${GK.enPausa(estadoTorneo) ? 'Gymkhana en pausa' : 'Esperando la salida'}</p>
-          <p>Vuestra primera estación es la <b>${GK.html(GK.letra(sit.orden[0]))}</b>. ${GK.enPausa(estadoTorneo) ? 'La organización ha parado el juego un momento.' : 'Mirad dónde está en el mapa: cuando la organización dé la salida, id hacia ella.'}</p></div>
-        </div>`;
+      const pausa = GK.enPausa(estadoTorneo);
+      foco = `<article class="foco">
+        <div class="foco-cab"><span class="foco-ante">${pausa ? 'Gymkhana en pausa' : 'Esperando la salida'}</span>${pausa ? reloj : ''}</div>
+        <div class="foco-cuerpo">${insignia(sit.orden[0], 'foco-letra')}
+          <div><h1 class="foco-titulo">Primera: ${GK.html(GK.estacion(sit.orden[0]).nombre)}</h1>
+          <p class="foco-texto">${pausa ? 'La organización ha parado el juego un momento. El reloj está parado.' : 'Mirad dónde está en el mapa. Cuando la organización dé la salida, id hacia ella.'}</p></div></div>
+        <div class="foco-espera"><div class="radar radar-mini" aria-hidden="true"></div><span>${pausa ? 'Esperando a que se reanude…' : 'La salida aún no se ha dado'}</span></div>
+      </article>`;
     } else {
-      tarjeta = `
-        <div class="tarjeta siguiente">
-          ${insignia(sig.id)}
-          <div class="siguiente-texto">
-            <p class="antetitulo">Paso ${sit.hechas + 1} de ${sit.total}</p>
-            <p class="siguiente-nombre">${GK.html(sig.nombre)}</p>
-            <p class="texto-2">Buscadla en el mapa y, al llegar, escanead su QR.</p>
-          </div>
-        </div>
-        <a class="boton boton-ancho boton-grande" href="#/escanear">${GK.icono('qr')} Escanear QR de la estación</a>`;
+      foco = `<article class="foco">
+        <div class="foco-cab"><span class="foco-ante">Paso ${sit.hechas + 1} de ${sit.total}</span>${reloj}</div>
+        <div class="foco-cuerpo">${insignia(sig.id, 'foco-letra')}
+          <div><h1 class="foco-titulo">${GK.html(sig.nombre)}</h1><p class="foco-texto">Buscadla en el mapa y, al llegar, escanead su QR.</p></div></div>
+        ${segmentos(sit)}
+        <a class="boton boton-ancho boton-grande" href="#/escanear">${GK.icono('qr')} Escanear el QR</a>
+      </article>`;
     }
 
     vista.innerHTML = `
       <section class="pantalla">
         <div id="mensaje-org"></div>
-        <div id="instalar"></div>
-        ${cabeceraPantalla(e.nombre, sit.terminado ? 'Misión completada' : 'Vuestra ruta', sit.terminado ? 'completada' : 'ruta')}
-        ${sit.ruta ? `<p class="ruta-info"><span class="chip chip-ambar">RUTA ${sit.ruta.id} DE ${C.rutas.length}</span> <span class="mono">≈ ${GK.metros(sit.ruta.metros)}</span>${sit.ruta.id === 1 ? ' <span class="chip chip-verde">LA MÁS CORTA</span>' : ''}</p>` : ''}
-        ${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas, meta: estadoMeta(sit) })}
-        <div class="marcadores">
-          <div><b>${sit.hechas}</b><span>hechas</span></div>
-          <div><b>${sit.total - sit.hechas}</b><span>faltan</span></div>
-          <div><b class="mono" id="reloj">--:--</b><span>tiempo</span></div>
-        </div>
         <div id="aviso-cola" class="aviso aviso-error aviso-reconectar oculto">
           <span>Vuestro móvil no consigue sincronizar con la organización. Ya les hemos avisado.</span>
           <button class="boton-sec mini" type="button" id="reconectar">Reconectar</button>
         </div>
-        ${atascado ? '<div class="aviso aviso-info">Lleváis un rato en esta estación: <b>ya hemos avisado a la organización</b>. Si necesitáis algo más, pulsad «Pedir ayuda».</div>' : ''}
-        ${tarjeta}
-        ${sit.ruta ? `<ol class="ruta-lista" aria-label="Orden de vuestra ruta">
-          ${sit.orden.map((s, i) => `<li class="${i < sit.hechas ? 'hecha' : i === sit.hechas ? 'actual' : ''}" title="${GK.html(GK.estacion(s).nombre)}">${GK.html(GK.letra(s))}</li>`).join('')}
-        </ol>
-        ${filaLetras(sit)}` : ''}
-        <div class="pie-acciones">
-          <button class="boton-sec boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda</button>
-          <a class="boton-sec" href="ranking.html">${GK.icono('podio')} Ver ranking</a>
-          ${GK.enModoApp && !GK.enModoApp() && (GK.dispositivo.esIOS || GK.dispositivo.esAndroid) ? '<button class="boton-sec" id="instalar-app">Instalar la app</button>' : ''}
-          <button class="boton-sec" id="salir">Cambiar de equipo</button>
+        ${atascado ? '<div class="aviso aviso-info">Lleváis un rato en esta estación: <b>ya hemos avisado a la organización</b>. Si necesitáis algo más, id a «Ayuda».</div>' : ''}
+        ${foco}
+        ${sit.ruta ? `
+        <div class="seccion">
+          <div class="seccion-cab"><h2>Vuestro recorrido</h2><a href="#/mapa">Ver mapa ${GK.icono('flecha')}</a></div>
+          <a class="mapa-previa" href="#/mapa" aria-label="Abrir el mapa">${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas, meta: estadoMeta(sit) })}</a>
+          <p class="ruta-info"><span>Ruta ${sit.ruta.id} de ${C.rutas.length}</span><span>≈ ${GK.metros(sit.ruta.metros)}</span>${sit.ruta.id === 1 ? '<span class="ruta-corta">La más corta</span>' : ''}</p>
         </div>
+        <div class="seccion">
+          <div class="seccion-cab"><h2>Orden de estaciones</h2><span class="seccion-dato">${sit.hechas}/${sit.total}</span></div>
+          <ol class="ruta-lista" aria-label="Orden de vuestra ruta">
+            ${sit.orden.map((s, i) => `<li class="${i < sit.hechas ? 'hecha' : i === sit.hechas && !sit.completas ? 'actual' : ''}" title="${GK.html(GK.estacion(s).nombre)}"><span>${GK.html(GK.letra(s))}</span></li>`).join('')}
+          </ol>
+        </div>
+        <div class="seccion">${filaLetras(sit)}</div>` : ''}
+        <div id="instalar"></div>
       </section>`;
-    GK.activarMapa(vista);
-    $('#ayuda').onclick = pedirAyuda;
-    if ($('#instalar-app')) $('#instalar-app').onclick = () => GK.mostrarInstalar();
     $('#reconectar').onclick = () => { GK.datos.reconectar(); $('#aviso-cola').classList.add('oculto'); };
-    $('#salir').onclick = async () => {
-      const ok = await GK.modal('<p>¿Seguro que queréis cambiar de equipo en este móvil?</p><p class="texto-2">El progreso de vuestro equipo no se pierde.</p>',
-        [['Cancelar', false], ['Cambiar', true, 'boton']]);
-      if (ok) ir('#/unirse');
-    };
     GK.datos.onEstado(() => {}); // actualiza el aviso de la cola recién pintado
     const tic = () => {
       const r = $('#reloj');
@@ -471,6 +491,121 @@
     };
     tic();
     relojId = setInterval(tic, 1000);
+  }
+
+  /* ---------- Pantalla: mapa a pantalla completa ---------- */
+  function pantallaMapa(centrar) {
+    const sit = situacion();
+    const sig = sit.siguiente != null ? GK.estacion(sit.siguiente) : null;
+    const destino = !sit.ruta ? null
+      : sit.terminado ? { ante: 'Misión completada', nombre: '¡En la meta!' }
+      : sit.palabraHecha ? { ante: 'Ahora id a', nombre: C.meta.nombre, meta: true }
+      : sit.completas ? { ante: 'Paso final', nombre: 'Última transmisión' }
+      : sig ? { ante: estadoTorneo && estadoTorneo.iniciada ? `Siguiente · paso ${sit.hechas + 1} de ${sit.total}` : 'Primera estación', nombre: sig.nombre, letra: sig.id } : null;
+    vista.innerHTML = `
+      <section class="pantalla pantalla-mapa">
+        <div class="mapa-completo">${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas, meta: estadoMeta(sit) })}</div>
+        <div class="mapa-leyenda" aria-hidden="true"><span><i class="ley-hecha"></i>Hechas</span><span><i class="ley-sig"></i>Siguiente</span><span><i class="ley-pend"></i>Pendientes</span></div>
+        ${destino ? `<div class="mapa-destino">
+          ${destino.letra ? insignia(destino.letra, 'destino-letra') : `<div class="destino-letra ${destino.meta ? 'insignia-meta' : 'insignia-final'}">${GK.icono(destino.meta ? 'bandera' : 'satelite')}</div>`}
+          <div><p class="foco-ante">${GK.html(destino.ante)}</p><p class="destino-nombre">${GK.html(destino.nombre)}</p></div>
+          ${sit.terminado ? '' : `<a class="boton mini-boton" href="${sit.completas && !sit.palabraHecha ? '#/final' : '#/escanear'}" aria-label="Escanear">${GK.icono('qr')}</a>`}
+        </div>` : ''}
+      </section>`;
+    const caja = $('.mapa-completo .mapa-caja');
+    GK.activarMapa(vista);
+    if (centrar && caja) {
+      // Centrar en la siguiente estación (o la última hecha) al abrir el mapa.
+      requestAnimationFrame(() => {
+        const marco = caja.querySelector('.mapa-marco');
+        const m = caja.querySelector('.m-siguiente') || [...caja.querySelectorAll('.m-hecha')].pop();
+        if (!m || !marco) return;
+        const lienzo = marco.querySelector('.mapa-lienzo');
+        marco.scrollLeft = (Number(m.dataset.x) / C.mapa.ancho) * lienzo.clientWidth - marco.clientWidth / 2;
+        marco.scrollTop = (Number(m.dataset.y) / C.mapa.alto) * lienzo.clientHeight - marco.clientHeight / 2;
+      });
+    }
+  }
+
+  /* ---------- Pantalla: ranking dentro de la app ---------- */
+  function pantallaRanking() {
+    const eq = miEquipo();
+    vista.innerHTML = `
+      <section class="pantalla">
+        <div class="pantalla-cab"><h1 class="titulo">Ranking</h1><span class="en-directo"><i></i>En directo</span></div>
+        <ol class="clasif" id="clasif" aria-label="Clasificación"><li class="clasif-cargando">Cargando…</li></ol>
+        <a class="enlace-sec" href="ranking.html">${GK.icono('pantalla')} Abrir el ranking en pantalla grande</a>
+      </section>`;
+    let todos = {};
+    const pintar = () => {
+      const ol = $('#clasif');
+      if (!ol) return;
+      const clasif = GK.clasificar(todos);
+      ol.innerHTML = clasif.map((s, i) => {
+        const yo = s.equipo.id === eq.id;
+        const estado = !s.ruta ? 'Sin ruta todavía'
+          : s.terminado ? `En meta · ${estadoTorneo && estadoTorneo.inicio ? GK.formatoTiempo(GK.tiempoJuego(estadoTorneo, s.ultima)) : ''}`
+          : s.palabraHecha ? 'Camino de la meta'
+          : s.completas ? 'Descifrando la palabra'
+          : `${s.hechas} de ${s.total} estaciones`;
+        const f = s.ruta ? Math.min(1, s.pasos / (s.total + 2)) : 0;
+        return `<li class="clasif-fila${yo ? ' yo' : ''}${s.terminado ? ' terminado' : ''}">
+          <span class="clasif-puesto p${i + 1}">${i + 1}</span>
+          <span class="clasif-info"><b>${GK.html(s.equipo.nombre)}${yo ? ' <small>· vosotros</small>' : ''}</b>
+            <span class="clasif-barra"><i style="width:${(f * 100).toFixed(1)}%"></i></span>
+            <span class="clasif-estado">${GK.html(estado)}</span></span>
+          <span class="clasif-cuenta">${s.terminado ? GK.icono('bandera') : `${s.hechas}<small>/${s.total}</small>`}</span>
+        </li>`;
+      }).join('');
+    };
+    const quitar = [
+      GK.datos.escuchar('progreso', (v) => { todos = v || {}; pintar(); }),
+      GK.datos.escuchar('asignacion', () => pintar()),
+    ];
+    limpiarVista = () => quitar.forEach((f) => f());
+  }
+
+  /* ---------- Pantalla: ayuda y ajustes del equipo ---------- */
+  function pantallaAyuda() {
+    const eq = miEquipo();
+    const puedeInstalar = GK.enModoApp && !GK.enModoApp() && (GK.dispositivo.esIOS || GK.dispositivo.esAndroid);
+    const fila = (id, ico, texto, sub, clase) => `<button type="button" class="fila-ajuste ${clase || ''}" id="${id}">
+      <span class="fila-ico">${GK.icono(ico)}</span><span class="fila-texto"><b>${texto}</b>${sub ? `<small>${sub}</small>` : ''}</span>${GK.icono('flecha')}</button>`;
+    vista.innerHTML = `
+      <section class="pantalla">
+        <div id="mensaje-org"></div>
+        <div class="pantalla-cab"><h1 class="titulo">Ayuda</h1></div>
+        <div class="tarjeta ayuda-sos">
+          <div class="ayuda-sos-cab"><span class="fila-ico ico-sos">${GK.icono('campana')}</span>
+            <div><b>¿Os habéis atascado?</b><p class="texto-2">Elegid qué pasa y avisamos a la organización en su móvil.</p></div></div>
+          <div class="lista-ajustes">
+            ${MOTIVOS.map((m, i) => fila('motivo-' + i, ['lupa', 'bombilla', 'qr', 'mensaje'][i] || 'ayuda', GK.html(m), '')).join('')}
+          </div>
+        </div>
+        <div id="instalar"></div>
+        <h2 class="seccion-titulo">Vuestro equipo</h2>
+        <div class="lista-ajustes tarjeta">
+          <div class="fila-ajuste fila-info"><span class="avatar avatar-equipo">${eq.id}</span><span class="fila-texto"><b>${GK.html(GK.equipo(eq.id).nombre)}</b><small>Código <span class="mono">${GK.html((eq.codigo || '').toUpperCase())}</span></small></span></div>
+          ${puedeInstalar ? fila('instalar-app', 'mas', 'Instalar la app', 'Con su icono, a pantalla completa') : ''}
+          ${fila('ver-ranking', 'pantalla', 'Ranking en pantalla grande', 'Para verlo en un ordenador o proyector')}
+          ${fila('salir', 'reinicio', 'Cambiar de equipo', 'El progreso del equipo no se pierde', 'fila-peligro')}
+        </div>
+        <h2 class="seccion-titulo">Cómo funciona</h2>
+        <ol class="como-funciona tarjeta">
+          <li><b>Seguid vuestra ruta.</b> El mapa marca la siguiente estación.</li>
+          <li><b>Escanead el QR</b> de la estación con el botón central.</li>
+          <li><b>Superad la prueba.</b> Al minuto aparece una pista.</li>
+          <li><b>Juntad las ${C.estaciones.length} letras</b>, descifrad la palabra y corred a la meta.</li>
+        </ol>
+      </section>`;
+    MOTIVOS.forEach((m, i) => { $('#motivo-' + i).onclick = () => pedirAyuda(m); });
+    if ($('#instalar-app')) $('#instalar-app').onclick = () => GK.mostrarInstalar();
+    $('#ver-ranking').onclick = () => { location.href = 'ranking.html'; };
+    $('#salir').onclick = async () => {
+      const ok = await GK.modal('<h2 class="titulo">¿Cambiar de equipo?</h2><p class="texto-2">Este móvil dejará de estar en el equipo. El progreso del equipo no se pierde.</p>',
+        [['Cancelar', false], ['Cambiar', true, 'boton']]);
+      if (ok) ir('#/unirse');
+    };
   }
 
   /* ---------- Pantalla: escanear ---------- */

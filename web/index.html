@@ -16,24 +16,31 @@
 </head>
 <body class="app">
   <div id="banda-demo" class="banda-demo oculto">MODO DEMO · LOS DATOS SOLO ESTÁN EN ESTE NAVEGADOR</div>
-  <header class="cabecera">
-    <div class="cabecera-int">
-      <a class="marca" href="#/" aria-label="Ir a mi ruta">
-        <img id="logo" alt="Logo de GranaSAT" src="assets/img/logo.svg">
-        <div>
-          <div class="marca-nombre">GRANASAT</div>
-          <div class="marca-sub" id="marca-sub">Gymkhana SSTV</div>
-        </div>
+  <header class="barra-sup" id="barra-sup">
+    <div class="barra-sup-int">
+      <a class="barra-atras oculto" id="atras" href="#/" aria-label="Volver">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       </a>
-      <div class="cabecera-der">
-        <span class="chip chip-ambar oculto" id="chip-equipo"></span>
-        <span class="chip oculto" id="chip-progreso"></span>
-        <span class="chip" id="chip-red"><span class="led"></span></span>
-      </div>
+      <a class="barra-id" id="barra-id" href="#/" aria-label="Ir a mi ruta">
+        <span class="avatar" id="avatar"><img id="logo" alt="" src="assets/img/logo.svg"></span>
+        <span class="barra-textos">
+          <span class="barra-titulo" id="barra-titulo">Gymkhana SSTV</span>
+          <span class="barra-estado" id="chip-red"><i class="punto"></i><span>Conectando…</span></span>
+        </span>
+      </a>
+      <div class="barra-der" id="barra-der"></div>
     </div>
   </header>
 
   <main id="vista" class="vista" aria-live="polite"></main>
+
+  <nav class="tabbar oculto" id="tabbar" aria-label="Secciones">
+    <a href="#/" data-tab="ruta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>Ruta</span></a>
+    <a href="#/mapa" data-tab="mapa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4L3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg><span>Mapa</span></a>
+    <a href="#/escanear" data-tab="escanear" class="tab-escanear" aria-label="Escanear QR"><span class="tab-fab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 12h10"/></svg></span></a>
+    <a href="#/ranking" data-tab="ranking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21V11h8v10M2 21v-6h6M16 21v-8h6v8M1 21h22"/><path d="M12 3l1.1 2.2 2.4.4-1.7 1.7.4 2.4-2.2-1.2-2.2 1.2.4-2.4-1.7-1.7 2.4-.4z"/></svg><span>Ranking</span></a>
+    <a href="#/ayuda" data-tab="ayuda"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg><span>Ayuda</span></a>
+  </nav>
 
   <div id="sin-cripto" class="aviso aviso-error oculto" style="margin:16px">
     Este navegador no permite comprobar los códigos. Abrid la app con Chrome o Safari actualizados.

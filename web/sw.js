@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v12';
+const VERSION = 'gk-v13';
 const ARCHIVOS = [
   './',
   'index.html',
