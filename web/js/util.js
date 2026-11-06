@@ -33,6 +33,35 @@
     return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(texto))));
   };
 
+  const deB64 = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+
+  /** Deshace la ofuscación del Wordle (XOR con la sal + base64). Igual que ofuscar() en generar_torneo.py. */
+  GK.desofuscar = function (b64, salHex) {
+    const k = deHex(salHex);
+    const b = deB64(b64).map((x, i) => x ^ k[i % k.length]);
+    return new TextDecoder().decode(b);
+  };
+
+  /**
+   * Descifra un texto cifrado con la respuesta de la prueba (explicaciones que se enseñan al acertar).
+   * Igual que cifrar() en generar_torneo.py. Con una respuesta incorrecta sale basura (o null).
+   */
+  GK.descifrar = async function (b64, respuesta, salHex) {
+    try {
+      const enc = new TextEncoder();
+      const k = new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(`gk-explicacion:${GK.normalizar(respuesta)}:${salHex}`)));
+      const datos = deB64(b64);
+      const flujo = new Uint8Array(Math.ceil((datos.length + 1) / 32) * 32);
+      for (let i = 0; i * 32 < flujo.length; i++) {
+        const bloque = new Uint8Array(k.length + 4);
+        bloque.set(k);
+        new DataView(bloque.buffer).setUint32(k.length, i);
+        flujo.set(new Uint8Array(await crypto.subtle.digest('SHA-256', bloque)), i * 32);
+      }
+      return new TextDecoder().decode(datos.map((x, i) => x ^ flujo[i]));
+    } catch (e) { return null; }
+  };
+
   /** localStorage a prueba de navegadores privados o bloqueados. */
   GK.guardar = function (clave, valor) {
     try { localStorage.setItem('gk:' + clave, JSON.stringify(valor)); } catch (e) { /* sin almacenamiento */ }
@@ -65,15 +94,24 @@
   };
 
   /**
-   * Situación de un equipo a partir de su progreso ({idEstacion: {t}}).
-   * Solo cuenta lo hecho en el orden de su ruta, sin huecos.
+   * Situación de un equipo a partir de su progreso ({idEstacion | 'final' | 'meta': {t}}).
+   * Solo cuenta lo hecho en el orden de su ruta, sin huecos: las estaciones, después la palabra final
+   * («Última transmisión») y por último la meta.
+   *   hechas / total / faltan / siguiente → solo las estaciones (10)
+   *   completas    → todas las estaciones hechas
+   *   palabraHecha → han acertado la palabra final
+   *   enMeta       → han escaneado la meta: han TERMINADO (terminado === enMeta)
+   *   paso         → lo que les toca ahora: id de estación, 'final', 'meta' o null
+   *   pasos        → estaciones + palabra + meta hechas (para el ranking); totalPasos = total + 2
+   *   ultima       → instante del último paso hecho (la llegada a la meta si han terminado)
    */
   GK.situacion = function (idEquipo, progreso) {
     const eq = GK.equipo(idEquipo);
     const ruta = GK.rutaDeEquipo(idEquipo);
     const total = GK.totalEstaciones();
     if (!ruta) {
-      return { equipo: eq, ruta: null, orden: [], hechas: 0, total, faltan: [], siguiente: null, terminado: false, ultima: null };
+      return { equipo: eq, ruta: null, orden: [], hechas: 0, total, faltan: [], siguiente: null, terminado: false, ultima: null,
+        completas: false, palabraHecha: false, enMeta: false, paso: null, pasos: 0, totalPasos: total + 2 };
     }
     const p = progreso || {};
     let hechas = 0;
@@ -83,6 +121,11 @@
       hechas++;
       ultima = Math.max(ultima || 0, Number(p[s].t) || 0);
     }
+    const completas = hechas === ruta.orden.length;
+    const palabraHecha = completas && !!p.final;
+    const enMeta = palabraHecha && !!p.meta;
+    if (palabraHecha) ultima = Math.max(ultima || 0, Number(p.final.t) || 0);
+    if (enMeta) ultima = Math.max(ultima || 0, Number(p.meta.t) || 0);
     return {
       equipo: eq,
       ruta,
@@ -91,22 +134,34 @@
       total: ruta.orden.length,
       faltan: ruta.orden.slice(hechas),
       siguiente: ruta.orden[hechas] ?? null,
-      terminado: hechas === ruta.orden.length,
+      completas,
+      palabraHecha,
+      enMeta,
+      terminado: enMeta,
+      paso: !completas ? ruta.orden[hechas] : !palabraHecha ? 'final' : !enMeta ? 'meta' : null,
+      pasos: hechas + (palabraHecha ? 1 : 0) + (enMeta ? 1 : 0),
+      totalPasos: ruta.orden.length + 2,
       ultima,
     };
   };
 
+  /* ---------- Palabra final ---------- */
+  /** Letra de la palabra final que da una estación (torneo.json → palabra_final.letras). */
+  GK.letraPalabra = (id) => (GK.estacion(id) || {}).letraPalabra || '';
+  /** Letras conseguidas, en el orden en que las consiguieron (el de su ruta). */
+  GK.letrasConseguidas = (sit) => sit.orden.slice(0, sit.hechas).map(GK.letraPalabra);
+
   /**
-   * Clasificación: más estaciones hechas primero; en empate, el que llegó antes a ese número.
-   * Los equipos sin ruta todavía van al final.
+   * Clasificación: más pasos hechos primero (estaciones, palabra final y meta); en empate, el que llegó antes
+   * a ese número. Un equipo termina al llegar a la meta. Los equipos sin ruta todavía van al final.
    */
   GK.clasificar = function (progresoPorEquipo) {
     return C.equipos
       .map((e) => GK.situacion(e.id, progresoPorEquipo[e.id]))
       .sort((a, b) =>
         (b.ruta ? 1 : 0) - (a.ruta ? 1 : 0) ||
-        b.hechas - a.hechas ||
-        (a.hechas === 0 ? 0 : (a.ultima ?? Infinity) - (b.ultima ?? Infinity)) ||
+        b.pasos - a.pasos ||
+        (a.pasos === 0 ? 0 : (a.ultima ?? Infinity) - (b.ultima ?? Infinity)) ||
         (a.ruta && b.ruta ? a.ruta.id - b.ruta.id : 0) ||
         a.equipo.id - b.equipo.id
       );

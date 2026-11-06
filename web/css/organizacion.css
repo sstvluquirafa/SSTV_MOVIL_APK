@@ -33,9 +33,10 @@
 .lista-ayudas .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
 .boton.mini { min-height: 38px; padding: 6px 14px; font-size: .9rem; }
 .tabla-org tr.atascado td { background: rgba(248, 113, 113, .08); }
-.tabla-org tr.atascado td:nth-child(6) { color: #fca5a5; font-weight: 700; }
+.tabla-org tr.atascado td:nth-child(7) { color: #fca5a5; font-weight: 700; }
 .enlace { background: none; border: 0; padding: 0; color: var(--ambar); font: inherit; cursor: pointer; text-decoration: underline dotted; }
 .org-ntfy { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
 .org-ntfy p { margin: 0; max-width: 760px; }
 .acciones .icono { width: 18px; height: 18px; }
 select.campo { appearance: auto; }
+.final-estado .chip { white-space: nowrap; }

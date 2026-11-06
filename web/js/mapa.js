@@ -20,7 +20,8 @@
   }
 
   /**
-   * @param {object} o { orden: number[] (ruta, puede ir vacía), hechas: number, todas?: boolean }
+   * @param {object} o { orden: number[] (ruta, puede ir vacía), hechas: number,
+   *                     meta?: null | 'siguiente' | 'hecha'  (la meta solo se dibuja si se indica) }
    * @returns {string} HTML del mapa (usar después GK.activarMapa(contenedor) para el zoom)
    */
   GK.mapaRuta = function (o) {
@@ -33,6 +34,11 @@
       const clase = j + 1 < hechas ? 'l-hecha' : j + 1 === hechas ? 'l-activa' : 'l-pendiente';
       lineas += `<line class="${clase}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`;
     }
+    const meta = o.meta && C.meta ? C.meta : null;
+    if (meta && orden.length) {
+      const u = GK.estacion(orden[orden.length - 1]);
+      lineas += `<line class="${o.meta === 'hecha' ? 'l-meta-hecha' : 'l-meta'}" x1="${u.x}" y1="${u.y}" x2="${meta.x}" y2="${meta.y}"/>`;
+    }
     const enRuta = new Map(orden.map((s, i) => [s, i]));
     let marcas = '';
     // Primero las pendientes y la siguiente al final, para que quede encima
@@ -44,12 +50,23 @@
       const i = enRuta.has(e.id) ? enRuta.get(e.id) : -1;
       const estado = i < 0 ? 'neutra' : i < hechas ? 'hecha' : i === hechas ? 'siguiente' : 'pendiente';
       const r = estado === 'siguiente' ? R * 1.25 : R;
-      marcas += `<g class="m m-${estado}" data-estacion="${e.id}">
+      marcas += `<g class="m m-${estado}" data-x="${e.x}" data-y="${e.y}">
         ${estado === 'siguiente' ? `<circle class="m-pulso" cx="${e.x}" cy="${e.y}" r="${r}"/>` : ''}
         <circle class="m-fondo" cx="${e.x}" cy="${e.y}" r="${r}"/>
         <path class="m-estrella" d="${estrella(e.x, e.y, r * 0.92)}"/>
         <text x="${e.x}" y="${e.y}" dy=".36em" style="font-size:${Math.round(r * 0.95)}px">${GK.html(e.letra)}</text>
         ${i >= 0 && !o.sinPasos ? `<text class="m-paso" x="${e.x + r * 0.95}" y="${e.y - r * 0.8}" style="font-size:${Math.round(r * 0.62)}px">${i + 1}</text>` : ''}
+      </g>`;
+    }
+    if (meta) {
+      // La meta: estrella verde con «M», encima de todo
+      const sig = o.meta === 'siguiente';
+      const r = sig ? R * 1.3 : R * 1.1;
+      marcas += `<g class="m m-meta${sig ? ' m-siguiente' : ' m-hecha'}" data-x="${meta.x}" data-y="${meta.y}">
+        ${sig ? `<circle class="m-pulso" cx="${meta.x}" cy="${meta.y}" r="${r}"/>` : ''}
+        <circle class="m-fondo" cx="${meta.x}" cy="${meta.y}" r="${r}"/>
+        <path class="m-estrella" d="${estrella(meta.x, meta.y, r * 0.92)}"/>
+        <text x="${meta.x}" y="${meta.y}" dy=".36em" style="font-size:${Math.round(r * 0.95)}px">M</text>
       </g>`;
     }
     return `<div class="mapa-caja" data-zoom="1"><div class="mapa-marco">
@@ -85,7 +102,7 @@
     const centrar = () => {
       const sig = caja.querySelector('.m-siguiente') || [...caja.querySelectorAll('.m-hecha')].pop();
       if (!sig) return;
-      const e = GK.estacion(sig.dataset.estacion);
+      const e = { x: Number(sig.dataset.x), y: Number(sig.dataset.y) };
       const lienzo = marco.querySelector('.mapa-lienzo');
       marco.scrollLeft = (e.x / M.ancho) * lienzo.clientWidth - marco.clientWidth / 2;
       marco.scrollTop = (e.y / M.alto) * lienzo.clientHeight - marco.clientHeight / 2;

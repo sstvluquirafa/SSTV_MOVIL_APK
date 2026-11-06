@@ -69,6 +69,7 @@
     GK.borrar('equipo');
     GK.borrar('progreso:' + eq.id);
     GK.borrar('avisosAtasco');
+    GK.borrar('pistas');
     GK.datos.vaciarCola();
     cancelar.forEach((f) => f());
     cancelar = [];
@@ -123,12 +124,15 @@
     const est = sit && sit.siguiente != null ? GK.estacion(sit.siguiente) : null;
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     const nombre = GK.equipo(eq.id).nombre;
-    const donde = est ? `estación ${est.letra} (paso ${sit.hechas + 1}/${sit.total})` : 'sin estación asignada';
-    GK.datos.encolar({ tipo: 'ayuda', id: 'ayuda:' + id, idAyuda: id, equipo: eq.id, motivo, estacion: est ? est.id : 0, paso: sit ? sit.hechas + 1 : 0 });
+    const donde = est ? `estación ${est.letra} (paso ${sit.hechas + 1}/${sit.total})`
+      : sit && sit.paso === 'final' ? 'palabra final (Última transmisión)'
+      : sit && sit.paso === 'meta' ? 'camino de la meta' : 'sin estación asignada';
+    // paso: total + 1 = palabra final, total + 2 = meta (el panel lo muestra así)
+    GK.datos.encolar({ tipo: 'ayuda', id: 'ayuda:' + id, idAyuda: id, equipo: eq.id, motivo, estacion: est ? est.id : 0, paso: sit ? sit.pasos + 1 : 0 });
     GK.datos.encolar({
       tipo: 'ntfy', id: 'ntfy:' + id,
       titulo: automatico ? `${nombre} lleva un rato atascado` : `${nombre} pide ayuda`,
-      texto: `${automatico ? `Más de ${C.avisos.atascoMin} min sin completar la ` : ''}${donde}${automatico ? '' : ` · ${motivo}`}`,
+      texto: `${automatico ? `Más de ${C.avisos.atascoMin} min sin avanzar · ` : ''}${donde}${automatico ? '' : ` · ${motivo}`}`,
       prioridad: automatico ? 4 : 5,
       etiquetas: automatico ? 'hourglass_flowing_sand' : 'sos',
     });
@@ -152,13 +156,13 @@
   function vigilarAtasco() {
     const eq = miEquipo();
     const sit = situacion();
-    if (!eq || !sit || !sit.ruta || sit.terminado || !estadoTorneo || !estadoTorneo.iniciada || !estadoTorneo.inicio) return;
+    if (!eq || !sit || !sit.ruta || sit.terminado || sit.paso == null || !estadoTorneo || !estadoTorneo.iniciada || !estadoTorneo.inicio) return;
     const desde = Math.max(estadoTorneo.inicio, sit.ultima || 0);
     // Tiempo de juego sin avanzar (sin contar las pausas)
     if (GK.tiempoJuego(estadoTorneo, Date.now()) - GK.tiempoJuego(estadoTorneo, desde) < C.avisos.atascoMin * 60000) return;
     const avisados = GK.leer('avisosAtasco', {});
-    if (avisados[sit.siguiente]) return;
-    avisados[sit.siguiente] = Date.now();
+    if (avisados[sit.paso]) return;
+    avisados[sit.paso] = Date.now();
     GK.guardar('avisosAtasco', avisados);
     enviarAviso('Atasco (aviso automático)', true);
     refrescar();
@@ -178,13 +182,14 @@
     const r = ruta();
     // Pantallas con interacción en curso: solo se redibujan si cambia la ruta.
     if (!forzar && vista.dataset.ruta === location.hash) {
-      if (r.nombre === 'e' && estacionEnCurso) { actualizarEstacionEnCurso(); return; }
+      if ((r.nombre === 'e' || r.nombre === 'final') && estacionEnCurso) { actualizarEstacionEnCurso(); return; }
       if (r.nombre === 'escanear' || r.nombre === 'unirse') return;
       if (document.querySelector('.modal')) return;
     }
     vista.dataset.ruta = location.hash;
     if (limpiarVista) { try { limpiarVista(); } catch (e) { /* */ } limpiarVista = null; }
     clearInterval(relojId);
+    estacionEnCurso = null;
     const mapaPrevio = forzar ? null : GK.estadoMapa();
     const y = window.scrollY;
     const eq = miEquipo();
@@ -192,7 +197,9 @@
       case 'unirse': pantallaUnirse(r.args[0], r.args[1]); break;
       case 'e': pantallaEstacion(Number(r.args[0]), r.args[1]); break;
       case 'escanear': pantallaEscanear(); break;
-      case 'superada': pantallaSuperada(Number(r.args[0])); break;
+      case 'superada': pantallaSuperada(r.args[0] === 'final' ? 'final' : Number(r.args[0])); break;
+      case 'final': pantallaFinal(); break;
+      case 'meta': pantallaMeta(r.args[0]); break;
       default: if (eq) pantallaRuta(); else pantallaUnirse();
     }
     // Si solo se ha actualizado la misma pantalla, se conserva el scroll y el zoom del mapa.
@@ -209,6 +216,88 @@
   function cabeceraPantalla(ante, titulo, destacado) {
     return `<p class="antetitulo">${GK.html(ante)}</p><h1 class="titulo">${GK.tituloHTML(titulo, destacado)}</h1>`;
   }
+  /** Cómo se dibuja la meta en el mapa: oculta hasta acertar la palabra final. */
+  const estadoMeta = (sit) => (sit.enMeta ? 'hecha' : sit.palabraHecha ? 'siguiente' : null);
+
+  /** Fila de letras de la palabra final: las conseguidas (en el orden en que las consiguieron) y huecos. */
+  function filaLetras(sit) {
+    const conseguidas = GK.letrasConseguidas(sit);
+    const huecos = Math.max(0, sit.total - conseguidas.length);
+    return `<div class="letras-palabra">
+      <p class="antetitulo">Letras de la palabra secreta · ${conseguidas.length}/${sit.total}</p>
+      <div class="letras-fila" aria-label="Letras conseguidas: ${GK.html(conseguidas.join(', ') || 'ninguna')}">${conseguidas.map((l) => `<span class="letra-ficha">${GK.html(l)}</span>`).join('')}${'<span class="letra-ficha hueco"></span>'.repeat(huecos)}</div>
+    </div>`;
+  }
+
+  /**
+   * Botón «Pista» común a todas las pruebas: aparece 60 s después de abrir la prueba por primera vez (antes, un
+   * contador). Sin penalización, una sola pista. Se recuerda en el móvil (por equipo y estación) si ya la vieron.
+   */
+  const ESPERA_PISTA = 60000;
+  function montarPista(caja, clave, texto) {
+    if (!caja) return () => {};
+    if (!texto) { caja.innerHTML = ''; return () => {}; }
+    const todas = GK.leer('pistas', {});
+    if (!todas[clave]) { todas[clave] = { abierta: Date.now() }; GK.guardar('pistas', todas); }
+    let id = null;
+    const pintar = () => {
+      const r = GK.leer('pistas', {})[clave] || { abierta: Date.now() };
+      if (r.vista) {
+        clearInterval(id);
+        caja.innerHTML = `<div class="pista" role="note"><p class="antetitulo">${GK.icono('bombilla')} Pista</p><p>${GK.html(texto)}</p></div>`;
+        return;
+      }
+      const falta = Math.ceil((r.abierta + ESPERA_PISTA - Date.now()) / 1000);
+      if (falta > 0) {
+        const t = `0:${String(falta).padStart(2, '0')}`;
+        const b = caja.querySelector('.pista-espera b');
+        if (b) b.textContent = t;
+        else caja.innerHTML = `<p class="pista-espera">${GK.icono('bombilla')} Pista disponible en <b class="mono">${t}</b></p>`;
+        return;
+      }
+      clearInterval(id);
+      caja.innerHTML = `<button class="boton-sec boton-ancho boton-pista" type="button">${GK.icono('bombilla')} Ver pista</button>`;
+      caja.querySelector('button').onclick = () => {
+        const t2 = GK.leer('pistas', {});
+        t2[clave] = { ...(t2[clave] || {}), vista: true };
+        GK.guardar('pistas', t2);
+        pintar();
+      };
+    };
+    pintar();
+    id = setInterval(pintar, 1000);
+    return () => clearInterval(id);
+  }
+
+  /**
+   * Espera tras un fallo (pruebas de opciones, donde se podría acertar probando al azar): bloquea `boton`
+   * `segundos` con cuenta atrás y un mensaje amable. Devuelve una promesa que se cumple al acabar.
+   */
+  function crearEsperar(cajaAyuda, registrar) {
+    return (segundos, boton) => new Promise((res) => {
+      const texto = boton ? boton.textContent : '';
+      const fin = Date.now() + segundos * 1000;
+      if (boton) boton.disabled = true;
+      let id = null;
+      const tic = () => {
+        const falta = Math.ceil((fin - Date.now()) / 1000);
+        if (falta <= 0 || !cajaAyuda.isConnected) {
+          clearInterval(id);
+          if (boton) { boton.disabled = false; boton.textContent = texto; }
+          if (cajaAyuda.isConnected) cajaAyuda.innerHTML = '';
+          return res();
+        }
+        if (boton) boton.textContent = `Esperad ${falta} s`;
+        const b = cajaAyuda.querySelector('.aviso-espera b');
+        if (b) b.textContent = `${falta} s`;
+        else cajaAyuda.innerHTML = `<div class="aviso aviso-info aviso-espera">${GK.icono('reloj')} <span>Pensadlo un poco: podéis volver a probar en <b class="mono">${falta} s</b>.</span></div>`;
+      };
+      tic();
+      id = setInterval(tic, 250);
+      registrar(() => clearInterval(id));
+    });
+  }
+
   const insignia = (idEst, clase = 'siguiente-num') => `<div class="${clase}" aria-hidden="true">${GK.html(GK.letra(idEst))}</div>`;
 
   /* ---------- Pantalla: unirse a un equipo ---------- */
@@ -291,9 +380,31 @@
     } else if (sit.terminado) {
       tarjeta = `
         <div class="tarjeta tarjeta-final">
-          <p class="antetitulo">Transmisión recibida</p>
-          <p>Habéis completado las <b>${sit.total}</b> estaciones. <b>Id a la meta</b> y avisad a la organización.</p>
+          <p class="antetitulo">Misión completada</p>
+          <p>¡Habéis llegado a la meta en <b class="mono">${GK.formatoTiempo(GK.tiempoJuego(estadoTorneo, sit.ultima))}</b>! Mirad el ranking para ver vuestro puesto.</p>
         </div>`;
+    } else if (sit.completas && !sit.palabraHecha) {
+      tarjeta = `
+        <div class="tarjeta siguiente">
+          <div class="siguiente-num insignia-final" aria-hidden="true">${GK.icono('satelite')}</div>
+          <div class="siguiente-texto">
+            <p class="antetitulo">Paso final</p>
+            <p class="siguiente-nombre">Última transmisión</p>
+            <p class="texto-2">Tenéis las ${sit.total} letras. Ordenadlas para descifrar la palabra secreta.</p>
+          </div>
+        </div>
+        <a class="boton boton-ancho boton-grande" href="#/final">${GK.icono('satelite')} Descifrar la palabra</a>`;
+    } else if (sit.palabraHecha) {
+      tarjeta = `
+        <div class="tarjeta siguiente tarjeta-meta">
+          <div class="siguiente-num insignia-meta" aria-hidden="true">${GK.icono('bandera')}</div>
+          <div class="siguiente-texto">
+            <p class="antetitulo">Siguiente</p>
+            <p class="siguiente-nombre">${GK.html(C.meta.nombre)}</p>
+            <p class="texto-2">Id a la meta y escanead su QR. ¡Ya aparece en el mapa!</p>
+          </div>
+        </div>
+        <a class="boton boton-ancho boton-grande" href="#/escanear">${GK.icono('qr')} Escanear QR de la meta</a>`;
     } else if (!iniciada) {
       tarjeta = `
         <div class="tarjeta tarjeta-espera">
@@ -320,7 +431,7 @@
         <div id="instalar"></div>
         ${cabeceraPantalla(e.nombre, sit.terminado ? 'Misión completada' : 'Vuestra ruta', sit.terminado ? 'completada' : 'ruta')}
         ${sit.ruta ? `<p class="ruta-info"><span class="chip chip-ambar">RUTA ${sit.ruta.id} DE ${C.rutas.length}</span> <span class="mono">≈ ${GK.metros(sit.ruta.metros)}</span>${sit.ruta.id === 1 ? ' <span class="chip chip-verde">LA MÁS CORTA</span>' : ''}</p>` : ''}
-        ${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas })}
+        ${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas, meta: estadoMeta(sit) })}
         <div class="marcadores">
           <div><b>${sit.hechas}</b><span>hechas</span></div>
           <div><b>${sit.total - sit.hechas}</b><span>faltan</span></div>
@@ -334,7 +445,8 @@
         ${tarjeta}
         ${sit.ruta ? `<ol class="ruta-lista" aria-label="Orden de vuestra ruta">
           ${sit.orden.map((s, i) => `<li class="${i < sit.hechas ? 'hecha' : i === sit.hechas ? 'actual' : ''}" title="${GK.html(GK.estacion(s).nombre)}">${GK.html(GK.letra(s))}</li>`).join('')}
-        </ol>` : ''}
+        </ol>
+        ${filaLetras(sit)}` : ''}
         <div class="pie-acciones">
           <button class="boton-sec boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda</button>
           <a class="boton-sec" href="ranking.html">${GK.icono('podio')} Ver ranking</a>
@@ -405,7 +517,9 @@
     if (!estadoTorneo || !estadoTorneo.iniciada) {
       return mensaje(`Estación ${est.letra}`, 'La gymkhana todavía no está en marcha. Esperad la señal de la organización.', 'info');
     }
-    if (sit.terminado) return ir('#/');
+    if (sit.completas) {
+      return mensaje(`Estación ${est.letra}`, 'Ya habéis superado todas las estaciones. ¡Os falta la <b>última transmisión</b>!', 'ok', ['Ir a la última transmisión', '#/final']);
+    }
     const pos = sit.orden.indexOf(est.id);
     const toca = GK.letra(sit.siguiente);
     if (pos > -1 && pos < sit.hechas) {
@@ -426,42 +540,72 @@
         </div>
         <div id="prueba"></div>
         <div id="ayuda-prueba" aria-live="polite"></div>
+        <div id="pista"></div>
         <button class="boton-sec boton-ancho boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda a la organización</button>
         <a class="boton-sec boton-ancho" href="#/">Volver a la ruta</a>
       </section>`;
     $('#ayuda').onclick = pedirAyuda;
     pintarMensaje();
     estacionEnCurso = { id: est.id, equipo: eq.id };
+    const limpiezas = [];
+    const datosPrueba = est.prueba || {};
     const ctx = {
-      estacion: { id: est.id, letra: est.letra, nombre: est.nombre, prueba: est.prueba || {} },
+      estacion: { id: est.id, letra: est.letra, nombre: est.nombre, prueba: datosPrueba, sal: est.sal },
       equipo: { id: eq.id, nombre: GK.equipo(eq.id).nombre },
-      ayuda(texto) { $('#ayuda-prueba').innerHTML = texto ? `<div class="aviso aviso-error">${GK.html(texto)}</div>` : ''; },
-      async intentar(respuesta) {
+      /** ctx.ayuda(texto, tipo?): aviso bajo la prueba. tipo: 'error' (por defecto), 'info' u 'ok'. */
+      ayuda(texto, tipo) {
+        const t = ['info', 'ok'].includes(tipo) ? tipo : 'error';
+        $('#ayuda-prueba').innerHTML = texto ? `<div class="aviso aviso-${t}">${GK.html(texto)}</div>` : '';
+      },
+      /**
+       * Comprueba la respuesta. También valen los sinónimos de privado/secretos.json → «alternativas».
+       * Con { quedarse: true } la estación queda superada (y se envía) pero la app no cambia de pantalla: la prueba
+       * puede enseñar algo más (una explicación, una animación) y después llamar a ctx.continuar().
+       */
+      async intentar(respuesta, opciones) {
         if (!GK.normalizar(respuesta)) return false;
-        const ok = (await GK.huella(respuesta, est.sal)) === est.huella;
-        if (!ok) return false;
-        completar(eq.id, est.id, token, GK.normalizar(respuesta));
+        const h = await GK.huella(respuesta, est.sal);
+        if (h !== est.huella && !(datosPrueba.huellasAlternativas || []).includes(h)) return false;
+        completar(eq.id, est.id, token, GK.normalizar(respuesta), opciones && opciones.quedarse);
         return true;
       },
+      /** Tras un intentar(…, { quedarse: true }): pasa a la pantalla de «estación superada». */
+      continuar() { ir('#/superada/' + est.id); },
+      /** ¿La respuesta coincide con otra huella de la prueba (misma sal que la estación)? Sin superar nada. */
+      async coincide(respuesta, huella) {
+        return !!GK.normalizar(respuesta) && (await GK.huella(respuesta, est.sal)) === huella;
+      },
+      /** ctx.esperar(segundos, boton): espera tras fallo, con cuenta atrás. */
+      esperar: crearEsperar($('#ayuda-prueba'), (f) => limpiezas.push(f)),
     };
+    limpiezas.push(montarPista($('#pista'), `${eq.id}:${est.id}`, datosPrueba.pista));
     const limpiar = prueba.montar($('#prueba'), ctx);
-    limpiarVista = () => { estacionEnCurso = null; if (typeof limpiar === 'function') limpiar(); };
+    limpiarVista = () => {
+      estacionEnCurso = null;
+      limpiezas.forEach((f) => f());
+      if (typeof limpiar === 'function') limpiar();
+    };
   }
   function actualizarEstacionEnCurso() {
     // Si mientras están en la prueba otro móvil del equipo la completa (o la organización la marca), se avanza solo.
-    if (!estacionEnCurso) return;
+    if (!estacionEnCurso || estacionEnCurso.quedarse) return;
     const sit = situacion();
+    if (estacionEnCurso.id === 'final') { if (sit.palabraHecha) ir('#/superada/final'); return; }
     const pos = sit.orden.indexOf(estacionEnCurso.id);
     if (pos > -1 && pos < sit.hechas) ir('#/superada/' + estacionEnCurso.id);
   }
 
-  function completar(idEq, idEst, token, clave) {
+  function completar(idEq, idEst, token, clave, quedarse) {
     const local = progresoLocal(idEq);
     local[idEst] = { t: Date.now() };
     GK.guardar('progreso:' + idEq, local);
+    // Se queda en la prueba (sin repintarla) hasta que la prueba llame a ctx.continuar(). Se marca ANTES de encolar:
+    // el envío puede avisar enseguida de que la estación está hecha (en modo demo es inmediato).
+    if (quedarse && estacionEnCurso) estacionEnCurso.quedarse = true;
     GK.datos.encolar({ tipo: 'completar', equipo: idEq, estacion: idEst, token, clave });
+    if (quedarse) { pintarCabecera(); return; }
     estacionEnCurso = null;
-    ir('#/superada/' + idEst);
+    ir(idEst === 'meta' ? '#/' : '#/superada/' + idEst);
   }
 
   function mensaje(titulo, html, tipo, accion) {
@@ -483,19 +627,146 @@
     if (!eq) return ir('#/');
     const sit = situacion();
     if (!sit.ruta) return ir('#/');
+    if (idEst === 'final') {
+      if (!sit.palabraHecha) return ir('#/');
+      vista.innerHTML = `
+        <section class="pantalla superada">
+          <div class="destello" aria-hidden="true"></div>
+          <p class="antetitulo">Última transmisión · señal descifrada</p>
+          <h1 class="titulo">${GK.tituloHTML('¡Palabra correcta!', 'correcta!')}</h1>
+          <p class="texto-2">La meta ya aparece en vuestro mapa.</p>
+          ${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas, meta: estadoMeta(sit) })}
+          <div class="tarjeta siguiente tarjeta-meta"><div class="siguiente-num insignia-meta" aria-hidden="true">${GK.icono('bandera')}</div>
+            <div class="siguiente-texto"><p class="antetitulo">Ahora id a</p><p class="siguiente-nombre">${GK.html(C.meta.nombre)}</p>
+            <p class="texto-2">Escanead su QR para parar vuestro tiempo.</p></div></div>
+          <a class="boton boton-ancho boton-grande" href="#/escanear">${GK.icono('qr')} Escanear QR de la meta</a>
+          <a class="boton-sec boton-ancho" href="#/">Ver mi ruta</a>
+        </section>`;
+      GK.activarMapa(vista);
+      GK.vibrar([80, 60, 120, 60, 200]);
+      return;
+    }
+    const letra = GK.letraPalabra(idEst);
     vista.innerHTML = `
       <section class="pantalla superada">
         <div class="destello" aria-hidden="true"></div>
         <p class="antetitulo">Estación ${GK.html(GK.letra(idEst))} · señal recibida</p>
-        <h1 class="titulo">${sit.terminado ? GK.tituloHTML('¡Misión completada!', 'completada!') : GK.tituloHTML('¡Estación superada!', 'superada!')}</h1>
-        ${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas })}
-        ${sit.terminado
-          ? `<div class="tarjeta tarjeta-final"><p>Habéis completado las <b>${sit.total}</b> estaciones. <b>Id a la meta</b> y avisad a la organización.</p></div>`
-          : `<div class="tarjeta siguiente">${insignia(sit.siguiente)}<div class="siguiente-texto"><p class="antetitulo">Ahora id a</p><p class="siguiente-nombre">${GK.html(GK.estacion(sit.siguiente).nombre)}</p><p class="texto-2">Lleváis ${sit.hechas} de ${sit.total}. Buscadla en el mapa.</p></div></div>`}
-        <a class="boton boton-ancho" href="#/">Ver mi ruta</a>
+        <h1 class="titulo">${GK.tituloHTML('¡Estación superada!', 'superada!')}</h1>
+        ${letra ? `<div class="letra-ganada">
+          <p>Habéis conseguido la letra</p>
+          <div class="letra-grande">${GK.html(letra)}</div>
+        </div>
+        ${filaLetras(sit)}` : ''}
+        ${sit.completas
+          ? `<div class="tarjeta siguiente"><div class="siguiente-num insignia-final" aria-hidden="true">${GK.icono('satelite')}</div><div class="siguiente-texto"><p class="antetitulo">¡Todas las estaciones!</p><p class="siguiente-nombre">Última transmisión</p><p class="texto-2">Ordenad las ${sit.total} letras para descifrar la palabra secreta.</p></div></div>
+             <a class="boton boton-ancho boton-grande" href="#/final">${GK.icono('satelite')} Descifrar la palabra</a>`
+          : `${GK.mapaRuta({ orden: sit.orden, hechas: sit.hechas })}
+             <div class="tarjeta siguiente">${insignia(sit.siguiente)}<div class="siguiente-texto"><p class="antetitulo">Ahora id a</p><p class="siguiente-nombre">${GK.html(GK.estacion(sit.siguiente).nombre)}</p><p class="texto-2">Lleváis ${sit.hechas} de ${sit.total}. Buscadla en el mapa.</p></div></div>
+             <a class="boton boton-ancho" href="#/">Ver mi ruta</a>`}
       </section>`;
     GK.activarMapa(vista);
     GK.vibrar([80, 60, 120]);
+  }
+
+  /* ---------- Pantalla: Última transmisión (palabra final) ---------- */
+  /** Barajado determinista (siempre igual para el mismo equipo) que nunca deja la palabra ya ordenada. */
+  function barajar(letras, semilla) {
+    const a = [...letras];
+    let x = (semilla * 7919) % 233280;
+    const azar = () => { x = (x * 9301 + 49297) % 233280; return x / 233280; };
+    for (let intento = 0; intento < 5; intento++) {
+      for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(azar() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+      if (a.join('') !== letras.join('')) break;
+    }
+    return a;
+  }
+
+  function pantallaFinal() {
+    const eq = miEquipo();
+    if (!eq) return ir('#/unirse');
+    const sit = situacion();
+    if (!sit.ruta || sit.palabraHecha) return ir('#/');
+    if (!sit.completas) {
+      return mensaje('Última transmisión', `Todavía os faltan estaciones: <b>${sit.faltan.map(GK.letra).join(' · ')}</b>. Cuando las tengáis todas, aquí descifraréis la palabra secreta.`, 'info');
+    }
+    if (!estadoTorneo || !estadoTorneo.iniciada) {
+      return mensaje('Última transmisión', 'La gymkhana está en pausa. Esperad la señal de la organización.', 'info');
+    }
+    const F = C.final;
+    const letras = barajar(GK.letrasConseguidas(sit), eq.id);
+    vista.innerHTML = `
+      <section class="pantalla">
+        <div id="mensaje-org"></div>
+        <div class="estacion-cabecera">
+          <div class="estacion-num insignia-final" aria-hidden="true">${GK.icono('satelite')}</div>
+          <div>${cabeceraPantalla('Paso final', 'Última transmisión', 'transmisión')}</div>
+        </div>
+        <div class="ventana">
+          <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · TRANSMISIÓN FINAL</span></div>
+          <div class="ventana-cuerpo">
+            <p class="terminal">&gt; Señal recibida de las ${sit.total} estaciones.<br>&gt; Las letras llegan <b>desordenadas</b>: ordenadlas para descifrar la palabra secreta.</p>
+            <div class="letras-fila letras-final" aria-label="Letras: ${GK.html(letras.join(', '))}">${letras.map((l) => `<span class="letra-ficha">${GK.html(l)}</span>`).join('')}</div>
+            <form id="form-final" autocomplete="off">
+              <label class="etiqueta" for="palabra-final">La palabra secreta (${F.longitud} letras)</label>
+              <input id="palabra-final" class="campo campo-codigo" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="${'·'.repeat(F.longitud)}" required>
+              <button class="boton boton-ancho" type="submit">Enviar transmisión</button>
+            </form>
+          </div>
+        </div>
+        <div id="ayuda-prueba" aria-live="polite"></div>
+        <div id="pista"></div>
+        <button class="boton-sec boton-ancho boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda a la organización</button>
+        <a class="boton-sec boton-ancho" href="#/">Volver a la ruta</a>
+      </section>`;
+    $('#ayuda').onclick = pedirAyuda;
+    pintarMensaje();
+    estacionEnCurso = { id: 'final', equipo: eq.id };
+    const parar = montarPista($('#pista'), `${eq.id}:final`, F.pista);
+    limpiarVista = () => { estacionEnCurso = null; parar(); };
+    const form = $('#form-final');
+    const campo = $('#palabra-final');
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const boton = form.querySelector('button');
+      const texto = campo.value;
+      if (!GK.normalizar(texto)) return;
+      boton.disabled = true; boton.textContent = 'Descifrando…';
+      const ok = (await GK.huella(texto, F.sal)) === F.huella;
+      if (ok) return completar(eq.id, 'final', F.token, GK.normalizar(texto));
+      boton.disabled = false; boton.textContent = 'Enviar transmisión';
+      campo.select();
+      $('#ayuda-prueba').innerHTML = `<div class="aviso aviso-error">${GK.normalizar(texto).length !== F.longitud
+        ? `Casi: la palabra tiene <b>${F.longitud}</b> letras. Usadlas todas.`
+        : 'Esa no es la palabra. Probad a ordenar las letras de otra forma.'}</div>`;
+    });
+  }
+
+  /* ---------- Pantalla: meta (QR fijo; escanearlo termina la partida del equipo) ---------- */
+  async function pantallaMeta(token) {
+    vista.innerHTML = '<section class="pantalla"><p class="texto-2">Comprobando el QR…</p></section>';
+    if (!token || (await GK.sha256(token)) !== C.meta.token) {
+      return mensaje('QR no válido', 'Este QR no es de ninguna estación de la gymkhana.', 'error');
+    }
+    const eq = miEquipo();
+    if (!eq) {
+      GK.guardar('estacionPendiente', location.hash);
+      return mensaje(C.meta.nombre, 'Antes de nada, uníos a vuestro equipo con la tarjeta.', 'info', ['Unirse a un equipo', '#/unirse']);
+    }
+    const sit = situacion();
+    if (!sit.ruta) return mensaje(C.meta.nombre, 'Todavía no tenéis ruta. Necesitáis conexión un momento para recibirla.', 'info');
+    if (sit.terminado) return ir('#/');
+    if (!sit.palabraHecha) {
+      const falta = !sit.completas
+        ? `os ${sit.faltan.length === 1 ? 'falta la estación' : 'faltan las estaciones'} <b>${sit.faltan.map(GK.letra).join(' · ')}</b> y la última transmisión`
+        : 'os falta descifrar la <b>palabra secreta</b> de la última transmisión';
+      return mensaje('Aún no', `Esta es la meta, pero todavía no podéis terminar: ${falta}.`, 'info',
+        sit.completas ? ['Ir a la última transmisión', '#/final'] : null);
+    }
+    if (!estadoTorneo || !estadoTorneo.iniciada) {
+      return mensaje(C.meta.nombre, 'La gymkhana está en pausa. Esperad la señal de la organización y volved a escanear.', 'info');
+    }
+    GK.vibrar([120, 60, 120, 60, 300]);
+    completar(eq.id, 'meta', token, 'llegada');
   }
 
   /* ---------- Arranque ---------- */

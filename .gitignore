@@ -12,3 +12,13 @@ node_modules/
 
 # Imagen grande que se regenera (se copia a Web_Hackathon a mano)
 generado/mapa_con_estaciones.png
+
+# Resultados de las pruebas automáticas
+pruebas/test-results/
+pruebas/playwright-report/
+
+# Especificación con las respuestas de las pruebas (el repositorio es público)
+PRUEBAS.md
+
+# Registros de la herramienta de navegador usada en las pruebas
+.playwright-mcp/

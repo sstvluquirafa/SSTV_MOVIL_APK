@@ -17,6 +17,9 @@
   .marca circle { fill: #0f172a; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
   .marca path { fill: #fbbf24; }
   .marca.sel circle { stroke: #fb923c; stroke-width: 5; }
+  .marca.meta circle { fill: #064e3b; }
+  .marca.meta path { fill: #34d399; }
+  .lista li.li-meta .l { background: #34d399; color: #022c22; }
   .marca text { font-family: var(--titulo); font-weight: 900; text-anchor: middle; fill: #0f172a; pointer-events: none; }
   .lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
   .lista li { display: grid; grid-template-columns: 36px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 10px; border: 1px solid var(--borde); background: rgba(2, 6, 23, .5); cursor: pointer; }
@@ -35,7 +38,7 @@
   <main class="editor">
     <section>
       <div class="lienzo" id="lienzo"><img id="mapa" alt="Mapa del Parque"><svg id="svg"></svg></div>
-      <p class="ayuda">Selecciona una estación en la lista y <b>haz clic en el mapa</b> para colocarla, o <b>arrástrala</b>. Las letras amarillas son las estaciones; los números negros del mapa son los pabellones del Parque.</p>
+      <p class="ayuda">Selecciona una estación en la lista y <b>haz clic en el mapa</b> para colocarla, o <b>arrástrala</b>. Las letras amarillas son las estaciones; la <b>M verde es la meta</b> (los equipos no la ven hasta acertar la palabra final); los números negros del mapa son los pabellones del Parque.</p>
     </section>
     <aside>
       <div class="tarjeta">
@@ -50,7 +53,7 @@
         <p class="antetitulo">Guardar</p>
         <div class="ayuda"><ol>
           <li>Pulsa <b>Copiar</b>.</li>
-          <li>En <span class="mono">herramientas/torneo.json</span>, sustituye la lista <span class="mono">"estaciones": [ … ]</span> por lo copiado.</li>
+          <li>En <span class="mono">herramientas/torneo.json</span>, sustituye la lista <span class="mono">"estaciones": [ … ]</span> y la línea <span class="mono">"meta": { … }</span> por lo copiado.</li>
           <li>Ejecuta <span class="mono">python herramientas/generar_torneo.py</span>: recalcula las rutas, el mapa de la app y el mapa con las estaciones para los fragmentos SSTV.</li>
         </ol></div>
         <textarea id="salida" readonly></textarea>
@@ -66,6 +69,11 @@
   const LETRAS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let est = C.estaciones.map((e) => ({ id: e.id, letra: e.letra, nombre: e.nombre, x: e.x, y: e.y, prueba: e.prueba }));
   let sel = est.length ? est[0].id : null;
+  // La meta: punto fijo con su propio QR. Se edita como una estación más con id 'meta'.
+  const meta = { id: 'meta', letra: 'M', nombre: (C.meta && C.meta.nombre) || 'Meta', x: C.meta ? C.meta.x : M.ancho / 2, y: C.meta ? C.meta.y : M.alto / 2 };
+  const todos = () => [...est, meta];
+  const buscar = (id) => todos().find((e) => String(e.id) === String(id));
+  const idDe = (v) => (v === 'meta' ? 'meta' : Number(v));
   const $ = (s) => document.querySelector(s);
   const svg = $('#svg');
   $('#mapa').src = '../web/' + M.imagen;
@@ -79,20 +87,25 @@
     return d + 'Z';
   }
   function pintar() {
-    svg.innerHTML = est.map((e) => `<g class="marca${e.id === sel ? ' sel' : ''}" data-id="${e.id}">
+    svg.innerHTML = todos().map((e) => `<g class="marca${e.id === sel ? ' sel' : ''}${e.id === 'meta' ? ' meta' : ''}" data-id="${e.id}">
       <circle cx="${e.x}" cy="${e.y}" r="${R}"/><path d="${estrella(e.x, e.y, R * 0.92)}"/>
       <text x="${e.x}" y="${e.y}" dy=".36em" style="font-size:${R}px">${esc(e.letra)}</text></g>`).join('');
-    $('#lista').innerHTML = est.map((e) => `<li class="${e.id === sel ? 'sel' : ''}" data-id="${e.id}">
+    $('#lista').innerHTML = todos().map((e) => `<li class="${e.id === sel ? 'sel' : ''}${e.id === 'meta' ? ' li-meta' : ''}" data-id="${e.id}">
       <span class="l">${esc(e.letra)}</span>
-      <span><input value="${esc(e.nombre)}" data-nombre="${e.id}" aria-label="Nombre de la estación ${esc(e.letra)}"><span class="xy">x ${Math.round(e.x)} · y ${Math.round(e.y)}</span></span>
+      <span><input value="${esc(e.nombre)}" data-nombre="${e.id}" aria-label="Nombre de ${e.id === 'meta' ? 'la meta' : 'la estación ' + esc(e.letra)}"><span class="xy">x ${Math.round(e.x)} · y ${Math.round(e.y)}</span></span>
       <span></span></li>`).join('');
-    $('#lista').querySelectorAll('li').forEach((li) => li.addEventListener('click', (ev) => { if (ev.target.tagName !== 'INPUT') { sel = Number(li.dataset.id); pintar(); } }));
-    $('#lista').querySelectorAll('[data-nombre]').forEach((i) => i.addEventListener('input', () => { est.find((e) => e.id === Number(i.dataset.nombre)).nombre = i.value; salida(); }));
+    $('#lista').querySelectorAll('li').forEach((li) => li.addEventListener('click', (ev) => {
+      sel = idDe(li.dataset.id);
+      // Al pinchar en el nombre también se selecciona, sin repintar (se perdería el foco del campo)
+      if (ev.target.tagName !== 'INPUT') return pintar();
+      document.querySelectorAll('[data-id]').forEach((n) => n.classList.toggle('sel', n.dataset.id === String(sel)));
+    }));
+    $('#lista').querySelectorAll('[data-nombre]').forEach((i) => i.addEventListener('input', () => { buscar(i.dataset.nombre).nombre = i.value; salida(); }));
     salida();
   }
   function salida() {
     const filas = est.map((e) => `    { "id": ${e.id}, "letra": ${JSON.stringify(e.letra)}, "nombre": ${JSON.stringify(e.nombre)}, "x": ${Math.round(e.x)}, "y": ${Math.round(e.y)}, "prueba": ${JSON.stringify(e.prueba || { tipo: 'codigo_estacion' })} }`);
-    $('#salida').value = `"estaciones": [\n${filas.join(',\n')}\n  ],`;
+    $('#salida').value = `"estaciones": [\n${filas.join(',\n')}\n  ],\n\n  "meta": { "nombre": ${JSON.stringify(meta.nombre)}, "x": ${Math.round(meta.x)}, "y": ${Math.round(meta.y)} },`;
     $('#estado').textContent = `${est.length} ESTACIONES`;
   }
   function punto(ev) {
@@ -102,15 +115,15 @@
   let arrastre = null;
   svg.addEventListener('pointerdown', (ev) => {
     const g = ev.target.closest('.marca');
-    if (g) { sel = Number(g.dataset.id); arrastre = sel; svg.setPointerCapture(ev.pointerId); pintar(); return; }
-    const e = est.find((x) => x.id === sel);
+    if (g) { sel = idDe(g.dataset.id); arrastre = sel; svg.setPointerCapture(ev.pointerId); pintar(); return; }
+    const e = buscar(sel);
     if (!e) return;
     Object.assign(e, punto(ev));
     pintar();
   });
   svg.addEventListener('pointermove', (ev) => {
     if (arrastre == null) return;
-    Object.assign(est.find((x) => x.id === arrastre), punto(ev));
+    Object.assign(buscar(arrastre), punto(ev));
     pintar();
   });
   svg.addEventListener('pointerup', () => { arrastre = null; });
@@ -122,7 +135,7 @@
     pintar();
   };
   $('#quitar').onclick = () => {
-    if (!sel) return;
+    if (!sel || sel === 'meta') return;
     est = est.filter((e) => e.id !== sel);
     sel = est.length ? est[est.length - 1].id : null;
     pintar();

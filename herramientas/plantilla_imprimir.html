@@ -32,6 +32,32 @@
   .cartel .qr { width: 118mm; height: 118mm; margin: 6mm 0; padding: 4mm; border: 1.2mm solid var(--marino); border-radius: 6mm; }
   .cartel .qr svg { width: 100%; height: 100%; display: block; }
   .cartel p { font-size: 15pt; margin: 2mm 0; }
+  .cartel-meta .cartel-num { background: radial-gradient(circle at 35% 30%, #a7f3d0, #34d399 45%, #059669); color: #022c22; }
+  /* Carteles de prueba (papel) */
+  .cartel-prueba .cartel-num { width: 34mm; height: 34mm; font-size: 42pt; }
+  .cartel-prueba h1 { font-size: 26pt; margin: 5mm 0 1mm; }
+  .cartel-prueba .instr { font-size: 14pt; max-width: 160mm; margin: 2mm 0 6mm; }
+  .cartel-prueba .instr b { color: var(--naranja); }
+  .morse-cartel { align-self: stretch; border: 1.2mm solid var(--marino); border-radius: 6mm; padding: 8mm 6mm; display: grid; gap: 6mm; }
+  .morse-cartel div { display: flex; flex-wrap: wrap; justify-content: center; gap: 2mm 9mm; font-size: 24pt; font-weight: 700; line-height: 1.1; }
+  .morse-cartel span { white-space: nowrap; letter-spacing: .06em; }
+  .leyenda { font-size: 11pt !important; color: #475569; margin-top: 4mm !important; }
+  table.coord { border-collapse: collapse; font-size: 14pt; margin: 0 auto; min-width: 120mm; }
+  table.coord td { border-bottom: .3mm solid #cbd5e1; padding: 1.3mm 5mm; text-align: left; }
+  table.coord td:first-child { font-weight: 700; color: var(--naranja); white-space: nowrap; }
+  table.coord td.mono { font-size: 15pt; letter-spacing: .08em; }
+  .bombillas { display: grid; gap: 5mm; margin: 4mm 0 8mm; }
+  .bombillas .fila-b { display: flex; gap: 7mm; justify-content: center; }
+  .bombillas span { width: 22mm; height: 22mm; border-radius: 50%; border: 1.2mm solid var(--marino); background: #f1f5f9; }
+  .bombillas span.on { background: radial-gradient(circle at 40% 35%, #fff7d6, #fde047 45%, #f59e0b); }
+  .escondite { align-self: stretch; border: 1.2mm dashed var(--marino); border-radius: 6mm; padding: 14mm 10mm; font-size: 24pt; font-weight: 700; margin: 6mm 0; }
+  /* Etiquetas de QR escondido: 6 por hoja, sin pistas de qué son */
+  .qr-esc { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 92mm; padding: 8mm; }
+  .qr-esc > div { border: .4mm dashed #94a3b8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3mm; }
+  .qr-esc .qr { width: 62mm; height: 62mm; }
+  .qr-esc .qr svg { width: 100%; height: 100%; display: block; }
+  .qr-esc p { margin: 0; font-size: 10pt; letter-spacing: .15em; font-weight: 700; }
+  .qr-esc small { font-size: 7pt; color: #94a3b8; }
   .cartel .pie { position: absolute; bottom: 8mm; left: 0; right: 0; font-size: 8pt; color: #64748b; }
 
   /* Tarjetas de equipo: 4 por hoja */
@@ -74,7 +100,7 @@
     .barra { display: none; }
     .hoja { margin: 0; box-shadow: none; page-break-after: always; break-after: page; height: 297mm; min-height: 0; }
     .hoja:last-child { page-break-after: auto; break-after: auto; }
-    body.solo-carteles .hoja:not(.cartel), body.solo-etiquetas .hoja:not(.hoja-etiquetas), body.solo-tarjetas .hoja:not(.hoja-tarjetas), body.solo-monitores .hoja:not(.monitores) { display: none; }
+    body.solo-carteles .hoja:not(.cartel-estacion), body.solo-etiquetas .hoja:not(.hoja-etiquetas), body.solo-tarjetas .hoja:not(.hoja-tarjetas), body.solo-monitores .hoja:not(.monitores), body.solo-meta .hoja:not(.cartel-meta), body.solo-pruebas .hoja:not(.cartel-prueba), body.solo-qr-escondido .hoja:not(.hoja-qr) { display: none; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
@@ -83,6 +109,9 @@
   <div class="barra">
     <b>Imprimibles de la gymkhana</b>
     <button data-solo="carteles">Imprimir carteles</button>
+    <button data-solo="pruebas">Imprimir carteles de prueba</button>
+    <button data-solo="qr-escondido">Imprimir QR escondidos</button>
+    <button data-solo="meta">Imprimir cartel de la meta</button>
     <button data-solo="tarjetas">Imprimir tarjetas</button>
     <button data-solo="etiquetas">Imprimir etiquetas de código</button>
     <button data-solo="monitores">Imprimir hoja de organización</button>
@@ -106,7 +135,7 @@ const tituloHTML = esc(D.titulo).replace(esc(D.tituloDestacado), `<span class="a
 let html = '';
 
 for (const e of D.estaciones) {
-  html += `<section class="hoja cartel">
+  html += `<section class="hoja cartel cartel-estacion">
     <div class="cartel-cab"><span class="mono">GRANASAT · ESTACIÓN</span><span class="titulo">${tituloHTML}</span></div>
     <div class="cartel-num">${esc(e.letra)}</div>
     <h1 class="titulo">${esc(e.nombre)}</h1>
@@ -116,6 +145,54 @@ for (const e of D.estaciones) {
     ${e.tipo === 'codigo_estacion' ? '<p style="font-size:12pt;color:#475569">Después, buscad la etiqueta con el código escondida cerca.</p>' : ''}
     <div class="pie">${esc(D.lugar)}</div>
   </section>`;
+}
+
+// Cartel de la meta (A4, QR grande). Escanearlo termina la partida del equipo, si ya han acertado la palabra final.
+html += `<section class="hoja cartel cartel-meta">
+  <div class="cartel-cab"><span class="mono">GRANASAT · META</span><span class="titulo">${tituloHTML}</span></div>
+  <div class="cartel-num">🏁</div>
+  <h1 class="titulo">${esc(D.meta.nombre)}</h1>
+  <div class="qr">${qr(D.meta.url)}</div>
+  <p><b>Escanead este QR</b> con la app de la gymkhana</p>
+  <p>para terminar la misión y parar vuestro tiempo</p>
+  <div class="pie">${esc(D.lugar)}</div>
+</section>`;
+
+// Carteles de las pruebas en papel (el contenido sale de torneo.json → prueba.cartel / prueba.escondite)
+const dibujarMorse = (t) => String(t).replace(/\./g, '•').replace(/-/g, '–');
+const cabPrueba = (e, que) => `<div class="cartel-cab"><span class="mono">GRANASAT · PRUEBA · ${que}</span><span class="titulo">${tituloHTML}</span></div>
+  <div class="cartel-num">${esc(e.letra)}</div><h1 class="titulo">${esc(e.nombre)}</h1>`;
+for (const e of D.estaciones) {
+  const P = e.prueba || {};
+  let cuerpo = '';
+  if (e.tipo === 'morse') {
+    cuerpo = `${cabPrueba(e, 'MORSE')}
+      <p class="instr">Esta pregunta está en <b>código Morse</b>. Descifradla con la tabla de la app y escribid en la app la <b>respuesta</b> a la pregunta.</p>
+      <div class="morse-cartel mono">${String(P.cartel || '').split('/').map((w) => `<div>${w.trim().split(/\s+/).map((l) => `<span>${esc(dibujarMorse(l))}</span>`).join('')}</div>`).join('')}</div>
+      <p class="leyenda">• = punto (corto) · – = raya (largo) · letras separadas por espacios · cada línea es una palabra</p>`;
+  } else if (e.tipo === 'sstv_mano') {
+    const filas = P.cartel || [];
+    cuerpo = `${cabPrueba(e, 'SSTV A MANO')}
+      <p class="instr">Una imagen SSTV viaja <b>línea a línea</b>. En la app, pintad en cada fila las casillas que dice esta tabla (de arriba abajo). <b>¿Qué aparece?</b></p>
+      <table class="coord"><tbody>${filas.map((f, i) => `<tr><td>Fila ${i + 1}</td><td class="mono">${f && f.length ? f.join(', ') : '— (ninguna)'}</td></tr>`).join('')}</tbody></table>
+      <p class="leyenda">La cuadrícula tiene ${esc(P.columnas || 11)} casillas de ancho y ${esc(P.filas || filas.length)} filas.</p>`;
+  } else if (e.tipo === 'binario') {
+    cuerpo = `${cabPrueba(e, 'BINARIO')}
+      <p class="instr">Cada fila es un <b>número en binario</b>: bombilla encendida = 1, apagada = 0. Cada número es una letra: <b>A=1, B=2 … Z=26</b>. ¿Qué palabra forman?</p>
+      <div class="bombillas">${(P.cartel || []).map((f) => `<div class="fila-b">${String(f).split('').map((b) => `<span class="${b === '1' ? 'on' : ''}"></span>`).join('')}</div>`).join('')}</div>
+      <p class="leyenda">Escribid la palabra en la app.</p>`;
+  } else if (e.tipo === 'qr_escondido') {
+    cuerpo = `${cabPrueba(e, 'QR ESCONDIDO')}
+      <p class="instr">Cerca de aquí hay un <b>QR escondido</b>. Encontradlo y escaneadlo <b>desde la app</b> (botón «Escanear QR escondido»).</p>
+      <div class="escondite">${esc(P.escondite || '')}</div>`;
+  } else continue;
+  html += `<section class="hoja cartel cartel-prueba">${cuerpo}<div class="pie">${esc(D.lugar)}</div></section>`;
+}
+const conQR = D.estaciones.filter((e) => e.tipo === 'qr_escondido' && e.qr);
+for (let i = 0; i < conQR.length; i += 6) {
+  html += '<section class="hoja hoja-qr"><div class="qr-esc">';
+  for (const e of conQR.slice(i, i + 6)) html += `<div><div class="qr">${qr(e.qr)}</div><p>GRANASAT · GYMKHANA</p></div>`;
+  html += '</div></section>';
 }
 
 const conEtiqueta = D.estaciones.filter((e) => e.tipo === 'codigo_estacion');
@@ -155,8 +232,10 @@ html += `<section class="hoja monitores">
       <b class="mono">${esc(D.ntfyTema)}</b> (o escanead este QR). Os llegará un aviso cuando un equipo pulse «Pedir ayuda»
       o lleve demasiado rato sin completar una estación.</div>
   </div>
-  <table><thead><tr><th>ESTACIÓN</th><th>NOMBRE</th><th>PRUEBA</th><th>CÓDIGO / CLAVE</th></tr></thead><tbody>
-  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${esc(e.clave)}</td></tr>`).join('')}
+  <table><thead><tr><th>ESTACIÓN</th><th>NOMBRE</th><th>PRUEBA</th><th>CÓDIGO / CLAVE</th><th>LETRA</th></tr></thead><tbody>
+  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${esc(e.clave)}${e.alternativas && e.alternativas.length ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(e.alternativas.join(', '))}</small>` : ''}</td><td class="mono">${esc(e.letraPalabra)}</td></tr>`).join('')}
+  <tr><td><b>★</b></td><td>Última transmisión</td><td>palabra final</td><td class="mono">${esc(D.final.clave)}</td><td></td></tr>
+  <tr><td><b>🏁</b></td><td>${esc(D.meta.nombre)}</td><td>QR de la meta</td><td class="mono" style="font-size:9pt;letter-spacing:0">${esc(D.meta.token)}</td><td></td></tr>
   </tbody></table>
   <table><thead><tr><th>EQUIPO</th><th>CÓDIGO</th><th>RUTA (por orden de llegada)</th><th>RECORRIDO</th></tr></thead><tbody>
   ${D.equipos.map((e) => `<tr><td><b>${esc(e.nombre)}</b></td><td class="mono">${esc(e.codigo)}</td><td></td><td></td></tr>`).join('')}

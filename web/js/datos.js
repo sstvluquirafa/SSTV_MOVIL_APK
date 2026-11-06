@@ -14,7 +14,18 @@
   const GK = window.GK;
   const C = window.GK_CONFIG;
   const FB = C.firebase || {};
-  const MODO = FB.databaseURL && FB.apiKey ? 'firebase' : 'demo';
+  /*
+   * Para probar en local con Firebase configurado: abrir la app con «?demo=1» en localhost fuerza el modo demo
+   * (se recuerda en este navegador para ranking y panel; «?demo=0» lo quita). En la web publicada no tiene efecto.
+   */
+  const enLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  {
+    const q = new URLSearchParams(location.search).get('demo');
+    if (enLocal && q === '1') GK.guardar('forzarDemo', true);
+    if (q === '0') GK.borrar('forzarDemo');
+  }
+  const forzarDemo = enLocal && GK.leer('forzarDemo', false);
+  const MODO = FB.databaseURL && FB.apiKey && !forzarDemo ? 'firebase' : 'demo';
   const URL_BD = (FB.databaseURL || '').replace(/\/+$/, '');
 
   const oyentesEstado = new Set();
@@ -297,9 +308,12 @@
         const p = (bd.vivo.progreso[op.equipo] = bd.vivo.progreso[op.equipo] || {});
         if (p[op.estacion]) return; // ya estaba (otro móvil del equipo)
         if (!bd.vivo.estado.iniciada) throw errorHttp(403, 'La gymkhana no ha empezado');
-        const ruta = GK.equipo(op.equipo).ruta;
-        const i = ruta.indexOf(Number(op.estacion));
-        if (i < 0 || (i > 0 && !p[ruta[i - 1]])) throw errorHttp(403, 'Fuera de orden');
+        // Mismo orden que las reglas del servidor: estaciones de su ruta, palabra final y meta.
+        const r = GK.rutaDeEquipo(op.equipo);
+        if (!r) throw errorHttp(403, 'Sin ruta');
+        const pasos = [...r.orden.map(String), 'final', 'meta'];
+        const i = pasos.indexOf(String(op.estacion));
+        if (i < 0 || (i > 0 && !p[pasos[i - 1]])) throw errorHttp(403, 'Fuera de orden');
         p[op.estacion] = { t: Date.now() };
       }
       demo.escribir(bd);
@@ -481,6 +495,11 @@
     resolverAyuda: (equipo, id) => escribirAdmin({ [`vivo/ayudas/${equipo}/${id}/resuelta`]: true }),
     mensaje: (equipo, texto) => escribirAdmin({ [`vivo/mensajes/${equipo}`]: texto ? { texto, t: SELLO } : null }),
     marcar: (equipo, estacion) => escribirAdmin({ [`vivo/progreso/${equipo}/${estacion}`]: { t: SELLO, manual: true } }),
+    /** Llegada a la meta a mano: también la palabra final si faltaba (las dos con la hora del servidor). */
+    marcarMeta: (equipo, conPalabra) => escribirAdmin({
+      ...(conPalabra ? { [`vivo/progreso/${equipo}/final`]: { t: SELLO, manual: true } } : {}),
+      [`vivo/progreso/${equipo}/meta`]: { t: SELLO, manual: true },
+    }),
     desmarcar: (equipo, estacion) => escribirAdmin({ [`vivo/progreso/${equipo}/${estacion}`]: null, [`pruebas/${equipo}/${estacion}`]: null }),
     // Reiniciar empieza una «ronda» nueva: los móviles se desvinculan y los equipos vuelven a unirse con su
     // tarjeta, así el orden de llegada (y el reparto de rutas) vuelve a empezar.

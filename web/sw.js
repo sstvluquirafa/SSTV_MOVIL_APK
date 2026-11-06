@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v8';
+const VERSION = 'gk-v12';
 const ARCHIVOS = [
   './',
   'index.html',
@@ -24,6 +24,23 @@ const ARCHIVOS = [
   'js/inicio.js',
   'js/pruebas/registro.js',
   'js/pruebas/codigo_estacion.js',
+  'js/pruebas/morse.js',
+  'js/pruebas/sstv_mano.js',
+  'js/pruebas/binario.js',
+  'js/pruebas/qr_escondido.js',
+  'js/pruebas/wordle.js',
+  'js/pruebas/geoguessr.js',
+  'js/pruebas/real_o_ia.js',
+  'js/pruebas/caja_fuerte.js',
+  'js/pruebas/hackeo.js',
+  'js/pruebas/bulo_verdad.js',
+  'assets/img/pruebas/geo1.svg',
+  'assets/img/pruebas/geo2.svg',
+  'assets/img/pruebas/geo3.svg',
+  'assets/img/pruebas/ia1.svg',
+  'assets/img/pruebas/ia2.svg',
+  'assets/img/pruebas/ia3.svg',
+  'assets/img/pruebas/ia4.svg',
   'js/mapa.js',
   'js/instalar.js',
   'assets/img/icono-maskable-512.png',

@@ -18,6 +18,7 @@ Crea o actualiza:
 La carpeta privado/ NO se sube a GitHub (.gitignore). Solo necesita la biblioteca estándar de Python;
 con Pillow instalado (pip install pillow) genera además las imágenes del mapa.
 """
+import base64
 import hashlib
 import json
 import math
@@ -54,6 +55,78 @@ def huella(texto: str, sal: str) -> str:
 
 def sha256(texto: str) -> str:
     return hashlib.sha256(texto.encode()).hexdigest()
+
+
+# La palabra final y la meta se registran como dos «estaciones» más al final de cada ruta (claves «final» y «meta»).
+# El token de la palabra es fijo (no hay QR: lo que protege es la palabra) y la clave de la meta también (lo que
+# protege es el token de su QR).
+TOKEN_FINAL = "palabra"
+CLAVE_META = "llegada"
+
+
+def ofuscar(texto: str, sal_hex: str) -> str:
+    """XOR con la sal (repetida) y base64. Igual que GK.desofuscar en web/js/util.js."""
+    k = bytes.fromhex(sal_hex)
+    b = texto.encode("utf-8")
+    return base64.b64encode(bytes(x ^ k[i % len(k)] for i, x in enumerate(b))).decode()
+
+
+def cifrar(texto: str, clave: str, sal_hex: str) -> str:
+    """Cifra con una clave derivada de la respuesta (SHA-256 en modo contador). Igual que GK.descifrar en util.js:
+    k = SHA-256(«gk-explicacion:» + respuesta normalizada + «:» + sal); bloque i = SHA-256(k + i en 4 bytes)."""
+    k = hashlib.sha256(f"gk-explicacion:{normalizar(clave)}:{sal_hex}".encode()).digest()
+    b = texto.encode("utf-8")
+    flujo = b"".join(hashlib.sha256(k + i.to_bytes(4, "big")).digest() for i in range(len(b) // 32 + 1))
+    return base64.b64encode(bytes(x ^ flujo[i] for i, x in enumerate(b))).decode()
+
+
+def es_codigo_azar(clave) -> bool:
+    """¿Parece un código generado al azar (6 caracteres del alfabeto de códigos) y no una respuesta escrita a mano?"""
+    return isinstance(clave, str) and len(clave) == 6 and all(c in ALFABETO for c in clave)
+
+
+MORSE = {
+    ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E", "..-.": "F", "--.": "G", "....": "H", "..": "I",
+    ".---": "J", "-.-": "K", ".-..": "L", "--": "M", "-.": "N", "---": "O", ".--.": "P", "--.-": "Q", ".-.": "R",
+    "...": "S", "-": "T", "..-": "U", "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y", "--..": "Z",
+    "-----": "0", ".----": "1", "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6",
+    "--...": "7", "---..": "8", "----.": "9", "--.--": "Ñ",
+}
+
+
+def descifrar_morse(texto: str) -> str:
+    """«-. --- / -.. .» → «NO DE». Letras separadas por espacios y palabras por « / »."""
+    palabras = []
+    for p in str(texto).split("/"):
+        letras = [MORSE.get(c.strip(), "?") for c in p.split() if c.strip()]
+        palabras.append("".join(letras))
+    return " ".join(w for w in palabras if w)
+
+
+def prueba_publica(e, s):
+    """Opciones públicas de la prueba de una estación (torneo.json → prueba) más lo que se calcula a partir de los
+    secretos sin revelarlos: huellas de las respuestas alternativas (sinónimos que también valen) y, en el Morse, la
+    huella de la pregunta (para avisar si escriben la pregunta en vez de la respuesta)."""
+    p = dict(e.get("prueba") or {"tipo": "codigo_estacion"})
+    alternativas = [normalizar(a) for a in s.get("alternativas", []) if normalizar(a)]
+    if alternativas:
+        p["huellasAlternativas"] = [huella(a, s["sal"]) for a in alternativas]
+    if p.get("tipo") == "wordle":
+        # EXCEPCIÓN DOCUMENTADA: para colorear las letras, el móvil necesita la palabra. Va ofuscada (XOR con una sal
+        # pública + base64): no se lee a simple vista, pero alguien muy experto podría sacarla.
+        sal_w = hashlib.sha256(("wordle:" + s["sal"]).encode()).hexdigest()[:16]
+        p["salPalabra"] = sal_w
+        p["palabra"] = ofuscar(str(s["clave"]).upper(), sal_w)
+    # Explicaciones que se enseñan al acertar (¿Bulo o verdad?, ¿Real o IA?): viven en privado/secretos.json y se
+    # publican cifradas con la respuesta, así que solo se pueden leer después de acertar.
+    if s.get("explicaciones") is not None:
+        p["explicacionesCifradas"] = cifrar(json.dumps(s["explicaciones"], ensure_ascii=False), s["clave"], s["sal"])
+    if p.get("tipo") == "morse" and p.get("cartel"):
+        pregunta = descifrar_morse(p["cartel"])
+        if "?" in pregunta:
+            print(f"  · OJO: el Morse de la estación {e['letra']} tiene símbolos que no conozco: «{pregunta}»")
+        p["huellaPregunta"] = huella(pregunta, s["sal"])
+    return p
 
 
 # ---------------------------------------------------------------------------------------------
@@ -191,6 +264,10 @@ def generar_mapas(torneo):
 
 # ---------------------------------------------------------------------------------------------
 def main():
+    try:  # la consola de Windows no siempre entiende «≈» o «·»
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
     rotar = "--rotar" in sys.argv
     torneo = json.loads((RAIZ / "herramientas" / "torneo.json").read_text(encoding="utf-8"))
     est = torneo["estaciones"]
@@ -203,7 +280,10 @@ def main():
 
     PRIVADO.mkdir(exist_ok=True)
     ruta_sec = PRIVADO / "secretos.json"
-    previo = {} if rotar or not ruta_sec.exists() else json.loads(ruta_sec.read_text(encoding="utf-8"))
+    todo_previo = json.loads(ruta_sec.read_text(encoding="utf-8")) if ruta_sec.exists() else {}
+    # Con --rotar se renuevan códigos, tokens, sales y tema de avisos, pero NO las respuestas de las pruebas
+    # (las claves de las pruebas y la palabra final): esas las escribís vosotros y se conservan siempre.
+    previo = {} if rotar else todo_previo
 
     sec = {
         "organizacion": previo.get("organizacion") or {"codigo": codigo(8), "sal": secrets.token_hex(16)},
@@ -213,16 +293,60 @@ def main():
     }
     for k in range(1, n_eq + 1):
         sec["equipos"][str(k)] = previo.get("equipos", {}).get(str(k)) or {"codigo": codigo(), "sal": secrets.token_hex(16)}
+    claves_azar = []
     for e in est:
+        tipo = (e.get("prueba") or {}).get("tipo", "codigo_estacion")
+        siempre = todo_previo.get("estaciones", {}).get(str(e["id"])) or {}  # respuestas y sinónimos
         p = previo.get("estaciones", {}).get(str(e["id"])) or {}
-        sec["estaciones"][str(e["id"])] = {
+        s = {
+            **siempre,  # se conservan los campos extra (por ejemplo «alternativas»)
             "token": p.get("token") or secrets.token_urlsafe(12),
-            # Clave que da la prueba al superarla. Para «codigo_estacion» es el código escondido en la estación.
-            # Si una prueba necesita otra respuesta, cámbiala aquí y vuelve a ejecutar el script.
-            "clave": p.get("clave") or codigo(),
             "sal": p.get("sal") or secrets.token_hex(16),
         }
+        if tipo == "codigo_estacion":
+            # El código de la etiqueta escondida en la estación (prueba de relleno)
+            s["clave"] = p.get("clave") or codigo()
+        elif tipo == "qr_escondido":
+            # El QR escondido lleva este texto; la clave es el propio texto
+            s["qr"] = p.get("qr") or ("GK-QR-" + codigo())
+            s["clave"] = s["qr"]
+        else:
+            # Respuesta de la prueba: la escribís vosotros en privado/secretos.json («clave»)
+            s["clave"] = siempre.get("clave") or codigo()
+            if siempre.get("clave") is None or es_codigo_azar(s["clave"]):
+                claves_azar.append(f"{e['letra']} ({tipo})")
+        sec["estaciones"][str(e["id"])] = s
+
+    # ---------- palabra final y meta ----------
+    pf = torneo.get("palabra_final") or {}
+    palabra = pf.get("palabra") or ""
+    if not normalizar(palabra):
+        sys.exit("ERROR: falta palabra_final.palabra en torneo.json")
+    ids_por_id = sorted(ids)
+    letras_cfg = {str(k): v for k, v in (pf.get("letras") or {}).items()}
+    # Letra de cada estación: la de torneo.json o, si falta, la de la palabra en orden de id.
+    letras_palabra = {}
+    for i, sid in enumerate(ids_por_id):
+        letras_palabra[str(sid)] = str(letras_cfg.get(str(sid)) or (palabra[i] if i < len(palabra) else "?")).upper()
+    if sorted(normalizar("".join(letras_palabra.values()))) != sorted(normalizar(palabra)):
+        print(f"  · OJO: las letras de las estaciones ({''.join(letras_palabra.values())}) no forman la palabra «{palabra}».")
+    pf_prev = previo.get("final") or {}
+    sec["final"] = {
+        # La respuesta de la «Última transmisión». Si cambias la palabra en torneo.json, cámbiala también aquí.
+        "clave": (todo_previo.get("final") or {}).get("clave") or normalizar(palabra),
+        "sal": pf_prev.get("sal") or secrets.token_hex(16),
+    }
+    if normalizar(sec["final"]["clave"]) != normalizar(palabra):
+        print(f"  · OJO: la clave final de privado/secretos.json («{sec['final']['clave']}») no coincide con "
+              f"palabra_final.palabra de torneo.json («{palabra}»). Vale la de secretos.json.")
+    meta_cfg = torneo.get("meta") or {}
+    meta_cfg = {"nombre": meta_cfg.get("nombre", "Meta"),
+                "x": meta_cfg.get("x", torneo["mapa"]["ancho"] / 2), "y": meta_cfg.get("y", torneo["mapa"]["alto"] / 2)}
+    sec["meta"] = {"token": (previo.get("meta") or {}).get("token") or secrets.token_urlsafe(12)}
     ruta_sec.write_text(json.dumps(sec, ensure_ascii=False, indent=2), encoding="utf-8")
+    if claves_azar:
+        print("  · OJO: estas estaciones tienen una prueba con respuesta pero su «clave» en privado/secretos.json sigue "
+              "siendo un código al azar: " + ", ".join(claves_azar) + ". Escribid la respuesta y volved a ejecutar el script.")
 
     # ---------- rutas ----------
     mpp = float(torneo["mapa"].get("metros_por_pixel", 0.12))
@@ -265,12 +389,19 @@ def main():
         "rutas": [{"id": i + 1, "orden": r, "metros": metros[i]} for i, r in enumerate(rutas)],
         "estaciones": [
             {"id": e["id"], "letra": e["letra"], "nombre": e.get("nombre", f"Estación {e['letra']}"), "x": e["x"], "y": e["y"],
-             "prueba": e.get("prueba", {"tipo": "codigo_estacion"}),
+             "prueba": prueba_publica(e, sec["estaciones"][str(e["id"])]),
+             "letraPalabra": letras_palabra[str(e["id"])],
              "token": sha256(sec["estaciones"][str(e["id"])]["token"]),
              "sal": sec["estaciones"][str(e["id"])]["sal"],
              "huella": huella(sec["estaciones"][str(e["id"])]["clave"], sec["estaciones"][str(e["id"])]["sal"])}
             for e in est
         ],
+        # Palabra final: solo su huella (las letras sí son públicas: se ven en la app al superar cada estación).
+        "final": {"longitud": len(normalizar(sec["final"]["clave"])), "pista": pf.get("pista", ""),
+                  "sal": sec["final"]["sal"], "huella": huella(sec["final"]["clave"], sec["final"]["sal"]),
+                  "token": TOKEN_FINAL},
+        # Meta: posición y huella del token de su QR.
+        "meta": {**meta_cfg, "token": sha256(sec["meta"]["token"])},
     }
     (WEB / "js" / "config.js").write_text(
         "// GENERADO por herramientas/generar_torneo.py a partir de herramientas/torneo.json. No lo edites a mano.\n"
@@ -283,11 +414,20 @@ def main():
     secretos_fb = {
         "organizacion": normalizar(sec["organizacion"]["codigo"]),
         "equipos": {k: normalizar(v["codigo"]) for k, v in sec["equipos"].items()},
-        "estaciones": {k: {"token": v["token"], "clave": normalizar(v["clave"])} for k, v in sec["estaciones"].items()},
+        "estaciones": {k: {"token": v["token"], "clave": normalizar(v["clave"]),
+                           # Sinónimos que también se aceptan (las reglas los miran en «alternativas»)
+                           **({"alternativas": {normalizar(a): True for a in v["alternativas"] if normalizar(a)}}
+                              if v.get("alternativas") else {})}
+                       for k, v in sec["estaciones"].items()},
     }
+    secretos_fb["estaciones"]["final"] = {"token": TOKEN_FINAL, "clave": normalizar(sec["final"]["clave"])}
+    secretos_fb["estaciones"]["meta"] = {"token": sec["meta"]["token"], "clave": CLAVE_META}
     rutas_fb = {}
     for i, r in enumerate(rutas):
         rutas_fb[str(i + 1)] = {str(s): {"anterior": "inicio" if j == 0 else str(r[j - 1]), "paso": j + 1} for j, s in enumerate(r)}
+        # Dos pasos más al final de cada ruta: la palabra final (tras la última estación) y la meta (tras la palabra)
+        rutas_fb[str(i + 1)]["final"] = {"anterior": str(r[-1]), "paso": len(r) + 1}
+        rutas_fb[str(i + 1)]["meta"] = {"anterior": "final", "paso": len(r) + 2}
     importar = {
         "vivo": {"estado": {"iniciada": False}},
         "equipos": {k: {"nombre": v} for k, v in nombres.items()},
@@ -322,7 +462,14 @@ def main():
         "estaciones": [{"id": e["id"], "letra": e["letra"], "nombre": e.get("nombre", f"Estación {e['letra']}"),
                         "tipo": e.get("prueba", {}).get("tipo", "codigo_estacion"),
                         "url": f"{base}#/e/{e['id']}/{sec['estaciones'][str(e['id'])]['token']}",
-                        "clave": sec["estaciones"][str(e["id"])]["clave"]} for e in est],
+                        "clave": sec["estaciones"][str(e["id"])]["clave"],
+                        "alternativas": sec["estaciones"][str(e["id"])].get("alternativas", []),
+                        "prueba": e.get("prueba") or {},
+                        "pregunta": descifrar_morse(e["prueba"]["cartel"]) if (e.get("prueba") or {}).get("tipo") == "morse" and e["prueba"].get("cartel") else "",
+                        "qr": sec["estaciones"][str(e["id"])].get("qr", ""),
+                        "letraPalabra": letras_palabra[str(e["id"])]} for e in est],
+        "final": {"palabra": palabra, "clave": sec["final"]["clave"], "pista": pf.get("pista", "")},
+        "meta": {"nombre": meta_cfg["nombre"], "url": f"{base}#/meta/{sec['meta']['token']}", "token": sec["meta"]["token"]},
         "equipos": [{"id": k, "nombre": nombres[str(k)], "codigo": sec["equipos"][str(k)]["codigo"],
                      "url": f"{base}#/unirse/{k}/{sec['equipos'][str(k)]['codigo']}"} for k in range(1, n_eq + 1)],
         "rutas": [{"id": i + 1, "metros": metros[i], "letras": [letra[s] for s in r]} for i, r in enumerate(rutas)],

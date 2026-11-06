@@ -11,6 +11,7 @@
   let estado = null;
   let nombres = {};
   let previo = null; // situaciones anteriores, para detectar cambios
+  let recibido = false; // hasta recibir el progreso por primera vez no se avisa (si no, al abrir salen todos los avisos de golpe)
   const nodos = new Map();
 
   $('#lugar').textContent = C.lugar || '';
@@ -21,14 +22,20 @@
     // Una marca por estación, en el orden de la ruta del equipo: encendidas las hechas.
     if (!sit.ruta) return '<div class="estrellas sin-ruta">SIN RUTA TODAVÍA</div>';
     return `<div class="estrellas${grande ? ' grandes' : ''}" aria-hidden="true">${sit.orden
-      .map((s, i) => `<span class="${i < sit.hechas ? 'on' : i === sit.hechas && !sit.terminado ? 'sig' : ''}">${GK.html(GK.letra(s))}</span>`)
-      .join('')}</div>`;
+      .map((s, i) => `<span class="${i < sit.hechas ? 'on' : i === sit.hechas ? 'sig' : ''}">${GK.html(GK.letra(s))}</span>`)
+      .join('')}${extras(sit)}</div>`;
   }
-  /** Tiempo total de un equipo que ha terminado (desde la salida hasta su última estación). */
+  /** Dos marcas más tras las estaciones: la palabra final (★) y la meta (⚑). */
+  const extras = (sit) =>
+    `<span class="extra ${sit.palabraHecha ? 'on' : sit.paso === 'final' ? 'sig' : ''}" title="Palabra final">★</span>` +
+    `<span class="extra meta ${sit.enMeta ? 'on' : sit.paso === 'meta' ? 'sig' : ''}" title="Meta">⚑</span>`;
+  /** Tiempo total de un equipo que ha terminado (desde la salida hasta que escanea la meta). */
   const tiempo = (sit) => (sit.terminado && estado && estado.inicio ? GK.formatoTiempo(GK.tiempoJuego(estado, sit.ultima)) : null);
   function faltan(sit) {
     if (!sit.ruta) return 'Esperando a que llegue con el mapa';
-    if (sit.terminado) return `<span class="completo">MISIÓN COMPLETA · ${tiempo(sit) || ''}</span>`;
+    if (sit.terminado) return `<span class="completo">EN META · ${tiempo(sit) || ''}</span>`;
+    if (sit.palabraHecha) return '<b>Palabra descifrada</b>: camino de la meta';
+    if (sit.completas) return 'Todas las estaciones: <b>descifrando la palabra final</b>';
     return `Faltan <b>${sit.total - sit.hechas}</b>: ${sit.faltan.map(GK.letra).join(' · ')}`;
   }
   const infoRuta = (sit) => (sit.ruta ? `Ruta ${sit.ruta.id} · ≈${GK.metros(sit.ruta.metros)}` : '');
@@ -94,18 +101,20 @@
     if (previo) {
       ahora.forEach((s, id) => {
         const p = previo.get(id);
-        if (!p || s.hechas <= p.hechas) return;
+        if (!p || s.pasos <= p.pasos) return;
         const n = nodos.get(id);
         n.classList.remove('destello'); void n.offsetWidth; n.classList.add('destello');
         if (s.terminado) {
-          aviso(`🏁 ${nombre(s.equipo)} completa la misión en ${tiempo(s) || '—'}`, 'final');
+          aviso(`🏁 ${nombre(s.equipo)} llega a la meta en ${tiempo(s) || '—'}`, 'final');
           celebrar(n);
+        } else if (s.palabraHecha && !p.palabraHecha) {
+          aviso(`★ ${nombre(s.equipo)} descifra la palabra final${s.puesto < p.puesto ? ` y sube al ${s.puesto}º puesto` : ''}`);
         } else {
           aviso(`${nombre(s.equipo)} supera la estación ${GK.letra(s.orden[s.hechas - 1])}${s.puesto < p.puesto ? ` y sube al ${s.puesto}º puesto` : ''}`);
         }
       });
     }
-    previo = ahora;
+    previo = recibido ? ahora : null;
   }
 
   function aviso(texto, tipo) {
@@ -147,7 +156,7 @@
     r.textContent = GK.formatoTiempo(GK.tiempoJuego(estado, Date.now()));
   }, 500);
 
-  GK.datos.escuchar('progreso', (v) => { progreso = v || {}; pintar(); });
+  GK.datos.escuchar('progreso', (v) => { progreso = v || {}; pintar(); recibido = true; });
   GK.datos.escuchar('estado', (v) => { estado = v; pintarEstado(); pintar(); });
   GK.datos.escuchar('asignacion', () => pintar());
   GK.datos.leerUnaVez('equipos').then((v) => { if (v) { nombres = v; pintar(); } }).catch(() => {});

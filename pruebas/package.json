@@ -1,0 +1,11 @@
+{
+  "name": "pruebas-gymkhana",
+  "private": true,
+  "description": "Pruebas automáticas de la app de la gymkhana (Playwright con el Chrome instalado en el equipo)",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1"
+  }
+}

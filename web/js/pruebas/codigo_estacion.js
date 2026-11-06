@@ -10,12 +10,11 @@
   GK.pruebas.registrar('codigo_estacion', {
     titulo: 'Código de la estación',
     montar(contenedor, ctx) {
-      const pista = ctx.estacion.prueba.pista;
       contenedor.innerHTML = `
         <div class="ventana">
           <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · EST_${GK.html(ctx.estacion.letra)}</span></div>
           <div class="ventana-cuerpo">
-            <p class="terminal">&gt; En esta estación hay escondida una <b>etiqueta</b> con un código.<br>&gt; Encontradla y escribid el código.${pista ? `<br>&gt; Pista: ${GK.html(pista)}` : ''}</p>
+            <p class="terminal">&gt; En esta estación hay escondida una <b>etiqueta</b> con un código.<br>&gt; Encontradla y escribid el código.</p>
             <form class="form-codigo" autocomplete="off">
               <label class="etiqueta" for="codigo-estacion">Código de la estación</label>
               <input id="codigo-estacion" class="campo campo-codigo" inputmode="text" autocapitalize="characters"

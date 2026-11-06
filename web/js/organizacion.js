@@ -100,7 +100,7 @@
         <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span><span>RX_MONITOR · EQUIPOS</span></div>
         <div class="tabla-envoltura">
           <table class="tabla-org">
-            <thead><tr><th>Equipo</th><th>Ruta</th><th>Recorrido</th><th>Hechas</th><th>Siguiente</th><th>Sin avanzar</th><th>Acciones</th></tr></thead>
+            <thead><tr><th>Equipo</th><th>Ruta</th><th>Recorrido</th><th>Hechas</th><th>Siguiente</th><th>Final</th><th>Sin avanzar</th><th>Acciones</th></tr></thead>
             <tbody id="filas"></tbody>
           </table>
         </div>
@@ -160,7 +160,7 @@
       <ul class="lista-ayudas">${lista.map((a) => {
         const sit = GK.situacion(a.eq, progreso[a.eq]);
         return `<li>
-          <div><b>${GK.html(GK.equipo(a.eq).nombre)}</b> · ${a.estacion ? `estación <b>${GK.html(GK.letra(a.estacion))}</b> (paso ${a.paso}/${sit.total})` : 'sin estación'}
+          <div><b>${GK.html(GK.equipo(a.eq).nombre)}</b> · ${a.estacion ? `estación <b>${GK.html(GK.letra(a.estacion))}</b> (paso ${a.paso}/${sit.total})` : a.paso === sit.total + 1 ? '<b>palabra final</b>' : a.paso === sit.total + 2 ? '<b>camino de la meta</b>' : 'sin estación'}
             <div class="texto-2">${GK.html(a.motivo)} · hace ${Math.max(0, Math.round((Date.now() - a.t) / 60000))} min</div></div>
           <div class="acciones">
             <button class="boton-sec mini" data-msj="${a.eq}">${GK.icono('mensaje')} Mensaje</button>
@@ -186,12 +186,23 @@
     accion(() => org.mensaje(id, texto), texto ? `Mensaje enviado al ${GK.equipo(id).nombre}.` : 'Mensaje borrado.');
   }
 
+  /** Nombre de un paso: estación (letra), palabra final o meta. */
+  const nombrePaso = (paso) => (paso === 'final' ? 'la palabra final' : paso === 'meta' ? 'la llegada a la meta' : `la estación ${GK.letra(paso)}`);
+
   async function marcarSiguiente(id) {
     const sit = GK.situacion(id, progreso[id]);
-    if (!sit.ruta || sit.terminado) return;
-    const L = GK.letra(sit.siguiente);
-    if (await GK.modal(`<p>¿Marcar la <b>estación ${L}</b> como superada para el <b>${GK.html(GK.equipo(id).nombre)}</b>?</p><p class="texto-2">Úsalo si no consiguen hacerla, se han quedado sin batería o hay algún problema.</p>`, [['Cancelar', false], ['Marcar', true, 'boton']]))
-      accion(() => org.marcar(id, sit.siguiente), `Estación ${L} marcada para el ${GK.equipo(id).nombre}.`);
+    if (!sit.ruta || sit.paso == null) return;
+    const que = nombrePaso(sit.paso);
+    if (await GK.modal(`<p>¿Marcar <b>${que}</b> como superada para el <b>${GK.html(GK.equipo(id).nombre)}</b>?</p><p class="texto-2">Úsalo si no consiguen hacerla, se han quedado sin batería o hay algún problema.</p>`, [['Cancelar', false], ['Marcar', true, 'boton']]))
+      accion(() => org.marcar(id, sit.paso), `Marcada ${que} para el ${GK.equipo(id).nombre}.`);
+  }
+
+  /** Meta a mano (por ejemplo, llegan sin batería): marca la palabra final si falta y la llegada, con la hora de ahora. */
+  async function marcarMeta(id) {
+    const sit = GK.situacion(id, progreso[id]);
+    if (!sit.completas || sit.enMeta) return;
+    if (await GK.modal(`<p>¿Marcar que el <b>${GK.html(GK.equipo(id).nombre)}</b> ha <b>llegado a la meta</b> ahora?</p>${sit.palabraHecha ? '' : '<p class="texto-2">Todavía no han acertado la palabra final: también se marcará.</p>'}<p class="texto-2">Su tiempo será el de este momento.</p>`, [['Cancelar', false], ['Marcar meta', true, 'boton']]))
+      accion(() => org.marcarMeta(id, !sit.palabraHecha), `${GK.equipo(id).nombre} en meta.`);
   }
 
   async function cambiarRuta(id) {
@@ -253,23 +264,27 @@
         <td class="mono">${sit.ruta ? `<button class="enlace" data-ruta="${e.id}">${sit.ruta.id} · ≈${GK.metros(sit.ruta.metros)}</button>` : `<button class="enlace" data-ruta="${e.id}">— asignar</button>`}</td>
         <td>${sit.ruta ? `<div class="estrellas">${sit.orden.map((s, i) => `<span class="${i < sit.hechas ? 'on' : i === sit.hechas ? 'sig' : ''}${p[s] && p[s].manual ? ' manual' : ''}" title="${p[s] && p[s].manual ? 'Marcada a mano' : GK.html(GK.estacion(s).nombre)}">${GK.html(GK.letra(s))}</span>`).join('')}</div>` : '<span class="texto-2">Sin unirse o sin ruta</span>'}</td>
         <td class="mono"><b>${sit.hechas}</b>/${sit.total}</td>
-        <td class="mono">${sit.terminado ? `<span class="completo">FIN ${tiempoFinal || ''}</span>` : sit.siguiente != null ? GK.html(GK.letra(sit.siguiente)) : '—'}</td>
+        <td class="mono">${sit.terminado ? `<span class="completo">FIN ${tiempoFinal || ''}</span>` : sit.paso === 'final' ? 'Palabra' : sit.paso === 'meta' ? 'Meta' : sit.siguiente != null ? GK.html(GK.letra(sit.siguiente)) : '—'}</td>
+        <td class="final-estado">${sit.enMeta ? `<span class="chip chip-verde" title="Ha llegado a la meta${p.meta && p.meta.manual ? ' (marcado a mano)' : ''}">⚑ EN META${p.meta && p.meta.manual ? ' *' : ''}</span>` : sit.palabraHecha ? `<span class="chip chip-ambar" title="Palabra final acertada${p.final && p.final.manual ? ' (marcada a mano)' : ''}">★ PALABRA</span>` : sit.completas ? '<span class="texto-2">descifrando</span>' : '<span class="texto-2">—</span>'}</td>
         <td class="mono">${quieto != null ? `${tarde ? '⚠ ' : ''}${GK.formatoTiempo(quieto)}` : '—'}</td>
         <td class="acciones">
           <button class="boton-sec mini" data-msj="${e.id}" title="Enviar un mensaje al equipo">${GK.icono('mensaje')}</button>
-          <button class="boton-sec mini" data-mas="${e.id}" ${!sit.ruta || sit.terminado ? 'disabled' : ''} title="Marcar la siguiente estación como hecha">${GK.icono('mas')}</button>
-          <button class="boton-sec mini" data-menos="${e.id}" ${sit.hechas ? '' : 'disabled'} title="Deshacer la última estación">${GK.icono('menos')}</button>
+          <button class="boton-sec mini" data-mas="${e.id}" ${!sit.ruta || sit.paso == null ? 'disabled' : ''} title="Marcar el siguiente paso como hecho">${GK.icono('mas')}</button>
+          <button class="boton-sec mini" data-menos="${e.id}" ${sit.pasos ? '' : 'disabled'} title="Deshacer el último paso">${GK.icono('menos')}</button>
+          <button class="boton-sec mini" data-meta="${e.id}" ${sit.completas && !sit.enMeta ? '' : 'disabled'} title="Marcar la llegada a la meta a mano">${GK.icono('bandera')}</button>
         </td></tr>`;
     }).join('');
     filas.querySelectorAll('[data-mas]').forEach((b) => b.onclick = () => marcarSiguiente(Number(b.dataset.mas)));
+    filas.querySelectorAll('[data-meta]').forEach((b) => b.onclick = () => marcarMeta(Number(b.dataset.meta)));
     filas.querySelectorAll('[data-msj]').forEach((b) => b.onclick = () => escribirMensaje(Number(b.dataset.msj)));
     filas.querySelectorAll('[data-ruta]').forEach((b) => b.onclick = () => cambiarRuta(Number(b.dataset.ruta)));
     filas.querySelectorAll('[data-menos]').forEach((b) => b.onclick = async () => {
       const id = Number(b.dataset.menos);
       const sit = GK.situacion(id, progreso[id]);
-      const ult = sit.orden[sit.hechas - 1];
-      if (await GK.modal(`<p>¿Deshacer la <b>estación ${GK.html(GK.letra(ult))}</b> del <b>${GK.html(GK.equipo(id).nombre)}</b>?</p>`, [['Cancelar', false], ['Deshacer', true, 'boton-sec boton-peligro']]))
-        accion(() => org.desmarcar(id, ult), `Estación ${GK.letra(ult)} deshecha.`);
+      const ult = sit.enMeta ? 'meta' : sit.palabraHecha ? 'final' : sit.orden[sit.hechas - 1];
+      const que = nombrePaso(ult);
+      if (await GK.modal(`<p>¿Deshacer <b>${que}</b> del <b>${GK.html(GK.equipo(id).nombre)}</b>?</p>`, [['Cancelar', false], ['Deshacer', true, 'boton-sec boton-peligro']]))
+        accion(() => org.desmarcar(id, ult), `Deshecha ${que}.`);
     });
   }
 
