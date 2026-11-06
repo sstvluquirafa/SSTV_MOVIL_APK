@@ -338,11 +338,13 @@
         <div class="pie-acciones">
           <button class="boton-sec boton-ayuda" id="ayuda">${GK.icono('ayuda')} Pedir ayuda</button>
           <a class="boton-sec" href="ranking.html">${GK.icono('podio')} Ver ranking</a>
+          ${GK.enModoApp && !GK.enModoApp() && (GK.dispositivo.esIOS || GK.dispositivo.esAndroid) ? '<button class="boton-sec" id="instalar-app">Instalar la app</button>' : ''}
           <button class="boton-sec" id="salir">Cambiar de equipo</button>
         </div>
       </section>`;
     GK.activarMapa(vista);
     $('#ayuda').onclick = pedirAyuda;
+    if ($('#instalar-app')) $('#instalar-app').onclick = () => GK.mostrarInstalar();
     $('#reconectar').onclick = () => { GK.datos.reconectar(); $('#aviso-cola').classList.add('oculto'); };
     $('#salir').onclick = async () => {
       const ok = await GK.modal('<p>¿Seguro que queréis cambiar de equipo en este móvil?</p><p class="texto-2">El progreso de vuestro equipo no se pierde.</p>',

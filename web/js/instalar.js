@@ -14,6 +14,10 @@
   const ua = navigator.userAgent || '';
   const esIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const esAndroid = /Android/.test(ua);
+  // Navegadores de Android que sí saben instalar apps web; los demás (el de Xiaomi, visores de QR…) no.
+  const esChromeAndroid = esAndroid && /Chrome\//.test(ua) && !/MiuiBrowser|XiaoMi|HeyTapBrowser|OPR\/|; wv\)/.test(ua);
+  let esperaAndroid = false; // si Chrome no ofrece instalar en unos segundos, se explica cómo hacerlo a mano
+  if (esAndroid) setTimeout(() => { esperaAndroid = true; if (GK.pintarInstalar) GK.pintarInstalar(); }, 2500);
 
   window.addEventListener('beforeinstallprompt', (ev) => {
     ev.preventDefault();
@@ -30,7 +34,18 @@
   const icoAnadir = '<svg class="icono" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></svg>';
 
   /** ¿Hay algo que ofrecer en este dispositivo? */
-  GK.puedeInstalar = () => !enModoApp() && !GK.leer('instalada', false) && !GK.leer('instalarDescartado', false) && (!!aviso || esIOS);
+  GK.puedeInstalar = () => !enModoApp() && !GK.leer('instalada', false) && !GK.leer('instalarDescartado', false) && (!!aviso || esIOS || (esAndroid && esperaAndroid));
+
+  /** Volver a enseñar la tarjeta (botón «Instalar la app» del pie), aunque antes dijeran «Ahora no». */
+  GK.mostrarInstalar = function () {
+    GK.borrar('instalarDescartado');
+    GK.borrar('instalada');
+    esperaAndroid = true;
+    GK.pintarInstalar();
+    const caja = document.getElementById('instalar');
+    if (caja) caja.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  GK.enModoApp = enModoApp;
 
   /** Pinta (o quita) la tarjeta de instalar dentro del elemento #instalar de la pantalla actual. */
   GK.pintarInstalar = function () {
@@ -60,6 +75,22 @@
         } catch (e) { /* nada */ }
         GK.pintarInstalar();
       };
+    } else if (esAndroid) {
+      caja.innerHTML = `
+        <div class="tarjeta instalar instalar-ios">
+          <div class="instalar-cab">
+            <img src="assets/img/icono-192.png" alt="" width="52" height="52">
+            <div class="instalar-texto"><p class="antetitulo">Instalad la app</p><p>${esChromeAndroid ? 'Desde el menú de Chrome:' : 'Este navegador no sabe instalarla:'}</p></div>
+          </div>
+          <ol class="instalar-pasos">
+            ${esChromeAndroid ? `
+            <li><span class="paso-ico">⋮</span><span>Tocad el menú <b>⋮</b> (arriba a la derecha).</span></li>
+            <li><span class="paso-ico">${icoAnadir}</span><span>Elegid <b>«Instalar aplicación»</b> o <b>«Añadir a pantalla de inicio»</b> y confirmad.</span></li>` : `
+            <li><span class="paso-ico">⋮</span><span>Abrid esta página en <b>Chrome</b>: menú del navegador → <b>«Abrir en Chrome»</b> (o copiad la dirección y pegadla en Chrome).</span></li>
+            <li><span class="paso-ico">${icoAnadir}</span><span>Allí saldrá el botón <b>«Instalar»</b>.</span></li>`}
+          </ol>
+          <button class="boton-sec mini" type="button" id="instalar-no">Ahora no</button>
+        </div>`;
     } else {
       caja.innerHTML = `
         <div class="tarjeta instalar instalar-ios">
