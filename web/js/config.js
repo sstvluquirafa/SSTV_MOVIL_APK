@@ -10883,8 +10883,8 @@ window.GK_CONFIG = {
       "y": 587,
       "prueba": {
         "tipo": "sstv_puzle",
-        "_ayuda": "Contenido por equipo: lo genera el generador (privado/bancos.json → sstv_puzle). Una foto de la NASA por equipo, en 4 cuadrantes de 3 × 3 piezas.",
-        "pista": "Empezad por las esquinas y por las piezas con el horizonte o con el borde de un objeto"
+        "_ayuda": "Cuatro puzles de 3 × 3 con ilustraciones propias (privado/bancos.json → sstv_puzle), la misma mezcla y la misma clave para todos.",
+        "pista": "Fijaos en la miniatura y empezad por las esquinas"
       },
       "letraPalabra": "T",
       "token": "f5300e1f76b42e49d1e80d4215e6289178f8a577c18f0e3c47cbe100afd3e869",
@@ -10892,17 +10892,32 @@ window.GK_CONFIG = {
       "equipos": {
         "1": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-3.jpg",
-            "credito": "NASA · Apolo 11 (AS11-40-5903): Buzz Aldrin en la Luna",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    3,
-                    3
+                    2,
+                    2
                   ],
                   [
                     7,
+                    1
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    3,
+                    1
+                  ],
+                  [
+                    5,
                     3
                   ],
                   [
@@ -10910,116 +10925,37 @@ window.GK_CONFIG = {
                     3
                   ],
                   [
-                    5,
-                    2
-                  ],
-                  [
-                    0,
-                    2
-                  ],
-                  [
-                    1,
-                    2
-                  ],
-                  [
-                    2,
-                    0
-                  ],
-                  [
                     4,
                     0
                   ],
                   [
-                    8,
-                    2
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "4KVZEg=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
-                    5,
-                    0
-                  ],
-                  [
                     7,
+                    3
+                  ],
+                  [
+                    1,
                     2
                   ],
                   [
-                    0,
-                    2
+                    5,
+                    3
                   ],
                   [
                     4,
+                    2
+                  ],
+                  [
+                    3,
                     2
                   ],
                   [
@@ -11027,425 +10963,167 @@ window.GK_CONFIG = {
                     0
                   ],
                   [
-                    1,
+                    6,
+                    1
+                  ],
+                  [
+                    0,
                     1
                   ],
                   [
                     2,
-                    2
-                  ],
-                  [
-                    6,
-                    3
-                  ],
-                  [
-                    3,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "6mgaKg=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
-                    8,
-                    3
-                  ],
-                  [
-                    7,
+                    3,
                     0
                   ],
                   [
-                    4,
+                    6,
                     0
                   ],
                   [
                     0,
-                    0
+                    2
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    5,
+                    3
                   ],
                   [
                     2,
                     0
                   ],
                   [
-                    6,
-                    2
-                  ],
-                  [
-                    3,
-                    1
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    1,
-                    0
+                    7,
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "Bvm/aw=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    2,
-                    0
-                  ],
-                  [
                     6,
-                    1
-                  ],
-                  [
-                    8,
                     2
                   ],
                   [
-                    5,
+                    1,
                     3
                   ],
                   [
                     4,
-                    1
+                    0
+                  ],
+                  [
+                    8,
+                    3
+                  ],
+                  [
+                    5,
+                    0
+                  ],
+                  [
+                    7,
+                    3
                   ],
                   [
                     0,
-                    0
+                    1
                   ],
                   [
                     3,
                     2
                   ],
                   [
-                    1,
-                    1
-                  ],
-                  [
-                    7,
-                    3
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "e566dw=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "e28e8fbc2f48cadad349ef1b008475fc",
-          "huella": "42fd327c830d4309a7de38fae96ab776a6ea80066b8014585e819b8837f55d4f",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "R9B9mb7E6KCPmNFXmcLwGyqbAGlP4QcMFzhE6/GTCwuweHcl3EJK6FKN3VN1P74aFZ/poQ81Mlg/U0EEKQQ6NwA7PH2kGbIswYOAhgK2vgl1AUmLIRfX56I/V/HnyecXCVsqv68BuGAGMStUQiiUfbP3t0pb4PMV8r27E/7hR+0s8wSaLLvwcZZD4L9Un1C846bWfeCaJWap"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "2": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-3.jpg",
-            "credito": "NASA · Apolo 11 (AS11-40-5903): Buzz Aldrin en la Luna",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    8,
-                    3
+                    2,
+                    2
+                  ],
+                  [
+                    7,
+                    1
                   ],
                   [
                     0,
                     3
                   ],
                   [
-                    1,
-                    3
-                  ],
-                  [
-                    2,
-                    3
+                    8,
+                    2
                   ],
                   [
                     3,
                     1
                   ],
                   [
-                    6,
-                    0
-                  ],
-                  [
                     5,
-                    1
+                    3
                   ],
                   [
-                    7,
-                    2
+                    6,
+                    3
                   ],
                   [
                     4,
+                    0
+                  ],
+                  [
+                    1,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "NIJpUg=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
                     7,
-                    2
-                  ],
-                  [
-                    0,
                     3
-                  ],
-                  [
-                    3,
-                    2
-                  ],
-                  [
-                    6,
-                    2
                   ],
                   [
                     1,
-                    1
-                  ],
-                  [
-                    2,
-                    3
-                  ],
-                  [
-                    8,
-                    3
+                    2
                   ],
                   [
                     5,
@@ -11453,282 +11131,135 @@ window.GK_CONFIG = {
                   ],
                   [
                     4,
+                    2
+                  ],
+                  [
+                    3,
+                    2
+                  ],
+                  [
+                    8,
                     0
+                  ],
+                  [
+                    6,
+                    1
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "wMXBzw=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
-                  [
-                    6,
-                    3
-                  ],
                   [
                     3,
                     0
                   ],
                   [
-                    0,
-                    1
+                    6,
+                    0
                   ],
                   [
-                    1,
+                    0,
                     2
                   ],
                   [
-                    5,
+                    1,
+                    1
+                  ],
+                  [
+                    8,
                     2
                   ],
                   [
                     4,
-                    1
+                    2
                   ],
                   [
-                    7,
+                    5,
                     3
                   ],
                   [
                     2,
-                    3
+                    0
                   ],
                   [
-                    8,
+                    7,
                     3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "4bbCXQ=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    1,
+                    6,
                     2
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    8,
+                    3
+                  ],
+                  [
+                    5,
+                    0
                   ],
                   [
                     7,
                     3
                   ],
                   [
-                    5,
-                    1
-                  ],
-                  [
-                    6,
-                    1
-                  ],
-                  [
                     0,
-                    3
-                  ],
-                  [
-                    2,
-                    2
+                    1
                   ],
                   [
                     3,
                     2
                   ],
                   [
-                    8,
+                    2,
                     0
-                  ],
-                  [
-                    4,
-                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "ZX/oUA=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "c90df21fbe71e0dd9a56a9537dd9bb28",
-          "huella": "8ab0658571edbc2a6229b1ff58de12d78958ac5a33651a922153e12bb2f93448",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "TqiS5dBjSSwDgiuO/lTpiKH+FRyw5yvDdJhUvHiNN+FUB7yzIdoXmFlKhtuMubO3wostLHGlhu2s4rwem4oLPLTxihkVDLpmPz+s+Xd4QW7eFfJeppqPAhKSmMnEHNpeOQxCNZ+BS9mjgV4iuX8wpUQASDGox7tDgZf9tSnO8g3paLP6QC3ytFuw84KRYYFLNfy3iJRV8hjN"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "3": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-2.jpg",
-            "credito": "NASA · Apolo 17 (AS17-148-22727): «Blue Marble»",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    1,
+                    2,
                     2
                   ],
                   [
-                    2,
+                    7,
                     1
                   ],
                   [
@@ -11736,213 +11267,83 @@ window.GK_CONFIG = {
                     3
                   ],
                   [
-                    7,
-                    0
-                  ],
-                  [
                     8,
-                    3
-                  ],
-                  [
-                    5,
-                    1
-                  ],
-                  [
-                    4,
-                    1
+                    2
                   ],
                   [
                     3,
                     1
                   ],
                   [
+                    5,
+                    3
+                  ],
+                  [
                     6,
-                    2
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "EgtjHw=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
-                  [
-                    0,
-                    3
-                  ],
                   [
                     7,
                     3
                   ],
                   [
-                    6,
-                    0
+                    1,
+                    2
                   ],
                   [
-                    8,
-                    1
+                    5,
+                    3
                   ],
                   [
                     4,
-                    1
-                  ],
-                  [
-                    2,
                     2
                   ],
                   [
                     3,
+                    2
+                  ],
+                  [
+                    8,
+                    0
+                  ],
+                  [
+                    6,
                     1
                   ],
                   [
-                    1,
-                    3
+                    0,
+                    1
                   ],
                   [
-                    5,
+                    2,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ],
-                    [
-                      2,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    [
-                      2,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "VzBvJA=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
-                    1,
+                    3,
+                    0
+                  ],
+                  [
+                    6,
                     0
                   ],
                   [
@@ -11950,108 +11351,19 @@ window.GK_CONFIG = {
                     2
                   ],
                   [
-                    4,
-                    3
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    2,
-                    2
-                  ],
-                  [
-                    3,
-                    3
-                  ],
-                  [
-                    7,
-                    0
-                  ],
-                  [
-                    6,
-                    0
-                  ],
-                  [
-                    8,
-                    2
-                  ]
-                ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "TI7X+A=="
-              },
-              {
-                "inicio": [
-                  [
-                    8,
-                    0
-                  ],
-                  [
-                    6,
+                    1,
                     1
                   ],
                   [
+                    8,
+                    2
+                  ],
+                  [
                     4,
                     2
                   ],
                   [
-                    3,
+                    5,
                     3
                   ],
                   [
@@ -12059,118 +11371,75 @@ window.GK_CONFIG = {
                     0
                   ],
                   [
-                    0,
+                    7,
+                    3
+                  ]
+                ],
+                "sello": "JRDOOQ=="
+              },
+              {
+                "src": "assets/img/pruebas/puzle-4.svg",
+                "inicio": [
+                  [
+                    6,
                     2
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    8,
+                    3
+                  ],
+                  [
+                    5,
+                    0
                   ],
                   [
                     7,
                     3
                   ],
                   [
-                    1,
-                    0
+                    0,
+                    1
                   ],
                   [
-                    5,
+                    3,
                     2
+                  ],
+                  [
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "+UPQBw=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "c1ee79c05a21cd60509db22ed653de5c",
-          "huella": "cf2f212e8213bbbc791ea128d9663256f272315050d1fb0952caa38b30bd81e8",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "MlmPx9cSbIcTNbxFNP+kOBPsWe8/G05uykbFd3yk02+YU9/Ts66Uanw7quCNg47RHMEqKVynzru+Hctxnf7Xvn9MEAo08fEQyPdaszovwdBHi9BPZnCyUYYW+ulA1ifzHLlQfdgB+BdGvgGkerM1muwutJMc6udEV+G+ALWFSj7JxzaTaqh4S6ZYvDDFhfqJWMq5ocnaIwVH"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "4": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-2.jpg",
-            "credito": "NASA · Apolo 17 (AS17-148-22727): «Blue Marble»",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    7,
-                    3
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    4,
-                    1
-                  ],
-                  [
-                    3,
-                    1
-                  ],
-                  [
                     2,
-                    0
+                    2
                   ],
                   [
-                    1,
-                    2
+                    7,
+                    1
                   ],
                   [
                     0,
@@ -12178,293 +11447,132 @@ window.GK_CONFIG = {
                   ],
                   [
                     8,
+                    2
+                  ],
+                  [
+                    3,
+                    1
+                  ],
+                  [
+                    5,
                     3
                   ],
                   [
                     6,
-                    2
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "5Hv7NQ=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
-                    6,
-                    1
-                  ],
-                  [
-                    8,
-                    2
-                  ],
-                  [
-                    0,
-                    3
-                  ],
-                  [
                     7,
-                    2
+                    3
                   ],
                   [
                     1,
                     2
                   ],
                   [
-                    4,
+                    5,
                     3
                   ],
                   [
-                    5,
-                    1
+                    4,
+                    2
                   ],
                   [
                     3,
+                    2
+                  ],
+                  [
+                    8,
                     0
+                  ],
+                  [
+                    6,
+                    1
+                  ],
+                  [
+                    0,
+                    1
                   ],
                   [
                     2,
-                    0
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ],
-                    [
-                      2,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    [
-                      2,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "EIT0iw=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
-                    4,
-                    2
+                    3,
+                    0
                   ],
                   [
-                    8,
+                    6,
                     0
+                  ],
+                  [
+                    0,
+                    2
                   ],
                   [
                     1,
                     1
                   ],
                   [
-                    7,
-                    1
+                    8,
+                    2
                   ],
                   [
-                    6,
-                    1
-                  ],
-                  [
-                    2,
-                    3
-                  ],
-                  [
-                    0,
-                    1
+                    4,
+                    2
                   ],
                   [
                     5,
+                    3
+                  ],
+                  [
+                    2,
                     0
                   ],
                   [
-                    3,
-                    2
+                    7,
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "BjXEjw=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    7,
+                    6,
+                    2
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    8,
                     3
                   ],
                   [
@@ -12472,219 +11580,107 @@ window.GK_CONFIG = {
                     0
                   ],
                   [
-                    4,
+                    7,
                     3
                   ],
                   [
-                    6,
-                    0
+                    0,
+                    1
                   ],
                   [
                     3,
-                    0
-                  ],
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    1,
-                    1
+                    2
                   ],
                   [
                     2,
-                    1
-                  ],
-                  [
-                    8,
-                    1
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "Yz40fw=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "ae1efa711001b338c465eae8ec4dddc3",
-          "huella": "8d971c0bef0fd50dd88629899dcb7884c19e353c309e2e931a77e30cc129c0d8",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "JAKwDGoflKRbnPgacK0hf9tdixN6gzp2aRzFVESAIW4k8O9rTxNINx7+b27dR+EL++LwOk9yCQny0N/6wGh91UEHecNh0piG6VfdLTuEhr0eEol89n/G5IkEIKJPQ+gt4v3Gbnka8K/v6O3afaqvodGszW/JqasX87oJKaoN1OcFvPYAwOpekULg045MejvRM2RU2sZNHDaE"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "5": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-3.jpg",
-            "credito": "NASA · Apolo 11 (AS11-40-5903): Buzz Aldrin en la Luna",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    8,
-                    2
-                  ],
-                  [
-                    4,
-                    2
-                  ],
-                  [
-                    1,
-                    2
-                  ],
-                  [
-                    0,
-                    0
-                  ],
-                  [
                     2,
-                    3
-                  ],
-                  [
-                    3,
-                    3
+                    2
                   ],
                   [
                     7,
                     1
                   ],
                   [
-                    6,
+                    0,
+                    3
+                  ],
+                  [
+                    8,
                     2
+                  ],
+                  [
+                    3,
+                    1
                   ],
                   [
                     5,
-                    2
+                    3
+                  ],
+                  [
+                    6,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "+FTBbw=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
+                  [
+                    7,
+                    3
+                  ],
+                  [
+                    1,
+                    2
+                  ],
                   [
                     5,
                     3
+                  ],
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    3,
+                    2
+                  ],
+                  [
+                    8,
+                    0
+                  ],
+                  [
+                    6,
+                    1
                   ],
                   [
                     0,
@@ -12693,302 +11689,127 @@ window.GK_CONFIG = {
                   [
                     2,
                     1
-                  ],
-                  [
-                    6,
-                    0
-                  ],
-                  [
-                    4,
-                    2
-                  ],
-                  [
-                    7,
-                    3
-                  ],
-                  [
-                    1,
-                    0
-                  ],
-                  [
-                    3,
-                    1
-                  ],
-                  [
-                    8,
-                    2
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "bOxmRg=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
                     3,
-                    3
+                    0
                   ],
                   [
                     6,
-                    1
-                  ],
-                  [
-                    4,
-                    1
-                  ],
-                  [
-                    1,
-                    2
-                  ],
-                  [
-                    8,
                     0
                   ],
                   [
                     0,
-                    0
+                    2
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    4,
+                    2
                   ],
                   [
                     5,
+                    3
+                  ],
+                  [
+                    2,
                     0
                   ],
                   [
                     7,
-                    1
-                  ],
-                  [
-                    2,
-                    1
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "EHj44g=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    3,
-                    3
-                  ],
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    4,
-                    1
-                  ],
-                  [
-                    7,
-                    0
-                  ],
-                  [
-                    1,
+                    6,
                     2
                   ],
                   [
-                    6,
-                    1
-                  ],
-                  [
-                    2,
+                    1,
                     3
                   ],
                   [
+                    4,
+                    0
+                  ],
+                  [
                     8,
-                    1
+                    3
                   ],
                   [
                     5,
                     0
+                  ],
+                  [
+                    7,
+                    3
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    3,
+                    2
+                  ],
+                  [
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "jz7b4Q=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "e0e1a453e6c80a754a09902b3988531b",
-          "huella": "76e1f595a0ab1a910e52bc170acc82910423c57ccab14d2906084d6fc6f606ce",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "nKgkgPpvJ7V8AbDh3Ie/bdLMlUElSzwEFfx/Gmhr4h35lRNACUKXVbPctA3arMRaIuX+lZ8AQ32IM7ohEEenLDUtW9syt7QwJ5bZmV3NakkUkKDD3JWXkgjRAJhNgHoCjlSABorK/eRa/JDqZMFxt7dziseBohKWENkFaZSGgFYBn7a/Le1lcPDcBBVNY/57lXTLokoJUXbV"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "6": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-3.jpg",
-            "credito": "NASA · Apolo 11 (AS11-40-5903): Buzz Aldrin en la Luna",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
                     2,
+                    2
+                  ],
+                  [
+                    7,
+                    1
+                  ],
+                  [
+                    0,
                     3
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    3,
+                    1
                   ],
                   [
                     5,
@@ -12999,121 +11820,26 @@ window.GK_CONFIG = {
                     3
                   ],
                   [
-                    7,
-                    3
-                  ],
-                  [
-                    1,
-                    2
-                  ],
-                  [
-                    0,
-                    3
-                  ],
-                  [
                     4,
                     0
                   ],
                   [
-                    3,
-                    2
-                  ],
-                  [
-                    8,
+                    1,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "Rz7y5A=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
-                    6,
-                    0
-                  ],
-                  [
                     7,
-                    1
-                  ],
-                  [
-                    3,
                     3
                   ],
                   [
-                    0,
-                    3
-                  ],
-                  [
-                    8,
-                    0
+                    1,
+                    2
                   ],
                   [
                     5,
@@ -13124,89 +11850,50 @@ window.GK_CONFIG = {
                     2
                   ],
                   [
-                    1,
+                    3,
+                    2
+                  ],
+                  [
+                    8,
+                    0
+                  ],
+                  [
+                    6,
+                    1
+                  ],
+                  [
+                    0,
                     1
                   ],
                   [
                     2,
-                    0
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "X0Bb7A=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
-                    8,
+                    3,
+                    0
+                  ],
+                  [
+                    6,
                     0
                   ],
                   [
                     0,
-                    0
-                  ],
-                  [
-                    7,
                     2
                   ],
                   [
-                    3,
+                    1,
                     1
+                  ],
+                  [
+                    8,
+                    2
                   ],
                   [
                     4,
@@ -13214,435 +11901,165 @@ window.GK_CONFIG = {
                   ],
                   [
                     5,
-                    1
-                  ],
-                  [
-                    1,
                     3
                   ],
                   [
-                    6,
-                    2
-                  ],
-                  [
                     2,
-                    2
+                    0
+                  ],
+                  [
+                    7,
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "5ZnraQ=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    8,
+                    6,
                     2
                   ],
                   [
-                    3,
-                    1
-                  ],
-                  [
                     1,
-                    0
-                  ],
-                  [
-                    6,
                     3
                   ],
                   [
                     4,
-                    1
+                    0
+                  ],
+                  [
+                    8,
+                    3
                   ],
                   [
                     5,
-                    2
+                    0
                   ],
                   [
                     7,
-                    2
-                  ],
-                  [
-                    2,
                     3
                   ],
                   [
                     0,
+                    1
+                  ],
+                  [
+                    3,
                     2
+                  ],
+                  [
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "P3BFAQ=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "e03a953e64a3504e8f2ee5f16592d0e6",
-          "huella": "c40cf4769ff257d6df0c4f3a82820a82870ca89af2c9bc3afe89d74fe0728074",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "L6YJw5aBNRA2aMMfaUF2fF+38tTYEUzoz6OnePCvdRjO4htHEIjdHJ07edWN3oqJIfr7VWrOY/i8sU/87dxEiJVoVwzTdN0K/z2iLO0LEsJK5krZO55aB4AADVVFBShxonEZ0kIYfglMr5mPo2urI1uHMxmKPte2Hl4JX5FnBJVbPmgvdWBK5V8t0r0Oa4MW4GNZur6TEtii"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "7": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-2.jpg",
-            "credito": "NASA · Apolo 17 (AS17-148-22727): «Blue Marble»",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    6,
-                    0
-                  ],
-                  [
-                    8,
-                    0
-                  ],
-                  [
-                    1,
-                    2
-                  ],
-                  [
-                    4,
-                    3
-                  ],
-                  [
-                    3,
-                    2
-                  ],
-                  [
-                    0,
+                    2,
                     2
                   ],
                   [
                     7,
-                    3
-                  ],
-                  [
-                    5,
                     1
                   ],
                   [
-                    2,
+                    0,
                     3
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    3,
+                    1
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
+                    6,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "q3JZaw=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
-                  [
-                    8,
-                    2
-                  ],
-                  [
-                    1,
-                    1
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    6,
-                    2
-                  ],
-                  [
-                    2,
-                    3
-                  ],
-                  [
-                    4,
-                    3
-                  ],
-                  [
-                    0,
-                    0
-                  ],
                   [
                     7,
                     3
                   ],
                   [
+                    1,
+                    2
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
+                    4,
+                    2
+                  ],
+                  [
                     3,
+                    2
+                  ],
+                  [
+                    8,
+                    0
+                  ],
+                  [
+                    6,
+                    1
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ],
-                    [
-                      2,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    [
-                      2,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "tieTtQ=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
                     3,
-                    1
-                  ],
-                  [
-                    4,
-                    2
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    7,
-                    1
-                  ],
-                  [
-                    2,
                     0
                   ],
                   [
                     6,
-                    2
-                  ],
-                  [
-                    1,
                     0
                   ],
                   [
@@ -13650,424 +12067,198 @@ window.GK_CONFIG = {
                     2
                   ],
                   [
-                    8,
+                    1,
                     1
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    7,
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "47QwVg=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
                     6,
-                    1
-                  ],
-                  [
-                    0,
-                    3
-                  ],
-                  [
-                    7,
-                    0
-                  ],
-                  [
-                    4,
-                    3
-                  ],
-                  [
-                    2,
-                    3
-                  ],
-                  [
-                    5,
-                    1
-                  ],
-                  [
-                    8,
                     2
-                  ],
-                  [
-                    3,
-                    1
                   ],
                   [
                     1,
                     3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    8,
+                    3
+                  ],
+                  [
+                    5,
+                    0
+                  ],
+                  [
+                    7,
+                    3
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    3,
+                    2
+                  ],
+                  [
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "g2Vjyw=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "2eb0073793ca535ab52d04ff310e7db6",
-          "huella": "5fbaa333661f332fef5ed82f5f750bf064764b6fdacd51c4c8e76f77231441be",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "jX+6QUWI+bfTBgtJ7BT3AoLchUEib4ghMijCCJMuEsIlYSqStRo7zvPFUCXSk0O4gu0O5UVh8I+FbnYyykVy20yiuPTKW8nFEzHekzP8LT+T+Kumc6kV1Ouydmo4hIwW49gefQQtwU5VthPSyjBMb4jwPf2a+/9khfPYz2UrLRkZI6muMTqQOKP07XGJ8/xDChBR4wbRpQA1"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "8": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-2.jpg",
-            "credito": "NASA · Apolo 17 (AS17-148-22727): «Blue Marble»",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    1,
-                    3
-                  ],
-                  [
-                    3,
+                    2,
                     2
                   ],
                   [
                     7,
-                    2
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    8,
-                    3
+                    1
                   ],
                   [
                     0,
-                    0
+                    3
                   ],
                   [
-                    4,
+                    8,
                     2
                   ],
                   [
+                    3,
+                    1
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
                     6,
-                    1
+                    3
                   ],
                   [
-                    2,
+                    4,
+                    0
+                  ],
+                  [
+                    1,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "PvWRwQ=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
-                    0,
-                    1
+                    7,
+                    3
+                  ],
+                  [
+                    1,
+                    2
+                  ],
+                  [
+                    5,
+                    3
                   ],
                   [
                     4,
                     2
                   ],
                   [
-                    6,
-                    0
+                    3,
+                    2
                   ],
                   [
                     8,
+                    0
+                  ],
+                  [
+                    6,
                     1
                   ],
                   [
-                    3,
+                    0,
                     1
                   ],
                   [
                     2,
-                    0
-                  ],
-                  [
-                    5,
-                    1
-                  ],
-                  [
-                    7,
-                    1
-                  ],
-                  [
-                    1,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ],
-                    [
-                      2,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    [
-                      2,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "Hgm90Q=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
-                    5,
-                    1
+                    3,
+                    0
                   ],
                   [
                     6,
-                    3
+                    0
                   ],
                   [
-                    7,
+                    0,
+                    2
+                  ],
+                  [
+                    1,
                     1
+                  ],
+                  [
+                    8,
+                    2
                   ],
                   [
                     4,
                     2
                   ],
                   [
-                    3,
-                    1
-                  ],
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    8,
+                    5,
                     3
                   ],
                   [
@@ -14075,291 +12266,136 @@ window.GK_CONFIG = {
                     0
                   ],
                   [
-                    1,
+                    7,
                     3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "3m8tdQ=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    4,
-                    3
-                  ],
-                  [
-                    2,
-                    3
-                  ],
-                  [
-                    3,
-                    3
-                  ],
-                  [
-                    7,
-                    0
-                  ],
-                  [
-                    0,
-                    3
+                    6,
+                    2
                   ],
                   [
                     1,
-                    0
+                    3
                   ],
                   [
-                    6,
-                    1
+                    4,
+                    0
                   ],
                   [
                     8,
-                    0
+                    3
                   ],
                   [
                     5,
+                    0
+                  ],
+                  [
+                    7,
+                    3
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    3,
                     2
+                  ],
+                  [
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "tRN2Bg=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "c25b2856a8f0fe53c1233e0a7d184d16",
-          "huella": "6066bf5c282c987d820381ce89bde7b6b190a0a98d94f8cc84aa4b733d8d642f",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "iwVCGS+hHo7yzlNu1NNBZk4rBu7WJSOiyCf3xoPmlbrPHOswLypIgc//+7aPCJfk6zs3dIcprENsOaDVz8knirtaCrsZYuV9ZqunKvWp9KHyGxGqO4AFoBqPV64DWtzf2RVX8D656nbk3MB87nisp2+mH8XGXAlcwO0D9YNrHtgUMAF45FN9Q38q5Wc1B8Ket0VPR97wOOZi"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "9": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-2.jpg",
-            "credito": "NASA · Apolo 17 (AS17-148-22727): «Blue Marble»",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    1,
-                    1
-                  ],
-                  [
                     2,
-                    1
-                  ],
-                  [
-                    8,
-                    3
+                    2
                   ],
                   [
                     7,
-                    0
-                  ],
-                  [
-                    5,
-                    2
-                  ],
-                  [
-                    0,
-                    2
-                  ],
-                  [
-                    6,
                     1
                   ],
                   [
-                    4,
+                    0,
                     3
+                  ],
+                  [
+                    8,
+                    2
                   ],
                   [
                     3,
+                    1
+                  ],
+                  [
+                    5,
                     3
+                  ],
+                  [
+                    6,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "gOfYZQ=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
-                    2,
+                    7,
+                    3
+                  ],
+                  [
+                    1,
+                    2
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    3,
+                    2
+                  ],
+                  [
+                    8,
+                    0
+                  ],
+                  [
+                    6,
                     1
                   ],
                   [
@@ -14367,340 +12403,113 @@ window.GK_CONFIG = {
                     1
                   ],
                   [
-                    5,
-                    2
-                  ],
-                  [
-                    6,
-                    2
-                  ],
-                  [
-                    7,
+                    2,
                     1
-                  ],
-                  [
-                    8,
-                    3
-                  ],
-                  [
-                    4,
-                    0
-                  ],
-                  [
-                    1,
-                    2
-                  ],
-                  [
-                    3,
-                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ],
-                    [
-                      2,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    [
-                      2,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "ukaq7Q=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
-                  [
-                    8,
-                    0
-                  ],
                   [
                     3,
                     0
                   ],
                   [
-                    2,
-                    1
-                  ],
-                  [
-                    7,
-                    3
-                  ],
-                  [
-                    0,
+                    6,
                     0
                   ],
                   [
-                    5,
+                    0,
                     2
                   ],
                   [
-                    6,
-                    3
+                    1,
+                    1
+                  ],
+                  [
+                    8,
+                    2
                   ],
                   [
                     4,
                     2
                   ],
                   [
-                    1,
+                    5,
+                    3
+                  ],
+                  [
+                    2,
                     0
+                  ],
+                  [
+                    7,
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "ctsF1A=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
                     6,
                     2
                   ],
                   [
-                    0,
-                    1
+                    1,
+                    3
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    8,
+                    3
+                  ],
+                  [
+                    5,
+                    0
                   ],
                   [
                     7,
                     3
                   ],
                   [
-                    1,
+                    0,
                     1
-                  ],
-                  [
-                    8,
-                    1
-                  ],
-                  [
-                    5,
-                    1
-                  ],
-                  [
-                    2,
-                    2
-                  ],
-                  [
-                    4,
-                    2
                   ],
                   [
                     3,
                     2
+                  ],
+                  [
+                    2,
+                    0
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "sTt8pg=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "41fb6312349c60f05d05dda72be6d879",
-          "huella": "c3bd0ed9d8b8ac075debe2668f12ea0285a274f2aee961fcb602c73093679ecd",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "Kp9BxQ1TNl80mb8nsaJX0Tt+yWu7/pFbMxbKWyWKTIrB7eoiYZEkuvLpkKcdcFeQGz8RuAD+fcytc572oNtvUVc+4Dpha6Q8VNyQaKeR9aa7euZ+qMmgGypiXA8pf0d+sN1FN2lH6HIZByCKxAdaNLUegnyejUXaj8w0cw3d9YoQELqffTiHNq1bMh3/Ilp6cFdmiY1NIeum"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         },
         "10": {
           "prueba": {
-            "src": "assets/img/pruebas/sstv-3.jpg",
-            "credito": "NASA · Apolo 11 (AS11-40-5903): Buzz Aldrin en la Luna",
-            "cuadrantes": [
+            "puzles": [
               {
+                "src": "assets/img/pruebas/puzle-1.svg",
                 "inicio": [
                   [
-                    5,
-                    2
-                  ],
-                  [
-                    4,
-                    0
-                  ],
-                  [
-                    6,
-                    2
-                  ],
-                  [
-                    3,
-                    3
-                  ],
-                  [
-                    1,
-                    3
-                  ],
-                  [
-                    8,
-                    3
-                  ],
-                  [
                     2,
-                    3
+                    2
                   ],
                   [
                     7,
@@ -14708,83 +12517,56 @@ window.GK_CONFIG = {
                   ],
                   [
                     0,
+                    3
+                  ],
+                  [
+                    8,
+                    2
+                  ],
+                  [
+                    3,
+                    1
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
+                    6,
+                    3
+                  ],
+                  [
+                    4,
                     0
+                  ],
+                  [
+                    1,
+                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ],
-                    [
-                      0,
-                      1
-                    ],
-                    [
-                      0,
-                      2
-                    ],
-                    [
-                      0,
-                      3
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "nRRfLQ=="
+                "sello": "KUZMQw=="
               },
               {
+                "src": "assets/img/pruebas/puzle-2.svg",
                 "inicio": [
                   [
-                    0,
+                    7,
+                    3
+                  ],
+                  [
+                    1,
+                    2
+                  ],
+                  [
+                    5,
+                    3
+                  ],
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    3,
                     2
                   ],
                   [
@@ -14792,112 +12574,37 @@ window.GK_CONFIG = {
                     0
                   ],
                   [
-                    7,
-                    2
-                  ],
-                  [
-                    4,
-                    3
-                  ],
-                  [
                     6,
                     1
                   ],
                   [
-                    1,
-                    3
-                  ],
-                  [
-                    5,
-                    2
+                    0,
+                    1
                   ],
                   [
                     2,
-                    0
-                  ],
-                  [
-                    3,
                     1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "4fTI/g=="
+                "sello": "zREs/A=="
               },
               {
+                "src": "assets/img/pruebas/puzle-3.svg",
                 "inicio": [
                   [
-                    1,
+                    3,
                     0
                   ],
                   [
-                    3,
-                    3
-                  ],
-                  [
-                    2,
-                    1
-                  ],
-                  [
                     6,
-                    3
+                    0
                   ],
                   [
-                    5,
+                    0,
+                    2
+                  ],
+                  [
+                    1,
                     1
                   ],
                   [
@@ -14905,100 +12612,53 @@ window.GK_CONFIG = {
                     2
                   ],
                   [
-                    0,
-                    0
-                  ],
-                  [
                     4,
                     2
                   ],
                   [
+                    5,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
                     7,
-                    1
+                    3
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "97eMQQ=="
+                "sello": "JRDOOQ=="
               },
               {
+                "src": "assets/img/pruebas/puzle-4.svg",
                 "inicio": [
                   [
-                    7,
-                    2
-                  ],
-                  [
-                    0,
+                    6,
                     2
                   ],
                   [
                     1,
-                    1
+                    3
                   ],
                   [
-                    6,
-                    1
-                  ],
-                  [
-                    2,
+                    4,
                     0
                   ],
                   [
                     8,
+                    3
+                  ],
+                  [
+                    5,
+                    0
+                  ],
+                  [
+                    7,
+                    3
+                  ],
+                  [
+                    0,
                     1
                   ],
                   [
@@ -15006,78 +12666,18 @@ window.GK_CONFIG = {
                     2
                   ],
                   [
-                    5,
+                    2,
                     0
-                  ],
-                  [
-                    4,
-                    1
                   ]
                 ],
-                "validas": [
-                  [
-                    [
-                      0,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      1,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      2,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      3,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      4,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      5,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      6,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      7,
-                      0
-                    ]
-                  ],
-                  [
-                    [
-                      8,
-                      0
-                    ]
-                  ]
-                ],
-                "sello": "rbsDzA=="
+                "sello": "30Ynkw=="
               }
             ]
           },
-          "sal": "58d8e4765d628a3e9f0b59d29f1207f2",
-          "huella": "ea4845f3b5f74e9651987815c2e3618f34c735082a16f6bb508d5c82dc81dba8",
+          "sal": "82c5b6e5ffd0fdcee4219c8c6631a942",
+          "huella": "814fe21dc3e9301a5fb331f715897408bd479b8cb73fb46f50365fda1d7016cb",
           "datoCifrado": [
-            "B71b1yT67CBfWSyrHTimfgiMzbe6CY+PC50nKyVlgvmf4VHhxJO6Mv/DB9TC+RQp3kNOBgEP1rW2eU1eLQSf+wgrTiffDZcm+oNX4YBHZgAkbAAtAE3r1iL27C59XY4uaqZzxsSfZ0MzkTYqOsc2M1DX7x4DdPRLt6O5sSGr6hLUFF7SafUniqaccKpckPCuph9QdTlae99J"
+            "f6j2hG0hCJoJ0yc5mLuwwVKOpa9tlYZty0QxUaYHjdJ+BVlODypuC4APgBPKdu4U2Wmy8qfYlkMUNX0hEvDi8hdxd600/O+5sbCS0G7iJMKzSbjEwWj6huW8dPXuOy22Kle/OISt4LGJvOIKja4tDvnwjpfhxG8lj30X01h+lIHhZZlFIc6lDJ1mukXRON5mRD1XyvEi8/aq"
           ]
         }
       }

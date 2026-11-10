@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v20';
+const VERSION = 'gk-v21';
 const ARCHIVOS = [
   './',
   'index.html',
@@ -46,10 +46,10 @@ const ARCHIVOS = [
   'assets/img/pruebas/geo-07.jpg',
   'assets/img/pruebas/geo-08.jpg',
   'assets/img/pruebas/geo-09.jpg',
-  'assets/img/pruebas/sstv-1.jpg',
-  'assets/img/pruebas/sstv-2.jpg',
-  'assets/img/pruebas/sstv-3.jpg',
-  'assets/img/pruebas/sstv-4.jpg',
+  'assets/img/pruebas/puzle-1.svg',
+  'assets/img/pruebas/puzle-2.svg',
+  'assets/img/pruebas/puzle-3.svg',
+  'assets/img/pruebas/puzle-4.svg',
   'assets/img/pruebas/ia-a.jpg',
   'assets/img/pruebas/ia-b.jpg',
   'assets/img/pruebas/ia-c.jpg',

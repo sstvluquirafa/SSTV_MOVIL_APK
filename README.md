@@ -90,7 +90,7 @@ web/                       ← lo que se publica en GitHub Pages
       morse.js, pelis.js, binario.js, qr_escondido.js, wordle.js, geoguessr.js,
       diferencias.js, caja_fuerte.js, sstv_puzle.js, bulo_verdad.js       las 10 pruebas
       sstv_mano.js, real_o_ia.js, hackeo.js   en el banquillo (sin estación; configuración en torneo.json → banquillo)
-  assets/img/pruebas/      fotos de GeoGuessr (geo-01…09), de la Imagen SSTV (sstv-1…4) y de ¿Real o IA?
+  assets/img/pruebas/      fotos de GeoGuessr (geo-01…09), ilustraciones de la Imagen SSTV (puzle-1…4.svg) y fotos de ¿Real o IA?
                            (nombres neutros: el nombre del archivo no delata la respuesta)
   vendor/                  jsQR (leer QR) y qrcode-generator (crear QR); licencias en LICENCIAS.txt
   assets/img/mapa.jpg      GENERADO: el mapa del Parque, ligero (≈190 KB)
@@ -282,7 +282,7 @@ Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].pr
 | F | GeoGuessr (`geoguessr`) | app | 5 fotos de 9 (1 de Granada, 2 de España, 2 del mundo) |
 | G | Busca las diferencias (`diferencias`) | app | la escena y sus 12 diferencias (generadas) |
 | H | Escotilla (`caja_fuerte`) | app | nada: 2 acertijos fijos (3 y 4 cifras), iguales para todos y comprobados por fuerza bruta |
-| I | Imagen SSTV desordenada (`sstv_puzle`) | app | la foto y el desorden de las piezas |
+| I | Imagen SSTV desordenada (`sstv_puzle`) | app | nada: 4 puzles de 3 × 3 con ilustraciones propias, la misma mezcla y la misma clave para todos |
 | J | ¿Bulo o verdad? (`bulo_verdad`) | app | 10 noticias de 20, en 2 rondas |
 
 Todas llevan además `pista` en `torneo.json`: el texto del botón «Pista» de los 60 s.

@@ -562,67 +562,38 @@ def contenido_diferencias(banco, eq: Equipo):
 
 
 # ---------- I · Imagen SSTV desordenada ----------
-_PIEZAS_IGUALES = {}
-
-
-def piezas_iguales(src: str, umbral=9.0):
-    """Para cada hueco de cada cuadrante, qué (pieza, giro) se ven IGUAL que la buena (cielo negro, por ejemplo):
-    también valen, para que nadie se quede atascado con dos piezas negras «cambiadas». Necesita Pillow."""
-    if src in _PIEZAS_IGUALES:
-        return _PIEZAS_IGUALES[src]
-    res = None
-    try:
-        from PIL import Image, ImageChops, ImageStat
-        im = Image.open(WEB / src).convert("RGB").resize((6 * 24, 6 * 24))
-        tesela = lambda col, fila: im.crop((col * 24, fila * 24, col * 24 + 24, fila * 24 + 24))
-        res = []
-        for q in range(4):
-            qx, qy = q % 2, q // 2
-            piezas = [tesela(qx * 3 + p % 3, qy * 3 + p // 3) for p in range(9)]
-            cuad = []
-            for hueco in range(9):
-                bien = piezas[hueco]
-                vale = []
-                for p in range(9):
-                    for g in range(4):
-                        girada = piezas[p].rotate(-90 * g)  # g giros de 90° en el sentido de las agujas del reloj
-                        if (p, g) == (hueco, 0) or sum(ImageStat.Stat(ImageChops.difference(bien, girada)).mean) / 3 < umbral:
-                            vale.append([p, g])
-                cuad.append(vale)
-            res.append(cuad)
-    except Exception as ex:  # sin Pillow: solo vale la pieza buena sin girar
-        print(f"  · OJO: no puedo comparar las piezas de {src} ({type(ex).__name__}): solo valdrá la colocación exacta.")
-    if res is None:
-        res = [[[[h, 0]] for h in range(9)] for _ in range(4)]
-    _PIEZAS_IGUALES[src] = res
-    return res
+# Cuatro puzles independientes de 3 × 3, cada uno con su ilustración (SVG propio, de colores vivos y con algo
+# reconocible en cada pieza). Cada puzle resuelto da una letra; las 4, en orden, forman la palabra del banco («NAVE»).
+# Con «igual_para_todos», la misma mezcla y la misma clave para todos los equipos.
+def mezclar_puzle(azar, n=9, fuera_min=7):
+    """Piezas cambiadas de sitio y giradas, sin NINGUNA en su sitio y orientación correctos, y con al menos
+    «fuera_min» piezas fuera de su sitio (para que no sea solo girar)."""
+    for _ in range(2000):
+        orden = list(range(n))
+        azar.shuffle(orden)
+        inicio = [[p, azar.randrange(4)] for p in orden]
+        for h, (p, g) in enumerate(inicio):
+            if p == h and g == 0:
+                inicio[h][1] = azar.randrange(1, 4)
+        if sum(p != h for h, (p, _) in enumerate(inicio)) >= fuera_min:
+            return inicio
+    raise RuntimeError("No consigo mezclar el puzle")
 
 
 def contenido_sstv(banco, eq: Equipo):
-    az = eq.azar
-    foto = az.choice([f for f in banco["fotos"] if f.get("usar", True)])
-    validas = piezas_iguales(foto["src"])
-    letras = letras_equipo(eq)
-    cuadrantes = []
-    for q in range(4):
-        # Desordenadas y giradas, sin ninguna pieza ya en un sitio y giro que valgan
-        for _ in range(500):
-            orden = list(range(9))
-            az.shuffle(orden)
-            inicio = [[p, az.randrange(4)] for p in orden]
-            for h, (p, g) in enumerate(inicio):
-                if [p, g] in validas[q][h]:
-                    inicio[h][1] = next((x for x in (1, 2, 3, 0) if [p, x] not in validas[q][h]), g)
-            if not any(inicio[h] in validas[q][h] for h in range(9)):
-                break
-        else:
-            raise RuntimeError(f"No puedo desordenar el cuadrante {q + 1} de {foto['src']}")
-        cuadrantes.append({"inicio": inicio, "validas": validas[q],
-                           "sello": sellar(letras[q], f"cuadrante{q + 1}resuelto", eq.sal)})
-    return {"prueba": {"src": foto["src"], "credito": foto.get("credito", ""), "cuadrantes": cuadrantes},
-            "clave": "".join(letras),
-            "partes": [{"pregunta": f"Cuadrante {q + 1}", "respuestas": [letras[q].lower()]} for q in range(4)],
-            "foto": foto.get("credito", foto["src"])}
+    letras = list(str(banco.get("palabra", "NAVE")).upper())
+    imagenes = banco["imagenes"]
+    if len(letras) != len(imagenes):
+        sys.exit(f"ERROR: privado/bancos.json → sstv_puzle: la palabra «{''.join(letras)}» tiene {len(letras)} letras y hay {len(imagenes)} imágenes.")
+    puzles = []
+    for q, im in enumerate(imagenes):
+        if not (WEB / im["src"]).exists():
+            print(f"  · OJO: falta la imagen del puzle {q + 1}: web/{im['src']}")
+        puzles.append({"src": im["src"], "inicio": mezclar_puzle(eq.azar),
+                       # La letra se abre al resolverlo (ver la EXCEPCIÓN en web/js/pruebas/sstv_puzle.js)
+                       "sello": sellar(letras[q], f"puzle{q + 1}resuelto", eq.sal)})
+    return {"prueba": {"puzles": puzles}, "clave": "".join(letras),
+            "partes": [{"pregunta": f"Imagen {q + 1} ({im.get('nombre', '')})", "respuestas": [letras[q].lower()]} for q, im in enumerate(imagenes)]}
 
 
 # tipo de prueba → función que crea el contenido de un equipo a partir de su banco (privado/bancos.json → tipo)

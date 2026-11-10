@@ -1,152 +1,246 @@
 /*
- * Prueba IMAGEN SSTV DESORDENADA (app). Llega una foto de la NASA «por SSTV» con las piezas desordenadas y giradas.
- * La foto se divide en 4 cuadrantes y cada cuadrante es un puzle de 3 × 3 piezas (generar_torneo.py → contenido_sstv:
- * la foto y el desorden cambian por equipo; nunca empieza ninguna pieza ya bien puesta).
+ * Prueba IMAGEN SSTV DESORDENADA (app). Llegan 4 imágenes «por SSTV» con las piezas desordenadas y giradas: cuatro
+ * puzles independientes de 3 × 3, cada uno con su ilustración (SVG propio: cohete, astronauta, Saturno y CubeSat).
+ * Encima de cada puzle, la imagen terminada en pequeño (la tapa de la caja). La mezcla es la misma para todos.
  *
- * Tocar una pieza la elige; tocarla otra vez la gira 90°; tocar otra del mismo cuadrante las cambia de sitio. Cada
- * cuadrante se puede ampliar a pantalla completa. Al completarlo se ve «recibido» con las barras SSTV y su sello
- * (ctx.parte) da UNA LETRA; las 4 letras, en orden, son la clave del equipo, que se escribe en cualquier móvil.
+ * Controles: tocar una pieza la gira 90°; arrastrarla sobre otra las cambia de sitio (pointer events: dedo, ratón o
+ * lápiz; las piezas tienen touch-action: none para que no haga scroll mientras se arrastra). Con teclado: Intro gira y
+ * las flechas la cambian con la de al lado. Cada puzle se puede abrir a pantalla completa. Al entrar, una animación
+ * corta (una sola vez y sin ella si se pide menos movimiento) enseña los dos gestos con una pieza; después se queda
+ * quieta como leyenda hasta salir (quitarla movería la página mientras alguien arrastra).
  *
- * prueba.cuadrantes[q] = { inicio: [[pieza, giro] × 9], validas: [[[pieza, giro], …] × 9], sello }. «validas» dice qué
- * piezas valen en cada hueco: además de la buena, las que se ven igual (cielo negro), para no atascarse con ellas.
+ * Cada puzle resuelto enseña «Imagen recibida» con las barras SSTV y su sello (ctx.parte) da UNA LETRA; las 4, en
+ * orden, son la clave (se escribe en cualquier móvil: con varios móviles, cada uno puede hacer un puzle).
+ * prueba.puzles[q] = { src, inicio: [[pieza, giro] × 9], sello }. Resuelto = cada pieza en su hueco y sin girar.
  * EXCEPCIÓN (como el Wordle): el móvil necesita saber la solución para darla por buena; un experto podría sacarla.
  */
 (function () {
   'use strict';
   const GK = window.GK;
+  const LADO = 3;
 
   GK.pruebas.registrar('sstv_puzle', {
     titulo: 'Imagen SSTV desordenada',
-    objetivo: 'Recomponed la imagen recibida por SSTV.',
-    pasos: ['Repartíos los 4 cuadrantes', 'Tocad dos piezas para cambiarlas', 'Juntad las 4 letras'],
+    objetivo: (P) => `Recomponed las ${(P.puzles || []).length || 4} imágenes recibidas por SSTV.`,
+    pasos: (P) => ['Tocad una pieza para girarla', 'Arrastradla sobre otra para cambiarlas de sitio',
+      `Cada imagen terminada da una letra: juntadlas en orden del 1 al ${(P.puzles || []).length || 4}`],
     montar(contenedor, ctx) {
-      const P = ctx.estacion.prueba;
-      const cuadrantes = P.cuadrantes || [];
-      if (!P.src || cuadrantes.length !== 4) {
-        contenedor.innerHTML = '<div class="aviso aviso-error">Falta configurar la imagen de esta prueba. Avisad a la organización.</div>';
+      const puzles = ctx.estacion.prueba.puzles || [];
+      if (!puzles.length) {
+        contenedor.innerHTML = '<div class="aviso aviso-error">Falta configurar las imágenes de esta prueba. Avisad a la organización.</div>';
         return;
       }
-      const claveGuardado = `sstvpuzle:${ctx.equipo.id}:${ctx.estacion.id}`;
-      const guardado = GK.leer(claveGuardado, null);
-      const estado = guardado && guardado.src === P.src ? guardado
-        : { src: P.src, piezas: cuadrantes.map((c) => c.inicio.map((x) => [...x])), letras: {} };
+      const claveGuardado = `pz:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveDemo = `pz-demo:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const firma = puzles.map((p) => p.src + JSON.stringify(p.inicio)).join('|');
+      let estado = GK.leer(claveGuardado, null);
+      if (!estado || estado.firma !== firma) estado = { firma, piezas: puzles.map((p) => p.inicio.map((x) => [...x])), letras: {} };
       const guardar = () => GK.guardar(claveGuardado, estado);
-      let elegida = null; // [cuadrante, hueco]
-      let temporizador = null;
+      // Vueltas «visuales» de cada pieza (sin el % 4), para que el giro de 270° a 0° se anime hacia delante
+      const vueltas = estado.piezas.map((q) => q.map(([, g]) => g));
+      const temporizadores = [];
 
-      // (la URL va en cada pieza: dentro de una variable CSS se resolvería desde css/ y no desde la página)
-      const fondo = encodeURI(P.src).replace(/'/g, '%27');
-      /** Estilo de una pieza: su trozo de la foto (6 × 6 trozos en total) y su giro. */
-      const estilo = (q, p, g) => {
-        const col = (q % 2) * 3 + (p % 3);
-        const fila = Math.floor(q / 2) * 3 + Math.floor(p / 3);
-        return `background-image:url('${fondo}');background-position:${col * 20}% ${fila * 20}%;transform:rotate(${g * 90}deg)`;
-      };
-      const resuelto = (q) => estado.piezas[q].every((x, h) => (cuadrantes[q].validas[h] || [[h, 0]]).some(([p, g]) => p === x[0] && g === x[1]));
+      const url = (src) => encodeURI(src).replace(/'/g, '%27');
+      /** Estilo de una pieza: su trozo de la ilustración (3 × 3) y su giro. La URL va en cada pieza: dentro de una
+       *  variable CSS se resolvería desde css/ y no desde la página. */
+      const estilo = (src, p, v) => `background-image:url('${url(src)}');background-position:${(p % LADO) * 50}% ${Math.floor(p / LADO) * 50}%;transform:rotate(${v * 90}deg)`;
+      const resuelto = (q) => estado.piezas[q].every(([p, g], h) => p === h && g === 0);
+      const conDemo = !GK.menosMovimiento() && !GK.leer(claveDemo, false) && !Object.keys(estado.letras).length;
 
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="nota-prueba">Tocad una pieza para elegirla y otra vez para girarla. Tocad otra del mismo cuadrante para cambiarlas de sitio.</p>
-            <div class="sstv-rx">
-              ${cuadrantes.map((_, q) => `
-                <section class="sstv-q" data-q="${q}" aria-label="Cuadrante ${q + 1}">
-                  <div class="sstv-q-cab">
-                    <span>Cuadrante ${q + 1}</span>
-                    <b class="mono sstv-letra" id="sstv-letra-${q}"></b>
-                    <button type="button" class="sstv-ampliar" data-q="${q}" aria-label="Ampliar el cuadrante ${q + 1}">⤢</button>
-                  </div>
-                  <div class="sstv-piezas" id="sstv-q-${q}"></div>
-                  <div class="sstv-recibido" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                </section>`).join('')}
-            </div>
-            <p class="credito oculto" id="sstv-credito">${GK.html(P.credito || '')}</p>
+            ${conDemo ? `
+            <div class="pz-demo" id="pz-demo" aria-hidden="true">
+              <div class="pz-demo-piezas">
+                <span class="pz-demo-a"><i style="${estilo(puzles[0].src, 0, 0)}"></i></span>
+                <span class="pz-demo-b"><i style="${estilo(puzles[0].src, 1, 0)}"></i></span>
+                <b class="pz-demo-dedo"></b>
+              </div>
+              <p class="pz-demo-texto"><span class="pz-demo-t1">Tocar = girar</span><span class="pz-demo-t2">Arrastrar = cambiar</span></p>
+            </div>` : ''}
+            ${puzles.map((pz, q) => `
+              <section class="pz" data-q="${q}" aria-label="Imagen ${q + 1}">
+                <div class="pz-cab">
+                  <img class="pz-mini" src="${GK.html(pz.src)}" alt="Así queda la imagen ${q + 1}" width="56" height="56">
+                  <div class="pz-titulo"><b>Imagen ${q + 1}</b><span id="pz-estado-${q}">Por recomponer</span></div>
+                  <b class="pz-letra mono" id="pz-letra-${q}"></b>
+                  <button type="button" class="pz-ampliar" data-q="${q}" aria-label="Ampliar la imagen ${q + 1}">⤢</button>
+                </div>
+                <div class="pz-rejilla" id="pz-${q}"></div>
+                <div class="sstv-recibido" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </section>`).join('')}
             <form class="dif-clave-form" autocomplete="off" novalidate>
-              <label class="etiqueta" for="sstv-clave">Las 4 letras, del cuadrante 1 al 4</label>
-              <input id="sstv-clave" class="campo campo-codigo" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="····">
+              <label class="etiqueta" for="sstv-clave">La palabra: las letras de la imagen 1 a la ${puzles.length}</label>
+              <input id="sstv-clave" class="campo campo-codigo" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="${'·'.repeat(puzles.length)}">
               <button class="boton boton-ancho" type="submit">Comprobar</button>
             </form>
           </div>
         </div>`;
       const campo = contenedor.querySelector('#sstv-clave');
+      const pieza = (q, h) => contenedor.querySelector(`.pz-pieza[data-q="${q}"][data-h="${h}"]`);
 
       function pintar(q) {
-        const caja = contenedor.querySelector(`#sstv-q-${q}`);
         const hecho = !!estado.letras[q];
-        caja.innerHTML = estado.piezas[q].map(([p, g], h) => `<button type="button" class="sstv-pieza${elegida && elegida[0] === q && elegida[1] === h ? ' elegida' : ''}" data-q="${q}" data-h="${h}" aria-label="Pieza ${h + 1}${g ? `, girada ${g * 90} grados` : ''}"${hecho ? ' disabled' : ''}><i style="${estilo(q, p, g)}"></i></button>`).join('');
-        const sec = caja.closest('.sstv-q');
-        sec.classList.toggle('hecho', hecho);
-        contenedor.querySelector(`#sstv-letra-${q}`).textContent = hecho ? estado.letras[q] : '';
+        contenedor.querySelector(`#pz-${q}`).innerHTML = estado.piezas[q].map(([p], h) => `<button type="button" class="pz-pieza" data-q="${q}" data-h="${h}"${hecho ? ' disabled' : ''}><i style="${estilo(puzles[q].src, p, vueltas[q][h])}"></i></button>`).join('');
+        estado.piezas[q].forEach((_, h) => etiquetar(q, h));
+        contenedor.querySelector(`.pz[data-q="${q}"]`).classList.toggle('hecho', hecho);
+        contenedor.querySelector(`#pz-letra-${q}`).textContent = hecho ? estado.letras[q] : '';
+        contenedor.querySelector(`#pz-estado-${q}`).textContent = hecho ? `Imagen recibida · letra ${estado.letras[q]}` : 'Por recomponer';
+      }
+      function etiquetar(q, h) {
+        const g = estado.piezas[q][h][1];
+        pieza(q, h).setAttribute('aria-label', `Imagen ${q + 1}, hueco ${h + 1}${g ? `, girada ${g * 90} grados` : ''}. Intro: girar. Flechas: cambiar con la de al lado`);
+      }
+      /** Repinta una sola pieza (sin rehacer el puzle: así el giro se anima). */
+      function actualizar(q, h) {
+        const [p] = estado.piezas[q][h];
+        pieza(q, h).firstElementChild.setAttribute('style', estilo(puzles[q].src, p, vueltas[q][h]));
+        etiquetar(q, h);
+      }
+      /** Con las 4 letras en este móvil, la palabra se escribe sola. */
+      function rellenarClave() {
+        const todas = puzles.map((_, q) => estado.letras[q] || '').join('');
+        if (todas.length === puzles.length && !campo.value) campo.value = todas;
       }
       function pintarTodo() {
-        cuadrantes.forEach((_, q) => pintar(q));
-        const todas = cuadrantes.map((_, q) => estado.letras[q] || '').join('');
-        if (todas.length === cuadrantes.length) {
-          contenedor.querySelector('#sstv-credito').classList.remove('oculto');
-          if (!campo.value) campo.value = todas;
-        }
+        puzles.forEach((_, q) => pintar(q));
+        rellenarClave();
       }
 
-      async function completar(q) {
-        const letra = await ctx.parte(`cuadrante${q + 1}resuelto`, [cuadrantes[q].sello]);
+      async function comprobar(q) {
+        if (estado.letras[q] || !resuelto(q)) return;
+        const letra = await ctx.parte(`puzle${q + 1}resuelto`, [puzles[q].sello]);
         if (!letra) return;
         estado.letras[q] = letra.toUpperCase();
         guardar();
-        elegida = null;
-        const sec = contenedor.querySelector(`.sstv-q[data-q="${q}"]`);
+        const sec = contenedor.querySelector(`.pz[data-q="${q}"]`);
         sec.classList.add('recibiendo');
-        temporizador = setTimeout(() => sec.classList.remove('recibiendo'), GK.menosMovimiento() ? 0 : 1600);
-        pintarTodo();
-        ctx.ayuda(`¡Cuadrante ${q + 1} recibido! Su letra es «${estado.letras[q]}».`, 'ok');
+        temporizadores.push(setTimeout(() => sec.classList.remove('recibiendo'), GK.menosMovimiento() ? 0 : 1700));
+        // Solo este puzle: rehacer los demás cortaría un arrastre que alguien esté haciendo en otro
+        pintar(q);
+        rellenarClave();
+        GK.vibrar([40, 60, 40]);
+        ctx.ayuda(`¡Imagen ${q + 1} recibida! Su letra es «${estado.letras[q]}».`, 'ok');
+      }
+      function girar(q, h) {
+        estado.piezas[q][h][1] = (estado.piezas[q][h][1] + 1) % 4;
+        vueltas[q][h] += 1;
+        guardar();
+        actualizar(q, h);
+        ctx.ayuda('');
+        comprobar(q);
+      }
+      function cambiar(q, a, b) {
+        if (a === b) return;
+        [estado.piezas[q][a], estado.piezas[q][b]] = [estado.piezas[q][b], estado.piezas[q][a]];
+        [vueltas[q][a], vueltas[q][b]] = [vueltas[q][b], vueltas[q][a]];
+        guardar();
+        // Sin animar el giro al cambiar de sitio (la pieza «salta» a su nuevo hueco)
+        [a, b].forEach((h) => { pieza(q, h).firstElementChild.style.transition = 'none'; actualizar(q, h); });
+        requestAnimationFrame(() => [a, b].forEach((h) => { const i = pieza(q, h).firstElementChild; if (i) i.style.transition = ''; }));
+        ctx.ayuda('');
+        comprobar(q);
       }
 
-      contenedor.querySelector('.sstv-rx').addEventListener('click', async (ev) => {
-        const amp = ev.target.closest('.sstv-ampliar');
-        if (amp) {
-          const sec = amp.closest('.sstv-q');
-          const abierto = sec.classList.toggle('ampliado');
-          amp.textContent = abierto ? '✕' : '⤢';
-          amp.setAttribute('aria-label', `${abierto ? 'Cerrar' : 'Ampliar'} el cuadrante ${Number(sec.dataset.q) + 1}`);
-          document.body.classList.toggle('sin-scroll', abierto);
-          return;
+      /* ---------- Arrastrar (pointer events) y tocar ---------- */
+      let arr = null;
+      const destinoEn = (x, y) => document.elementsFromPoint(x, y)
+        .map((e) => e.closest && e.closest('.pz-pieza'))
+        .find((e) => e && e !== arr.b && Number(e.dataset.q) === arr.q && !e.disabled) || null;
+      contenedor.addEventListener('pointerdown', (ev) => {
+        const b = ev.target.closest('.pz-pieza');
+        if (!b || b.disabled || arr || (ev.pointerType === 'mouse' && ev.button !== 0)) return;
+        ev.preventDefault();
+        try { b.setPointerCapture(ev.pointerId); } catch (e) { /* sin captura */ }
+        arr = { b, q: Number(b.dataset.q), h: Number(b.dataset.h), x0: ev.clientX, y0: ev.clientY, id: ev.pointerId, movido: false, destino: null };
+        quitarDemo();
+      });
+      contenedor.addEventListener('pointermove', (ev) => {
+        if (!arr || ev.pointerId !== arr.id) return;
+        const dx = ev.clientX - arr.x0;
+        const dy = ev.clientY - arr.y0;
+        if (!arr.movido && Math.hypot(dx, dy) < 10) return;
+        ev.preventDefault();
+        if (!arr.movido) { arr.movido = true; arr.b.classList.add('arrastrando'); }
+        arr.b.style.transform = `translate(${dx}px, ${dy}px)`;
+        const d = destinoEn(ev.clientX, ev.clientY);
+        if (d !== arr.destino) {
+          if (arr.destino) arr.destino.classList.remove('destino');
+          arr.destino = d;
+          if (d) d.classList.add('destino');
         }
-        const b = ev.target.closest('.sstv-pieza');
-        if (!b || b.disabled) return;
+      });
+      const soltar = (ev, cancelar) => {
+        if (!arr || ev.pointerId !== arr.id) return;
+        const { b, q, h, movido, destino } = arr;
+        arr = null;
+        b.classList.remove('arrastrando');
+        b.style.transform = '';
+        if (destino) destino.classList.remove('destino');
+        if (cancelar) return;
+        if (!movido) girar(q, h);
+        else if (destino) cambiar(q, h, Number(destino.dataset.h));
+      };
+      contenedor.addEventListener('pointerup', (ev) => soltar(ev, false));
+      contenedor.addEventListener('pointercancel', (ev) => soltar(ev, true));
+      // Teclado: Intro / Espacio giran (el «click» de teclado llega sin puntero); las flechas cambian con la de al lado
+      contenedor.addEventListener('click', (ev) => {
+        const b = ev.target.closest('.pz-pieza');
+        if (b && !b.disabled && ev.detail === 0) girar(Number(b.dataset.q), Number(b.dataset.h));
+      });
+      contenedor.addEventListener('keydown', (ev) => {
+        const b = ev.target.closest && ev.target.closest('.pz-pieza');
+        const paso = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[ev.key];
+        if (!b || b.disabled || !paso) return;
         const q = Number(b.dataset.q);
         const h = Number(b.dataset.h);
-        const anterior = elegida;
-        if (!elegida || elegida[0] !== q) {
-          elegida = [q, h]; // elegir
-          if (anterior && anterior[0] !== q) pintar(anterior[0]);
-        } else if (elegida[1] === h) {
-          estado.piezas[q][h][1] = (estado.piezas[q][h][1] + 1) % 4; // girar
-        } else {
-          const t = estado.piezas[q][h]; // cambiar de sitio
-          estado.piezas[q][h] = estado.piezas[q][elegida[1]];
-          estado.piezas[q][elegida[1]] = t;
-          elegida = null;
-        }
-        guardar();
-        ctx.ayuda('');
-        pintar(q);
-        if (!estado.letras[q] && resuelto(q)) await completar(q);
+        const c = (h % LADO) + paso[0];
+        const f = Math.floor(h / LADO) + paso[1];
+        if (c < 0 || c >= LADO || f < 0 || f >= LADO) return;
+        ev.preventDefault();
+        cambiar(q, h, f * LADO + c);
+        pieza(q, f * LADO + c).focus();
       });
+
+      /* ---------- Pantalla completa ---------- */
+      contenedor.addEventListener('click', (ev) => {
+        const amp = ev.target.closest('.pz-ampliar');
+        if (!amp) return;
+        const sec = amp.closest('.pz');
+        const abierto = sec.classList.toggle('ampliado');
+        amp.textContent = abierto ? '✕' : '⤢';
+        amp.setAttribute('aria-label', `${abierto ? 'Cerrar' : 'Ampliar'} la imagen ${Number(sec.dataset.q) + 1}`);
+        document.body.classList.toggle('sin-scroll', !!contenedor.querySelector('.pz.ampliado'));
+      });
+
+      /* ---------- Animación de ayuda (una vez) ---------- */
+      // Al acabar (o al tocar una pieza) se queda quieta como leyenda: quitarla movería la página mientras alguien
+      // arrastra. La próxima vez que entren ya no sale.
+      function quitarDemo() {
+        if (conDemo) GK.guardar(claveDemo, true);
+      }
+      if (conDemo) {
+        const demo = contenedor.querySelector('#pz-demo');
+        requestAnimationFrame(() => demo.classList.add('reproduciendo'));
+        temporizadores.push(setTimeout(quitarDemo, 3000));
+      }
 
       const form = contenedor.querySelector('form');
       form.addEventListener('submit', async (ev) => {
         ev.preventDefault();
         const b = form.querySelector('button');
-        if (GK.normalizar(campo.value).length < cuadrantes.length) return ctx.ayuda(`La clave tiene ${cuadrantes.length} letras: una por cuadrante.`, 'info');
+        if (GK.normalizar(campo.value).length < puzles.length) return ctx.ayuda(`La palabra tiene ${puzles.length} letras: una por imagen.`, 'info');
         b.disabled = true;
         b.textContent = 'Comprobando…';
         if (await ctx.intentar(campo.value)) { GK.borrar(claveGuardado); return; }
         b.disabled = false;
         b.textContent = 'Comprobar';
-        ctx.ayuda('Esas letras no son. Revisad el orden: cuadrante 1, 2, 3 y 4.');
+        ctx.ayuda('Esa palabra no es. Revisad el orden: imagen 1, 2, 3 y 4.');
       });
       pintarTodo();
-      cuadrantes.forEach((_, q) => { if (!estado.letras[q] && resuelto(q)) completar(q); });
-      return () => { clearTimeout(temporizador); document.body.classList.remove('sin-scroll'); };
+      puzles.forEach((_, q) => comprobar(q));
+      return () => { temporizadores.forEach(clearTimeout); document.body.classList.remove('sin-scroll'); };
     },
   });
 })();

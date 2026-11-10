@@ -159,64 +159,77 @@ test('Busca las diferencias: tocar las 3 de una zona da su letra; tocar donde no
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
-test('Imagen SSTV: resolver un cuadrante tocando piezas da su letra', async ({ page }) => {
-  const e = C.estaciones.find((x) => x.prueba.tipo === 'sstv_puzle');
-  test.skip(!e, 'Sin Imagen SSTV');
-  const Q = e.equipos['1'].prueba.cuadrantes[0];
-  const letras = A.respuestasPartes(e.id);
-  await A.empezar(page);
-  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
-  await A.abrirEstacion(page, e.id);
-  await A.sinScrollHorizontal(page);
-  await expect(page.locator('#sstv-letra-0')).toHaveText('');
-  // Como lo haría un equipo: para cada hueco, traer su pieza (dos toques) y girarla (tocar la elegida)
-  const piezas = Q.inicio.map((x) => [...x]);
-  const tocar = (h) => page.locator(`.sstv-pieza[data-q="0"][data-h="${h}"]`).click();
+/** Arrastra la pieza «de» sobre la pieza «a» con el puntero (pointer events, como el dedo). */
+async function arrastrar(page, de, a) {
+  const o = await de.boundingBox();
+  const d = await a.boundingBox();
+  await page.mouse.move(o.x + o.width / 2, o.y + o.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(d.x + d.width / 2, d.y + d.height / 2, { steps: 8 });
+  await page.mouse.up();
+}
+
+/** Resuelve el puzle q como un equipo: trae a cada hueco su pieza (arrastrar) y la gira (tocar). Devuelve los gestos. */
+async function resolverPuzle(page, inicio, q) {
+  const piezas = inicio.map((x) => [...x]);
+  const hueco = (h) => page.locator(`.pz-pieza[data-q="${q}"][data-h="${h}"]`);
+  let gestos = 0;
   for (let h = 0; h < 9; h++) {
     const donde = piezas.findIndex((x) => x[0] === h);
     if (donde !== h) {
-      await tocar(donde); await tocar(h);
+      // La rejilla entera a la vista: si no, el destino podría quedar fuera de la pantalla
+      await page.locator(`#pz-${q}`).evaluate((el) => el.scrollIntoView({ block: 'center' }));
+      await arrastrar(page, hueco(donde), hueco(h));
       [piezas[h], piezas[donde]] = [piezas[donde], piezas[h]];
+      gestos++;
     }
-    if (piezas[h][1] !== 0 && !(await page.locator('#sstv-letra-0').innerText())) {
-      await tocar(h);
-      while (piezas[h][1] !== 0) { await tocar(h); piezas[h][1] = (piezas[h][1] + 1) % 4; if (await page.locator('#sstv-letra-0').innerText()) break; }
-      // deseleccionar (elegir otra pieza de otro cuadrante no cambia nada)
-      if (!(await page.locator('#sstv-letra-0').innerText())) await page.locator('.sstv-pieza[data-q="1"][data-h="0"]').click();
+    while (piezas[h][1] !== 0) {
+      await hueco(h).click();
+      piezas[h][1] = (piezas[h][1] + 1) % 4;
+      gestos++;
     }
   }
-  await expect(page.locator('#sstv-letra-0')).toHaveText(letras[0].toUpperCase());
-  await A.responder(page, 'sstv_puzle', A.clave(e.id));
-  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
-});
+  return gestos;
+}
 
-test('Escotilla: acertijos fijos iguales para todos, cifras para tachar y las dos escotillas', async ({ page }) => {
-  const e = C.estaciones.find((x) => x.prueba.tipo === 'caja_fuerte');
-  test.skip(!e || !e.equipos, 'Sin escotilla');
-  // El mismo acertijo y la misma clave para todos los equipos
-  const ids = Object.keys(e.equipos);
-  const pistas = (k) => JSON.stringify(e.equipos[k].prueba.escotillas);
-  for (const k of ids) {
-    expect(pistas(k)).toBe(pistas(ids[0]));
-    expect(A.clave(e.id, k)).toBe(A.clave(e.id, ids[0]));
+test('Imagen SSTV: 4 puzles; tocar gira, arrastrar cambia y cada puzle resuelto da su letra', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'sstv_puzle');
+  test.skip(!e, 'Sin Imagen SSTV');
+  const puzles = e.equipos['1'].prueba.puzles;
+  const letras = A.respuestasPartes(e.id);
+  expect(puzles).toHaveLength(4);
+  // La misma mezcla y la misma clave para todos los equipos
+  for (const k of Object.keys(e.equipos)) {
+    expect(JSON.stringify(e.equipos[k].prueba)).toBe(JSON.stringify(e.equipos['1'].prueba));
+    expect(A.clave(e.id, k)).toBe(A.clave(e.id, 1));
   }
-  expect(e.equipos[ids[0]].prueba.escotillas.map((x) => x.pistas.length)).toEqual([5, 5]);
-  await page.clock.install();
+  // Ninguna pieza empieza en su sitio y orientación correctos
+  for (const pz of puzles) expect(pz.inicio.some(([p, g], h) => p === h && g === 0)).toBe(false);
   await A.empezar(page);
   await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
   await A.abrirEstacion(page, e.id);
   await A.sinScrollHorizontal(page);
-  await expect(page.locator('#prueba .nota-prueba')).toContainText('ninguna se repite');
-  // Tachar y destachar una cifra (solo visual)
-  const siete = page.locator('.tachar-cifra[data-d="7"]');
-  await siete.click();
-  await expect(siete).toHaveClass(/tachada/);
-  await expect(siete).toHaveAttribute('aria-pressed', 'true');
-  await siete.click();
-  await expect(siete).not.toHaveClass(/tachada/);
-  // Las dos escotillas, una tras otra
-  await A.responder(page, 'caja_fuerte', A.clave(e.id));
-  await page.clock.fastForward(3000);
+  await expect(page.locator('.pz')).toHaveCount(4);
+  await expect(page.locator('.pz-mini')).toHaveCount(4);
+  // Tocar una pieza la gira 90° (y no cambia de sitio)
+  const giro = () => page.locator('.pz-pieza[data-q="0"][data-h="0"]').getAttribute('aria-label');
+  const antes = puzles[0].inicio[0][1];
+  await page.locator('.pz-pieza[data-q="0"][data-h="0"]').click();
+  const ahora = (antes + 1) % 4;
+  expect(await giro()).toContain(ahora ? `girada ${ahora * 90} grados` : 'hueco 1.');
+  await page.locator('.pz-pieza[data-q="0"][data-h="0"]').click();
+  await page.locator('.pz-pieza[data-q="0"][data-h="0"]').click();
+  await page.locator('.pz-pieza[data-q="0"][data-h="0"]').click();
+  // Resolver los puzles 1 y 2 (arrastrando y tocando): cada uno da su letra
+  for (const q of [0, 1]) {
+    await resolverPuzle(page, puzles[q].inicio, q);
+    await expect(page.locator(`#pz-letra-${q}`)).toHaveText(letras[q].toUpperCase());
+    await expect(page.locator(`#pz-estado-${q}`)).toContainText('Imagen recibida');
+  }
+  // Una palabra equivocada no vale; la buena supera la estación
+  await A.responder(page, 'sstv_puzle', 'luna');
+  await expect(page.locator('#ayuda-prueba')).toContainText('Esa palabra no es');
+  await A.responder(page, 'sstv_puzle', A.clave(e.id));
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 

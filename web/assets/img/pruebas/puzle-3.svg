@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- Puzle 3 · Saturno con sus anillos y una luna (ilustración propia, GranaSAT). -->
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a0b40"/><stop offset="1" stop-color="#7b2d8e"/>
+    </linearGradient>
+    <clipPath id="planeta"><circle cx="150" cy="155" r="64"/></clipPath>
+  </defs>
+  <rect width="300" height="300" fill="url(#fondo)"/>
+  <g fill="#fff">
+    <circle cx="18" cy="110" r="2"/><circle cx="110" cy="20" r="2.2"/><circle cx="180" cy="40" r="1.8"/><circle cx="290" cy="150" r="2"/>
+    <circle cx="25" cy="190" r="2"/><circle cx="200" cy="270" r="2"/><circle cx="270" cy="210" r="1.8"/><circle cx="120" cy="285" r="2"/>
+  </g>
+  <path d="M100,40 l4,9 9,4 -9,4 -4,9 -4,-9 -9,-4 9,-4z" fill="#fff59d"/>
+  <path d="M275,250 l4,9 9,4 -9,4 -4,9 -4,-9 -9,-4 9,-4z" fill="#fff59d"/>
+  <!-- Asteroides (arriba, en medio) -->
+  <path d="M138,30 l14,-6 12,6 2,14 -12,8 -15,-4z" fill="#a1887f" stroke="#140a35" stroke-width="3"/>
+  <circle cx="148" cy="38" r="3" fill="#6d4c41"/><circle cx="157" cy="32" r="2" fill="#6d4c41"/>
+  <path d="M172,64 l8,-4 7,4 0,8 -8,4 -7,-3z" fill="#bcaaa4" stroke="#140a35" stroke-width="2.5"/>
+  <path d="M120,62 l6,-3 5,3 -1,6 -6,2 -5,-3z" fill="#bcaaa4" stroke="#140a35" stroke-width="2.5"/>
+  <!-- Cometa (arriba a la izquierda) -->
+  <path d="M6,14 L52,52 L44,60 Z" fill="#80deea" opacity=".85"/>
+  <circle cx="52" cy="58" r="10" fill="#e0f7fa" stroke="#140a35" stroke-width="3"/>
+  <!-- Luna con cráteres (arriba a la derecha) -->
+  <circle cx="246" cy="58" r="30" fill="#cfd8dc" stroke="#140a35" stroke-width="3.5"/>
+  <circle cx="236" cy="48" r="7" fill="#90a4ae"/><circle cx="256" cy="68" r="5" fill="#90a4ae"/><circle cx="255" cy="44" r="3.5" fill="#90a4ae"/>
+  <!-- Planeta azul pequeño (abajo a la izquierda) -->
+  <circle cx="52" cy="250" r="22" fill="#29b6f6" stroke="#140a35" stroke-width="3"/>
+  <path d="M34,246 q18,-6 36,2" stroke="#e1f5fe" stroke-width="4" fill="none"/>
+  <!-- Satélite pequeño (abajo a la derecha) -->
+  <g transform="translate(232 238) rotate(-20)">
+    <rect x="-24" y="-6" width="16" height="12" fill="#1e88e5" stroke="#140a35" stroke-width="2"/>
+    <rect x="8" y="-6" width="16" height="12" fill="#1e88e5" stroke="#140a35" stroke-width="2"/>
+    <rect x="-8" y="-8" width="16" height="16" rx="2" fill="#ffca28" stroke="#140a35" stroke-width="2.5"/>
+    <path d="M0,-8 V-18" stroke="#fff" stroke-width="2"/>
+  </g>
+  <!-- Anillo de atrás -->
+  <g transform="rotate(-18 150 155)">
+    <ellipse cx="150" cy="155" rx="132" ry="34" fill="none" stroke="#140a35" stroke-width="20"/>
+    <ellipse cx="150" cy="155" rx="132" ry="34" fill="none" stroke="#ffe0b2" stroke-width="14"/>
+    <ellipse cx="150" cy="155" rx="132" ry="34" fill="none" stroke="#ffb74d" stroke-width="4"/>
+  </g>
+  <!-- Planeta con bandas -->
+  <circle cx="150" cy="155" r="64" fill="#ffca28"/>
+  <g clip-path="url(#planeta)">
+    <rect x="80" y="110" width="140" height="14" fill="#ff8f00"/>
+    <rect x="80" y="138" width="140" height="10" fill="#fff3c4"/>
+    <rect x="80" y="160" width="140" height="16" fill="#e65100"/>
+    <rect x="80" y="188" width="140" height="10" fill="#ffe082"/>
+    <circle cx="178" cy="170" r="9" fill="#bf360c"/>
+  </g>
+  <circle cx="150" cy="155" r="64" fill="none" stroke="#140a35" stroke-width="4"/>
+  <!-- Anillo de delante (mitad de abajo) -->
+  <g transform="rotate(-18 150 155)">
+    <path d="M18,155 A132 34 0 0 0 282,155" fill="none" stroke="#140a35" stroke-width="20"/>
+    <path d="M18,155 A132 34 0 0 0 282,155" fill="none" stroke="#ffe0b2" stroke-width="14"/>
+    <path d="M18,155 A132 34 0 0 0 282,155" fill="none" stroke="#ffb74d" stroke-width="4"/>
+  </g>
+</svg>
