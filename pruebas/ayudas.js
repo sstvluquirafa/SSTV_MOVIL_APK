@@ -118,6 +118,24 @@ async function responder(page, tipo, r) {
     }
     case 'diferencias': await page.fill('#dif-clave', r); await page.locator('.dif-clave-form button').click(); break;
     case 'sstv_puzle': await page.fill('#sstv-clave', r); await page.locator('.dif-clave-form button').click(); break;
+    case 'mas_menos': {
+      // r = la clave: se encadena la racha acertando; cualquier otra cosa: se falla la primera pregunta
+      const partes = secretoEquipo(idDeTipo(tipo)).partes;
+      const buena = (a, b) => partes.find((p) => p.opciones.includes(a) && p.opciones.includes(b)).respuestas[0];
+      const seguir = page.locator('#mm-seguir');
+      if (await seguir.isVisible() && /Otra racha/.test(await seguir.innerText())) await seguir.click();
+      const meta = est(idDeTipo(tipo)).equipos['1'].prueba.racha;
+      for (let n = 0; n < (r === clave(idDeTipo(tipo)) ? meta : 1); n++) {
+        if (n) await seguir.click();
+        await expect(page.locator('.mm-carta:not([disabled])')).toHaveCount(2);
+        const nombres = await page.locator('.mm-nombre').allInnerTexts();
+        const ok = buena(nombres[0], nombres[1]);
+        const i = r === clave(idDeTipo(tipo)) ? nombres.indexOf(ok) : 1 - nombres.indexOf(ok);
+        await page.locator(`.mm-carta[data-i="${i}"]`).click();
+        await expect(page.locator('#mm-dato')).not.toHaveText('');
+      }
+      break;
+    }
     case 'binario': {
       const rs = comoLista(tipo, r);
       for (let i = 0; i < rs.length; i++) await page.fill(`#resp-bin-${i}`, rs[i]);
@@ -189,6 +207,7 @@ async function continuarSiHaceFalta(page, tipo, id) {
   if (tipo === 'real_o_ia') { await expect(page.locator('#ia-comprobar')).toHaveText('Continuar'); await page.locator('#ia-comprobar').click(); }
   if (tipo === 'bulo_verdad') { await expect(page.locator('#bulo-comprobar')).toHaveText('Continuar'); await page.locator('#bulo-comprobar').click(); }
   if (tipo === 'hackeo') await page.locator('#hack-seguir').click();
+  if (tipo === 'mas_menos') { await expect(page.locator('#mm-seguir')).toHaveText('Continuar'); await page.locator('#mm-seguir').click(); }
   await expect(page).toHaveURL(new RegExp(`#/superada/${id}$`), { timeout: 8000 });
 }
 

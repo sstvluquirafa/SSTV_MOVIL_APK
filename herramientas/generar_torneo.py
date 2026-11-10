@@ -596,8 +596,28 @@ def contenido_sstv(banco, eq: Equipo):
             "partes": [{"pregunta": f"Imagen {q + 1} ({im.get('nombre', '')})", "respuestas": [letras[q].lower()]} for q, im in enumerate(imagenes)]}
 
 
+# ---------- G · ¿Más o menos? ----------
+def contenido_mas_menos(banco, eq: Equipo):
+    """Parejas de «¿qué es más…?». El móvil necesita saber al momento si aciertan, pero sin respuestas en claro: cada
+    pareja lleva la huella (PBKDF2 con sal) del nombre correcto, y su dato va cifrado con ese nombre (solo se lee tras
+    contestar). La clave de la estación se revela al encadenar la racha: va ofuscada, como las palabras del Wordle."""
+    parejas = []
+    for x in banco["parejas"]:
+        buena = x[x["correcta"]]["nombre"]
+        parejas.append({"pregunta": x["pregunta"], "opciones": [x["a"], x["b"]],
+                        "huella": huella(buena, eq.sal), "datoCifrado": cifrar(x["dato"], buena, eq.sal)})
+    clave = trozo_clave(eq.semilla, f"masmenos:{eq.est}", 8)
+    sal_c = derivar(eq.semilla, f"masmenos-sal:{eq.est}")[:8].hex()
+    return {"prueba": {"racha": int(banco.get("racha", 8)), "porIntento": int(banco.get("por_intento", 8)),
+                       "parejas": parejas, "clave": ofuscar(clave, sal_c), "salClave": sal_c},
+            "clave": clave,
+            "partes": [{"pregunta": x["pregunta"].replace("*", "") + f" {x['a']['nombre']} / {x['b']['nombre']}",
+                        "respuestas": [x[x["correcta"]]["nombre"]], "opciones": [x["a"]["nombre"], x["b"]["nombre"]]}
+                       for x in banco["parejas"]]}
+
+
 # tipo de prueba → función que crea el contenido de un equipo a partir de su banco (privado/bancos.json → tipo)
-CONTENIDO = {"diferencias": contenido_diferencias, "sstv_puzle": contenido_sstv, "morse": contenido_morse, "pelis": contenido_pelis, "wordle": contenido_wordle, "binario": contenido_binario,
+CONTENIDO = {"mas_menos": contenido_mas_menos, "diferencias": contenido_diferencias, "sstv_puzle": contenido_sstv, "morse": contenido_morse, "pelis": contenido_pelis, "wordle": contenido_wordle, "binario": contenido_binario,
              "qr_escondido": contenido_qr, "geoguessr": contenido_geoguessr, "caja_fuerte": contenido_caja,
              "bulo_verdad": contenido_bulo}
 # Las que se generan antes que las demás (el Binario evita las palabras del Wordle de cada equipo)

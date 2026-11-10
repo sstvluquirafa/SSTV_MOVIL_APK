@@ -1419,3 +1419,35 @@ body.sin-scroll { overflow: hidden; }
   content: ''; position: absolute; left: 18%; right: 18%; top: 50%; height: 3px; border-radius: 2px;
   background: var(--interferencia); transform: rotate(-35deg);
 }
+
+/* ---------- ¿Más o menos? ---------- */
+.mm-racha { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 14px; background: var(--superficie); border: 1px solid var(--linea); }
+.mm-racha-texto { font-family: var(--mono); font-weight: 700; color: var(--texto); }
+.mm-puntos { display: flex; gap: 6px; }
+.mm-puntos i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--texto-3); background: transparent; transition: background .25s, border-color .25s, box-shadow .25s; }
+.mm-puntos i.on { background: var(--fosforo); border-color: var(--fosforo); box-shadow: 0 0 8px rgba(94, 230, 208, .8); }
+.mm-racha.completa { border-color: var(--fosforo); }
+.mm-pregunta { margin: 14px 2px 0; text-align: center; font-family: var(--display); font-weight: 700; font-size: 1.45rem; line-height: 1.25; color: var(--texto); text-wrap: balance; }
+.mm-pregunta b { color: var(--ambar); }
+.mm-cartas { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 8px; }
+.mm-o { align-self: center; font-family: var(--display); font-weight: 800; color: var(--texto-3); }
+.mm-carta {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 150px; padding: 12px 8px;
+  border-radius: 18px; border: 2px solid var(--linea); background: var(--superficie); color: var(--texto); cursor: pointer;
+  font: 700 1.02rem/1.25 var(--cuerpo); text-align: center; transition: border-color .2s, transform .15s;
+}
+.mm-carta:not(:disabled):active { transform: scale(.97); }
+.mm-carta:disabled { cursor: default; }
+.mm-icono { display: grid; place-items: center; width: 68px; height: 68px; }
+.mm-dibujo { width: 68px; height: 68px; }
+.mm-emoji { font-size: 3.2rem; line-height: 1; font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif; }
+.mm-carta.elegida { border-color: var(--ambar); }
+.mm-carta.correcta { border-color: var(--fosforo); background: linear-gradient(180deg, rgba(94, 230, 208, .16), var(--superficie)); animation: mm-latido .5s ease 1; }
+.mm-carta.fallo { border-color: var(--interferencia); background: linear-gradient(180deg, rgba(255, 107, 91, .14), var(--superficie)); animation: mm-temblor .4s ease 1; }
+.mm-carta:disabled:not(.correcta):not(.fallo) { opacity: .6; }
+@keyframes mm-latido { 0% { transform: scale(1); } 45% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes mm-temblor { 0%, 100% { transform: none; } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) { .mm-carta.correcta, .mm-carta.fallo { animation: none; } }
+.mm-dato { min-height: 2.6em; margin: 14px 4px 0; text-align: center; font-size: 1rem; line-height: 1.35; color: var(--texto-2); }
+.mm-dato.ok { color: var(--fosforo); }
+.mm-dato.no { color: #ffb4aa; }

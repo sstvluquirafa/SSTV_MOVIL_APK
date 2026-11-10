@@ -233,6 +233,45 @@ test('Imagen SSTV: 4 puzles; tocar gira, arrastrar cambia y cada puzle resuelto 
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
+test('¿Más o menos?: acertar sube la racha, fallar la pone a cero, y con 8 seguidas se supera', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'mas_menos');
+  test.skip(!e, 'Sin ¿Más o menos?');
+  const P = e.equipos['1'].prueba;
+  expect(P.parejas.length).toBeGreaterThanOrEqual(24);
+  for (const k of Object.keys(e.equipos)) expect(A.clave(e.id, k)).toBe(A.clave(e.id, 1));
+  const partes = A.secretoEquipo(e.id).partes;
+  const buena = (a, b) => partes.find((p) => p.opciones.includes(a) && p.opciones.includes(b)).respuestas[0];
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.sinScrollHorizontal(page);
+  await expect(page.locator('#mm-racha-texto')).toHaveText('Racha: 0 de 8');
+  const tocar = async (acertar) => {
+    const nombres = await page.locator('.mm-nombre').allInnerTexts();
+    const ok = nombres.indexOf(buena(nombres[0], nombres[1]));
+    await page.locator(`.mm-carta[data-i="${acertar ? ok : 1 - ok}"]`).click();
+    return ok;
+  };
+  // Dos aciertos: la racha sube y se ve el dato
+  for (let n = 1; n <= 2; n++) {
+    await tocar(true);
+    await expect(page.locator('#mm-racha-texto')).toHaveText(`Racha: ${n} de 8`);
+    await expect(page.locator('.mm-puntos i.on')).toHaveCount(n);
+    await expect(page.locator('#mm-dato')).toContainText('¡Sí!');
+    await page.locator('#mm-seguir').click();
+  }
+  // Un fallo: se marca la correcta, su dato, y la racha a cero
+  const ok = await tocar(false);
+  await expect(page.locator(`.mm-carta[data-i="${ok}"]`)).toHaveClass(/correcta/);
+  await expect(page.locator('#mm-dato')).toContainText('Era ');
+  await expect(page.locator('#mm-racha-texto')).toHaveText('Racha: 0 de 8');
+  await expect(page.locator('#mm-seguir')).toHaveText('Otra racha');
+  // Ocho seguidas: la estación se completa sola
+  await A.responder(page, 'mas_menos', A.clave(e.id));
+  await expect(page.locator('#mm-racha-texto')).toHaveText('Racha: 8 de 8');
+  await A.continuarSiHaceFalta(page, 'mas_menos', e.id);
+});
+
 test('Morse: si escriben la pregunta, se les dice que es la pregunta', async ({ page }) => {
   const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
   test.skip(!e, 'Sin Morse');

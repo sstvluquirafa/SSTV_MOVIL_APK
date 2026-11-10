@@ -3156,9 +3156,9 @@ window.GK_CONFIG = {
       "x": 1708,
       "y": 409,
       "prueba": {
-        "tipo": "diferencias",
-        "_ayuda": "Contenido por equipo: lo genera el generador (privado/bancos.json → diferencias). Una escena por equipo con 4 zonas y 3 diferencias en cada una.",
-        "pista": "Comparad zona por zona: primero objetos que faltan, luego colores, luego posiciones"
+        "tipo": "mas_menos",
+        "_ayuda": "Igual para todos: parejas de privado/bancos.json → mas_menos; hay que encadenar «racha» aciertos (8).",
+        "pista": "Cuidado con las trampas: la Estación Espacial está mucho más cerca de la Tierra que la Luna, y Venus es más caliente que Mercurio"
       },
       "letraPalabra": "A",
       "token": "fc1be9180901d10ba28d12ca570f4ac1e6bce0dcea82912bc0ab01b28be18c8f",
@@ -3166,7074 +3166,3752 @@ window.GK_CONFIG = {
       "equipos": {
         "1": {
           "prueba": {
-            "estrellas": [
-              [
-                210.2,
-                112.5,
-                0.6
-              ],
-              [
-                161.2,
-                57.1,
-                0.6
-              ],
-              [
-                338.9,
-                36.6,
-                0.8
-              ],
-              [
-                271.7,
-                234.6,
-                0.8
-              ],
-              [
-                127.4,
-                107.7,
-                0.8
-              ],
-              [
-                297.4,
-                276.7,
-                0.6
-              ],
-              [
-                168.8,
-                124.4,
-                1.1
-              ],
-              [
-                387.8,
-                123.7,
-                0.6
-              ],
-              [
-                188.8,
-                242.7,
-                1.1
-              ],
-              [
-                6.4,
-                285.9,
-                0.6
-              ],
-              [
-                306.3,
-                83.8,
-                0.6
-              ],
-              [
-                227.9,
-                273.0,
-                1.4
-              ],
-              [
-                260.7,
-                134.4,
-                1.1
-              ],
-              [
-                47.3,
-                8.7,
-                0.8
-              ],
-              [
-                297.7,
-                210.7,
-                0.8
-              ],
-              [
-                124.3,
-                11.1,
-                1.1
-              ],
-              [
-                252.9,
-                86.5,
-                0.6
-              ],
-              [
-                234.8,
-                135.3,
-                1.1
-              ],
-              [
-                368.7,
-                88.4,
-                1.1
-              ],
-              [
-                286.0,
-                250.3,
-                0.8
-              ],
-              [
-                100.3,
-                287.0,
-                1.1
-              ],
-              [
-                157.7,
-                90.5,
-                0.8
-              ],
-              [
-                307.4,
-                23.4,
-                0.6
-              ],
-              [
-                167.0,
-                25.3,
-                0.6
-              ],
-              [
-                257.8,
-                42.3,
-                0.6
-              ],
-              [
-                110.5,
-                156.1,
-                1.1
-              ],
-              [
-                10.7,
-                56.6,
-                0.6
-              ],
-              [
-                244.8,
-                169.7,
-                0.6
-              ],
-              [
-                100.0,
-                215.6,
-                0.6
-              ],
-              [
-                73.7,
-                215.0,
-                1.1
-              ],
-              [
-                226.6,
-                255.6,
-                0.8
-              ],
-              [
-                86.6,
-                243.7,
-                1.1
-              ],
-              [
-                332.4,
-                168.5,
-                1.1
-              ],
-              [
-                59.0,
-                149.0,
-                0.6
-              ],
-              [
-                153.3,
-                249.0,
-                0.8
-              ],
-              [
-                215.9,
-                10.8,
-                1.4
-              ],
-              [
-                159.1,
-                116.3,
-                1.1
-              ],
-              [
-                290.2,
-                13.3,
-                1.1
-              ],
-              [
-                58.6,
-                286.3,
-                0.6
-              ],
-              [
-                329.0,
-                30.6,
-                0.8
-              ],
-              [
-                342.5,
-                277.2,
-                1.4
-              ],
-              [
-                99.0,
-                180.3,
-                1.1
-              ],
-              [
-                131.7,
-                170.4,
-                0.8
-              ],
-              [
-                228.8,
-                228.7,
-                1.1
-              ],
-              [
-                171.1,
-                69.5,
-                1.4
-              ],
-              [
-                254.4,
-                219.6,
-                0.6
-              ],
-              [
-                113.9,
-                185.0,
-                1.1
-              ],
-              [
-                289.9,
-                110.9,
-                0.8
-              ],
-              [
-                104.9,
-                230.8,
-                1.1
-              ],
-              [
-                379.4,
-                78.4,
-                0.6
-              ],
-              [
-                250.9,
-                112.9,
-                1.4
-              ],
-              [
-                180.4,
-                101.1,
-                1.4
-              ],
-              [
-                122.1,
-                197.5,
-                1.1
-              ],
-              [
-                188.6,
-                233.4,
-                0.8
-              ],
-              [
-                103.7,
-                67.0,
-                0.6
-              ],
-              [
-                393.9,
-                10.1,
-                1.1
-              ],
-              [
-                11.1,
-                207.7,
-                1.4
-              ],
-              [
-                337.5,
-                252.9,
-                0.6
-              ],
-              [
-                113.4,
-                195.6,
-                0.6
-              ],
-              [
-                124.2,
-                209.6,
-                1.4
-              ],
-              [
-                248.3,
-                125.9,
-                1.1
-              ],
-              [
-                247.4,
-                275.3,
-                0.8
-              ],
-              [
-                46.3,
-                122.2,
-                1.4
-              ],
-              [
-                330.0,
-                39.2,
-                1.1
-              ],
-              [
-                223.6,
-                121.7,
-                1.1
-              ],
-              [
-                376.9,
-                222.9,
-                1.1
-              ],
-              [
-                369.1,
-                9.6,
-                0.8
-              ],
-              [
-                318.4,
-                157.2,
-                0.6
-              ],
-              [
-                232.0,
-                165.3,
-                1.4
-              ],
-              [
-                172.2,
-                231.2,
-                0.8
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "estrella",
-                "x": 103.0,
-                "y": 110.7,
-                "s": 24,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "antena",
-                "x": 166.6,
-                "y": 43.9,
-                "s": 32,
-                "r": 15,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "estrella",
-                "x": 98.8,
-                "y": 38.1,
-                "s": 24,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "astronauta",
-                "x": 165.6,
-                "y": 111.1,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "cubesat",
-                "x": 304.7,
-                "y": 36.9,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "astronauta",
-                "x": 304.6,
-                "y": 117.7,
-                "s": 34,
-                "r": 30,
-                "c": "#eef1fa"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "cubesat",
-                "x": 236.4,
-                "y": 34.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "astronauta",
-                "x": 361.7,
-                "y": 117.3,
-                "s": 34,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "planeta",
-                "x": 159.0,
-                "y": 265.9,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa",
-                "a": 1
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "cubesat",
-                "x": 98.5,
-                "y": 262.0,
-                "s": 32,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "antena",
-                "x": 105.8,
-                "y": 184.8,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "estrella",
-                "x": 161.4,
-                "y": 193.5,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "cometa",
-                "x": 302.2,
-                "y": 189.6,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "cohete",
-                "x": 235.6,
-                "y": 194.9,
-                "s": 36,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "planeta",
-                "x": 359.9,
-                "y": 184.9,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "planeta",
-                "x": 365.1,
-                "y": 259.5,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627",
-                "a": 1
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "estrella",
-                "x": 103.0,
-                "y": 110.7,
-                "s": 24,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 98.8,
-                "y": 38.1,
-                "s": 24,
-                "r": 15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "astronauta",
-                "x": 165.6,
-                "y": 111.1,
-                "s": 34,
-                "r": 195,
-                "c": "#ffb627"
-              },
-              {
-                "t": "planeta",
-                "x": 36,
-                "y": 40,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cubesat",
-                "x": 274.7,
-                "y": 58.9,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "astronauta",
-                "x": 304.6,
-                "y": 117.7,
-                "s": 34,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cubesat",
-                "x": 236.4,
-                "y": 34.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "astronauta",
-                "x": 361.7,
-                "y": 117.3,
-                "s": 19,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 236,
-                "y": 112,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "planeta",
-                "x": 159.0,
-                "y": 265.9,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa",
-                "a": 1
-              },
-              {
-                "t": "cubesat",
-                "x": 98.5,
-                "y": 262.0,
-                "s": 32,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "antena",
-                "x": 75.8,
-                "y": 206.8,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 161.4,
-                "y": 193.5,
-                "s": 41,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cometa",
-                "x": 302.2,
-                "y": 189.6,
-                "s": 34,
-                "r": 210,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cohete",
-                "x": 235.6,
-                "y": 194.9,
-                "s": 36,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "planeta",
-                "x": 359.9,
-                "y": 184.9,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1a4rm",
-                "x": 166.6,
-                "y": 43.9,
-                "r": 28
-              },
-              {
-                "id": "1bfkw",
-                "x": 36,
-                "y": 40,
-                "r": 28
-              },
-              {
-                "id": "1cam4",
-                "x": 165.6,
-                "y": 111.1,
-                "r": 28
-              },
-              {
-                "id": "2aact",
-                "x": 236,
-                "y": 112,
-                "r": 28
-              },
-              {
-                "id": "2bpc7",
-                "x": 361.7,
-                "y": 117.3,
-                "r": 28
-              },
-              {
-                "id": "2cxw7",
-                "x": 274.7,
-                "y": 58.9,
-                "r": 28,
-                "x2": 304.7,
-                "y2": 36.9
-              },
-              {
-                "id": "3ajch",
-                "x": 161.4,
-                "y": 193.5,
-                "r": 28
-              },
-              {
-                "id": "3bkyt",
-                "x": 75.8,
-                "y": 206.8,
-                "r": 28,
-                "x2": 105.8,
-                "y2": 184.8
-              },
-              {
-                "id": "3c3kt",
-                "x": 98.5,
-                "y": 262.0,
-                "r": 28
-              },
-              {
-                "id": "4a7e7",
-                "x": 235.6,
-                "y": 194.9,
-                "r": 28
-              },
-              {
-                "id": "4bk9j",
-                "x": 302.2,
-                "y": 189.6,
-                "r": 28
-              },
-              {
-                "id": "4c64t",
-                "x": 365.1,
-                "y": 259.5,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "XaIBHw==",
-              "fFImbg==",
-              "Qvelow==",
-              "BgO63Q=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "c9d58239e1354609c3d869850c8c8904",
-          "huella": "45b64c1d0301598b1a49a2d62181e633d82d5dcf04e157e2f4e1dbc56e8f6940",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "5ZuSlZRuNZWEYfO8TIF1eqVvcjAdbGGIhk9LGj3dlAZKEIBMWHUJUfuMfOteMN+ijGaX4r+7Ahv3ffAv4rJ7lJwfth7JsdP73zahURJGDOs5cbH0s2f+abiVb49Na8MrI/QuJu0LVRWG+Bxa0aRim1vGm1bPvRmJlSRtFRde+UzJ0cKewg+3NbeIKcc="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "2": {
           "prueba": {
-            "estrellas": [
-              [
-                38.1,
-                19.7,
-                1.4
-              ],
-              [
-                383.2,
-                235.3,
-                0.8
-              ],
-              [
-                179.2,
-                184.6,
-                1.1
-              ],
-              [
-                102.1,
-                103.2,
-                0.8
-              ],
-              [
-                97.6,
-                64.2,
-                1.4
-              ],
-              [
-                318.0,
-                47.5,
-                0.8
-              ],
-              [
-                360.5,
-                104.1,
-                1.1
-              ],
-              [
-                291.4,
-                98.8,
-                1.1
-              ],
-              [
-                24.3,
-                125.9,
-                1.4
-              ],
-              [
-                267.8,
-                15.5,
-                0.6
-              ],
-              [
-                394.4,
-                291.3,
-                1.4
-              ],
-              [
-                395.6,
-                67.7,
-                1.4
-              ],
-              [
-                77.9,
-                94.5,
-                0.6
-              ],
-              [
-                198.8,
-                53.6,
-                0.6
-              ],
-              [
-                383.1,
-                73.1,
-                1.1
-              ],
-              [
-                393.9,
-                251.4,
-                0.8
-              ],
-              [
-                342.0,
-                187.7,
-                1.1
-              ],
-              [
-                287.4,
-                191.5,
-                1.4
-              ],
-              [
-                103.8,
-                258.5,
-                1.1
-              ],
-              [
-                317.2,
-                143.3,
-                0.6
-              ],
-              [
-                306.3,
-                209.0,
-                1.4
-              ],
-              [
-                393.5,
-                130.4,
-                1.4
-              ],
-              [
-                301.3,
-                227.3,
-                1.4
-              ],
-              [
-                21.7,
-                223.6,
-                1.1
-              ],
-              [
-                199.8,
-                152.4,
-                1.1
-              ],
-              [
-                299.2,
-                73.5,
-                1.1
-              ],
-              [
-                319.4,
-                183.5,
-                1.4
-              ],
-              [
-                66.7,
-                180.4,
-                0.6
-              ],
-              [
-                297.8,
-                248.1,
-                0.8
-              ],
-              [
-                94.4,
-                102.9,
-                1.4
-              ],
-              [
-                251.0,
-                189.1,
-                1.1
-              ],
-              [
-                49.2,
-                160.5,
-                0.6
-              ],
-              [
-                261.0,
-                187.4,
-                1.4
-              ],
-              [
-                219.9,
-                262.2,
-                1.4
-              ],
-              [
-                179.5,
-                279.8,
-                0.6
-              ],
-              [
-                23.7,
-                35.5,
-                1.4
-              ],
-              [
-                61.0,
-                217.8,
-                0.8
-              ],
-              [
-                336.6,
-                271.2,
-                0.8
-              ],
-              [
-                271.1,
-                24.0,
-                0.6
-              ],
-              [
-                204.4,
-                237.4,
-                1.1
-              ],
-              [
-                386.6,
-                163.0,
-                0.6
-              ],
-              [
-                394.3,
-                111.1,
-                0.6
-              ],
-              [
-                312.7,
-                274.3,
-                1.1
-              ],
-              [
-                204.5,
-                106.2,
-                1.1
-              ],
-              [
-                34.5,
-                81.9,
-                1.4
-              ],
-              [
-                115.6,
-                173.5,
-                0.8
-              ],
-              [
-                331.8,
-                161.1,
-                1.1
-              ],
-              [
-                24.3,
-                16.5,
-                1.1
-              ],
-              [
-                126.5,
-                269.7,
-                0.8
-              ],
-              [
-                362.3,
-                249.7,
-                0.8
-              ],
-              [
-                362.1,
-                95.4,
-                0.6
-              ],
-              [
-                363.0,
-                249.9,
-                1.1
-              ],
-              [
-                177.6,
-                90.6,
-                0.8
-              ],
-              [
-                67.5,
-                161.2,
-                1.1
-              ],
-              [
-                392.0,
-                29.3,
-                0.6
-              ],
-              [
-                265.0,
-                162.3,
-                1.1
-              ],
-              [
-                390.3,
-                290.1,
-                0.8
-              ],
-              [
-                391.1,
-                39.2,
-                0.8
-              ],
-              [
-                15.3,
-                44.6,
-                1.1
-              ],
-              [
-                210.2,
-                279.1,
-                1.1
-              ],
-              [
-                123.7,
-                47.5,
-                1.1
-              ],
-              [
-                36.1,
-                118.4,
-                1.1
-              ],
-              [
-                134.2,
-                97.3,
-                1.1
-              ],
-              [
-                351.2,
-                100.1,
-                0.6
-              ],
-              [
-                326.9,
-                293.8,
-                1.4
-              ],
-              [
-                377.2,
-                93.0,
-                0.6
-              ],
-              [
-                7.0,
-                181.9,
-                1.1
-              ],
-              [
-                192.0,
-                180.9,
-                1.4
-              ],
-              [
-                225.4,
-                34.4,
-                1.4
-              ],
-              [
-                137.2,
-                84.8,
-                0.6
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "planeta",
-                "x": 161.8,
-                "y": 116.0,
-                "s": 34,
-                "r": -15,
-                "c": "#eef1fa",
-                "a": 1
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "antena",
-                "x": 36.1,
-                "y": 45.8,
-                "s": 32,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "astronauta",
-                "x": 31.5,
-                "y": 107.3,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "antena",
-                "x": 101.6,
-                "y": 34.2,
-                "s": 32,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "planeta",
-                "x": 367.2,
-                "y": 40.6,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "estrella",
-                "x": 241.7,
-                "y": 110.9,
-                "s": 24,
-                "r": -15,
-                "c": "#eef1fa"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "luna",
-                "x": 299.8,
-                "y": 45.6,
-                "s": 30,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "astronauta",
-                "x": 231.6,
-                "y": 36.0,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "cohete",
-                "x": 101.6,
-                "y": 266.0,
-                "s": 36,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "astronauta",
-                "x": 161.2,
-                "y": 261.3,
-                "s": 34,
-                "r": 30,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "estrella",
-                "x": 100.3,
-                "y": 184.9,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "cohete",
-                "x": 162.5,
-                "y": 192.2,
-                "s": 36,
-                "r": -15,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "cubesat",
-                "x": 359.9,
-                "y": 186.8,
-                "s": 32,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "luna",
-                "x": 304.5,
-                "y": 184.7,
-                "s": 30,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "luna",
-                "x": 235.4,
-                "y": 187.1,
-                "s": 30,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "cubesat",
-                "x": 235.8,
-                "y": 258.4,
-                "s": 32,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "planeta",
-                "x": 161.8,
-                "y": 116.0,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff",
-                "a": 1
-              },
-              {
-                "t": "antena",
-                "x": 36.1,
-                "y": 45.8,
-                "s": 32,
-                "r": 165,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "astronauta",
-                "x": 61.5,
-                "y": 128,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "antena",
-                "x": 101.6,
-                "y": 34.2,
-                "s": 32,
-                "r": -15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "planeta",
-                "x": 367.2,
-                "y": 40.6,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "estrella",
-                "x": 241.7,
-                "y": 110.9,
-                "s": 24,
-                "r": -15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "luna",
-                "x": 299.8,
-                "y": 45.6,
-                "s": 30,
-                "r": 105,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "astronauta",
-                "x": 231.6,
-                "y": 36.0,
-                "s": 34,
-                "r": 15,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cometa",
-                "x": 364,
-                "y": 112,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cohete",
-                "x": 101.6,
-                "y": 266.0,
-                "s": 20,
-                "r": 15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "estrella",
-                "x": 100.3,
-                "y": 184.9,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cohete",
-                "x": 162.5,
-                "y": 192.2,
-                "s": 36,
-                "r": -15,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "luna",
-                "x": 36,
-                "y": 190,
-                "s": 30,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "luna",
-                "x": 274.5,
-                "y": 172,
-                "s": 30,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "luna",
-                "x": 235.4,
-                "y": 187.1,
-                "s": 51,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cubesat",
-                "x": 235.8,
-                "y": 258.4,
-                "s": 32,
-                "r": 0,
-                "c": "#eef1fa"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1af9a",
-                "x": 61.5,
-                "y": 128,
-                "r": 28,
-                "x2": 31.5,
-                "y2": 107.3
-              },
-              {
-                "id": "1banf",
-                "x": 36.1,
-                "y": 45.8,
-                "r": 28
-              },
-              {
-                "id": "1c9an",
-                "x": 161.8,
-                "y": 116.0,
-                "r": 28
-              },
-              {
-                "id": "2a6n3",
-                "x": 231.6,
-                "y": 36.0,
-                "r": 28
-              },
-              {
-                "id": "2bnwv",
-                "x": 299.8,
-                "y": 45.6,
-                "r": 28
-              },
-              {
-                "id": "2crky",
-                "x": 364,
-                "y": 112,
-                "r": 28
-              },
-              {
-                "id": "3ayv6",
-                "x": 101.6,
-                "y": 266.0,
-                "r": 28
-              },
-              {
-                "id": "3bymm",
-                "x": 36,
-                "y": 190,
-                "r": 28
-              },
-              {
-                "id": "3cxne",
-                "x": 161.2,
-                "y": 261.3,
-                "r": 28
-              },
-              {
-                "id": "4av9p",
-                "x": 274.5,
-                "y": 172,
-                "r": 28,
-                "x2": 304.5,
-                "y2": 184.7
-              },
-              {
-                "id": "4b3f9",
-                "x": 359.9,
-                "y": 186.8,
-                "r": 28
-              },
-              {
-                "id": "4cktf",
-                "x": 235.4,
-                "y": 187.1,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "96H6Eg==",
-              "Id1DIg==",
-              "l9DM7w==",
-              "aDmBiw=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "b95a7c3aec6ee0583f4c7f492e385310",
-          "huella": "68839b4910a2be8bbb39790d877a1f505991549d76c6591c3e38ddbd93dc80e9",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "ZICow30xXqRfTkDAPEgb9u9c2GEz+C+5LYB8KbmMcXIntduVQEihofpxiOWm9DIwrZEx4vBt26j2nedxaJzcSmunZHdygPBXmCtUn02wMXkvFSl0H5LKLNtnV+jvJK1fvKrj4HTQPxbcxWq5DPkfDRrQL5N+TghhS/Ar5cH8OwDMHaSVmRZ+faaC0I0="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "3": {
           "prueba": {
-            "estrellas": [
-              [
-                84.9,
-                60.4,
-                0.6
-              ],
-              [
-                260.3,
-                28.8,
-                1.1
-              ],
-              [
-                39.6,
-                268.3,
-                1.1
-              ],
-              [
-                293.6,
-                169.5,
-                1.1
-              ],
-              [
-                26.5,
-                35.6,
-                0.6
-              ],
-              [
-                15.3,
-                47.0,
-                0.6
-              ],
-              [
-                9.5,
-                172.3,
-                0.6
-              ],
-              [
-                60.9,
-                154.1,
-                1.4
-              ],
-              [
-                376.1,
-                54.8,
-                0.6
-              ],
-              [
-                66.8,
-                29.8,
-                0.8
-              ],
-              [
-                78.7,
-                129.9,
-                1.1
-              ],
-              [
-                176.0,
-                16.3,
-                1.4
-              ],
-              [
-                86.6,
-                27.4,
-                0.6
-              ],
-              [
-                323.7,
-                208.9,
-                0.6
-              ],
-              [
-                71.0,
-                181.0,
-                0.6
-              ],
-              [
-                225.4,
-                192.5,
-                0.8
-              ],
-              [
-                197.1,
-                198.0,
-                0.8
-              ],
-              [
-                195.4,
-                109.7,
-                1.4
-              ],
-              [
-                190.6,
-                93.7,
-                0.6
-              ],
-              [
-                237.0,
-                196.3,
-                0.6
-              ],
-              [
-                175.5,
-                93.5,
-                0.8
-              ],
-              [
-                75.1,
-                202.5,
-                1.1
-              ],
-              [
-                191.0,
-                35.4,
-                0.6
-              ],
-              [
-                79.4,
-                81.9,
-                1.1
-              ],
-              [
-                22.3,
-                110.2,
-                1.4
-              ],
-              [
-                164.5,
-                230.1,
-                1.1
-              ],
-              [
-                242.3,
-                155.7,
-                0.8
-              ],
-              [
-                244.1,
-                47.3,
-                1.1
-              ],
-              [
-                368.6,
-                62.7,
-                1.1
-              ],
-              [
-                254.3,
-                49.6,
-                1.4
-              ],
-              [
-                345.5,
-                210.4,
-                1.1
-              ],
-              [
-                155.8,
-                137.4,
-                0.6
-              ],
-              [
-                135.8,
-                191.7,
-                1.1
-              ],
-              [
-                216.4,
-                190.5,
-                0.6
-              ],
-              [
-                169.1,
-                294.4,
-                1.4
-              ],
-              [
-                54.7,
-                69.5,
-                0.8
-              ],
-              [
-                205.7,
-                7.6,
-                0.6
-              ],
-              [
-                107.7,
-                292.7,
-                0.6
-              ],
-              [
-                62.5,
-                132.2,
-                0.6
-              ],
-              [
-                166.0,
-                152.7,
-                0.8
-              ],
-              [
-                303.3,
-                172.2,
-                0.6
-              ],
-              [
-                305.3,
-                66.7,
-                0.6
-              ],
-              [
-                102.9,
-                197.3,
-                0.6
-              ],
-              [
-                17.6,
-                208.3,
-                0.6
-              ],
-              [
-                253.6,
-                29.1,
-                1.4
-              ],
-              [
-                10.8,
-                177.7,
-                0.8
-              ],
-              [
-                121.4,
-                220.4,
-                1.1
-              ],
-              [
-                336.0,
-                258.1,
-                1.1
-              ],
-              [
-                114.3,
-                213.7,
-                1.1
-              ],
-              [
-                345.1,
-                253.3,
-                1.1
-              ],
-              [
-                208.0,
-                224.1,
-                1.1
-              ],
-              [
-                43.8,
-                79.5,
-                0.8
-              ],
-              [
-                52.3,
-                6.4,
-                1.1
-              ],
-              [
-                203.8,
-                189.3,
-                0.6
-              ],
-              [
-                262.2,
-                267.5,
-                0.6
-              ],
-              [
-                26.2,
-                200.9,
-                1.1
-              ],
-              [
-                388.8,
-                103.2,
-                0.8
-              ],
-              [
-                233.7,
-                107.8,
-                1.1
-              ],
-              [
-                14.8,
-                256.0,
-                1.1
-              ],
-              [
-                133.8,
-                76.4,
-                1.4
-              ],
-              [
-                319.4,
-                115.8,
-                0.8
-              ],
-              [
-                23.6,
-                267.8,
-                1.4
-              ],
-              [
-                374.3,
-                64.1,
-                1.4
-              ],
-              [
-                102.5,
-                265.9,
-                0.8
-              ],
-              [
-                211.2,
-                286.4,
-                0.8
-              ],
-              [
-                156.5,
-                239.3,
-                1.1
-              ],
-              [
-                147.2,
-                41.6,
-                1.1
-              ],
-              [
-                163.7,
-                88.0,
-                1.1
-              ],
-              [
-                206.0,
-                24.9,
-                1.1
-              ],
-              [
-                34.0,
-                294.9,
-                0.6
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "antena",
-                "x": 35.3,
-                "y": 115.0,
-                "s": 32,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "estrella",
-                "x": 160.6,
-                "y": 39.8,
-                "s": 24,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "cubesat",
-                "x": 158.3,
-                "y": 110.5,
-                "s": 32,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "estrella",
-                "x": 33.6,
-                "y": 40.6,
-                "s": 24,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "luna",
-                "x": 239.1,
-                "y": 113.2,
-                "s": 30,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "estrella",
-                "x": 368.3,
-                "y": 42.2,
-                "s": 24,
-                "r": -15,
-                "c": "#eef1fa"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "estrella",
-                "x": 363.2,
-                "y": 109.2,
-                "s": 24,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "estrella",
-                "x": 304.9,
-                "y": 107.9,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "cometa",
-                "x": 94.6,
-                "y": 258.6,
-                "s": 34,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "estrella",
-                "x": 105.4,
-                "y": 195.4,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "astronauta",
-                "x": 163.3,
-                "y": 267.7,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "cubesat",
-                "x": 32.2,
-                "y": 186.3,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "planeta",
-                "x": 305.2,
-                "y": 261.7,
-                "s": 34,
-                "r": 30,
-                "c": "#ffb627",
-                "a": 1
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "cometa",
-                "x": 298.7,
-                "y": 187.9,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "estrella",
-                "x": 234.2,
-                "y": 256.6,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "planeta",
-                "x": 359.4,
-                "y": 259.9,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "estrella",
-                "x": 160.6,
-                "y": 39.8,
-                "s": 24,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cubesat",
-                "x": 158.3,
-                "y": 110.5,
-                "s": 32,
-                "r": 195,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "estrella",
-                "x": 33.6,
-                "y": 40.6,
-                "s": 41,
-                "r": -15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "luna",
-                "x": 239.1,
-                "y": 113.2,
-                "s": 30,
-                "r": 90,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "estrella",
-                "x": 368.3,
-                "y": 42.2,
-                "s": 24,
-                "r": -15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "estrella",
-                "x": 363.2,
-                "y": 109.2,
-                "s": 24,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 94.6,
-                "y": 258.6,
-                "s": 19,
-                "r": -15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 105.4,
-                "y": 195.4,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "astronauta",
-                "x": 133.3,
-                "y": 278,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cubesat",
-                "x": 32.2,
-                "y": 186.3,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 36,
-                "y": 262,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "planeta",
-                "x": 275.2,
-                "y": 278,
-                "s": 34,
-                "r": 30,
-                "c": "#ffb627",
-                "a": 1
-              },
-              {
-                "t": "cometa",
-                "x": 298.7,
-                "y": 187.9,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 234.2,
-                "y": 256.6,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "planeta",
-                "x": 359.4,
-                "y": 259.9,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 364,
-                "y": 190,
-                "s": 34,
-                "r": 0,
-                "c": "#5ee6d0"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1acp9",
-                "x": 35.3,
-                "y": 115.0,
-                "r": 28
-              },
-              {
-                "id": "1bkuf",
-                "x": 33.6,
-                "y": 40.6,
-                "r": 28
-              },
-              {
-                "id": "1cyfj",
-                "x": 158.3,
-                "y": 110.5,
-                "r": 28
-              },
-              {
-                "id": "2a3ew",
-                "x": 239.1,
-                "y": 113.2,
-                "r": 28
-              },
-              {
-                "id": "2by44",
-                "x": 363.2,
-                "y": 109.2,
-                "r": 28
-              },
-              {
-                "id": "2cc9u",
-                "x": 304.9,
-                "y": 107.9,
-                "r": 28
-              },
-              {
-                "id": "3aare",
-                "x": 133.3,
-                "y": 278,
-                "r": 28,
-                "x2": 163.3,
-                "y2": 267.7
-              },
-              {
-                "id": "3bmmn",
-                "x": 94.6,
-                "y": 258.6,
-                "r": 28
-              },
-              {
-                "id": "3cujy",
-                "x": 36,
-                "y": 262,
-                "r": 28
-              },
-              {
-                "id": "4akah",
-                "x": 275.2,
-                "y": 278,
-                "r": 28,
-                "x2": 305.2,
-                "y2": 261.7
-              },
-              {
-                "id": "4bpfe",
-                "x": 364,
-                "y": 190,
-                "r": 28
-              },
-              {
-                "id": "4cmem",
-                "x": 359.4,
-                "y": 259.9,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "oCJ0xQ==",
-              "mI7cIA==",
-              "rALQiA==",
-              "2nLcIA=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "e00cdb6003e0addc1a2e19fe0bd60312",
-          "huella": "8ad207074b9099b3681fd91fee8be341b5cdc2edde9d5327a122d5a9a7a3900b",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "M2r8qVljkaPe3ni/MSMBKNImtL1D2wQutBBRzqPzSr6BMM7OC3aocsHF1B4onUfQieNh8yMT+Cdjy3nbyrGyS6tCuwE+CapfhKNIFjdvH1hoq/hwGuwxrrQKenxY6snvwVC+4QWyUlqIjwflfUiIPgIgJLILjoVimLiG744c0tTyCL5Gg+WmSNBsYwA="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "4": {
           "prueba": {
-            "estrellas": [
-              [
-                225.5,
-                162.3,
-                1.4
-              ],
-              [
-                372.2,
-                287.4,
-                1.4
-              ],
-              [
-                107.2,
-                85.9,
-                0.6
-              ],
-              [
-                95.1,
-                176.3,
-                0.8
-              ],
-              [
-                360.1,
-                184.7,
-                1.1
-              ],
-              [
-                40.4,
-                135.8,
-                0.8
-              ],
-              [
-                363.8,
-                196.8,
-                1.4
-              ],
-              [
-                140.1,
-                205.8,
-                1.4
-              ],
-              [
-                345.4,
-                14.8,
-                0.8
-              ],
-              [
-                249.9,
-                264.7,
-                0.6
-              ],
-              [
-                13.5,
-                22.5,
-                0.6
-              ],
-              [
-                342.4,
-                293.2,
-                1.4
-              ],
-              [
-                258.3,
-                193.0,
-                1.1
-              ],
-              [
-                330.9,
-                266.9,
-                0.8
-              ],
-              [
-                386.2,
-                254.1,
-                1.4
-              ],
-              [
-                84.7,
-                295.0,
-                1.1
-              ],
-              [
-                309.8,
-                239.1,
-                1.4
-              ],
-              [
-                33.0,
-                165.7,
-                1.1
-              ],
-              [
-                52.9,
-                225.5,
-                1.4
-              ],
-              [
-                295.6,
-                209.6,
-                1.4
-              ],
-              [
-                342.4,
-                111.4,
-                1.1
-              ],
-              [
-                323.1,
-                148.8,
-                0.6
-              ],
-              [
-                93.8,
-                202.5,
-                0.8
-              ],
-              [
-                367.7,
-                65.3,
-                1.4
-              ],
-              [
-                299.2,
-                167.9,
-                1.1
-              ],
-              [
-                12.2,
-                93.6,
-                0.6
-              ],
-              [
-                266.4,
-                61.2,
-                0.8
-              ],
-              [
-                118.7,
-                179.1,
-                1.1
-              ],
-              [
-                274.2,
-                168.8,
-                0.8
-              ],
-              [
-                166.4,
-                121.6,
-                0.8
-              ],
-              [
-                144.8,
-                81.4,
-                0.6
-              ],
-              [
-                75.9,
-                118.4,
-                0.8
-              ],
-              [
-                287.8,
-                122.7,
-                1.1
-              ],
-              [
-                107.7,
-                217.4,
-                0.8
-              ],
-              [
-                170.7,
-                271.9,
-                0.6
-              ],
-              [
-                239.7,
-                295.7,
-                1.4
-              ],
-              [
-                168.2,
-                128.0,
-                1.1
-              ],
-              [
-                262.9,
-                65.7,
-                0.6
-              ],
-              [
-                60.6,
-                222.0,
-                0.8
-              ],
-              [
-                189.6,
-                290.7,
-                0.6
-              ],
-              [
-                70.9,
-                150.0,
-                1.4
-              ],
-              [
-                248.0,
-                127.5,
-                0.8
-              ],
-              [
-                289.4,
-                105.8,
-                0.8
-              ],
-              [
-                256.3,
-                202.1,
-                1.1
-              ],
-              [
-                20.8,
-                77.0,
-                1.4
-              ],
-              [
-                278.6,
-                68.7,
-                1.4
-              ],
-              [
-                135.8,
-                99.6,
-                0.8
-              ],
-              [
-                70.0,
-                265.6,
-                0.8
-              ],
-              [
-                97.1,
-                234.7,
-                0.8
-              ],
-              [
-                27.7,
-                223.5,
-                1.1
-              ],
-              [
-                199.3,
-                159.3,
-                1.4
-              ],
-              [
-                295.3,
-                19.1,
-                0.8
-              ],
-              [
-                86.4,
-                14.2,
-                0.8
-              ],
-              [
-                163.1,
-                229.1,
-                0.6
-              ],
-              [
-                18.2,
-                231.8,
-                0.8
-              ],
-              [
-                327.5,
-                156.8,
-                0.6
-              ],
-              [
-                201.4,
-                51.8,
-                0.8
-              ],
-              [
-                69.3,
-                290.3,
-                0.8
-              ],
-              [
-                281.9,
-                100.4,
-                1.1
-              ],
-              [
-                299.8,
-                61.7,
-                1.4
-              ],
-              [
-                345.6,
-                129.1,
-                1.4
-              ],
-              [
-                109.4,
-                126.7,
-                1.4
-              ],
-              [
-                320.7,
-                103.3,
-                0.6
-              ],
-              [
-                306.7,
-                191.8,
-                1.1
-              ],
-              [
-                89.4,
-                252.9,
-                0.6
-              ],
-              [
-                141.2,
-                6.2,
-                1.1
-              ],
-              [
-                333.0,
-                8.6,
-                1.1
-              ],
-              [
-                191.0,
-                80.8,
-                0.6
-              ],
-              [
-                192.8,
-                211.6,
-                1.1
-              ],
-              [
-                71.9,
-                115.1,
-                0.6
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "cohete",
-                "x": 161.5,
-                "y": 113.9,
-                "s": 36,
-                "r": 15,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "antena",
-                "x": 101.7,
-                "y": 43.0,
-                "s": 32,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "estrella",
-                "x": 168.6,
-                "y": 38.5,
-                "s": 24,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "astronauta",
-                "x": 99.7,
-                "y": 108.3,
-                "s": 34,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "cometa",
-                "x": 305.2,
-                "y": 37.8,
-                "s": 34,
-                "r": 30,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "astronauta",
-                "x": 241.3,
-                "y": 115.4,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "cubesat",
-                "x": 368.3,
-                "y": 110.9,
-                "s": 32,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "astronauta",
-                "x": 364.3,
-                "y": 38.6,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "estrella",
-                "x": 159.3,
-                "y": 259.4,
-                "s": 24,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "cohete",
-                "x": 30.0,
-                "y": 259.4,
-                "s": 36,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "cubesat",
-                "x": 97.8,
-                "y": 191.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "luna",
-                "x": 97.1,
-                "y": 262.3,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "antena",
-                "x": 232.4,
-                "y": 188.9,
-                "s": 32,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "planeta",
-                "x": 368.7,
-                "y": 191.1,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa",
-                "a": 1
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "estrella",
-                "x": 298.7,
-                "y": 192.3,
-                "s": 24,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "cometa",
-                "x": 241.4,
-                "y": 258.8,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "cohete",
-                "x": 161.5,
-                "y": 113.9,
-                "s": 20,
-                "r": 15,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "estrella",
-                "x": 138.6,
-                "y": 60.5,
-                "s": 24,
-                "r": -15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "astronauta",
-                "x": 99.7,
-                "y": 108.3,
-                "s": 34,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 305.2,
-                "y": 37.8,
-                "s": 34,
-                "r": -60,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "astronauta",
-                "x": 241.3,
-                "y": 115.4,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cubesat",
-                "x": 368.3,
-                "y": 110.9,
-                "s": 32,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "astronauta",
-                "x": 364.3,
-                "y": 38.6,
-                "s": 19,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "planeta",
-                "x": 236,
-                "y": 40,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 159.3,
-                "y": 259.4,
-                "s": 24,
-                "r": 15,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cohete",
-                "x": 30.0,
-                "y": 259.4,
-                "s": 36,
-                "r": -90,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cubesat",
-                "x": 97.8,
-                "y": 191.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "luna",
-                "x": 97.1,
-                "y": 262.3,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "planeta",
-                "x": 36,
-                "y": 190,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "planeta",
-                "x": 368.7,
-                "y": 191.1,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff",
-                "a": 1
-              },
-              {
-                "t": "estrella",
-                "x": 298.7,
-                "y": 192.3,
-                "s": 24,
-                "r": -15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cometa",
-                "x": 271.4,
-                "y": 278,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1an63",
-                "x": 161.5,
-                "y": 113.9,
-                "r": 28
-              },
-              {
-                "id": "1bn3n",
-                "x": 138.6,
-                "y": 60.5,
-                "r": 28,
-                "x2": 168.6,
-                "y2": 38.5
-              },
-              {
-                "id": "1cy7y",
-                "x": 101.7,
-                "y": 43.0,
-                "r": 28
-              },
-              {
-                "id": "2a4nk",
-                "x": 364.3,
-                "y": 38.6,
-                "r": 28
-              },
-              {
-                "id": "2b6yw",
-                "x": 305.2,
-                "y": 37.8,
-                "r": 28
-              },
-              {
-                "id": "2c3pj",
-                "x": 236,
-                "y": 40,
-                "r": 28
-              },
-              {
-                "id": "3ajhn",
-                "x": 36,
-                "y": 190,
-                "r": 28
-              },
-              {
-                "id": "3bnx4",
-                "x": 30.0,
-                "y": 259.4,
-                "r": 28
-              },
-              {
-                "id": "3cjru",
-                "x": 159.3,
-                "y": 259.4,
-                "r": 28
-              },
-              {
-                "id": "4avkc",
-                "x": 271.4,
-                "y": 278,
-                "r": 28,
-                "x2": 241.4,
-                "y2": 258.8
-              },
-              {
-                "id": "4brjc",
-                "x": 368.7,
-                "y": 191.1,
-                "r": 28
-              },
-              {
-                "id": "4cnhc",
-                "x": 232.4,
-                "y": 188.9,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "12OlsA==",
-              "+eZr7Q==",
-              "wIBjRg==",
-              "TP6J6g=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "c7a4a3b2f3f0ead7460872b7af69ea68",
-          "huella": "cfddb36bfd43ec0c5b6726ad6178c634787fe7a7dc0543e7dc587fe2f1cb2703",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "o+0gpaBJlMSitkLvO6kHGpqm69oc6vukcEfMdY2UXEaAzu09qT9z0bufhpeAPXTA0QeRvlPQ3I0fGigOIrHr6AMm54RRLtkoKHa1UYJ6hq+8nRomUIAcyDPTMRA2exN2wKXv0Omb/vRGK8AXR687R+VoeLqiMTPzgX+kkBJU5Xs91TysAp0Re8KodEg="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "5": {
           "prueba": {
-            "estrellas": [
-              [
-                223.6,
-                45.6,
-                1.1
-              ],
-              [
-                71.6,
-                109.7,
-                0.8
-              ],
-              [
-                318.6,
-                224.9,
-                0.6
-              ],
-              [
-                371.5,
-                126.7,
-                1.4
-              ],
-              [
-                334.1,
-                90.3,
-                0.6
-              ],
-              [
-                280.5,
-                12.7,
-                1.4
-              ],
-              [
-                108.2,
-                185.6,
-                1.4
-              ],
-              [
-                387.0,
-                88.3,
-                1.1
-              ],
-              [
-                383.3,
-                62.2,
-                1.4
-              ],
-              [
-                127.1,
-                171.4,
-                1.4
-              ],
-              [
-                332.6,
-                72.8,
-                0.6
-              ],
-              [
-                194.7,
-                48.6,
-                1.1
-              ],
-              [
-                384.9,
-                159.8,
-                1.1
-              ],
-              [
-                56.9,
-                220.2,
-                0.6
-              ],
-              [
-                85.1,
-                124.2,
-                0.8
-              ],
-              [
-                165.8,
-                163.2,
-                1.1
-              ],
-              [
-                146.7,
-                53.8,
-                1.1
-              ],
-              [
-                240.5,
-                5.1,
-                0.6
-              ],
-              [
-                62.2,
-                35.2,
-                0.6
-              ],
-              [
-                27.1,
-                250.3,
-                1.4
-              ],
-              [
-                377.5,
-                27.0,
-                1.1
-              ],
-              [
-                370.5,
-                262.7,
-                0.6
-              ],
-              [
-                243.6,
-                98.4,
-                0.8
-              ],
-              [
-                317.0,
-                81.1,
-                0.6
-              ],
-              [
-                75.9,
-                254.3,
-                0.6
-              ],
-              [
-                309.0,
-                127.1,
-                0.6
-              ],
-              [
-                66.3,
-                184.4,
-                1.4
-              ],
-              [
-                282.3,
-                281.8,
-                0.6
-              ],
-              [
-                9.6,
-                84.9,
-                0.8
-              ],
-              [
-                22.5,
-                201.8,
-                0.8
-              ],
-              [
-                268.3,
-                247.8,
-                1.4
-              ],
-              [
-                213.6,
-                126.4,
-                1.1
-              ],
-              [
-                238.4,
-                139.8,
-                0.6
-              ],
-              [
-                133.6,
-                86.9,
-                1.1
-              ],
-              [
-                268.8,
-                92.6,
-                1.1
-              ],
-              [
-                299.3,
-                191.4,
-                1.1
-              ],
-              [
-                308.8,
-                209.4,
-                0.6
-              ],
-              [
-                201.8,
-                272.5,
-                0.6
-              ],
-              [
-                197.7,
-                284.6,
-                0.6
-              ],
-              [
-                7.0,
-                276.0,
-                1.4
-              ],
-              [
-                90.9,
-                240.6,
-                0.8
-              ],
-              [
-                8.6,
-                114.7,
-                0.6
-              ],
-              [
-                86.1,
-                108.8,
-                1.1
-              ],
-              [
-                394.8,
-                166.2,
-                1.1
-              ],
-              [
-                83.9,
-                34.8,
-                1.4
-              ],
-              [
-                169.0,
-                237.0,
-                1.1
-              ],
-              [
-                205.4,
-                85.1,
-                1.1
-              ],
-              [
-                384.5,
-                105.5,
-                1.4
-              ],
-              [
-                205.8,
-                49.0,
-                0.6
-              ],
-              [
-                236.4,
-                196.0,
-                0.8
-              ],
-              [
-                151.3,
-                256.0,
-                0.8
-              ],
-              [
-                80.7,
-                165.6,
-                1.4
-              ],
-              [
-                33.7,
-                290.3,
-                0.6
-              ],
-              [
-                362.0,
-                29.4,
-                0.8
-              ],
-              [
-                216.9,
-                104.3,
-                0.6
-              ],
-              [
-                168.0,
-                134.5,
-                1.1
-              ],
-              [
-                80.6,
-                41.7,
-                0.8
-              ],
-              [
-                352.0,
-                36.6,
-                1.4
-              ],
-              [
-                220.0,
-                166.0,
-                1.4
-              ],
-              [
-                310.2,
-                245.0,
-                0.8
-              ],
-              [
-                350.6,
-                64.5,
-                0.6
-              ],
-              [
-                172.9,
-                106.0,
-                1.1
-              ],
-              [
-                303.1,
-                98.2,
-                1.1
-              ],
-              [
-                105.2,
-                159.8,
-                1.1
-              ],
-              [
-                265.0,
-                81.4,
-                0.8
-              ],
-              [
-                265.2,
-                20.2,
-                1.4
-              ],
-              [
-                113.0,
-                36.1,
-                0.8
-              ],
-              [
-                274.0,
-                175.7,
-                1.1
-              ],
-              [
-                276.6,
-                246.7,
-                1.4
-              ],
-              [
-                80.7,
-                109.6,
-                1.1
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "estrella",
-                "x": 41.9,
-                "y": 106.3,
-                "s": 24,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "planeta",
-                "x": 94.5,
-                "y": 43.7,
-                "s": 34,
-                "r": -15,
-                "c": "#eef1fa",
-                "a": 1
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "planeta",
-                "x": 163.8,
-                "y": 109.0,
-                "s": 34,
-                "r": -15,
-                "c": "#5ee6d0",
-                "a": 1
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "cubesat",
-                "x": 32.2,
-                "y": 39.1,
-                "s": 32,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "antena",
-                "x": 233.6,
-                "y": 43.7,
-                "s": 32,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "antena",
-                "x": 361.7,
-                "y": 37.4,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "estrella",
-                "x": 239.6,
-                "y": 110.5,
-                "s": 24,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "cubesat",
-                "x": 300.4,
-                "y": 42.0,
-                "s": 32,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "cometa",
-                "x": 94.6,
-                "y": 263.6,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "estrella",
-                "x": 97.7,
-                "y": 191.0,
-                "s": 24,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "cubesat",
-                "x": 36.7,
-                "y": 193.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "cometa",
-                "x": 160.7,
-                "y": 195.7,
-                "s": 34,
-                "r": 30,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "cohete",
-                "x": 234.9,
-                "y": 191.1,
-                "s": 36,
-                "r": 30,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "estrella",
-                "x": 234.4,
-                "y": 265.9,
-                "s": 24,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "luna",
-                "x": 362.3,
-                "y": 263.9,
-                "s": 30,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "astronauta",
-                "x": 299.8,
-                "y": 195.1,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "planeta",
-                "x": 94.5,
-                "y": 43.7,
-                "s": 34,
-                "r": -15,
-                "c": "#eef1fa",
-                "a": 1
-              },
-              {
-                "t": "planeta",
-                "x": 163.8,
-                "y": 109.0,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff",
-                "a": 1
-              },
-              {
-                "t": "cubesat",
-                "x": 62.2,
-                "y": 61.1,
-                "s": 32,
-                "r": -15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "antena",
-                "x": 233.6,
-                "y": 43.7,
-                "s": 32,
-                "r": -60,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "antena",
-                "x": 361.7,
-                "y": 37.4,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 239.6,
-                "y": 110.5,
-                "s": 41,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cubesat",
-                "x": 300.4,
-                "y": 42.0,
-                "s": 32,
-                "r": 30,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "luna",
-                "x": 364,
-                "y": 112,
-                "s": 30,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cometa",
-                "x": 94.6,
-                "y": 263.6,
-                "s": 19,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cubesat",
-                "x": 66.7,
-                "y": 215.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cometa",
-                "x": 160.7,
-                "y": 195.7,
-                "s": 34,
-                "r": 30,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cohete",
-                "x": 234.9,
-                "y": 191.1,
-                "s": 36,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "estrella",
-                "x": 234.4,
-                "y": 265.9,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "luna",
-                "x": 362.3,
-                "y": 263.9,
-                "s": 30,
-                "r": -75,
-                "c": "#ffb627"
-              },
-              {
-                "t": "astronauta",
-                "x": 299.8,
-                "y": 195.1,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "planeta",
-                "x": 300,
-                "y": 262,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1ay3h",
-                "x": 41.9,
-                "y": 106.3,
-                "r": 28
-              },
-              {
-                "id": "1bj74",
-                "x": 62.2,
-                "y": 61.1,
-                "r": 28,
-                "x2": 32.2,
-                "y2": 39.1
-              },
-              {
-                "id": "1cmjk",
-                "x": 163.8,
-                "y": 109.0,
-                "r": 28
-              },
-              {
-                "id": "2aptk",
-                "x": 239.6,
-                "y": 110.5,
-                "r": 28
-              },
-              {
-                "id": "2b9aw",
-                "x": 364,
-                "y": 112,
-                "r": 28
-              },
-              {
-                "id": "2cvnc",
-                "x": 233.6,
-                "y": 43.7,
-                "r": 28
-              },
-              {
-                "id": "3army",
-                "x": 66.7,
-                "y": 215.1,
-                "r": 28,
-                "x2": 36.7,
-                "y2": 193.1
-              },
-              {
-                "id": "3byjn",
-                "x": 94.6,
-                "y": 263.6,
-                "r": 28
-              },
-              {
-                "id": "3cup3",
-                "x": 97.7,
-                "y": 191.0,
-                "r": 28
-              },
-              {
-                "id": "4aken",
-                "x": 234.4,
-                "y": 265.9,
-                "r": 28
-              },
-              {
-                "id": "4btvh",
-                "x": 300,
-                "y": 262,
-                "r": 28
-              },
-              {
-                "id": "4c99h",
-                "x": 362.3,
-                "y": 263.9,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "AUJ+HA==",
-              "XY+fLA==",
-              "5W1VKA==",
-              "lZpA4g=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "31ebc85221f844b96dc36eb21b673f62",
-          "huella": "46715ba14b13a715f2a10021941faff3bf51a4ad76fe734d44236c88455a7bc5",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "g6tGQ7j8urazgwRHcARWAzHPquuOMGTRg/1atflB2HRhfPhgwMqimir9Cxv2C8oP/BO/gxK1S8NpR9vpgJ3VSyX8bvEIWEZQu6q0/0+Qkw3QZi0gvgTACURfJTw6DpzMLAJcdP2FuDnUv0+ZKYpbUqwqIDu3INN/5Cl2rqqYvq3E9Kk8zQuDgYlTjyM="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "6": {
           "prueba": {
-            "estrellas": [
-              [
-                36.0,
-                82.3,
-                0.8
-              ],
-              [
-                7.5,
-                76.3,
-                0.8
-              ],
-              [
-                351.3,
-                136.8,
-                0.6
-              ],
-              [
-                322.9,
-                239.0,
-                1.1
-              ],
-              [
-                171.3,
-                274.3,
-                1.4
-              ],
-              [
-                287.1,
-                227.5,
-                0.6
-              ],
-              [
-                111.0,
-                162.0,
-                1.1
-              ],
-              [
-                128.5,
-                209.6,
-                0.6
-              ],
-              [
-                176.3,
-                88.6,
-                0.6
-              ],
-              [
-                339.0,
-                284.5,
-                0.6
-              ],
-              [
-                135.4,
-                8.2,
-                0.8
-              ],
-              [
-                295.3,
-                36.2,
-                0.6
-              ],
-              [
-                20.0,
-                132.5,
-                1.4
-              ],
-              [
-                266.5,
-                282.9,
-                1.1
-              ],
-              [
-                165.5,
-                136.7,
-                0.8
-              ],
-              [
-                67.9,
-                223.0,
-                0.8
-              ],
-              [
-                262.9,
-                61.4,
-                0.8
-              ],
-              [
-                150.7,
-                104.0,
-                1.1
-              ],
-              [
-                8.2,
-                34.9,
-                0.6
-              ],
-              [
-                300.2,
-                108.7,
-                1.1
-              ],
-              [
-                352.6,
-                144.0,
-                1.4
-              ],
-              [
-                189.7,
-                99.9,
-                1.1
-              ],
-              [
-                63.4,
-                243.0,
-                0.8
-              ],
-              [
-                196.4,
-                59.7,
-                1.1
-              ],
-              [
-                345.0,
-                274.4,
-                1.4
-              ],
-              [
-                122.9,
-                195.5,
-                0.8
-              ],
-              [
-                202.0,
-                150.6,
-                0.8
-              ],
-              [
-                44.0,
-                139.0,
-                1.4
-              ],
-              [
-                100.5,
-                142.1,
-                0.8
-              ],
-              [
-                21.8,
-                223.8,
-                0.8
-              ],
-              [
-                153.5,
-                152.9,
-                1.1
-              ],
-              [
-                150.0,
-                203.0,
-                0.6
-              ],
-              [
-                264.4,
-                17.5,
-                1.4
-              ],
-              [
-                29.4,
-                61.6,
-                0.6
-              ],
-              [
-                232.9,
-                24.0,
-                1.1
-              ],
-              [
-                221.7,
-                187.2,
-                1.4
-              ],
-              [
-                168.4,
-                18.9,
-                1.1
-              ],
-              [
-                31.3,
-                101.8,
-                0.6
-              ],
-              [
-                307.8,
-                268.6,
-                1.1
-              ],
-              [
-                6.8,
-                109.4,
-                0.6
-              ],
-              [
-                124.5,
-                64.7,
-                0.8
-              ],
-              [
-                35.3,
-                178.9,
-                0.6
-              ],
-              [
-                331.7,
-                55.3,
-                0.6
-              ],
-              [
-                29.2,
-                196.4,
-                1.1
-              ],
-              [
-                241.6,
-                143.0,
-                1.1
-              ],
-              [
-                24.0,
-                189.4,
-                0.8
-              ],
-              [
-                378.5,
-                241.4,
-                1.4
-              ],
-              [
-                71.0,
-                269.2,
-                1.1
-              ],
-              [
-                224.5,
-                245.1,
-                1.4
-              ],
-              [
-                79.8,
-                154.5,
-                0.6
-              ],
-              [
-                339.9,
-                143.1,
-                0.6
-              ],
-              [
-                76.1,
-                138.0,
-                0.8
-              ],
-              [
-                382.5,
-                296.0,
-                0.6
-              ],
-              [
-                301.1,
-                202.7,
-                0.6
-              ],
-              [
-                122.1,
-                133.4,
-                1.4
-              ],
-              [
-                264.4,
-                258.9,
-                0.8
-              ],
-              [
-                296.4,
-                47.2,
-                0.8
-              ],
-              [
-                94.1,
-                283.1,
-                1.1
-              ],
-              [
-                355.6,
-                36.6,
-                0.6
-              ],
-              [
-                103.0,
-                215.5,
-                1.4
-              ],
-              [
-                52.1,
-                101.3,
-                0.6
-              ],
-              [
-                70.6,
-                39.1,
-                1.1
-              ],
-              [
-                68.6,
-                171.0,
-                1.1
-              ],
-              [
-                127.3,
-                213.8,
-                0.8
-              ],
-              [
-                335.5,
-                38.2,
-                0.8
-              ],
-              [
-                29.2,
-                122.6,
-                1.1
-              ],
-              [
-                10.4,
-                219.0,
-                0.8
-              ],
-              [
-                370.4,
-                232.0,
-                1.4
-              ],
-              [
-                21.4,
-                257.7,
-                0.8
-              ],
-              [
-                263.0,
-                78.2,
-                0.6
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "cubesat",
-                "x": 158.6,
-                "y": 112.2,
-                "s": 32,
-                "r": 30,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "cohete",
-                "x": 100.5,
-                "y": 38.5,
-                "s": 36,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "astronauta",
-                "x": 96.5,
-                "y": 115.2,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "cometa",
-                "x": 37.6,
-                "y": 44.9,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "cohete",
-                "x": 368.7,
-                "y": 107.3,
-                "s": 36,
-                "r": -15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "estrella",
-                "x": 238.5,
-                "y": 106.8,
-                "s": 24,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "estrella",
-                "x": 297.9,
-                "y": 110.1,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "planeta",
-                "x": 364.5,
-                "y": 41.8,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff",
-                "a": 1
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "estrella",
-                "x": 31.9,
-                "y": 257.9,
-                "s": 24,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "estrella",
-                "x": 160.1,
-                "y": 262.6,
-                "s": 24,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "cohete",
-                "x": 167.7,
-                "y": 188.5,
-                "s": 36,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "luna",
-                "x": 98.2,
-                "y": 261.7,
-                "s": 30,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "cometa",
-                "x": 303.1,
-                "y": 187.9,
-                "s": 34,
-                "r": 30,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "cometa",
-                "x": 363.5,
-                "y": 259.7,
-                "s": 34,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "astronauta",
-                "x": 298.8,
-                "y": 267.0,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "cubesat",
-                "x": 239.8,
-                "y": 257.2,
-                "s": 32,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "cubesat",
-                "x": 158.6,
-                "y": 112.2,
-                "s": 32,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cohete",
-                "x": 100.5,
-                "y": 38.5,
-                "s": 36,
-                "r": -15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "astronauta",
-                "x": 96.5,
-                "y": 115.2,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cometa",
-                "x": 67.6,
-                "y": 66.9,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "luna",
-                "x": 36,
-                "y": 112,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "estrella",
-                "x": 238.5,
-                "y": 106.8,
-                "s": 41,
-                "r": 15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 297.9,
-                "y": 110.1,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "planeta",
-                "x": 334.5,
-                "y": 63.8,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff",
-                "a": 1
-              },
-              {
-                "t": "estrella",
-                "x": 31.9,
-                "y": 257.9,
-                "s": 24,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "estrella",
-                "x": 160.1,
-                "y": 262.6,
-                "s": 24,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cohete",
-                "x": 167.7,
-                "y": 188.5,
-                "s": 36,
-                "r": 90,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "luna",
-                "x": 98.2,
-                "y": 261.7,
-                "s": 30,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "planeta",
-                "x": 36,
-                "y": 190,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 303.1,
-                "y": 187.9,
-                "s": 19,
-                "r": 30,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "astronauta",
-                "x": 298.8,
-                "y": 267.0,
-                "s": 34,
-                "r": -75,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cubesat",
-                "x": 239.8,
-                "y": 257.2,
-                "s": 32,
-                "r": 15,
-                "c": "#ff6b5b"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1auve",
-                "x": 36,
-                "y": 112,
-                "r": 28
-              },
-              {
-                "id": "1bhce",
-                "x": 67.6,
-                "y": 66.9,
-                "r": 28,
-                "x2": 37.6,
-                "y2": 44.9
-              },
-              {
-                "id": "1c6kp",
-                "x": 100.5,
-                "y": 38.5,
-                "r": 28
-              },
-              {
-                "id": "2awun",
-                "x": 334.5,
-                "y": 63.8,
-                "r": 28,
-                "x2": 364.5,
-                "y2": 41.8
-              },
-              {
-                "id": "2bpaf",
-                "x": 368.7,
-                "y": 107.3,
-                "r": 28
-              },
-              {
-                "id": "2c6uw",
-                "x": 238.5,
-                "y": 106.8,
-                "r": 28
-              },
-              {
-                "id": "3anej",
-                "x": 167.7,
-                "y": 188.5,
-                "r": 28
-              },
-              {
-                "id": "3bknj",
-                "x": 36,
-                "y": 190,
-                "r": 28
-              },
-              {
-                "id": "3c6xn",
-                "x": 98.2,
-                "y": 261.7,
-                "r": 28
-              },
-              {
-                "id": "4apk7",
-                "x": 303.1,
-                "y": 187.9,
-                "r": 28
-              },
-              {
-                "id": "4b9wr",
-                "x": 363.5,
-                "y": 259.7,
-                "r": 28
-              },
-              {
-                "id": "4cw6h",
-                "x": 298.8,
-                "y": 267.0,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "y2Q6TQ==",
-              "ASAa5g==",
-              "c3b+DA==",
-              "7bXGRg=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "552450f585c9527cb1a36cec52fd033a",
-          "huella": "e3319333421b75c7962154e7fed6fd419e0f1fc15905516a70430b135650d131",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "4zMrjpoiVcjSQpk3u7AnazJPm/ZW2Ahi6q8LXzc3v/rLWKJglI54PMx7bWciwOlv0DmQwPg68WGEejnXmVLW2WSnS622s7nV9SypBEMnI44X0XXPZBaumrlsRTtp67sW+WwwUDWq0/msgzfccBWZgRVkG7LYT4NUlGztGTgtcDsP07fs2LK0RgWn/Sk="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "7": {
           "prueba": {
-            "estrellas": [
-              [
-                360.0,
-                71.3,
-                0.8
-              ],
-              [
-                100.8,
-                222.1,
-                1.1
-              ],
-              [
-                325.9,
-                164.2,
-                1.4
-              ],
-              [
-                202.0,
-                142.7,
-                0.8
-              ],
-              [
-                13.4,
-                274.5,
-                0.6
-              ],
-              [
-                291.1,
-                150.2,
-                1.1
-              ],
-              [
-                353.9,
-                52.0,
-                1.4
-              ],
-              [
-                238.0,
-                213.7,
-                1.4
-              ],
-              [
-                156.2,
-                161.3,
-                1.1
-              ],
-              [
-                286.9,
-                291.2,
-                0.8
-              ],
-              [
-                78.3,
-                162.4,
-                1.1
-              ],
-              [
-                181.4,
-                283.7,
-                1.4
-              ],
-              [
-                168.5,
-                236.3,
-                1.1
-              ],
-              [
-                348.6,
-                204.8,
-                0.8
-              ],
-              [
-                308.7,
-                66.2,
-                0.8
-              ],
-              [
-                144.8,
-                191.5,
-                0.8
-              ],
-              [
-                316.0,
-                78.2,
-                0.8
-              ],
-              [
-                246.4,
-                138.9,
-                1.4
-              ],
-              [
-                192.8,
-                139.1,
-                1.4
-              ],
-              [
-                199.4,
-                13.5,
-                1.1
-              ],
-              [
-                356.9,
-                42.6,
-                0.6
-              ],
-              [
-                356.6,
-                187.6,
-                1.4
-              ],
-              [
-                79.9,
-                162.4,
-                1.4
-              ],
-              [
-                33.4,
-                166.4,
-                1.4
-              ],
-              [
-                379.5,
-                171.0,
-                1.1
-              ],
-              [
-                34.8,
-                63.9,
-                0.6
-              ],
-              [
-                217.6,
-                118.9,
-                1.4
-              ],
-              [
-                93.4,
-                247.0,
-                1.1
-              ],
-              [
-                104.2,
-                256.1,
-                0.8
-              ],
-              [
-                159.8,
-                84.6,
-                1.1
-              ],
-              [
-                20.2,
-                194.9,
-                0.6
-              ],
-              [
-                225.4,
-                123.7,
-                0.6
-              ],
-              [
-                94.1,
-                157.1,
-                0.6
-              ],
-              [
-                318.7,
-                71.8,
-                0.6
-              ],
-              [
-                345.5,
-                149.5,
-                0.6
-              ],
-              [
-                125.4,
-                203.3,
-                1.4
-              ],
-              [
-                326.9,
-                267.5,
-                1.1
-              ],
-              [
-                73.6,
-                13.9,
-                1.4
-              ],
-              [
-                341.2,
-                191.7,
-                1.1
-              ],
-              [
-                156.8,
-                243.0,
-                1.4
-              ],
-              [
-                200.2,
-                272.7,
-                1.4
-              ],
-              [
-                357.0,
-                249.5,
-                0.8
-              ],
-              [
-                313.9,
-                149.5,
-                1.4
-              ],
-              [
-                158.9,
-                22.1,
-                1.4
-              ],
-              [
-                72.7,
-                41.7,
-                0.8
-              ],
-              [
-                284.9,
-                233.0,
-                0.8
-              ],
-              [
-                189.7,
-                114.9,
-                0.8
-              ],
-              [
-                268.5,
-                70.8,
-                1.4
-              ],
-              [
-                221.0,
-                43.8,
-                1.4
-              ],
-              [
-                392.6,
-                265.7,
-                0.8
-              ],
-              [
-                136.8,
-                16.4,
-                1.1
-              ],
-              [
-                284.3,
-                167.7,
-                0.6
-              ],
-              [
-                293.4,
-                250.5,
-                1.4
-              ],
-              [
-                55.9,
-                80.4,
-                0.6
-              ],
-              [
-                324.4,
-                201.0,
-                1.1
-              ],
-              [
-                347.6,
-                281.8,
-                0.6
-              ],
-              [
-                333.0,
-                274.3,
-                1.4
-              ],
-              [
-                253.0,
-                97.6,
-                0.6
-              ],
-              [
-                346.9,
-                273.9,
-                0.6
-              ],
-              [
-                275.5,
-                17.4,
-                1.4
-              ],
-              [
-                237.0,
-                21.0,
-                1.1
-              ],
-              [
-                173.3,
-                53.5,
-                1.1
-              ],
-              [
-                295.6,
-                99.7,
-                1.4
-              ],
-              [
-                311.4,
-                6.7,
-                0.8
-              ],
-              [
-                285.7,
-                31.2,
-                1.1
-              ],
-              [
-                195.7,
-                98.1,
-                1.4
-              ],
-              [
-                341.4,
-                169.3,
-                1.1
-              ],
-              [
-                144.0,
-                48.0,
-                0.8
-              ],
-              [
-                301.7,
-                129.4,
-                1.1
-              ],
-              [
-                364.9,
-                70.9,
-                0.8
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "antena",
-                "x": 99.3,
-                "y": 111.5,
-                "s": 32,
-                "r": 30,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "cohete",
-                "x": 34.0,
-                "y": 110.5,
-                "s": 36,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "cohete",
-                "x": 158.3,
-                "y": 44.1,
-                "s": 36,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "luna",
-                "x": 36.0,
-                "y": 40.5,
-                "s": 30,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "estrella",
-                "x": 301.2,
-                "y": 107.9,
-                "s": 24,
-                "r": -15,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "estrella",
-                "x": 360.2,
-                "y": 41.4,
-                "s": 24,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "luna",
-                "x": 232.0,
-                "y": 38.9,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "luna",
-                "x": 368.6,
-                "y": 117.7,
-                "s": 30,
-                "r": 30,
-                "c": "#ffb627"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "planeta",
-                "x": 164.9,
-                "y": 261.3,
-                "s": 34,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "antena",
-                "x": 39.6,
-                "y": 185.7,
-                "s": 32,
-                "r": -15,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "cometa",
-                "x": 40.0,
-                "y": 263.5,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "estrella",
-                "x": 165.8,
-                "y": 195.1,
-                "s": 24,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "cubesat",
-                "x": 303.5,
-                "y": 256.7,
-                "s": 32,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "cohete",
-                "x": 368.0,
-                "y": 256.2,
-                "s": 36,
-                "r": 15,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "planeta",
-                "x": 241.3,
-                "y": 190.1,
-                "s": 34,
-                "r": 30,
-                "c": "#eef1fa",
-                "a": 1
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "estrella",
-                "x": 363.2,
-                "y": 191.3,
-                "s": 24,
-                "r": -15,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "antena",
-                "x": 99.3,
-                "y": 111.5,
-                "s": 32,
-                "r": 210,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cohete",
-                "x": 34.0,
-                "y": 110.5,
-                "s": 36,
-                "r": 15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cohete",
-                "x": 128.3,
-                "y": 22.1,
-                "s": 36,
-                "r": 30,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "luna",
-                "x": 36.0,
-                "y": 40.5,
-                "s": 30,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "planeta",
-                "x": 164,
-                "y": 112,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "estrella",
-                "x": 360.2,
-                "y": 41.4,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "luna",
-                "x": 232.0,
-                "y": 38.9,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "luna",
-                "x": 368.6,
-                "y": 117.7,
-                "s": 30,
-                "r": 30,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cometa",
-                "x": 300,
-                "y": 40,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "planeta",
-                "x": 164.9,
-                "y": 261.3,
-                "s": 19,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "antena",
-                "x": 39.6,
-                "y": 185.7,
-                "s": 32,
-                "r": -15,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cometa",
-                "x": 40.0,
-                "y": 263.5,
-                "s": 34,
-                "r": 180,
-                "c": "#ffb627"
-              },
-              {
-                "t": "estrella",
-                "x": 135.8,
-                "y": 173.1,
-                "s": 24,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cubesat",
-                "x": 303.5,
-                "y": 256.7,
-                "s": 18,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "planeta",
-                "x": 241.3,
-                "y": 190.1,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff",
-                "a": 1
-              },
-              {
-                "t": "estrella",
-                "x": 363.2,
-                "y": 191.3,
-                "s": 24,
-                "r": -15,
-                "c": "#3d8bff"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1a4r6",
-                "x": 128.3,
-                "y": 22.1,
-                "r": 28,
-                "x2": 158.3,
-                "y2": 44.1
-              },
-              {
-                "id": "1bfcx",
-                "x": 164,
-                "y": 112,
-                "r": 28
-              },
-              {
-                "id": "1crpp",
-                "x": 99.3,
-                "y": 111.5,
-                "r": 28
-              },
-              {
-                "id": "2a69m",
-                "x": 360.2,
-                "y": 41.4,
-                "r": 28
-              },
-              {
-                "id": "2baru",
-                "x": 300,
-                "y": 40,
-                "r": 28
-              },
-              {
-                "id": "2c6v4",
-                "x": 301.2,
-                "y": 107.9,
-                "r": 28
-              },
-              {
-                "id": "3amfj",
-                "x": 164.9,
-                "y": 261.3,
-                "r": 28
-              },
-              {
-                "id": "3bppa",
-                "x": 135.8,
-                "y": 173.1,
-                "r": 28,
-                "x2": 165.8,
-                "y2": 195.1
-              },
-              {
-                "id": "3chhj",
-                "x": 40.0,
-                "y": 263.5,
-                "r": 28
-              },
-              {
-                "id": "4afuc",
-                "x": 368.0,
-                "y": 256.2,
-                "r": 28
-              },
-              {
-                "id": "4bvfj",
-                "x": 303.5,
-                "y": 256.7,
-                "r": 28
-              },
-              {
-                "id": "4cj7m",
-                "x": 241.3,
-                "y": 190.1,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "3mZh6g==",
-              "dJXKbQ==",
-              "xNPFtg==",
-              "A6lTWg=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "7bd3bd17112f4fafec328d27a92615d6",
-          "huella": "bd635f9f9effe939559d4d1eb9470488afdd4c7f29105dad8652c30c15c22d6a",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "VslyEWma52UK+D7MQwm1HL2DIrt7dVt3vUKOUDlKwa+D2+WupQQS4WgcU1mMXeGyXiBNlsUf+SCwsBaG7EyrzlAst+1HPHg2zM2Kq66Oggj7l8vqT3JN4W2csdRXXWkZdBmBHYhVBmP4o6OJHN+OdgrczfLmlsXofE+59vwKLrAeF1x66534/mIohMo="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "8": {
           "prueba": {
-            "estrellas": [
-              [
-                347.6,
-                146.8,
-                1.1
-              ],
-              [
-                227.9,
-                126.0,
-                0.8
-              ],
-              [
-                119.0,
-                273.1,
-                1.4
-              ],
-              [
-                170.3,
-                260.1,
-                0.6
-              ],
-              [
-                340.5,
-                241.5,
-                1.4
-              ],
-              [
-                140.8,
-                181.9,
-                1.4
-              ],
-              [
-                49.3,
-                91.3,
-                0.8
-              ],
-              [
-                102.7,
-                165.5,
-                0.8
-              ],
-              [
-                278.9,
-                180.1,
-                1.1
-              ],
-              [
-                49.7,
-                182.5,
-                1.4
-              ],
-              [
-                395.2,
-                109.2,
-                0.8
-              ],
-              [
-                308.7,
-                141.7,
-                1.4
-              ],
-              [
-                142.9,
-                39.1,
-                1.1
-              ],
-              [
-                79.6,
-                85.3,
-                1.1
-              ],
-              [
-                201.4,
-                253.7,
-                1.4
-              ],
-              [
-                288.3,
-                146.1,
-                1.1
-              ],
-              [
-                279.4,
-                219.7,
-                1.1
-              ],
-              [
-                32.0,
-                19.1,
-                0.6
-              ],
-              [
-                241.6,
-                36.1,
-                0.6
-              ],
-              [
-                86.8,
-                13.7,
-                0.6
-              ],
-              [
-                339.1,
-                294.7,
-                0.8
-              ],
-              [
-                11.1,
-                19.2,
-                0.8
-              ],
-              [
-                118.0,
-                249.4,
-                0.6
-              ],
-              [
-                109.0,
-                123.3,
-                1.4
-              ],
-              [
-                288.9,
-                131.9,
-                0.8
-              ],
-              [
-                154.7,
-                280.2,
-                1.1
-              ],
-              [
-                165.2,
-                193.8,
-                1.4
-              ],
-              [
-                44.9,
-                92.7,
-                1.4
-              ],
-              [
-                108.8,
-                212.9,
-                0.6
-              ],
-              [
-                290.9,
-                256.8,
-                0.6
-              ],
-              [
-                289.0,
-                44.4,
-                0.6
-              ],
-              [
-                170.8,
-                16.7,
-                1.4
-              ],
-              [
-                307.2,
-                116.6,
-                1.1
-              ],
-              [
-                318.2,
-                231.2,
-                0.8
-              ],
-              [
-                382.2,
-                275.6,
-                0.8
-              ],
-              [
-                127.2,
-                200.7,
-                0.8
-              ],
-              [
-                285.2,
-                42.0,
-                1.1
-              ],
-              [
-                299.5,
-                169.0,
-                1.1
-              ],
-              [
-                66.3,
-                189.8,
-                0.6
-              ],
-              [
-                318.0,
-                109.6,
-                0.8
-              ],
-              [
-                345.6,
-                266.3,
-                1.1
-              ],
-              [
-                199.5,
-                122.7,
-                0.8
-              ],
-              [
-                141.4,
-                173.4,
-                1.4
-              ],
-              [
-                193.7,
-                187.1,
-                1.1
-              ],
-              [
-                264.4,
-                73.1,
-                1.4
-              ],
-              [
-                89.9,
-                36.2,
-                1.1
-              ],
-              [
-                289.5,
-                244.6,
-                1.4
-              ],
-              [
-                279.5,
-                188.3,
-                0.8
-              ],
-              [
-                241.5,
-                135.3,
-                0.8
-              ],
-              [
-                131.2,
-                247.1,
-                1.1
-              ],
-              [
-                210.1,
-                258.3,
-                1.4
-              ],
-              [
-                98.8,
-                118.4,
-                1.1
-              ],
-              [
-                204.3,
-                109.7,
-                1.4
-              ],
-              [
-                285.5,
-                27.3,
-                0.8
-              ],
-              [
-                248.2,
-                78.1,
-                0.8
-              ],
-              [
-                360.4,
-                21.3,
-                0.6
-              ],
-              [
-                392.3,
-                191.3,
-                0.8
-              ],
-              [
-                131.2,
-                85.6,
-                1.4
-              ],
-              [
-                371.5,
-                129.3,
-                0.6
-              ],
-              [
-                291.7,
-                269.2,
-                1.4
-              ],
-              [
-                8.2,
-                75.4,
-                1.4
-              ],
-              [
-                8.4,
-                207.2,
-                0.6
-              ],
-              [
-                313.8,
-                275.4,
-                0.6
-              ],
-              [
-                75.5,
-                199.9,
-                1.1
-              ],
-              [
-                229.6,
-                269.3,
-                0.8
-              ],
-              [
-                118.1,
-                86.6,
-                0.6
-              ],
-              [
-                361.1,
-                183.9,
-                1.4
-              ],
-              [
-                321.2,
-                166.9,
-                0.6
-              ],
-              [
-                79.5,
-                101.5,
-                1.1
-              ],
-              [
-                316.9,
-                267.1,
-                1.4
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "cometa",
-                "x": 164.6,
-                "y": 46.0,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "cohete",
-                "x": 101.7,
-                "y": 116.8,
-                "s": 36,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "cometa",
-                "x": 39.9,
-                "y": 38.7,
-                "s": 34,
-                "r": 30,
-                "c": "#ffb627"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "antena",
-                "x": 41.9,
-                "y": 109.5,
-                "s": 32,
-                "r": 30,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "luna",
-                "x": 238.0,
-                "y": 110.3,
-                "s": 30,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "planeta",
-                "x": 297.0,
-                "y": 106.8,
-                "s": 34,
-                "r": -15,
-                "c": "#ffb627",
-                "a": 1
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "luna",
-                "x": 232.8,
-                "y": 38.7,
-                "s": 30,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "cohete",
-                "x": 368.5,
-                "y": 117.7,
-                "s": 36,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "planeta",
-                "x": 35.9,
-                "y": 264.6,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b",
-                "a": 1
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "planeta",
-                "x": 33.1,
-                "y": 189.3,
-                "s": 34,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "astronauta",
-                "x": 98.6,
-                "y": 256.9,
-                "s": 34,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "cohete",
-                "x": 158.3,
-                "y": 266.5,
-                "s": 36,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "astronauta",
-                "x": 297.6,
-                "y": 261.9,
-                "s": 34,
-                "r": 30,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "planeta",
-                "x": 367.4,
-                "y": 191.7,
-                "s": 34,
-                "r": 15,
-                "c": "#5ee6d0",
-                "a": 1
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "cubesat",
-                "x": 365.2,
-                "y": 256.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "planeta",
-                "x": 230.9,
-                "y": 265.1,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "cometa",
-                "x": 164.6,
-                "y": 46.0,
-                "s": 34,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cohete",
-                "x": 101.7,
-                "y": 116.8,
-                "s": 20,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cometa",
-                "x": 39.9,
-                "y": 38.7,
-                "s": 34,
-                "r": 30,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "antena",
-                "x": 41.9,
-                "y": 109.5,
-                "s": 32,
-                "r": 120,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "luna",
-                "x": 268.0,
-                "y": 128,
-                "s": 30,
-                "r": -15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "planeta",
-                "x": 297.0,
-                "y": 106.8,
-                "s": 34,
-                "r": -15,
-                "c": "#ffb627",
-                "a": 1
-              },
-              {
-                "t": "luna",
-                "x": 232.8,
-                "y": 38.7,
-                "s": 51,
-                "r": -15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "planeta",
-                "x": 35.9,
-                "y": 264.6,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b",
-                "a": 1
-              },
-              {
-                "t": "planeta",
-                "x": 33.1,
-                "y": 189.3,
-                "s": 34,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "astronauta",
-                "x": 98.6,
-                "y": 256.9,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cohete",
-                "x": 158.3,
-                "y": 266.5,
-                "s": 36,
-                "r": -75,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "estrella",
-                "x": 164,
-                "y": 190,
-                "s": 24,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "astronauta",
-                "x": 327.6,
-                "y": 239.9,
-                "s": 34,
-                "r": 30,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cubesat",
-                "x": 365.2,
-                "y": 256.1,
-                "s": 32,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "planeta",
-                "x": 230.9,
-                "y": 265.1,
-                "s": 34,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cometa",
-                "x": 300,
-                "y": 190,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1a3nh",
-                "x": 101.7,
-                "y": 116.8,
-                "r": 28
-              },
-              {
-                "id": "1ba3f",
-                "x": 39.9,
-                "y": 38.7,
-                "r": 28
-              },
-              {
-                "id": "1cpwp",
-                "x": 41.9,
-                "y": 109.5,
-                "r": 28
-              },
-              {
-                "id": "2amea",
-                "x": 368.5,
-                "y": 117.7,
-                "r": 28
-              },
-              {
-                "id": "2bhpn",
-                "x": 232.8,
-                "y": 38.7,
-                "r": 28
-              },
-              {
-                "id": "2crt9",
-                "x": 268.0,
-                "y": 128,
-                "r": 28,
-                "x2": 238.0,
-                "y2": 110.3
-              },
-              {
-                "id": "3a9e9",
-                "x": 98.6,
-                "y": 256.9,
-                "r": 28
-              },
-              {
-                "id": "3b3au",
-                "x": 158.3,
-                "y": 266.5,
-                "r": 28
-              },
-              {
-                "id": "3ccyu",
-                "x": 164,
-                "y": 190,
-                "r": 28
-              },
-              {
-                "id": "4aenf",
-                "x": 367.4,
-                "y": 191.7,
-                "r": 28
-              },
-              {
-                "id": "4b6er",
-                "x": 327.6,
-                "y": 239.9,
-                "r": 28,
-                "x2": 297.6,
-                "y2": 261.9
-              },
-              {
-                "id": "4caw6",
-                "x": 300,
-                "y": 190,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "xWAk0A==",
-              "aqLEiw==",
-              "hYxtMA==",
-              "4wq6rw=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "f0c013438bad14c615eed228fc04dd8f",
-          "huella": "2a173a5427ed6c3afe7389988bac55835333b329bfa33b4dbdead9ff39721768",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "hJR7fElRWh++sZuD/cO7dri26cO5TDaTdsTFRr8uGkMExXsOezIK0LMKt7s7Vl+D/+G6RYPU6S8bOSILNbwgGIW8pqQkwv2WRTS6pXXtZ1ICbjyuWCprXLDSPRhZl6pj7+Tlon0BjNHUFxRvCepzQqCt7EKVNruw2PQpAhXCyX9kQ9AH7xUW3ySiqjc="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "9": {
           "prueba": {
-            "estrellas": [
-              [
-                102.0,
-                92.4,
-                1.4
-              ],
-              [
-                234.0,
-                131.7,
-                1.4
-              ],
-              [
-                297.1,
-                135.0,
-                1.1
-              ],
-              [
-                343.5,
-                35.8,
-                0.6
-              ],
-              [
-                23.2,
-                164.5,
-                0.8
-              ],
-              [
-                59.6,
-                85.3,
-                0.8
-              ],
-              [
-                63.9,
-                264.7,
-                1.1
-              ],
-              [
-                183.7,
-                66.6,
-                0.6
-              ],
-              [
-                174.6,
-                193.8,
-                0.6
-              ],
-              [
-                151.1,
-                45.6,
-                1.4
-              ],
-              [
-                259.9,
-                66.3,
-                0.8
-              ],
-              [
-                255.0,
-                277.6,
-                0.6
-              ],
-              [
-                364.4,
-                48.3,
-                1.4
-              ],
-              [
-                68.4,
-                11.5,
-                1.4
-              ],
-              [
-                235.8,
-                91.0,
-                1.1
-              ],
-              [
-                229.5,
-                5.8,
-                1.1
-              ],
-              [
-                129.3,
-                236.8,
-                0.6
-              ],
-              [
-                368.3,
-                85.6,
-                1.4
-              ],
-              [
-                292.7,
-                107.3,
-                1.4
-              ],
-              [
-                60.1,
-                141.4,
-                0.6
-              ],
-              [
-                310.8,
-                100.0,
-                1.1
-              ],
-              [
-                123.8,
-                24.0,
-                0.8
-              ],
-              [
-                315.9,
-                266.0,
-                0.6
-              ],
-              [
-                122.2,
-                116.1,
-                0.8
-              ],
-              [
-                133.7,
-                78.8,
-                1.1
-              ],
-              [
-                210.0,
-                80.6,
-                0.8
-              ],
-              [
-                21.0,
-                110.3,
-                1.1
-              ],
-              [
-                162.0,
-                284.6,
-                1.4
-              ],
-              [
-                356.6,
-                115.0,
-                0.6
-              ],
-              [
-                79.8,
-                147.4,
-                1.1
-              ],
-              [
-                358.7,
-                262.3,
-                1.4
-              ],
-              [
-                243.3,
-                140.9,
-                1.4
-              ],
-              [
-                299.0,
-                283.6,
-                1.4
-              ],
-              [
-                222.2,
-                236.2,
-                0.6
-              ],
-              [
-                227.7,
-                148.4,
-                1.1
-              ],
-              [
-                301.0,
-                10.1,
-                0.8
-              ],
-              [
-                9.6,
-                275.7,
-                0.8
-              ],
-              [
-                238.2,
-                151.5,
-                1.4
-              ],
-              [
-                286.2,
-                171.7,
-                1.1
-              ],
-              [
-                175.7,
-                46.9,
-                0.8
-              ],
-              [
-                242.2,
-                292.8,
-                1.1
-              ],
-              [
-                359.7,
-                94.7,
-                0.6
-              ],
-              [
-                388.0,
-                93.7,
-                0.8
-              ],
-              [
-                141.9,
-                75.8,
-                1.1
-              ],
-              [
-                142.2,
-                255.1,
-                0.6
-              ],
-              [
-                308.4,
-                101.3,
-                1.1
-              ],
-              [
-                273.6,
-                112.4,
-                1.4
-              ],
-              [
-                40.2,
-                63.2,
-                0.8
-              ],
-              [
-                82.4,
-                84.4,
-                1.4
-              ],
-              [
-                116.9,
-                165.7,
-                1.4
-              ],
-              [
-                366.4,
-                254.3,
-                0.8
-              ],
-              [
-                318.9,
-                237.5,
-                1.4
-              ],
-              [
-                267.3,
-                271.1,
-                1.4
-              ],
-              [
-                41.2,
-                243.4,
-                1.4
-              ],
-              [
-                39.1,
-                141.4,
-                0.6
-              ],
-              [
-                327.2,
-                132.2,
-                0.6
-              ],
-              [
-                56.7,
-                83.7,
-                1.4
-              ],
-              [
-                287.7,
-                277.5,
-                1.4
-              ],
-              [
-                158.8,
-                68.8,
-                1.1
-              ],
-              [
-                344.1,
-                231.2,
-                0.6
-              ],
-              [
-                9.9,
-                273.7,
-                1.4
-              ],
-              [
-                142.4,
-                253.8,
-                0.6
-              ],
-              [
-                92.9,
-                261.6,
-                0.6
-              ],
-              [
-                373.0,
-                294.8,
-                1.4
-              ],
-              [
-                343.2,
-                63.9,
-                0.8
-              ],
-              [
-                71.4,
-                143.8,
-                1.4
-              ],
-              [
-                37.1,
-                258.6,
-                1.4
-              ],
-              [
-                363.2,
-                88.8,
-                1.1
-              ],
-              [
-                384.3,
-                6.9,
-                1.4
-              ],
-              [
-                338.0,
-                123.9,
-                0.8
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "cometa",
-                "x": 99.1,
-                "y": 37.0,
-                "s": 34,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "antena",
-                "x": 166.7,
-                "y": 34.4,
-                "s": 32,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "planeta",
-                "x": 31.9,
-                "y": 41.9,
-                "s": 34,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "estrella",
-                "x": 104.8,
-                "y": 114.8,
-                "s": 24,
-                "r": 30,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "cometa",
-                "x": 298.0,
-                "y": 39.5,
-                "s": 34,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "cubesat",
-                "x": 240.7,
-                "y": 114.0,
-                "s": 32,
-                "r": -15,
-                "c": "#eef1fa"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "planeta",
-                "x": 297.7,
-                "y": 109.5,
-                "s": 34,
-                "r": -15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "cometa",
-                "x": 360.5,
-                "y": 117.9,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "cubesat",
-                "x": 164.0,
-                "y": 186.0,
-                "s": 32,
-                "r": 30,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "cubesat",
-                "x": 94.5,
-                "y": 188.8,
-                "s": 32,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "estrella",
-                "x": 40.3,
-                "y": 194.5,
-                "s": 24,
-                "r": -15,
-                "c": "#ffb627"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "cubesat",
-                "x": 33.0,
-                "y": 256.5,
-                "s": 32,
-                "r": 0,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "cohete",
-                "x": 305.1,
-                "y": 256.7,
-                "s": 36,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "cohete",
-                "x": 235.5,
-                "y": 187.8,
-                "s": 36,
-                "r": 30,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "astronauta",
-                "x": 359.0,
-                "y": 256.6,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "cohete",
-                "x": 364.9,
-                "y": 191.3,
-                "s": 36,
-                "r": 15,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "cometa",
-                "x": 99.1,
-                "y": 37.0,
-                "s": 34,
-                "r": -90,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "antena",
-                "x": 166.7,
-                "y": 34.4,
-                "s": 32,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "planeta",
-                "x": 31.9,
-                "y": 41.9,
-                "s": 19,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "estrella",
-                "x": 104.8,
-                "y": 114.8,
-                "s": 24,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 36,
-                "y": 112,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cubesat",
-                "x": 240.7,
-                "y": 114.0,
-                "s": 32,
-                "r": -15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "planeta",
-                "x": 297.7,
-                "y": 109.5,
-                "s": 19,
-                "r": -15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 330.5,
-                "y": 95.9,
-                "s": 34,
-                "r": 15,
-                "c": "#ffb627"
-              },
-              {
-                "t": "cubesat",
-                "x": 164.0,
-                "y": 186.0,
-                "s": 32,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cubesat",
-                "x": 124.5,
-                "y": 210.8,
-                "s": 32,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cubesat",
-                "x": 33.0,
-                "y": 256.5,
-                "s": 32,
-                "r": 0,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cohete",
-                "x": 305.1,
-                "y": 256.7,
-                "s": 36,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cohete",
-                "x": 235.5,
-                "y": 187.8,
-                "s": 36,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "astronauta",
-                "x": 359.0,
-                "y": 256.6,
-                "s": 34,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "cohete",
-                "x": 364.9,
-                "y": 191.3,
-                "s": 36,
-                "r": 195,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cometa",
-                "x": 236,
-                "y": 262,
-                "s": 34,
-                "r": 0,
-                "c": "#5ee6d0"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1avp3",
-                "x": 36,
-                "y": 112,
-                "r": 28
-              },
-              {
-                "id": "1bv9j",
-                "x": 99.1,
-                "y": 37.0,
-                "r": 28
-              },
-              {
-                "id": "1cfty",
-                "x": 31.9,
-                "y": 41.9,
-                "r": 28
-              },
-              {
-                "id": "2ap4e",
-                "x": 297.7,
-                "y": 109.5,
-                "r": 28
-              },
-              {
-                "id": "2bc3v",
-                "x": 298.0,
-                "y": 39.5,
-                "r": 28
-              },
-              {
-                "id": "2cyue",
-                "x": 330.5,
-                "y": 95.9,
-                "r": 28,
-                "x2": 360.5,
-                "y2": 117.9
-              },
-              {
-                "id": "3aayw",
-                "x": 40.3,
-                "y": 194.5,
-                "r": 28
-              },
-              {
-                "id": "3b66x",
-                "x": 164.0,
-                "y": 186.0,
-                "r": 28
-              },
-              {
-                "id": "3c7h6",
-                "x": 124.5,
-                "y": 210.8,
-                "r": 28,
-                "x2": 94.5,
-                "y2": 188.8
-              },
-              {
-                "id": "4afvt",
-                "x": 235.5,
-                "y": 187.8,
-                "r": 28
-              },
-              {
-                "id": "4br73",
-                "x": 364.9,
-                "y": 191.3,
-                "r": 28
-              },
-              {
-                "id": "4c7c4",
-                "x": 236,
-                "y": 262,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "jDw+bA==",
-              "XrYomw==",
-              "XYv3nQ==",
-              "6vky/Q=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "75c0024686caf64aee8c3fa50a2b1c72",
-          "huella": "f60dd5a2f538f83665a2bda9cf574a76a7ffb72a2fbe07964a5f6a318ab5960b",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "NPuQWXt21ZSbublGJOGL81JE6NZyotEU1Wam3gp1nLvQi3RHCwx7GUGuC/2iabvt4uvH332pGJkc3wPidGCy5vgsgH+mB1ofERonfuSD/D0hwsKj+xKz+Y58bkULHio9IoZVlakb3p8F/N0pnAZfTQxBqsSn0bs80sNYacdKUPvBqYU/dbR4R8H72vw="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         },
         "10": {
           "prueba": {
-            "estrellas": [
-              [
-                208.9,
-                234.6,
-                1.1
-              ],
-              [
-                151.4,
-                141.8,
-                0.8
-              ],
-              [
-                361.0,
-                269.2,
-                1.4
-              ],
-              [
-                340.9,
-                291.6,
-                0.6
-              ],
-              [
-                60.1,
-                98.0,
-                0.6
-              ],
-              [
-                150.2,
-                35.9,
-                1.1
-              ],
-              [
-                281.2,
-                71.8,
-                0.6
-              ],
-              [
-                263.7,
-                140.7,
-                0.6
-              ],
-              [
-                375.8,
-                243.9,
-                1.4
-              ],
-              [
-                81.7,
-                234.6,
-                0.6
-              ],
-              [
-                330.4,
-                276.8,
-                0.6
-              ],
-              [
-                35.4,
-                126.8,
-                0.6
-              ],
-              [
-                335.6,
-                137.0,
-                1.4
-              ],
-              [
-                106.3,
-                15.5,
-                0.8
-              ],
-              [
-                149.0,
-                209.0,
-                0.6
-              ],
-              [
-                22.9,
-                90.8,
-                0.6
-              ],
-              [
-                362.9,
-                207.4,
-                1.1
-              ],
-              [
-                236.2,
-                276.6,
-                1.4
-              ],
-              [
-                59.8,
-                75.9,
-                0.8
-              ],
-              [
-                351.5,
-                148.2,
-                0.6
-              ],
-              [
-                393.7,
-                282.9,
-                1.1
-              ],
-              [
-                178.5,
-                73.4,
-                0.8
-              ],
-              [
-                218.8,
-                139.7,
-                1.1
-              ],
-              [
-                274.7,
-                16.8,
-                1.1
-              ],
-              [
-                251.9,
-                295.5,
-                0.8
-              ],
-              [
-                328.0,
-                208.6,
-                0.8
-              ],
-              [
-                29.0,
-                244.7,
-                1.1
-              ],
-              [
-                384.8,
-                160.1,
-                0.6
-              ],
-              [
-                100.8,
-                198.7,
-                0.8
-              ],
-              [
-                50.2,
-                134.2,
-                0.8
-              ],
-              [
-                363.7,
-                81.7,
-                1.4
-              ],
-              [
-                134.3,
-                174.5,
-                1.4
-              ],
-              [
-                164.2,
-                63.3,
-                1.1
-              ],
-              [
-                238.0,
-                72.1,
-                0.6
-              ],
-              [
-                191.1,
-                128.5,
-                0.6
-              ],
-              [
-                108.4,
-                217.7,
-                0.6
-              ],
-              [
-                123.0,
-                279.9,
-                1.1
-              ],
-              [
-                58.0,
-                162.7,
-                1.4
-              ],
-              [
-                385.9,
-                58.5,
-                1.4
-              ],
-              [
-                51.3,
-                31.9,
-                0.8
-              ],
-              [
-                124.0,
-                96.3,
-                0.6
-              ],
-              [
-                13.9,
-                249.4,
-                1.4
-              ],
-              [
-                284.6,
-                153.7,
-                1.1
-              ],
-              [
-                40.3,
-                32.4,
-                0.6
-              ],
-              [
-                311.6,
-                7.8,
-                0.6
-              ],
-              [
-                29.3,
-                249.4,
-                0.6
-              ],
-              [
-                107.5,
-                92.9,
-                1.4
-              ],
-              [
-                117.4,
-                148.8,
-                1.4
-              ],
-              [
-                363.9,
-                141.7,
-                1.1
-              ],
-              [
-                209.1,
-                217.5,
-                1.1
-              ],
-              [
-                392.9,
-                246.8,
-                0.6
-              ],
-              [
-                16.1,
-                198.4,
-                1.4
-              ],
-              [
-                8.8,
-                134.2,
-                1.4
-              ],
-              [
-                177.9,
-                46.6,
-                0.8
-              ],
-              [
-                249.7,
-                263.4,
-                1.1
-              ],
-              [
-                16.6,
-                68.3,
-                0.6
-              ],
-              [
-                38.0,
-                279.9,
-                0.8
-              ],
-              [
-                240.3,
-                16.9,
-                0.6
-              ],
-              [
-                390.1,
-                30.4,
-                1.4
-              ],
-              [
-                320.2,
-                109.5,
-                1.1
-              ],
-              [
-                327.5,
-                264.8,
-                1.1
-              ],
-              [
-                193.3,
-                273.5,
-                1.1
-              ],
-              [
-                391.0,
-                182.6,
-                0.6
-              ],
-              [
-                371.9,
-                122.0,
-                0.6
-              ],
-              [
-                78.8,
-                25.4,
-                0.6
-              ],
-              [
-                277.1,
-                135.8,
-                1.4
-              ],
-              [
-                150.2,
-                201.8,
-                0.6
-              ],
-              [
-                333.5,
-                183.9,
-                0.6
-              ],
-              [
-                103.8,
-                65.3,
-                0.8
-              ],
-              [
-                238.6,
-                286.4,
-                1.1
-              ]
-            ],
-            "original": [
+            "racha": 8,
+            "porIntento": 8,
+            "parejas": [
               {
-                "t": "luna",
-                "x": 95.7,
-                "y": 109.3,
-                "s": 30,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "5d4753367ac88d3409de65fb33eaec807ed57314f3cd6ae01acae03cce201f2e",
+                "datoCifrado": "Qw6XYfMuh7yfpn2ZDZ6temOccsem6J4W6Tp5NXgm5/+iZ4i3Fd2ft50="
               },
               {
-                "t": "astronauta",
-                "x": 163.8,
-                "y": 112.7,
-                "s": 34,
-                "r": 30,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué está *más lejos* del Sol?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "2LnTdCO3XEEyGFuytNwu+Zc8y4JnJp2wDpo6hXKuXmRJg6CnEEY="
               },
               {
-                "t": "cohete",
-                "x": 105.3,
-                "y": 39.4,
-                "s": 36,
-                "r": 0,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué superficie es *más caliente*?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "DKaSMwlPhDK469T/F94ctsMWx2jh82930zKPbNZ40MrVob31rJaXI+z7kk4="
               },
               {
-                "t": "estrella",
-                "x": 37.7,
-                "y": 109.9,
-                "s": 24,
-                "r": 0,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "8kobLLIGJYZdAjsT+FDrROSD5eIBm7JJJi3E1I3oil5RQCeW3YM2UqnLIiQ="
               },
               {
-                "t": "cometa",
-                "x": 241.2,
-                "y": 109.4,
-                "s": 34,
-                "r": 30,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué tiene *más lunas*?",
+                "opciones": [
+                  {
+                    "nombre": "Saturno",
+                    "icono": "planeta-anillo:#e8c27a"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "4ea3f8170f870983f7724de34a98b0eda0e71c63f34b73b008bb211878645175",
+                "datoCifrado": "xrnVdTT5QA47BA8FfJk18tZ90ZQBP5q8GMljyPVqRClKleQ="
               },
               {
-                "t": "cometa",
-                "x": 238.0,
-                "y": 34.9,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Dónde dura *más* un día?",
+                "opciones": [
+                  {
+                    "nombre": "Venus",
+                    "icono": "planeta:#e9b65c"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "844e644735e66aaa78066ff55df1c2a98b99dde597f08b5abc633d130dbed797",
+                "datoCifrado": "Cr2SNr6PJqGu45HbE5AIsZETwnugtjFjg3OHwAkjg5/Pq7yn/dPWcUs4/w=="
               },
               {
-                "t": "planeta",
-                "x": 305.5,
-                "y": 107.4,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Sputnik 1",
+                    "icono": "sputnik"
+                  },
+                  {
+                    "nombre": "Gagarin en órbita",
+                    "icono": "emoji:👨‍🚀"
+                  }
+                ],
+                "huella": "fd61d100c5c93278321fc03175ef927f6c1fd43f6fdb1d53c96985cdfb214761",
+                "datoCifrado": "/I7qWNHl0bssknSvl3aEW0x6YXnGHoC6qIV4AcpXgy81hQQEwiXIGFw="
               },
               {
-                "t": "cohete",
-                "x": 363.3,
-                "y": 40.8,
-                "s": 36,
-                "r": 15,
-                "c": "#5ee6d0"
+                "pregunta": "¿Qué pasó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Primer paso en la Luna",
+                    "icono": "emoji:👣"
+                  },
+                  {
+                    "nombre": "Estación Espacial Internacional",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "b1aaad102222016f881c230691f97b3ac54826626412fe375d1f9a2315c2cca9",
+                "datoCifrado": "WyO8cafzC3y/kkShwhvcDi9Sag=="
               },
               {
-                "t": "cohete",
-                "x": 34.7,
-                "y": 187.5,
-                "s": 36,
-                "r": 0,
-                "c": "#ffb627"
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Monte Olimpo (Marte)",
+                    "icono": "montana:#c1502e"
+                  },
+                  {
+                    "nombre": "Everest",
+                    "icono": "emoji:🏔️"
+                  }
+                ],
+                "huella": "242d74ff435c99c5a99d220c9bca49b0a075dfc17ed9f7ade59cb6c450e53cd6",
+                "datoCifrado": "cvbId9kUqsvWL+7v0cE8JpYRAkyWVXCFDFCYiXqLEWv44Znqhg=="
               },
               {
-                "t": "astronauta",
-                "x": 95.7,
-                "y": 188.8,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué está *más cerca* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "DabZhgPNTWOyADlSndntXILkgv+xxiOMlqKkjw4OvvszRlZUO1wgvpaauQ=="
               },
               {
-                "t": "luna",
-                "x": 36.7,
-                "y": 264.8,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué va *más rápido*?",
+                "opciones": [
+                  {
+                    "nombre": "Estación Espacial",
+                    "icono": "iss"
+                  },
+                  {
+                    "nombre": "Avión de pasajeros",
+                    "icono": "emoji:✈️"
+                  }
+                ],
+                "huella": "4d2e33069d8927ff86ef56fe085249ebeffbd2546258ba24feed8172f217e564",
+                "datoCifrado": "HbvCNoLfFG33XmYB1oDyBIw="
               },
               {
-                "t": "estrella",
-                "x": 162.0,
-                "y": 265.4,
-                "s": 24,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "33cfe4a853d9790ec1e208169d141b1ecf2e6a879f091c4c2ed1b500aaadd773",
+                "datoCifrado": "gBeKYZFHGV0+dG9x3d900Y2h35XqPh1YxVPcxo3Edmg4bw6ADkAcjs46d8OtPW9DgA=="
               },
               {
-                "t": "luna",
-                "x": 359.7,
-                "y": 190.0,
-                "s": 30,
-                "r": 30,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  },
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "b28830c37a24ea57be4bd098b970a0848d5908741a30bddc9a8a5d2b883ec2cb",
+                "datoCifrado": "seYQor3g1spOtcIG1U8g0SDMw17RTjI3pEX6"
               },
               {
-                "t": "astronauta",
-                "x": 233.6,
-                "y": 262.0,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff"
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Ganímedes (luna de Júpiter)",
+                    "icono": "planeta:#a89f91"
+                  },
+                  {
+                    "nombre": "Mercurio",
+                    "icono": "planeta:#9e9e9e"
+                  }
+                ],
+                "huella": "c86383522d30f4306b614ca5f83358e7f0207ac9b11f2f87486cc8b067df4ebf",
+                "datoCifrado": "vRl2huF08sdgl+MmRPvw8ZiMFI0o9d/Dyh9KunqjT/lKHvcjvz5P1Sc="
               },
               {
-                "t": "antena",
-                "x": 361.9,
-                "y": 265.4,
-                "s": 32,
-                "r": 15,
-                "c": "#eef1fa"
+                "pregunta": "¿Qué luz tarda *más* en llegar a la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Del Sol",
+                    "icono": "sol"
+                  },
+                  {
+                    "nombre": "De la Luna",
+                    "icono": "emoji:🌕"
+                  }
+                ],
+                "huella": "dcd41ca0af1d804919defbdf9ed5e795b34581b087b68b526db405c4aaaf4931",
+                "datoCifrado": "4ER9+YVrMTrusTQK1lt+dDnUJA0RjF7xxvYf7ZxhTsf22bCuE+9PY5bFqY5Th7g="
               },
               {
-                "t": "cometa",
-                "x": 231.6,
-                "y": 188.1,
-                "s": 34,
-                "r": 15,
-                "c": "#ff6b5b"
+                "pregunta": "¿Qué es *más frío*?",
+                "opciones": [
+                  {
+                    "nombre": "Neptuno",
+                    "icono": "planeta:#3f6fe0"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "b63edfbd110b90fddc1ba5ae8f7bc87e8ba957f2ef9106f34667cef209187f26",
+                "datoCifrado": "5MJc6JfJhuWoPgM3tkKJ6nqprcPpZn94kAy6K+kHmtqO5oYTyU1IBsxH8l4RSr6IAFc5Oj8="
+              },
+              {
+                "pregunta": "¿Dónde dura *más* un año?",
+                "opciones": [
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "sJX0mQHk1YYQ1LVvw+OOWo3rGiTgehaZ+IHy55VJy5M="
+              },
+              {
+                "pregunta": "¿Qué se lanzó *antes*?",
+                "opciones": [
+                  {
+                    "nombre": "Telescopio Hubble",
+                    "icono": "hubble"
+                  },
+                  {
+                    "nombre": "Telescopio James Webb",
+                    "icono": "webb"
+                  }
+                ],
+                "huella": "79d9105ea5f77fa9e092b2715aff919ee0127ddd291f1556fb25b97712e59210",
+                "datoCifrado": "G4Y0QByIW5y3GCfUbSQOcuagQw=="
+              },
+              {
+                "pregunta": "¿Qué está *más lejos* de la Tierra?",
+                "opciones": [
+                  {
+                    "nombre": "Sonda Voyager 1",
+                    "icono": "sonda"
+                  },
+                  {
+                    "nombre": "Plutón",
+                    "icono": "planeta:#cbb59d"
+                  }
+                ],
+                "huella": "dccd1b1cd4910b7c426e3438b31eb6585f02087fc36428ac330abff8e20a7bdf",
+                "datoCifrado": "rSxAlMjfVBKsR/O84ePpqrRGIckIX/wEn7btYhkqG1sVBeZN5mtwfxVO6g=="
+              },
+              {
+                "pregunta": "¿Qué *pesa más*?",
+                "opciones": [
+                  {
+                    "nombre": "Un CubeSat como los de GranaSAT",
+                    "icono": "cubesat"
+                  },
+                  {
+                    "nombre": "Un balón de fútbol",
+                    "icono": "emoji:⚽"
+                  }
+                ],
+                "huella": "4eb7ae98e2ae41f648a6dc39d62057f2bb56ceea377761a58500c93b963dd152",
+                "datoCifrado": "A3hmTX7HeJTQSzJqGJH3Gc0SJKu2cRE6eTYA8wUzXVA5ka8oXGICB7C8IjSYx29R/A=="
+              },
+              {
+                "pregunta": "¿Qué es *más grande*?",
+                "opciones": [
+                  {
+                    "nombre": "Betelgeuse",
+                    "icono": "estrella:#e53935"
+                  },
+                  {
+                    "nombre": "Sol",
+                    "icono": "sol"
+                  }
+                ],
+                "huella": "37fa0be4088ed085e9ce191a00041789da16a538f732f1d09514b0f0fffc7a6f",
+                "datoCifrado": "6LzoxnJM71U0tnrj6l1XC3beRC1tsJg31EwjMNn226MY5GVsObm+EW9gEQhAMeRRujRC3tHIvxJIbh1LkV8BfhAv"
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Júpiter",
+                    "icono": "planeta-bandas:#d9a066"
+                  },
+                  {
+                    "nombre": "Tierra",
+                    "icono": "emoji:🌍"
+                  }
+                ],
+                "huella": "a690a3305de7d9180e71b3b4988c1ff90ed15de12e2efe9e3054d38cfe7e6e70",
+                "datoCifrado": "4ldaOv4Ued8cGjsE/AOm6yTQoeBTlr0NF2TFw5Op9w=="
+              },
+              {
+                "pregunta": "¿Dónde hay *más gravedad*?",
+                "opciones": [
+                  {
+                    "nombre": "Luna",
+                    "icono": "emoji:🌕"
+                  },
+                  {
+                    "nombre": "Marte",
+                    "icono": "planeta:#d0533a"
+                  }
+                ],
+                "huella": "803d32bebd57bf9519f3094adf3396729a5354ed045fa24b52e087542bb1e0ef",
+                "datoCifrado": "qDh1i+Ix38pV3vpAzvTaTtjqTzPvekzA7+3jSlkG"
+              },
+              {
+                "pregunta": "¿Qué es *más alto*?",
+                "opciones": [
+                  {
+                    "nombre": "Cohete Saturno V",
+                    "icono": "cohete"
+                  },
+                  {
+                    "nombre": "La Giralda de Sevilla",
+                    "icono": "torre"
+                  }
+                ],
+                "huella": "eb98b12b82dae258937423896977807ceb1f6a5e7c110c937ea74ac199ac5021",
+                "datoCifrado": "pMTBKoG2oAXS7wlKaRH3Dyin81xDuVIgPAsTFZz8vA=="
               }
             ],
-            "recibida": [
-              {
-                "t": "luna",
-                "x": 95.7,
-                "y": 109.3,
-                "s": 30,
-                "r": 15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "astronauta",
-                "x": 163.8,
-                "y": 112.7,
-                "s": 34,
-                "r": 30,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cohete",
-                "x": 105.3,
-                "y": 39.4,
-                "s": 20,
-                "r": 0,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "luna",
-                "x": 164,
-                "y": 40,
-                "s": 30,
-                "r": 0,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cometa",
-                "x": 241.2,
-                "y": 109.4,
-                "s": 34,
-                "r": 30,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "cometa",
-                "x": 268.0,
-                "y": 22,
-                "s": 34,
-                "r": -15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "planeta",
-                "x": 305.5,
-                "y": 107.4,
-                "s": 34,
-                "r": -15,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cohete",
-                "x": 363.3,
-                "y": 40.8,
-                "s": 36,
-                "r": 195,
-                "c": "#5ee6d0"
-              },
-              {
-                "t": "cohete",
-                "x": 34.7,
-                "y": 187.5,
-                "s": 36,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "luna",
-                "x": 36.7,
-                "y": 264.8,
-                "s": 30,
-                "r": 0,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "estrella",
-                "x": 162.0,
-                "y": 265.4,
-                "s": 24,
-                "r": 15,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "estrella",
-                "x": 164,
-                "y": 190,
-                "s": 24,
-                "r": 0,
-                "c": "#ffb627"
-              },
-              {
-                "t": "luna",
-                "x": 359.7,
-                "y": 190.0,
-                "s": 51,
-                "r": 30,
-                "c": "#ff6b5b"
-              },
-              {
-                "t": "astronauta",
-                "x": 233.6,
-                "y": 262.0,
-                "s": 34,
-                "r": -15,
-                "c": "#3d8bff"
-              },
-              {
-                "t": "antena",
-                "x": 361.9,
-                "y": 265.4,
-                "s": 32,
-                "r": 195,
-                "c": "#eef1fa"
-              },
-              {
-                "t": "cometa",
-                "x": 261.6,
-                "y": 210.1,
-                "s": 34,
-                "r": 15,
-                "c": "#ff6b5b"
-              }
-            ],
-            "diferencias": [
-              {
-                "id": "1ah6y",
-                "x": 37.7,
-                "y": 109.9,
-                "r": 28
-              },
-              {
-                "id": "1bp6x",
-                "x": 164,
-                "y": 40,
-                "r": 28
-              },
-              {
-                "id": "1cetp",
-                "x": 105.3,
-                "y": 39.4,
-                "r": 28
-              },
-              {
-                "id": "2auw7",
-                "x": 268.0,
-                "y": 22,
-                "r": 28,
-                "x2": 238.0,
-                "y2": 34.9
-              },
-              {
-                "id": "2bxc3",
-                "x": 363.3,
-                "y": 40.8,
-                "r": 28
-              },
-              {
-                "id": "2cjnj",
-                "x": 305.5,
-                "y": 107.4,
-                "r": 28
-              },
-              {
-                "id": "3a69f",
-                "x": 34.7,
-                "y": 187.5,
-                "r": 28
-              },
-              {
-                "id": "3b443",
-                "x": 95.7,
-                "y": 188.8,
-                "r": 28
-              },
-              {
-                "id": "3cwpj",
-                "x": 164,
-                "y": 190,
-                "r": 28
-              },
-              {
-                "id": "4ah9j",
-                "x": 261.6,
-                "y": 210.1,
-                "r": 28,
-                "x2": 231.6,
-                "y2": 188.1
-              },
-              {
-                "id": "4bkvn",
-                "x": 359.7,
-                "y": 190.0,
-                "r": 28
-              },
-              {
-                "id": "4cffe",
-                "x": 361.9,
-                "y": 265.4,
-                "r": 28
-              }
-            ],
-            "sellosZona": [
-              "GIBHyQ==",
-              "DUFBdw==",
-              "l3eqmg==",
-              "Cm4yDw=="
-            ]
+            "clave": "3abco1JMa7c=",
+            "salClave": "bedeb1d4222458ce"
           },
-          "sal": "fc62fbc0f5cc59827566582d8b523c2b",
-          "huella": "85bdfc5899c9844a3f8c84341aa1bd9dcb034e286a8033a37a4f8808cd1e0b69",
+          "sal": "934ac5ef346a49609a337df1d187cae6",
+          "huella": "c42c8faa1ea0c8ce3282a8a2a39a7186db8edb3807f1dddcac43865f8d583762",
           "datoCifrado": [
-            "MIR2JhPL1fhX0dVSsINu2jrFMNLDSe4fXCfU6K0kK/Msvc/iUMnr9+AHw9GhWtsbgmoxLDhrdWzKi8PysRBMeYKMo5jMZQbD1iOZA2CtrrR4AQbtrnMzZ70phawIF+PX/WW8CFpY2brOBChgP5RaI6jZJCMN2HggAlSr5W4GG7THxYYgrekVSFzNJd8="
+            "2Q6+PtVzx+1OYLWed0cB+r4Vuu3j8MNM6iHA9D779yEy2jqoU3AXfnTKRMKabc0f5VRF2iAN9RlEg+jP58erTgcqMJ5hS2e5IdcK9LsIr2WX0n6oMob87ur9qQ=="
           ]
         }
       }
