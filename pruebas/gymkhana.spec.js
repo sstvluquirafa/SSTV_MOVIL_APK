@@ -44,14 +44,35 @@ for (const e of C.estaciones) {
   });
 }
 
-test('SSTV a mano: también valen los sinónimos (alternativas)', async ({ page }) => {
-  const e = C.estaciones.find((x) => x.prueba.tipo === 'sstv_mano');
-  const alt = (SEC.estaciones[String(e.id)].alternativas || [])[0];
-  test.skip(!e || !alt, 'Sin SSTV o sin sinónimos configurados');
+test('Pelis espaciales: valen las variantes (otro idioma, artículo, mayúsculas, sin tildes)', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  test.skip(!e, 'Sin Pelis espaciales');
   await A.empezar(page);
   await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
   await A.abrirEstacion(page, e.id);
-  await A.responder(page, 'sstv_mano', alt);
+  // 1.ª: «El …» + mayúsculas · 2.ª: su segunda variante · 3.ª: «The …» delante de la variante sin artículo
+  const [t1] = A.titulosPelis(0);
+  const [, t2, t3] = A.titulosPelis(1);
+  const quitarTildes = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+  await A.responder(page, 'pelis', ['El ' + t1.toUpperCase(), quitarTildes(t2).toLowerCase(), '  ' + t3 + '!']);
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+});
+
+test('Pelis espaciales: un título equivocado se marca y no supera la estación', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  test.skip(!e, 'Sin Pelis espaciales');
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.responder(page, 'pelis', A.respuestaMala('pelis'));
+  await expect(page.locator('.peli[data-i="1"]')).toHaveClass(/fallo/);
+  await expect(page.locator('.peli[data-i="0"]')).toHaveClass(/acierto/);
+  await expect(page.locator('.peli[data-i="2"]')).toHaveClass(/acierto/);
+  await expect(page.locator('#ayuda-prueba')).toContainText('Lleváis 2 de 3');
+  await expect(page).toHaveURL(new RegExp(`#/e/${e.id}/`));
+  // Corrigen solo la que falla y la estación se supera
+  await page.fill('#peli-1', A.titulosPelis(0)[1]);
+  await page.locator('#pelis-comprobar').click();
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 

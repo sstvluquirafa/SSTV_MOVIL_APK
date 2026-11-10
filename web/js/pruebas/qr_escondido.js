@@ -9,13 +9,12 @@
 
   GK.pruebas.registrar('qr_escondido', {
     titulo: 'QR escondido',
+    objetivo: 'Encontrad el QR escondido cerca de aquí.',
+    pasos: ['Leed la pista del escondite', 'Buscadlo sin mover nada', 'Escaneadlo desde aquí'],
     montar(contenedor, ctx) {
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">Cerca de esta estación hay un <b>QR escondido</b>.<br>
-              El cartel os dice dónde buscar.<br>
-              Encontradlo y escaneadlo <b>desde aquí</b>.</p>
             <div class="radar-caja" id="qr-radar">
               <div class="radar-baliza" aria-hidden="true"><i class="radar-barrido"></i><i class="radar-eco"></i></div>
               <p class="radar-texto">Buscando la baliza…</p>

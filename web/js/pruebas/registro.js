@@ -8,6 +8,8 @@
  * Definición de una prueba:
  *   {
  *     titulo: 'Texto corto para la cabecera',
+ *     objetivo: 'Una frase: qué hay que conseguir.',      ← la app lo pinta igual en todas, sobre la prueba
+ *     pasos: ['Paso corto', 'Otro paso', 'Último paso'], ← 2 o 3, de 6–7 palabras como mucho, sin negritas
  *     montar(contenedor, ctx) {
  *       // Dibuja la prueba dentro de `contenedor` (un <div>).
  *       // ctx.estacion   → { id, letra, nombre, prueba, sal }  (prueba = las opciones de torneo.json)

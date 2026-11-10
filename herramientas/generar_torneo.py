@@ -20,9 +20,11 @@ con Pillow instalado (pip install pillow) genera además las imágenes del mapa.
 """
 import base64
 import hashlib
+import itertools
 import json
 import math
 import random
+import re
 import secrets
 import sys
 import unicodedata
@@ -42,6 +44,25 @@ def normalizar(texto: str) -> str:
     t = unicodedata.normalize("NFD", str(texto).lower())
     t = "".join(c for c in t if unicodedata.category(c) != "Mn")
     return "".join(c for c in t if c.isascii() and c.isalnum())
+
+
+ARTICULOS = re.compile(r"^(el|la|los|las|the)\s+")
+
+
+def normalizar_titulo(texto: str) -> str:
+    """Igual que tituloLimpio en web/js/pruebas/pelis.js: como normalizar() pero quitando antes un artículo al
+    principio («el», «la», «los», «las», «the»). Así «The Martian» y «Martian» valen igual."""
+    t = unicodedata.normalize("NFD", str(texto).lower())
+    t = "".join(c for c in t if unicodedata.category(c) != "Mn")
+    t = re.sub(r"^[^a-z0-9]+", "", t)
+    return normalizar(ARTICULOS.sub("", t))
+
+
+def combinaciones_pelis(peliculas) -> list:
+    """«Pelis espaciales»: la respuesta es la unión de los tres títulos (en orden). Vale cualquier combinación de
+    títulos aceptados; la primera (los títulos principales) es la «clave» y el resto van a «alternativas»."""
+    listas = [list(dict.fromkeys(normalizar_titulo(x) for x in p if normalizar_titulo(x))) for p in peliculas]
+    return ["".join(c) for c in itertools.product(*listas)]
 
 
 def codigo(n=6) -> str:
@@ -128,6 +149,18 @@ def prueba_publica(e, s):
         if len(s["dato"]) > 160:
             print(f"  · OJO: el dato de la estación {e['letra']} pasa de 160 caracteres ({len(s['dato'])}).")
         p["datoCifrado"] = [cifrar("gk:" + s["dato"], k, s["sal"]) for k in [s["clave"], *s.get("alternativas", [])]]
+    if p.get("tipo") == "pelis" and s.get("peliculas"):
+        # Una huella por cada título aceptado de cada película (con la sal de la estación), para marcar en el móvil
+        # cuál han acertado sin publicar los títulos. La comprobación de verdad es la clave conjunta de Firebase.
+        publicas = p.get("peliculas") or []
+        if len(publicas) != len(s["peliculas"]):
+            print(f"  · OJO: la estación {e['letra']} tiene {len(publicas)} películas en torneo.json y "
+                  f"{len(s['peliculas'])} en privado/secretos.json.")
+        p["peliculas"] = [
+            {**(publicas[i] if i < len(publicas) else {}),
+             "huellas": sorted({huella(normalizar_titulo(x), s["sal"]) for x in titulos if normalizar_titulo(x)})}
+            for i, titulos in enumerate(s["peliculas"])
+        ]
     if p.get("tipo") == "morse" and p.get("cartel"):
         pregunta = descifrar_morse(p["cartel"])
         if "?" in pregunta:
@@ -342,6 +375,10 @@ def main():
         if tipo == "codigo_estacion":
             # El código de la etiqueta escondida en la estación (prueba de relleno)
             s["clave"] = p.get("clave") or codigo()
+        elif tipo == "pelis" and siempre.get("peliculas"):
+            # Clave y sinónimos salen de la lista de títulos de cada película (privado/secretos.json → «peliculas»)
+            combos = combinaciones_pelis(siempre["peliculas"])
+            s["clave"], s["alternativas"] = combos[0], combos[1:]
         elif tipo == "qr_escondido":
             # El QR escondido lleva este texto; la clave es el propio texto
             s["qr"] = p.get("qr") or ("GK-QR-" + codigo())
@@ -502,6 +539,7 @@ def main():
                         "url": f"{base}#/e/{e['id']}/{sec['estaciones'][str(e['id'])]['token']}",
                         "clave": sec["estaciones"][str(e["id"])]["clave"],
                         "alternativas": sec["estaciones"][str(e["id"])].get("alternativas", []),
+                        "peliculas": sec["estaciones"][str(e["id"])].get("peliculas", []),
                         "prueba": e.get("prueba") or {},
                         "pregunta": descifrar_morse(e["prueba"]["cartel"]) if (e.get("prueba") or {}).get("tipo") == "morse" and e["prueba"].get("cartel") else "",
                         "qr": sec["estaciones"][str(e["id"])].get("qr", ""),

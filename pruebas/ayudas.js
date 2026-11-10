@@ -61,6 +61,11 @@ async function abrirEstacion(page, id) {
 
 /* ---------- Cómo se responde cada tipo de prueba ---------- */
 const LETRAS = 'abcdefgh';
+/** Pelis espaciales: los títulos principales (o la variante n de cada película, si la hay). */
+function titulosPelis(n = 0) {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  return SEC.estaciones[String(e.id)].peliculas.map((p) => p[Math.min(n, p.length - 1)]);
+}
 /** Una respuesta incorrecta pero con la forma correcta (mismo largo / mismo número de opciones). */
 function respuestaMala(tipo, buena) {
   if (tipo === 'geoguessr' || tipo === 'real_o_ia') {
@@ -69,6 +74,8 @@ function respuestaMala(tipo, buena) {
   }
   if (tipo === 'bulo_verdad') return buena.slice(0, -1) + (buena.slice(-1) === 'b' ? 'v' : 'b');
   if (tipo === 'caja_fuerte') return buena.split('').map((d) => String((Number(d) + 1) % 10)).join('');
+  // Pelis: la 1.ª y la 3.ª bien y la 2.ª con un título equivocado (los buenos salen de privado/secretos.json)
+  if (tipo === 'pelis') return titulosPelis().map((t, i) => (i === 1 ? 'Titanic' : t));
   if (tipo === 'wordle') return buena.split('').reverse().join('') === buena ? 'zzzzz' : buena.split('').reverse().join('');
   return 'respuestamala';
 }
@@ -79,6 +86,13 @@ async function responder(page, tipo, r) {
     case 'codigo_estacion': await page.fill('#codigo-estacion', r); await prueba.locator('form button').click(); break;
     case 'morse': await page.fill('#resp-morse', r); await prueba.locator('form button').click(); break;
     case 'sstv_mano': await page.fill('#resp-sstv', r); await prueba.locator('form button').click(); break;
+    case 'pelis': {
+      // r: lista de títulos, o la clave (la unión de los tres): entonces se escriben los títulos principales
+      const titulos = Array.isArray(r) ? r : titulosPelis();
+      for (let i = 0; i < titulos.length; i++) await page.fill(`#peli-${i}`, titulos[i]);
+      await page.locator('#pelis-comprobar').click();
+      break;
+    }
     case 'binario': await page.fill('#resp-bin', r); await prueba.locator('form button').click(); break;
     case 'hackeo': await page.fill('#hack-clave', r); await page.locator('#hack-form button').click(); break;
     case 'qr_escondido':
@@ -135,4 +149,4 @@ async function sinScrollHorizontal(page) {
   expect(ancho, 'la página no debe tener scroll horizontal').toBeLessThanOrEqual(vista + 1);
 }
 
-module.exports = { C, SEC, est, clave, token, rutaQueEmpiezaPor, empezar, ponerRuta, hechas, abrirEstacion, respuestaMala, responder, continuarSiHaceFalta, superar, sinScrollHorizontal };
+module.exports = { C, SEC, titulosPelis, est, clave, token, rutaQueEmpiezaPor, empezar, ponerRuta, hechas, abrirEstacion, respuestaMala, responder, continuarSiHaceFalta, superar, sinScrollHorizontal };

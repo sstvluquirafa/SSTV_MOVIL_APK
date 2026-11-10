@@ -87,9 +87,10 @@ web/                       ← lo que se publica en GitHub Pages
       registro.js          interfaz de pruebas (léelo antes de crear una)
       _plantilla.js        plantilla para pruebas nuevas
       codigo_estacion.js   prueba de relleno: código escondido en la estación
-      morse.js, sstv_mano.js, binario.js, qr_escondido.js         pruebas de papel
-      wordle.js, geoguessr.js, real_o_ia.js, caja_fuerte.js,
+      morse.js, binario.js, qr_escondido.js                        pruebas de papel
+      pelis.js, wordle.js, geoguessr.js, real_o_ia.js, caja_fuerte.js,
       hackeo.js, bulo_verdad.js                                    pruebas de la app
+      sstv_mano.js         en el banquillo (sin estación; su configuración, en torneo.json → banquillo)
   assets/img/pruebas/      imágenes de GeoGuessr y ¿Real o IA?
   vendor/                  jsQR (leer QR) y qrcode-generator (crear QR); licencias en LICENCIAS.txt
   assets/img/mapa.jpg      GENERADO: el mapa del Parque, ligero (≈190 KB)
@@ -237,7 +238,7 @@ python herramientas/generar_torneo.py
 Abre `privado/imprimir.html` con doble clic. Tiene un botón para imprimir cada parte por separado:
 
 - **Carteles A4 de estación**, con la letra y el QR.
-- **Carteles de prueba** (A4): Morse (la pregunta), SSTV a mano (las coordenadas), Binario (las bombillas) y QR
+- **Carteles de prueba** (A4): Morse (la pregunta), Binario (las bombillas) y QR
   escondido (la pista de dónde está). Van **junto al cartel de la estación**.
 - **QR escondidos**: etiquetas pequeñas con el QR y «GranaSAT · Gymkhana». Escondedlas a menos de 10–15 pasos.
 - **Cartel de la meta** (A4), con su QR grande.
@@ -260,7 +261,7 @@ Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].pr
 | Est. | Prueba | Dónde | Lo público (`torneo.json` → `prueba`) | Lo secreto (`privado/secretos.json`) |
 |---|---|---|---|---|
 | A | Morse (`morse`) | cartel + app | `cartel`: la pregunta en Morse (letras con espacios, palabras con « / ») | `clave`: la respuesta |
-| B | SSTV a mano (`sstv_mano`) | cartel + app | `columnas`, `filas`, `cartel`: lista de filas con las casillas pintadas | `clave` y `alternativas` (sinónimos) |
+| B | Pelis espaciales (`pelis`) | app | `peliculas`: `[{ emojis: [...] }]` (3, sin títulos) | `peliculas`: títulos que valen de cada una (la `clave` y las `alternativas` las calcula el script) |
 | C | Binario (`binario`) | cartel + app | `cartel`: filas de 5 bombillas («01100»…) | `clave`: la palabra |
 | D | QR escondido (`qr_escondido`) | cartel + QR + app | `escondite`: pista del cartel | `qr` y `clave` (los genera el script) |
 | E | Wordle (`wordle`) | app | — | `clave`: palabra de 5 letras |

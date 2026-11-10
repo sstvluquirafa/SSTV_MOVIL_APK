@@ -672,6 +672,7 @@
             </div>
           </div>
         </header>
+        ${htmlObjetivo(prueba, est.prueba)}
         <div id="prueba"></div>
         <div id="ayuda-prueba" aria-live="polite"></div>
         <div id="pista"></div>
@@ -722,6 +723,23 @@
       if (typeof limpiar === 'function') limpiar();
     };
   }
+  /**
+   * Qué hay que hacer en la prueba, igual en todas: el objetivo (una frase) y 2 o 3 pasos cortos. Cada prueba lo
+   * define como datos en su módulo (objetivo y pasos); aquí se pinta, entre la cabecera de la estación y la prueba.
+   */
+  function htmlObjetivo(prueba, datos) {
+    // objetivo y pasos pueden ser funciones de la configuración de torneo.json (por ejemplo, cuántas fotos hay)
+    const valor = (x) => (typeof x === 'function' ? x(datos || {}) : x);
+    const objetivo = prueba && valor(prueba.objetivo);
+    if (!objetivo) return '';
+    const pasos = valor(prueba.pasos) || [];
+    return `
+      <section class="objetivo" aria-label="Qué hay que hacer">
+        <p class="objetivo-texto">${GK.html(objetivo)}</p>
+        ${pasos.length ? `<ol class="objetivo-pasos">${pasos.map((p) => `<li>${GK.html(p)}</li>`).join('')}</ol>` : ''}
+      </section>`;
+  }
+
   function actualizarEstacionEnCurso() {
     // Si mientras están en la prueba otro móvil del equipo la completa (o la organización la marca), se avanza solo.
     if (!estacionEnCurso || estacionEnCurso.quedarse) return;

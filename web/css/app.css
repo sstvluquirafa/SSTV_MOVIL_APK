@@ -1216,3 +1216,49 @@ body.app #cielo { opacity: 1; }
 .app .bulo.es-bulo { border-left-color: var(--interferencia); }
 .app .bulo.es-verdad { border-left-color: var(--fosforo); }
 @media (prefers-reduced-motion: reduce) { .app .bulo-botones::before { transition: none; } }
+
+/* ---------- Pelis espaciales: tres tarjetas con los emojis grandes ---------- */
+.pelis { display: grid; gap: 12px; margin-top: 14px; }
+.peli {
+  padding: 12px 12px 14px; border-radius: 12px; border: 1px solid var(--linea);
+  border-left: 4px solid var(--atmosfera); background: var(--superficie);
+}
+.peli-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.peli-titulo { font-family: var(--display); font-weight: 600; font-size: 1.05rem; color: var(--texto); }
+.peli-marca { font-size: .9rem; font-weight: 600; }
+.peli-emojis {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px;
+  margin: 10px 0 12px; font-size: 2.4rem; line-height: 1.15;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+}
+.peli .campo { margin: 0; }
+.peli.acierto { border-left-color: var(--fosforo); }
+.peli.acierto .peli-marca { color: var(--fosforo); }
+.peli.acierto .campo { border-color: rgba(94, 230, 208, .55); }
+.peli.fallo { border-left-color: var(--interferencia); }
+.peli.fallo .peli-marca { color: var(--interferencia); }
+.peli.fallo .campo { border-color: rgba(255, 107, 91, .6); }
+.pelis .boton-ancho { margin-top: 2px; }
+@media (max-width: 380px) { .peli-emojis { gap: 6px 10px; } }
+
+/* ---------- Qué hay que hacer: objetivo + pasos, igual en todas las pruebas (app.js → htmlObjetivo) ---------- */
+.objetivo { margin: 4px 2px 0; }
+.objetivo-texto {
+  margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.25rem; line-height: 1.3;
+  color: var(--texto); text-wrap: balance;
+}
+.objetivo-pasos { list-style: none; counter-reset: paso; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+.objetivo-pasos li {
+  counter-increment: paso; display: flex; align-items: center; gap: 10px;
+  font-size: 1rem; line-height: 1.35; color: var(--texto-2);
+}
+.objetivo-pasos li::before {
+  content: counter(paso); flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--ambar-suave); border: 1px solid rgba(255, 182, 39, .55); color: var(--ambar);
+  font-family: var(--mono); font-size: .8rem; font-weight: 700;
+}
+/* Leyenda de colores del Wordle, junto al tablero */
+.w-leyenda { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; margin: 10px 0 0; font-size: .88rem; color: var(--texto-2); }
+.w-leyenda > span { display: inline-flex; align-items: center; gap: 6px; }
+/* Notas que explican una parte concreta de la prueba (van junto a esa parte, no en el objetivo) */
+.app .reto-cuerpo > .nota-prueba { margin: 16px 2px -8px; font-size: .9rem; line-height: 1.4; color: var(--texto-2); }

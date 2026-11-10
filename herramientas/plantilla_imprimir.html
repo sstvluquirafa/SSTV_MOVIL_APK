@@ -159,6 +159,7 @@ html += `<section class="hoja cartel cartel-meta">
 </section>`;
 
 // Carteles de las pruebas en papel (el contenido sale de torneo.json → prueba.cartel / prueba.escondite)
+// Las pruebas solo de app (Pelis espaciales, Wordle…) no llevan cartel de prueba: solo el cartel normal de estación.
 const dibujarMorse = (t) => String(t).replace(/\./g, '•').replace(/-/g, '–');
 const cabPrueba = (e, que) => `<div class="cartel-cab"><span class="mono">GRANASAT · PRUEBA · ${que}</span><span class="titulo">${tituloHTML}</span></div>
   <div class="cartel-num">${esc(e.letra)}</div><h1 class="titulo">${esc(e.nombre)}</h1>`;
@@ -233,7 +234,7 @@ html += `<section class="hoja monitores">
       o lleve demasiado rato sin completar una estación.</div>
   </div>
   <table><thead><tr><th>ESTACIÓN</th><th>NOMBRE</th><th>PRUEBA</th><th>CÓDIGO / CLAVE</th><th>LETRA</th></tr></thead><tbody>
-  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${esc(e.clave)}${e.alternativas && e.alternativas.length ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(e.alternativas.join(', '))}</small>` : ''}</td><td class="mono">${esc(e.letraPalabra)}</td></tr>`).join('')}
+  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${e.peliculas && e.peliculas.length ? e.peliculas.map((p, i) => `${i + 1}. ${esc(p[0])}${p.length > 1 ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(p.slice(1).join(', '))}</small>` : ''}`).join('<br>') : `${esc(e.clave)}${e.alternativas && e.alternativas.length ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(e.alternativas.join(', '))}</small>` : ''}`}</td><td class="mono">${esc(e.letraPalabra)}</td></tr>`).join('')}
   <tr><td><b>★</b></td><td>Última transmisión</td><td>palabra final</td><td class="mono">${esc(D.final.clave)}</td><td></td></tr>
   <tr><td><b>🏁</b></td><td>${esc(D.meta.nombre)}</td><td>QR de la meta</td><td class="mono" style="font-size:9pt;letter-spacing:0">${esc(D.meta.token)}</td><td></td></tr>
   </tbody></table>

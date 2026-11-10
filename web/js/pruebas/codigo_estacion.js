@@ -9,11 +9,12 @@
 
   GK.pruebas.registrar('codigo_estacion', {
     titulo: 'Código de la estación',
+    objetivo: 'Encontrad el código escondido en esta estación.',
+    pasos: ['Buscad la etiqueta cerca', 'Escribid su código'],
     montar(contenedor, ctx) {
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">En esta estación hay escondida una <b>etiqueta</b> con un código.<br>Encontradla y escribid el código.</p>
             <form class="form-codigo" autocomplete="off">
               <label class="etiqueta" for="codigo-estacion">Código de la estación</label>
               <input id="codigo-estacion" class="campo campo-codigo" inputmode="text" autocapitalize="characters"

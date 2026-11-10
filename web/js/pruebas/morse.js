@@ -25,14 +25,13 @@
 
   GK.pruebas.registrar('morse', {
     titulo: 'Código Morse',
+    objetivo: 'Descifrad la pregunta en Morse y respondedla.',
+    pasos: ['Leed el código del cartel', 'Traducidlo con la tabla', 'Escribid la respuesta'],
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">El cartel de la estación trae una <b>pregunta en Morse</b>.<br>
-              Letras separadas por espacios; palabras separadas por <b>/</b>.<br>
-              Descifradla con la tabla y escribid la <b>respuesta</b> (no la pregunta).</p>
             <section class="radio-panel" aria-label="Tabla Morse">
               <div class="radio-cab">
                 <span class="radio-titulo">Tabla Morse</span>
@@ -41,7 +40,7 @@
               <div class="tabla-morse">
                 ${TABLA.map(([l, c]) => `<button type="button" class="tecla-morse" data-c="${c}" aria-label="${l}: ${leer(c)}"><b>${l}</b><span class="pulsos" aria-hidden="true">${pulsos(c)}</span></button>`).join('')}
               </div>
-              <p class="radio-nota">Tocad una letra para sentir su ritmo.</p>
+              <p class="radio-nota">En el cartel, las letras van separadas por espacios y las palabras por «/». Tocad una letra para sentir su ritmo.</p>
             </section>
             <form autocomplete="off">
               <label class="etiqueta" for="resp-morse">Respuesta a la pregunta</label>

@@ -32,6 +32,8 @@
 
   GK.pruebas.registrar('wordle', {
     titulo: 'Wordle espacial',
+    objetivo: 'Adivinad la palabra secreta de 5 letras.',
+    pasos: ['Probad una palabra', 'Fijaos en los colores', 'Tenéis 6 intentos'],
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       let palabra = '';
@@ -51,10 +53,9 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">Adivinad la palabra secreta de <b>${N} letras</b> en ${INTENTOS} intentos.<br>
-              <span class="w-ej ok">A</span> letra en su sitio · <span class="w-ej casi">A</span> está, pero en otro sitio · <span class="w-ej no">A</span> no está.</p>
             <p class="texto-2 mono w-ronda" id="w-ronda"></p>
             <div class="w-tablero" id="w-tablero" style="--n:${N}" role="grid" aria-label="Tablero"></div>
+            <p class="w-leyenda"><span><span class="w-ej ok">A</span> en su sitio</span><span><span class="w-ej casi">A</span> en otro sitio</span><span><span class="w-ej no">A</span> no está</span></p>
             <p class="w-msg" id="w-msg" aria-live="polite"></p>
             <div class="w-teclado" id="w-teclado">
               ${FILAS_TECLADO.map((f) => `<div class="w-fila">${[...f].map((k) =>

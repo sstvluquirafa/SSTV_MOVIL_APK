@@ -276,98 +276,93 @@ window.GK_CONFIG = {
       "x": 1352,
       "y": 925,
       "prueba": {
-        "tipo": "sstv_mano",
-        "columnas": 11,
-        "filas": 14,
-        "cartel": [
-          [
-            6
-          ],
-          [
-            5,
-            6,
-            7
-          ],
-          [
-            4,
-            5,
-            7,
-            8
-          ],
-          [
-            4,
-            8
-          ],
-          [
-            4,
-            6,
-            8
-          ],
-          [
-            4,
-            8
-          ],
-          [
-            4,
-            5,
-            6,
-            7,
-            8
-          ],
-          [
-            4,
-            8
-          ],
-          [
-            3,
-            4,
-            8,
-            9
-          ],
-          [
-            2,
-            3,
-            4,
-            8,
-            9,
-            10
-          ],
-          [
-            2,
-            4,
-            5,
-            6,
-            7,
-            8,
-            10
-          ],
-          [
-            5,
-            7
-          ],
-          [
-            4,
-            8
-          ],
-          []
+        "tipo": "pelis",
+        "_ayuda": "Tres películas contadas con emojis. Los títulos que valen están en privado/secretos.json → peliculas (nunca aquí).",
+        "peliculas": [
+          {
+            "emojis": [
+              "🌽",
+              "🚀",
+              "🕳️",
+              "⏳",
+              "👨‍👧"
+            ],
+            "huellas": [
+              "d4e8bed9df8ced3d6eb66f025fe76ff00bf49033ed8e2e5bbec76ad065ffb670",
+              "d8844b0c133a8df460b93cbd329fac7323de467d3cc17f9edb1d75fac25227f1"
+            ]
+          },
+          {
+            "emojis": [
+              "☀️",
+              "🦠",
+              "🧑‍🏫",
+              "🚀",
+              "🕷️",
+              "🤝"
+            ],
+            "huellas": [
+              "3b6d8a944d450da5953f7d0cc95a58a6ad6412a820b4afd723d301dddd3818a1",
+              "3ed204971a836bd839cfc640b27a3ffd9d6d8c76e582d4f72ad930c752bbf17e",
+              "638efea513eddb856611da8092b1480caabad87672c13a240d61f6516249332b",
+              "78d0e21e1ed74f2e54cf30b50807d822d7231f80f720cde8e8be05039473483a"
+            ]
+          },
+          {
+            "emojis": [
+              "🧑‍🚀",
+              "🔴",
+              "🥔",
+              "🆘",
+              "🛰️"
+            ],
+            "huellas": [
+              "9e8f1b1b740bf6cd1741190c8ac20ff22a29c7a3cb2fd6a826dd99dc7ed1402c",
+              "f4630e7477d777b4569ed32d7ab4cec1f30b410f36649728069c9a4b41041e88"
+            ]
+          }
         ],
-        "pista": "Es un vehículo",
+        "pista": "Son de 2014, 2015 y 2026, y las tres están en plataformas",
         "huellasAlternativas": [
-          "f1502f7bcb780115709bbe800a600eaea184f37af5af8818843620c137c17d61",
-          "6f8a69d3c48778d8a8a53b79b65a51a680114e5b7701ab9bbcf943ea1831f945",
-          "08d8b4c854e90acd4b9af384e1b334e1f6f0c765e64f05269916e7186838b4a5"
+          "7dec1ecfe261feaf5aca08ac7848d5f5f7c9cb323af917bf51bfa37280ef53b9",
+          "8270c0675e62580d5769bc83b510ce99f4f5a08db375a0071d6bd3e62738fecb",
+          "055f012e5a2f00fd4162334e86cc63746ccacbede721def094dc7a3ce55d45c0",
+          "fa9d6a4f51d13e238029ff8227b30e609c06a550b97b08249b49f5aeddcbf7c5",
+          "7b57f9073690a3be332aadb2d2ff703dcca29f524bc15cb00c346eec1aeb6a67",
+          "b1f30281aec2b68bb276f6c8c89bbc53704013d422163a67fbe2d7fbcdd63cf0",
+          "7c0969bdb101579590fa32af3b81b862dab2bcfdbf0b964f5b7723309c320998",
+          "05177d5ac5404aadfe1168750b5b3ca58f46f0d4dc01dadac4f94c87157d8766",
+          "456c7de7b3dd28dc2343ec9f3e0714ba24646b6693920be3943101fb3536d7e0",
+          "30c82ba1b6d6075d8d85108a5192240ab427310c954b87481512c45a0ef9f052",
+          "f8d79563b91a9e5312893388c63bdcd61ec2288a4d4a9ef849ffdbcf04b75a61",
+          "7aef84f64ba6cdc28350e3d93e6d8ad59f2c8e321a65178b393bc3ebed32721a",
+          "c4f047476aedd752f4d317fcdd19afad7bbc4376f0d9af5a06c6eea75a8ffa7a",
+          "0247c6c7795e08f7b8c05987d0efdb7d8bd4b5235e51f9420f029f40c7168814",
+          "5013d7efb295065e5055e13fcf675e01da751093a04b6479f12f52c30dd2531c"
         ],
         "datoCifrado": [
-          "CEBGk6D+RMuYePAXTNm1LhJWPz5GUdNLvv79gHf9Ol+yxyve/+7MaHAK/NGoPnxYRzyUZs/UDNumD5Mjm9MPj8PfTANC0Z42/xkW4eYtAtYDYhw+0LkOkGTOx6Iz225hAila8I6bAqWSU8sYrHdg2NGvFOvk09llAwquqQqt6DAESVnUEoc39xsXuPHBy9lDfq7Gt8q2hVph",
-          "pzKRjXJ6D8iWd1N8/AAvRPVt7BGCrOxsFaKje2aQUSrEpQ8LfDtysnoZLnMxpfM3gJyU3UQsqjXymxlyzFji0dqqiUPwwlRRg8HfQzIy/UcGzze94UiUzooRUmXJNScKwC+DuIONzSLfT3+oAV68J6m/AlEV1buXddHIuDJoSoG7HPYxAopbGnlvmx226AAzuRgT3rxEDmP3",
-          "cIQcyT6l45uZGkSedTBmzEGoQRxtseZ2s4qMHwdyBSPWETv6RyYc+iyFGClj5i+0L7fRez1Ey0lOgAAuSal+Eb1ahLESzAXpZ05MGkRb8WVVPE+6VnMyIAf0gauT9qsxWm1yMD1ILVsPtBSG56DTg2RV7J67EEQ5a6K3UpuyVAX+FWB87nOSREIo6d78vckP7TTNNtPxd3J2",
-          "DjFPTKb2CuKFNxvKYwqFlYQWUQ9AnMZylqPKKiO/xqaAwWurtHcBXe2U2+woS6O3P8u+LuRO0/N9NFTnTWE9z6DVJRIpl5Vh2Q/eVNg/pdhKtBgP6tmRESIa9LOUg2GRwniCDxSeeMVZrtc1hZFjX8RKO8d1NtHtLo8Oanrt83KjbJuWmha90WoZlrgfcpV3dcqkEIqf2Awq"
+          "W2ToGATWkE8xDVdSclz9T6AM1+LcoEN3/F59MTdp2/9cO2K9IhHiCsG3k3i06sTO+ZDiTW6cWaCcw7Pc3D2adI132nFQygRSAx/9GRI33Nb37S/8hUOaNCFNmjImmsgW4dY5G09cr+K53KvITzbGADlBzlyvZUTbUmqfv239EA==",
+          "UnXg6WM5tN+VGKewdaSUap8IqH6kCVsoJMhrAjdTzFQJTK8NkEfqLzMCAAOJsUIDevBb5tx+xnol93AzaoyOf/j468OfQhf+DncNvItcYwiRyMvVZVtue2PxHhxLz5/DyXmXAfrnU9iVLaP/ERPSQFMAdsxCrZJdywy6DMuBGg==",
+          "HCvTPVbMdnPTgixRFPXpVbqGb3cd1+M7cP674mULa3AH3s81LhgTSDpCW/0FnOz1KbIF9wYgXcSeCElVuBqplzdWVDDLNtZnWwJ0nEt8EyJikBw9BLXR1vHT/7a33XWFYifsrvZlRi9+FLbt3+C33BowEUsWxD+UWNJydG99CQ==",
+          "RXGorgwwQu+PHzPUxTFHqKjieSWkcVph2sxpmMxPfnDsOqC4HCvUSJ9Vn+9y2jDfopPAghXx+s60CJ9Gl+Hu+mnsHX33Kx68UXrhU1+VUY8af6ITSHlZEJgr8E6ljeHIrCrEJ1yfXZZbO20fkPIjQpxMJ0NHFBmrEax926+Q0g==",
+          "s5KM5AwxcNIYhKuFCrQPe5o3b6odD7E5whuqZqZqDNji/bta3pjwC7Nlt/FQPTSGHT93KYy4+JB8pyBKZUjlZixhUFqraPmKjHL2usIur65QHk+6lfigiLOvgmhpYU32XwAMfqowTr10ZDdSZ9e3ffDawpggAfZWV/Y8qOeJ7g==",
+          "vISRdWya2ohaaVKK7opA9ifRSxXIv7tc1UwK2IsVu69sMXrV6SC1LCHFIztA5J4jH/cAKhfP0zdcRp6P51kvzMx/3errTB6MWqVKDHrPZzF4mNJTDb7R6rv5/eosbhTlcG4Wv3xI5KcnfEkec7v0+Ua0Qtr1hxOQTXsDWFxgaA==",
+          "PQHZK8XEUFJ7HPWojUcWoAASB3EjkfKBy51sENH6s2JmXG7PhRSKXXlTPnCW3jMgLMuwQhJSqh8AAWrmP45vmTnvSBIHrGqqo3AHsIkDdusit3yxm0yICC/MPxqKopAC5l7nHM8wtXhEFnqsaf8XepLU5Z2qwYq2gtOCizlBng==",
+          "jQ0d0m43c9efioKw99TeAJ9mIYtzqd+ZPIbvNeHLWelTt97pLDmSX76H/LMkpzY9Urz3U0EshEh/w9/y8AcbWQzlrtzFGdqQgQz504jepFzTfiDFWNuzR3MMDHkajL5Add79dieUa7PrBcOw3GlkuIFBVAoOoDDXytj12USIBw==",
+          "W7tWgt3r9RnEN+GnByLvjStbjJjyd8xZYDoTbWIrwF0DZ7F3nC50zWwi2Gsl6p5M/e202qW+ksRhDIQhJ5l9j2SWbBXpJgmJTKPvvV970v/6DnuYO2CppPjfhn5xNMkmTp9L/xEqeD05URiEqyvQNM6uTJf1qWEIL22ukACKLA==",
+          "CSU5HIgJUkw5EaT71IoGR6NbhDv5HLodIaEre3fKXJ9pn8o30gyKhFQyntSZ2m/lQevQzvI7ftNYcn+Xtam+LDJZKrLl95UN7wutqKOLMrRrHaqKdXLWRaWvPCKD0NQz34VIP0fYhcnzHJkY8TDaHN7Z/Bdhvoa+y/wauiVv3w==",
+          "2ezrB445CEJ3a5EXBIX3VdQjqV0dty4gzJB4V3W48JLblKvPMuvHIhFJ7Qk4ub883GXky+8QfaezLraGRreGNyMSU/TaGrNGP69xwYb755DJDo4CKh7U93oFDni+nBiGHHwF9d44bnSqzwcxJrgkCd5m5/PGRT10QMQ2letDig==",
+          "oyD+sm7hVmIDEVamakaENHQHRa3TMY6YyZrEte1x2v4+I6rsNSAvFfn7gsefZ0phYHO+5RWeR5cDEvx/Nkbzs7QEoXYqGwPmvBUhSrfSW5gObnmwRwdMGyEtldjQ5YiiB/YvSgOkUOZyFUrv5ICOv2ejJVtz/8OPimfYZbxoEg==",
+          "OLD0whnF/iQMD/YZFMDfly0G3akRd2xAkNVsRICcKyBFQfvL5jH5cKd5ti7cQ7nWoiXTm3c6F89X05fNdOTZTGP7BI/D4kTCfspoQTq4S/3YPXSSa+LBkSNydz+VAmqPhI2hopJHIiea74qsb3WXyKN6l2PV3hPGf7/kuSKvVQ==",
+          "5kG/Xm7vv96SGsMqXoqN2/oq1AuQonoeTewoPUdP4A88g63HQtpuWrjYe1nvYs7Z2jLyRIdnG7XKyDqyZ8QpRAzbt+lhnhqSjZIPQ08lFYkQvfjfpOVgb/xFfic1de2ygLeh7djBquHZVcAZY1MDRME7dkhxIcpyyC+1twm8Jw==",
+          "lntTENLBrhqoglqGz3/ePIe5onHt0THXJcs9mvxTzu+LoCqjN+A1ibtlFvE0UfPllgIcD/4GvYnnNE1kw8kenf8DcfwxOafmP1GKRjIC0ovaIq64p7oWyS3saZHG2SJ6V2mgALS1h+2VIlm+2zrNbNcCaLy42p7IOeT529ftSg==",
+          "VPrGPOpjETsWRSVxYlJ/BnJQVKbDihYSMJPFOmz5kBl38FdX+rs2VZE+5PF0dSpMqoAk/Llxwz3xUa92M1Q69rMKdudju291O7P7uYnyUZz8Z4kFw2jTPlJvclsPXpbgtiHx+ZCWSTvt7gLjVBQAp08lYhoCAufcoS0ZXPlfNw=="
         ]
       },
       "letraPalabra": "S",
       "token": "2e7b8cde50e8bee45672069fcf42c0293a2b3dd9a8b24ee9b891f07a38a66594",
       "sal": "3543b644f53f436090113dc0a18e93ea",
-      "huella": "459d963e93f1cde2b9f632e71111de361cc5c57fb2a2d79c3aeedc0dd656559d"
+      "huella": "eda976b04e829188694cc111a4f664deb08be98cafd952f4f130d272b76f177c"
     },
     {
       "id": 3,

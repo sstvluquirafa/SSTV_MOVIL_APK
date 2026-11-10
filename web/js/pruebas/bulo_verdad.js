@@ -12,6 +12,8 @@
 
   GK.pruebas.registrar('bulo_verdad', {
     titulo: '¿Bulo o verdad?',
+    objetivo: 'Decidid qué noticias son bulos.',
+    pasos: (P) => [`Leed las ${(P.afirmaciones || []).length} noticias`, 'Marcad bulo o verdad', 'Comprobad'],
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       const afirmaciones = (P.afirmaciones || []).map((a) => (typeof a === 'string' ? a : a.texto));
@@ -19,7 +21,6 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">Nos llegan estas noticias del espacio.<br>¿Cuáles son <b>bulos</b> y cuáles son <b>verdad</b>?</p>
             <ol class="bulos">
               ${afirmaciones.map((a, i) => `
                 <li class="bulo" data-i="${i}">

@@ -9,6 +9,8 @@
 
   GK.pruebas.registrar('caja_fuerte', {
     titulo: 'Abre la escotilla',
+    objetivo: (P) => `Abrid la escotilla con el código de ${Math.max(1, Math.min(6, Number(P.cifras) || 3))} cifras.`,
+    pasos: ['Leed las pistas', 'Descartad cifras', 'Girad las ruedas'],
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       const n = Math.max(1, Math.min(6, Number(P.cifras) || 3));
@@ -16,7 +18,6 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">La escotilla de la nave se abre con un código de <b>${n} cifras</b>.<br>Estas pistas os dirán cuál es:</p>
             <ul class="caja-pistas">
               ${(P.pistas || []).map((p) => `<li><span class="caja-cod mono" aria-label="Código ${GK.html(String(p.codigo).split('').join(' '))}">${String(p.codigo).split('').map((d) => `<i>${GK.html(d)}</i>`).join('')}</span><span>${GK.html(p.texto)}</span></li>`).join('')}
             </ul>

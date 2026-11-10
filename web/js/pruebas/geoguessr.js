@@ -14,14 +14,14 @@
 
   GK.pruebas.registrar('geoguessr', {
     titulo: 'GeoGuessr desde satélite',
+    objetivo: 'Descubrid dónde se hizo cada foto desde el espacio.',
+    pasos: (P) => [`Mirad las ${(P.imagenes || []).length} fotos`, 'Elegid un lugar en cada una', 'Comprobad'],
     montar(contenedor, ctx) {
       const imagenes = ctx.estacion.prueba.imagenes || [];
       const elegidas = Array(imagenes.length).fill(null);
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">Nuestro satélite ha hecho ${imagenes.length} fotos desde el espacio.<br>
-              ¿Dónde está cada una? Elegid una opción en cada foto y pulsad <b>Comprobar</b>.</p>
             ${imagenes.map((im, i) => `
               <figure class="geo-foto">
                 <div class="visor-sat">

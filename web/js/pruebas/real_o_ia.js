@@ -15,6 +15,8 @@
 
   GK.pruebas.registrar('real_o_ia', {
     titulo: '¿Real o IA?',
+    objetivo: 'Encontrad la foto hecha con inteligencia artificial.',
+    pasos: ['Mirad los detalles', 'Tocad la falsa', 'Comprobad'],
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       const imagenes = P.imagenes || [];
@@ -22,9 +24,6 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">Hemos recibido ${imagenes.length} fotos del espacio.<br>
-              ${imagenes.length - 1} son <b>reales</b> y una está <b>hecha con IA</b>.<br>
-              Tocad la falsa y pulsad Comprobar.</p>
             <div class="ia-rejilla" role="radiogroup" aria-label="¿Cuál está hecha con IA?">
               ${imagenes.map((im, i) => `
                 <button type="button" class="ia-foto" role="radio" aria-checked="false" data-i="${i}">

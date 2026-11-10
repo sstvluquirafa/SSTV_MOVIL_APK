@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v17';
+const VERSION = 'gk-v18';
 const ARCHIVOS = [
   './',
   'index.html',
@@ -26,6 +26,7 @@ const ARCHIVOS = [
   'js/pruebas/codigo_estacion.js',
   'js/pruebas/morse.js',
   'js/pruebas/sstv_mano.js',
+  'js/pruebas/pelis.js',
   'js/pruebas/binario.js',
   'js/pruebas/qr_escondido.js',
   'js/pruebas/wordle.js',

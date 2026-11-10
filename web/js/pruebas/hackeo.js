@@ -11,6 +11,8 @@
 
   GK.pruebas.registrar('hackeo', {
     titulo: 'Hackea el satélite',
+    objetivo: (P) => `Entrad en el satélite con la contraseña de ${String((P.perfil || {}).nombre || 'su dueña').split(/\s+/)[0]}.`,
+    pasos: ['Leed la ayuda de la contraseña', 'Buscad en su perfil', 'Escribidla'],
     montar(contenedor, ctx) {
       const P = ctx.estacion.prueba;
       const perfil = P.perfil || {};

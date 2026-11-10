@@ -11,18 +11,19 @@
 
   GK.pruebas.registrar('binario', {
     titulo: 'Binario',
+    objetivo: 'Convertid las bombillas en una palabra.',
+    pasos: ['Cada fila es un número', 'Cada número es una letra', 'Escribid la palabra'],
     montar(contenedor, ctx) {
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="reto-intro">Cada fila de bombillas del cartel es un <b>número en binario</b>.<br>
-              Encendida = 1 · apagada = 0. Cada número es una letra: <b>A=1, B=2 … Z=26</b>.<br>
-              Juntad las letras y escribid la palabra.</p>
+            <p class="nota-prueba">Bombilla encendida = 1 · apagada = 0. Cada una vale lo que pone encima.</p>
             <div class="placa" role="img" aria-label="Ejemplo: encendidos los LED que valen 8, 2 y 1: 8 más 2 más 1 son 11, la letra K">
               <p class="placa-rotulo mono" aria-hidden="true">GranaSAT · LED de estado</p>
               <div class="bin-fila" aria-hidden="true">${[16, 8, 4, 2, 1].map((v, i) => `<div class="bin-col"><span class="mono bin-valor">${v}</span><span class="led${[8, 2, 1].includes(v) ? ' on' : ''}"></span><span class="mono led-nombre">D${i + 1}</span></div>`).join('')}</div>
               <p class="placa-texto" aria-hidden="true"><b>Ejemplo:</b> encendidos 8, 2 y 1 → 8 + 2 + 1 = <b>11</b> → <b class="ambar">K</b></p>
             </div>
+            <p class="nota-prueba">Cada número es una letra: A=1, B=2 … Z=26.</p>
             <div class="abc-numerado" aria-label="Alfabeto numerado">
               ${ABC.split('').map((l, i) => `<span><b>${l}</b><i class="mono">${i + 1}</i></span>`).join('')}
             </div>
