@@ -10246,8 +10246,8 @@ window.GK_CONFIG = {
       "y": 302,
       "prueba": {
         "tipo": "caja_fuerte",
-        "_ayuda": "Contenido por equipo: lo elige el generador del banco de privado/bancos.json → caja_fuerte: las pistas se generan solas por equipo, con una única solución.",
-        "pista": "Empezad por la pista en la que no hay ninguna cifra correcta y tachad esas cifras"
+        "_ayuda": "Dos acertijos fijos, iguales para todos (privado/bancos.json → caja_fuerte → escotillas_fijas), comprobados por fuerza bruta al generar.",
+        "pista": "Empezad por las pistas en las que ninguna cifra es correcta: tachad esas cifras y mirad qué queda en las demás"
       },
       "letraPalabra": "U",
       "token": "df21695ce8d3e59a9abe802f0724752682ef84ba1eb556441ce8fb31389defbd",
@@ -10260,63 +10260,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "725",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "568",
-                    "texto": "Dos cifras son correctas y están bien colocadas"
-                  },
-                  {
-                    "codigo": "350",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "596",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "384",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
+                  },
+                  {
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
+                  },
+                  {
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "235ddf5d7f2ede74d0d3f17557858ec4aa11bffc704425e14f8e9a5ce8459420"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "6127",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "5281",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "0639",
-                    "texto": "Tres cifras son correctas: una bien colocada y dos mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "0893",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "2708",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
                   },
                   {
-                    "codigo": "3096",
-                    "texto": "Tres cifras son correctas pero están mal colocadas"
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "6cc9b83af50144f5f5175c0f5dfde5c2",
-          "huella": "498ee44277b68a97a482aee0a573b1670216e923ccb3abe345d89009fd24d5df",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "apkgJ9cLgH01OrdqM3xv8pAKlNMoVAhfBvd5jd9A5dKVbi65JgMkLJczKdNh8shbe4DE0u9ZEJ4SfX9NNis5qVwuUf9jJNs1Qb2I2lwqpmp7XXZZ9/ROPS3it7vdUEVvVBcWEOHeGRP4m77/h+uqnuKg0wOIT7AJrZ3qkh7F1GLemeHYBJJhiSyke5CnIlTm5lEc150="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "2": {
@@ -10326,63 +10322,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "459",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "319",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "638",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "204",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "412",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "112d5937d0c5a1415f9621d21b407193d49f11fb00b094209a059e86a8ae1afa"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "0543",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "2165",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "0246",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "8341",
-                    "texto": "Tres cifras son correctas: una bien colocada y dos mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "5079",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "1672",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
+                  },
+                  {
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "a344f39f20c8e75283d2fbf3887f644e",
-          "huella": "473b3e3ea7f1e774adcfd54ccf3a6391088ecc748ef23172b7960b8abade7d44",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "aDnQqIilu5bt8vf+lIqbc3WWETQ9VMfIVBUSNAh+0daU5AbhLXg8VM45C0d04LVjHksqs9exPr4NaXkdcMxVzyYaHnPFxLgwD1jWKjER9cE6E6cl2EMRNljLK82mMY7xusEEQGvm2WOsYdxcF6HBw8IGz2EnCIuWvnTb1j7FiF4pHfIgVc8ibOXAd88zagNlh39wCqU="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "3": {
@@ -10392,63 +10384,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "472",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "308",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "912",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "594",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "418",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "41b8bb7da4f698d9366a4d183925485ece0b43ccb643aaaf723f8c569ab35e30"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "6274",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "8092",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "6253",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "3809",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "1837",
-                    "texto": "Tres cifras son correctas pero están mal colocadas"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "2157",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
+                  },
+                  {
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "aca51de7e480a349133cca6ba4a475bb",
-          "huella": "c38dae15ff70643db63494d9d0b4c3f8d456af0531d07ec5560b7e2cedcf073a",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "JRLjxuuzz46VX+jOwDxuniGwup/l48CH5WUtLX/voqNDNhB8zzbRU+drIduMHEDFlciTcWgxBRL7IIcrdZT8h0egUREaBPOdKPgHLtSChHwsCxLoc83rxgxaRxemrN6vZqYQTKy2FcOiG+NaW0rYLHBRnY8OqwdMo25FNfV/7EGc963b1UvaaLlLbtCacD9OXCHO/NY="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "4": {
@@ -10458,63 +10446,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "298",
-                    "texto": "Una cifra es correcta y está bien colocada"
-                  },
-                  {
-                    "codigo": "052",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "073",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "195",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "348",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "220a02af3078b9132ab1206b3d50f2df82a04e1625684802d822d067ce7b77ef"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "2485",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "3597",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "6702",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "3821",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "1072",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "9543",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
+                  },
+                  {
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "9efe21c16313870c0de88adf46c2f3db",
-          "huella": "dfa7a5b38f8abdd07c9aefa0e322a29cb7521b8136f6f7446a362882bd28c39e",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "Vmq/+zsarDCVjO855mbZCmtcR26LMNnNuFr0bxWVwePkXlK1wNhQ5tBgGpZkB2W4fHfH0ewmrk4FlRqENlWxwuipc/+2Bk0Fp36ISG0NqoifXqoL27uckXxxuLcQ4QZTmurxk4hRc+7wNZcFuEkKewycu/VGLdNbvvh5N3w++zkU5vD8sB7Vn9IntMkADVGbYYLShi4="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "5": {
@@ -10524,63 +10508,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "218",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "457",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "531",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "970",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "964",
-                    "texto": "Dos cifras son correctas y están bien colocadas"
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "e3fbc3d7a5d499127b4ebee71203c1e5a9f9d40f2b119fb0c22e170f5bf00273"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "8234",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "1205",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "6098",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "3418",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "1986",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "5784",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
+                  },
+                  {
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
+                  },
+                  {
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "786bd948887461b7fd22453843afddf7",
-          "huella": "5039bff360455f58102cfc57d19375bfae6c4b1d49b52132bb13b2558a222827",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "fSvVisr1Aiy43DbxDR5hQcwxjNt3N5HmqdUOkgdJdmqGpGA8374lN1p+sT2nQot8L3R+s4IzlrLIM99xTb6MPs2jYEF5Yts3yrdUEtr8jyGx1sZXnAbYWxp2zHVGdyvq0zPv/DNNfYKjMSEQ5Or7f2+tfCUGHdqOfdkv4Q8t/WPth/brnqTFpfPrMHnPiAn1A9fU2MA="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "6": {
@@ -10590,63 +10570,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "390",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "746",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "891",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "160",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "702",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "53433f03254ff735546ed4a2bd7d6e0c97b7c34982aa6992a140d693b639e0c6"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "5431",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "2381",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "8016",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "2853",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
                   },
                   {
-                    "codigo": "7652",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "4037",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "b2c789d1f06ccb4f83669a4de8452313",
-          "huella": "93bf4808b09c1251631d69fa2f60684309a89fc66527d817c53a0fdf55b01797",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "gFemmrm+Bmg2lrkq7sMlzk54loz1M5zNx6rF438lbE1EY9p63kYp20Lt4lxy5FByrloZOtiDnYJ+pW+KG0WLabjRMINnCd8eyVE2GMrTpAWBE3hqSkB2YY6uHiD508K0o4+QxJwYq5iqUU1VBvFEmknlS6+SQDEgB39v57BxtT8w+s9CH8ABmkEudylGYnbSxqYekUc="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "7": {
@@ -10656,63 +10632,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "196",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "230",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "716",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "905",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "689",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "11ee876f29ff5ed2ddf157cb8fecb278d737233e8c19575eadca8190b64d173e"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "3167",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "0219",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "0591",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
-                  },
-                  {
-                    "codigo": "9234",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "0298",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "4893",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
+                  },
+                  {
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "44c6bdbce7afe6072d51faedfbd473bb",
-          "huella": "b42f33fdd81f91f8725ccac5fb15b0b55c77ac6b2dba91196be8f6bf68d60cc7",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "l48I449QTCJj/2JBZOrmPM4zjVgjzlGGufTPeVXCKVBlR9PoMtNLH02dtq+JFjVYAFN/Sh+xu78JckzW8Q6fXNBjB2amQYpE4HFdhSrSXstFj0n/22Zp3ZlShPsHSsGyeUDRqk5t5jdUsoVcZLidtPYQIkZ4nDBmshHkloHEobaEEhXbpjNOF475HiMmpHTkvGfJN0E="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "8": {
@@ -10722,63 +10694,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "657",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "314",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "793",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
                   },
                   {
-                    "codigo": "932",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "710",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "fab7f17f374a27fdb0ff15448e11b8d1153a792f1b29076058f0a1e1f805dae8"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "6587",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "4893",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "5381",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "0834",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
                   },
                   {
-                    "codigo": "5126",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "8247",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "c2875912ca915123041c823ed8ab280d",
-          "huella": "1a922c5f0440ed5f1190ca68730e659ed8d0132a3e270cdfa45fcfb6bd6c2c01",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "qXsgvumkYhIggene8F8YImIdtXkhyZpbdHYE/zhFieUjuWE2D07FEe9yXU7sBB4bqGNGQ0ur5j5FU8Ru5mJnc7wpdvefyOA58kY8lXc1xqaUBUySl1ItfOUVupfTZNoMFQqC55v+dAUrAub6DhhHs2ysBB0XjtRi/ke+j+t93ssbYTfXemEox4crgacbQfYYJTwuLQ4="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "9": {
@@ -10788,63 +10756,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "421",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "023",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "983",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "485",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "617",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
+                  },
+                  {
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
+                  },
+                  {
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "72e18f43d02ecc5a77cf0e30b3640b65bd5d4446cf35331d53b24e3144c758a9"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "8302",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "3759",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "1435",
-                    "texto": "Dos cifras son correctas: una bien colocada y otra mal colocada"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "5498",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
                   },
                   {
-                    "codigo": "1038",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "5130",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "2680628fc3bf811e404214a304c1cb18",
-          "huella": "512c7d82453eb3d3345be8eb82a771c906995a628dd77c5d803ac6ac9efafa87",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "lWiZpwTB9Xks6UV0ph2NibOqBlFZinKAazoiJAMZpXc0fh0g2tvqniThPecc1ADb/mBKj4y4xsn23a5uGstE77HYkpC9CNnCFhWdMkHbRhC3OfD+lxWKsTCCPAKLYbwmRe0SRBC5TDFHKF1HY1HGSeE9J2jSjg42JYdG45zNM9t7cDBCdCF7ytetU1fLshvZ+k83u5Q="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         },
         "10": {
@@ -10854,63 +10818,59 @@ window.GK_CONFIG = {
                 "cifras": 3,
                 "pistas": [
                   {
-                    "codigo": "539",
-                    "texto": "Una cifra es correcta y está bien colocada"
-                  },
-                  {
-                    "codigo": "371",
-                    "texto": "Una cifra es correcta y está bien colocada"
-                  },
-                  {
-                    "codigo": "351",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "856",
-                    "texto": "Una cifra es correcta pero está mal colocada"
-                  },
-                  {
-                    "codigo": "604",
+                    "codigo": "731",
                     "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "573",
+                    "texto": "Una cifra es correcta y bien colocada"
+                  },
+                  {
+                    "codigo": "219",
+                    "texto": "Una cifra es correcta pero mal colocada"
+                  },
+                  {
+                    "codigo": "946",
+                    "texto": "Ninguna cifra es correcta"
+                  },
+                  {
+                    "codigo": "862",
+                    "texto": "Dos cifras son correctas pero mal colocadas"
                   }
                 ],
-                "huella": "264f4c8f9bd9de8d53ec6957d2058a8be2b03da5299e20b30077e0ea96c17301"
+                "huella": "bb6e223733bb829a41585d90974714d700090fc8da2a8453157d032aef0ce233"
               },
               {
                 "cifras": 4,
                 "pistas": [
                   {
-                    "codigo": "5321",
+                    "codigo": "1247",
                     "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "5684",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "3152",
+                    "texto": "Una cifra es correcta y bien colocada"
                   },
                   {
-                    "codigo": "2971",
-                    "texto": "Una cifra es correcta y está bien colocada"
+                    "codigo": "5841",
+                    "texto": "Ninguna cifra es correcta"
                   },
                   {
-                    "codigo": "2460",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
+                    "codigo": "6790",
+                    "texto": "Tres cifras son correctas pero mal colocadas"
                   },
                   {
-                    "codigo": "1786",
-                    "texto": "Dos cifras son correctas pero están mal colocadas"
-                  },
-                  {
-                    "codigo": "9310",
-                    "texto": "Una cifra es correcta pero está mal colocada"
+                    "codigo": "8692",
+                    "texto": "Una cifra es correcta y bien colocada, y otra correcta pero mal colocada"
                   }
                 ]
               }
             ]
           },
-          "sal": "5c301acfee3df4ad9c13d5f80daea754",
-          "huella": "a892e50e528579acbdc663fda8128ebc0bce3ce6d637bee8de98f7d3e479ad01",
+          "sal": "eb9a1bca408b65586c4cb5986429a7c5",
+          "huella": "fd684a5fb112dfdc376dcafebdd841787eddf72d3bfdf11454f2dcb04c2e0e65",
           "datoCifrado": [
-            "KMT20GTc7FqyhJIeydms0dT1kfDbDb+ad5QcFJQEVVGXO71OAYO5IHNaEMgbfTiQikFUAW/8AFHwWI69I4NHrp6p3NvEkdgPoruyAZGhrQKpm3wZihdwXzd0BvskfICt2I/ChCoR3xHnLaTDBUj/MCidxzOXbYQQrz8u4Eqgusk1g8r3kV99E9yp/+ljlP8iKzaY0Rc="
+            "VYY6QiVydSHPnRcTXaKIig7F/u7ZXU3CJq5Vdv13oyKxBsjGc4lRFMot2WbWPVyikBmwpPQLSQQo1qkLr35tfU6HGs5viU2vN/4uDLumvwgH4npYRM8IVFZWt23oiJRs8Y7xBXSATtAeR0m9KwlxHAl3TSg1ToyrLTkvXyVKul7rgFwCO4NKv5/5LTFIjZHynNGlXps="
           ]
         }
       }

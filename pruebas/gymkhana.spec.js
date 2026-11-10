@@ -190,6 +190,36 @@ test('Imagen SSTV: resolver un cuadrante tocando piezas da su letra', async ({ p
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
+test('Escotilla: acertijos fijos iguales para todos, cifras para tachar y las dos escotillas', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'caja_fuerte');
+  test.skip(!e || !e.equipos, 'Sin escotilla');
+  // El mismo acertijo y la misma clave para todos los equipos
+  const ids = Object.keys(e.equipos);
+  const pistas = (k) => JSON.stringify(e.equipos[k].prueba.escotillas);
+  for (const k of ids) {
+    expect(pistas(k)).toBe(pistas(ids[0]));
+    expect(A.clave(e.id, k)).toBe(A.clave(e.id, ids[0]));
+  }
+  expect(e.equipos[ids[0]].prueba.escotillas.map((x) => x.pistas.length)).toEqual([5, 5]);
+  await page.clock.install();
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.sinScrollHorizontal(page);
+  await expect(page.locator('#prueba .nota-prueba')).toContainText('ninguna se repite');
+  // Tachar y destachar una cifra (solo visual)
+  const siete = page.locator('.tachar-cifra[data-d="7"]');
+  await siete.click();
+  await expect(siete).toHaveClass(/tachada/);
+  await expect(siete).toHaveAttribute('aria-pressed', 'true');
+  await siete.click();
+  await expect(siete).not.toHaveClass(/tachada/);
+  // Las dos escotillas, una tras otra
+  await A.responder(page, 'caja_fuerte', A.clave(e.id));
+  await page.clock.fastForward(3000);
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+});
+
 test('Morse: si escriben la pregunta, se les dice que es la pregunta', async ({ page }) => {
   const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
   test.skip(!e, 'Sin Morse');

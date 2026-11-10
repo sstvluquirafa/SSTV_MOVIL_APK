@@ -281,7 +281,7 @@ Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].pr
 | E | Wordle (`wordle`) | app | 2 palabras (5 y 6 letras) |
 | F | GeoGuessr (`geoguessr`) | app | 5 fotos de 9 (1 de Granada, 2 de España, 2 del mundo) |
 | G | Busca las diferencias (`diferencias`) | app | la escena y sus 12 diferencias (generadas) |
-| H | Escotilla (`caja_fuerte`) | app | 2 acertijos (3 y 4 cifras) generados con solución única |
+| H | Escotilla (`caja_fuerte`) | app | nada: 2 acertijos fijos (3 y 4 cifras), iguales para todos y comprobados por fuerza bruta |
 | I | Imagen SSTV desordenada (`sstv_puzle`) | app | la foto y el desorden de las piezas |
 | J | ¿Bulo o verdad? (`bulo_verdad`) | app | 10 noticias de 20, en 2 rondas |
 

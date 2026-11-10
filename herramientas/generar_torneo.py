@@ -402,10 +402,35 @@ def generar_escotilla(azar, cifras: int, n_pistas: int):
     raise RuntimeError(f"No encuentro una escotilla de {cifras} cifras con {n_pistas} pistas")
 
 
+def comprobar_escotilla_fija(n: int, esc: dict) -> str:
+    """Escotilla escrita a mano: prueba TODAS las combinaciones de cifras distintas y exige una única solución, que sea
+    la indicada, y que cada pista diga lo que dice su «bien»/«mal». Devuelve la solución."""
+    sol = str(esc["solucion"])
+    cifras = len(sol)
+    for p in esc["pistas"]:
+        if respuesta_pista(sol, str(p["codigo"])) != (int(p["bien"]), int(p["mal"])):
+            sys.exit(f"ERROR: escotilla fija {n}: la pista {p['codigo']} no cuadra con la solución {sol}.")
+    todos = ["".join(x) for x in itertools.permutations("0123456789", cifras)]
+    validas = [c for c in todos if all(respuesta_pista(c, str(p["codigo"])) == (int(p["bien"]), int(p["mal"])) for p in esc["pistas"])]
+    if validas != [sol]:
+        sys.exit(f"ERROR: la escotilla fija {n} tiene {len(validas)} soluciones ({', '.join(validas[:10])}), no solo {sol}.")
+    return sol
+
+
 def contenido_caja(banco, eq: Equipo):
     """H · Escotilla: dos escotillas seguidas (3 cifras con 5 pistas y 4 cifras con 6), generadas por equipo. La
     primera se comprueba en el móvil con su huella; la clave es la unión de los dos códigos."""
     escotillas, codigos = [], []
+    if banco.get("escotillas_fijas"):
+        # Acertijos escritos a mano (iguales para todos), con las pistas en su orden
+        fijas = banco["escotillas_fijas"]
+        for i, esc in enumerate(fijas):
+            codigo_e = comprobar_escotilla_fija(i + 1, esc)
+            codigos.append(codigo_e)
+            escotillas.append({"cifras": len(codigo_e), "pistas": [{"codigo": str(p["codigo"]), "texto": p["texto"]} for p in esc["pistas"]],
+                               **({"huella": huella(codigo_e, eq.sal)} if i < len(fijas) - 1 else {})})
+        return {"prueba": {"escotillas": escotillas}, "clave": "".join(codigos),
+                "partes": [{"pregunta": f"Escotilla {i + 1}", "respuestas": [c]} for i, c in enumerate(codigos)]}
     for i, conf in enumerate(banco.get("escotillas", [{"cifras": 3, "pistas": 5}, {"cifras": 4, "pistas": 6}])):
         codigo_e, pistas = generar_escotilla(eq.azar, int(conf["cifras"]), int(conf["pistas"]))
         codigos.append(codigo_e)

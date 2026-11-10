@@ -1365,3 +1365,17 @@ body.app #cielo { opacity: 1; }
 .sstv-q.ampliado .sstv-q-cab { font-size: 1rem; }
 .sstv-q.ampliado .sstv-piezas { width: min(100%, 72vh); margin: 0 auto; gap: 3px; }
 body.sin-scroll { overflow: hidden; }
+
+/* Escotilla: cifras 0–9 para tachar (solo una ayuda visual para descartar) */
+.tachar { margin-top: 14px; }
+.tachar-titulo { margin: 0 2px 6px; font-size: .9rem; color: var(--texto-2); }
+.tachar-cifras { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.tachar-cifra {
+  position: relative; min-height: 46px; padding: 0; border-radius: 9px; border: 1px solid var(--linea);
+  background: var(--superficie); color: var(--texto); font: 700 1.15rem var(--mono); cursor: pointer;
+}
+.tachar-cifra.tachada { color: var(--texto-3); background: rgba(255, 107, 91, .08); border-color: rgba(255, 107, 91, .45); }
+.tachar-cifra.tachada::after {
+  content: ''; position: absolute; left: 18%; right: 18%; top: 50%; height: 3px; border-radius: 2px;
+  background: var(--interferencia); transform: rotate(-35deg);
+}

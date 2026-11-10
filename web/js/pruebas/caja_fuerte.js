@@ -1,7 +1,8 @@
 /*
- * Prueba ABRE LA ESCOTILLA (app; tipo «caja_fuerte»). Dos escotillas seguidas, generadas para cada equipo: primero
- * una de 3 cifras (5 pistas) y, al abrirla, otra de 4 (6 pistas). Las pistas son del estilo «una cifra es correcta y
- * está bien colocada»; las cifras no se repiten y el generador comprueba que cada acertijo tiene una única solución.
+ * Prueba ABRE LA ESCOTILLA (app; tipo «caja_fuerte»). Dos escotillas seguidas: primero una de 3 cifras y, al abrirla,
+ * otra de 4. Ahora son dos acertijos FIJOS, iguales para todos (privado/bancos.json → caja_fuerte → escotillas_fijas),
+ * pensados para resolverse por descarte leyendo las pistas en orden; las cifras no se repiten y el generador comprueba
+ * por fuerza bruta que cada uno tiene una única solución. Bajo las pistas, una fila 0–9 para tachar cifras (visual).
  *
  * Contenido de este equipo: prueba.escotillas = [{ cifras, pistas: [{ codigo, texto }], huella? }]. Las escotillas
  * intermedias se comprueban con su huella (ctx.coincide); la última supera la estación con la unión de los códigos.
@@ -36,10 +37,14 @@
           <div class="reto">
             <div class="reto-cuerpo">
               ${escotillas.length > 1 ? `<p class="escotilla-paso mono">Escotilla ${k + 1} de ${escotillas.length} · ${n} cifras</p>` : ''}
-              <p class="nota-prueba">Las cifras no se repiten.</p>
+              <p class="nota-prueba">El código tiene ${n} cifras distintas: ninguna se repite.</p>
               <ul class="caja-pistas">
                 ${(E.pistas || []).map((p) => `<li><span class="caja-cod mono" aria-label="Código ${GK.html(String(p.codigo).split('').join(' '))}">${String(p.codigo).split('').map((d) => `<i>${GK.html(d)}</i>`).join('')}</span><span>${GK.html(p.texto)}</span></li>`).join('')}
               </ul>
+              <div class="tachar" role="group" aria-label="Cifras para tachar: tocad una para tacharla o destacharla">
+                <p class="tachar-titulo">Tachad las cifras que descartéis</p>
+                <div class="tachar-cifras">${[...'0123456789'].map((d) => `<button type="button" class="tachar-cifra" data-d="${d}" aria-pressed="false">${d}</button>`).join('')}</div>
+              </div>
               <div class="caja caja-${n}" id="caja">
                 ${Array.from({ length: 8 }, (_, j) => `<i class="perno" style="--a:${j * 45 + 22.5}deg" aria-hidden="true"></i>`).join('')}
                 <div class="caja-puerta">
@@ -60,6 +65,12 @@
           </div>`;
         const caja = contenedor.querySelector('#caja');
         const boton = contenedor.querySelector('#caja-abrir');
+        // Cifras tachadas: solo una ayuda visual para descartar (no cuenta para la respuesta); cada escotilla la suya
+        contenedor.querySelectorAll('.tachar-cifra').forEach((b) => b.addEventListener('click', () => {
+          const tachada = b.classList.toggle('tachada');
+          b.setAttribute('aria-pressed', String(tachada));
+          b.setAttribute('aria-label', `${b.dataset.d}${tachada ? ', tachada' : ''}`);
+        }));
         const mover = (i, d) => {
           ruedas[i] = (ruedas[i] + d + 10) % 10;
           contenedor.querySelector(`#rueda-${i}`).textContent = ruedas[i];
