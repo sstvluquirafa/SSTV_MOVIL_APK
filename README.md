@@ -275,7 +275,7 @@ Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].pr
 | Est. | Prueba | Dónde | Qué cambia por equipo (banco de `privado/bancos.json`) |
 |---|---|---|---|
 | A | Morse (`morse`) | app + cartel con la tabla | 3 preguntas en Morse |
-| B | Pelis espaciales (`pelis`) | app | 6 películas con emojis (3 fáciles, 2 medias, 1 difícil) |
+| B | Pelis espaciales (`pelis`) | app | nada: las mismas 6 películas y la misma clave para todos (`igual_para_todos` en el banco) |
 | C | Binario (`binario`) | app | 3 palabras (4, 5 y 6 letras) en bombillas |
 | D | QR escondido (`qr_escondido`) | 3 QR + app | la palabra que da cada QR (los QR impresos son los mismos); `escondites` en `torneo.json` |
 | E | Wordle (`wordle`) | app | 2 palabras (5 y 6 letras) |

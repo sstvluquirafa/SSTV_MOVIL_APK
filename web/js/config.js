@@ -597,8 +597,8 @@ window.GK_CONFIG = {
       "y": 925,
       "prueba": {
         "tipo": "pelis",
-        "_ayuda": "Contenido por equipo: lo elige el generador del banco de privado/bancos.json → pelis.",
-        "pista": "Hay películas de animación y de acción; probad a decir en voz alta lo que cuenta cada emoji"
+        "_ayuda": "Las mismas 6 películas para todos los equipos (privado/bancos.json → pelis → lista_fija), con la misma clave.",
+        "pista": "Son películas muy conocidas: tres de ellas son de animación o para todos los públicos"
       },
       "letraPalabra": "S",
       "token": "2e7b8cde50e8bee45672069fcf42c0293a2b3dd9a8b24ee9b891f07a38a66594",
@@ -609,42 +609,53 @@ window.GK_CONFIG = {
             "peliculas": [
               {
                 "emojis": [
-                  "🧑‍🚀",
-                  "🐱",
-                  "🤖",
-                  "⏱️",
-                  "🚀"
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
                 ],
                 "sellos": [
-                  "31Xx5iJ264Xb",
-                  "brXXF3nrmydN"
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
                 ]
               },
               {
                 "emojis": [
-                  "☄️",
+                  "🤖",
+                  "🗑️",
                   "🌍",
-                  "⛏️",
-                  "💥",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "C6RBo/HP0MMx",
-                  "aUk6wQIvjDVI"
-                ]
-              },
-              {
-                "emojis": [
-                  "👧",
-                  "👽",
-                  "🌺",
-                  "🏝️",
-                  "💙"
-                ],
-                "sellos": [
-                  "BqX6Fwp2Ci8B",
-                  "LrC3/XGhTdyi",
-                  "sVK5FUrgIdRM"
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
                 ]
               },
               {
@@ -656,41 +667,32 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "JjkzSSLV3bya",
-                  "TaV1uB5+3Q/r"
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
                 ]
               },
               {
                 "emojis": [
-                  "🏜️",
-                  "🪱",
-                  "🌶️",
-                  "👑"
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
                 ],
                 "sellos": [
-                  "FPCckOFb6pI3",
-                  "OU26U6Nkc85m"
-                ]
-              },
-              {
-                "emojis": [
-                  "🧑‍🚀",
-                  "🔴",
-                  "🥔",
-                  "🆘",
-                  "🛰️"
-                ],
-                "sellos": [
-                  "HXl891Gp2dw/",
-                  "M7cEAKB6670u"
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
                 ]
               }
             ]
           },
-          "sal": "39d38a518868d9085915f3134798ecb1",
-          "huella": "dce124258a99a7330b5f700009f2c1de7781d47e9e7600647d0580e07d2f1026",
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
           "datoCifrado": [
-            "U+GDp/yg7xaf50HPomzLyW5Q4pVw1GqIUwry00+udeRAdbeboe+Nh39jEZs0lxWfASdvylBm92EyaclazoWTG3ruyYB266oX+wpWjFtbwB1qFbZce7x1f008uco2sDMndDNLe1KuY5hCsXlZ7yvnNTB35k+tWMZoPhqk/QmhBw=="
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
           ]
         },
         "2": {
@@ -698,6 +700,31 @@ window.GK_CONFIG = {
             "peliculas": [
               {
                 "emojis": [
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
+                ],
+                "sellos": [
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
                   "👽",
                   "🚲",
                   "🌕",
@@ -705,8 +732,21 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "efdM2NAzIgRF",
-                  "xteJ8ZjxbDEc"
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
                 ]
               },
               {
@@ -718,8 +758,8 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "10cQ+HyU+t4t",
-                  "6qvLOY6HpPJj"
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
                 ]
               },
               {
@@ -732,57 +772,18 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "TKBhtR9/sAd8",
-                  "WAiMJPkkfSbL",
-                  "lN9mXGQQwpsx",
-                  "yPbLOFuwwEy/"
-                ]
-              },
-              {
-                "emojis": [
-                  "🏜️",
-                  "🪱",
-                  "🌶️",
-                  "👑"
-                ],
-                "sellos": [
-                  "/TzMf/+CpvAP",
-                  "v6jxZjm0Hbvr"
-                ]
-              },
-              {
-                "emojis": [
-                  "☄️",
-                  "🌍",
-                  "⛏️",
-                  "💥",
-                  "👨‍👧"
-                ],
-                "sellos": [
-                  "QU7EMewFzmC1",
-                  "kfpqiDdw6wKJ"
-                ]
-              },
-              {
-                "emojis": [
-                  "👧",
-                  "👽",
-                  "🌺",
-                  "🏝️",
-                  "💙"
-                ],
-                "sellos": [
-                  "7TAaOPHRH7/M",
-                  "HIZFpYIZrxZt",
-                  "ptK5FJh1N9RP"
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
                 ]
               }
             ]
           },
-          "sal": "a8bfbb48ebe0327bed9cfc3d65b3b485",
-          "huella": "cad4949d74fc5524205072b7521b048b1480bf5bab9ea16f121a4aac28390836",
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
           "datoCifrado": [
-            "GvZmU/iesz8tW/DIkeb3wOVs5CvBh28H7WVlWXaPhtuWe3TNJu6LfSMD0VkkgFzHJB2Q21aa299NqvknFmhDt6ahhy4tsUaIB9Mel79JBx7rdecrOJnhpweB7+AENmLP7Y9GNJz1NseAPtvGRAbHWvaPgmxgBf4GtssUZrFgGA=="
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
           ]
         },
         "3": {
@@ -790,6 +791,57 @@ window.GK_CONFIG = {
             "peliculas": [
               {
                 "emojis": [
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
+                ],
+                "sellos": [
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
+                ]
+              },
+              {
+                "emojis": [
                   "🦝",
                   "🌳",
                   "🎧",
@@ -797,79 +849,32 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "T/6Et1mpBKVU",
-                  "Vj/7gW3jtDFx"
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
                 ]
               },
               {
                 "emojis": [
-                  "☄️",
-                  "🌍",
-                  "⛏️",
-                  "💥",
-                  "👨‍👧"
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
                 ],
                 "sellos": [
-                  "GagGojUVwOMg",
-                  "LV1mypZOcf8z"
-                ]
-              },
-              {
-                "emojis": [
-                  "🧑‍🚀",
-                  "🐱",
-                  "🤖",
-                  "⏱️",
-                  "🚀"
-                ],
-                "sellos": [
-                  "JWt665iplEPU",
-                  "unXwR/Ymlph3"
-                ]
-              },
-              {
-                "emojis": [
-                  "🌳",
-                  "💙",
-                  "👽",
-                  "🪐",
-                  "🏹"
-                ],
-                "sellos": [
-                  "sKoad1qBthKV"
-                ]
-              },
-              {
-                "emojis": [
-                  "🏜️",
-                  "🪱",
-                  "🌶️",
-                  "👑"
-                ],
-                "sellos": [
-                  "CZVQ9zopWMEp",
-                  "PcJxM1zARzGT"
-                ]
-              },
-              {
-                "emojis": [
-                  "👩‍🚀",
-                  "💥",
-                  "🛰️",
-                  "🌀",
-                  "🌍"
-                ],
-                "sellos": [
-                  "Mqrg1ddBvv/Y",
-                  "OIwNHdZ2Claz"
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
                 ]
               }
             ]
           },
-          "sal": "157ff25dccd097e5a573ea42948be63a",
-          "huella": "05904a42ef5bc03ada527279bf66f07dc67607828ee9e2e87516b6ab69736d43",
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
           "datoCifrado": [
-            "Ufj2aNEYKhmLYcXCr8qjTCqnzlc+W5kqCFoLYkD8W/9HEKxl526X7nAj/UHGHuUzet+8yWa+KnMrx90Q2PzhgqOuSNU5o2CnYxGuMiE6rBZdQgcDvrRw19IPT7D5Tvsv/r+JXTagc0M5w9gYVaIRNvjOGjlRYBGJyXA2ZvBlZg=="
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
           ]
         },
         "4": {
@@ -877,28 +882,27 @@ window.GK_CONFIG = {
             "peliculas": [
               {
                 "emojis": [
-                  "🌽",
-                  "🚀",
-                  "🕳️",
-                  "⏳",
-                  "👨‍👧"
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
                 ],
                 "sellos": [
-                  "98ejESzvK7r6",
-                  "jHWe6s1Bwqnm"
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
                 ]
               },
               {
                 "emojis": [
-                  "☄️",
-                  "🔭",
-                  "📺",
-                  "🙄",
-                  "🌍"
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
                 ],
                 "sellos": [
-                  "0YP24nArBhLx",
-                  "G9I7CVY4pPNJ"
+                  "rTSU4op0IrLw"
                 ]
               },
               {
@@ -910,54 +914,58 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "UKMbOqk5L8+1",
-                  "X+tcE2LUpUqc"
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
                 ]
               },
               {
                 "emojis": [
-                  "👩‍🚀",
-                  "💥",
-                  "🛰️",
-                  "🌀",
-                  "🌍"
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
                 ],
                 "sellos": [
-                  "6CACPnzAa3vA",
-                  "Hx84PNktjjI5"
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
                 ]
               },
               {
                 "emojis": [
+                  "🦝",
                   "🌳",
-                  "💙",
-                  "👽",
-                  "🪐",
-                  "🏹"
+                  "🎧",
+                  "🚀",
+                  "🦸"
                 ],
                 "sellos": [
-                  "Xwq+Yb6X/6Ci"
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
                 ]
               },
               {
                 "emojis": [
-                  "🧑‍🚀",
-                  "🐱",
-                  "🤖",
-                  "⏱️",
-                  "🚀"
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
                 ],
                 "sellos": [
-                  "jxSLKyNFPwwm",
-                  "xUHlsouuCX3X"
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
                 ]
               }
             ]
           },
-          "sal": "60f1755e235ed5a3c82d2d04a123d8de",
-          "huella": "de38297cd1d0a9b0296b46a864c4595235f637999c8f9bef3ffae08026af1d2a",
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
           "datoCifrado": [
-            "VdnvJ73hA5lVOtA5R+0zbNNwUJqMO8+r55TwK94iOra2yUGiILSH6msE1Y5j7evmEfDalz+FeqcekGf5M73CpCWOrJWYQZxQxjkhmlhk2py5lh/oCkApkKSu+++uRlwe6oppcrPYDXqk1q9vY/7/SQwieQ5zzAqzYjrWa7G/cg=="
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
           ]
         },
         "5": {
@@ -965,14 +973,66 @@ window.GK_CONFIG = {
             "peliculas": [
               {
                 "emojis": [
-                  "🌳",
-                  "💙",
-                  "👽",
-                  "🪐",
-                  "🏹"
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
                 ],
                 "sellos": [
-                  "MEPD2KVaYuP+"
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
+                ]
+              },
+              {
+                "emojis": [
+                  "🦝",
+                  "🌳",
+                  "🎧",
+                  "🚀",
+                  "🦸"
+                ],
+                "sellos": [
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
                 ]
               },
               {
@@ -985,69 +1045,18 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "3VhEpwgTwCtx",
-                  "T7ArjOxknN1V",
-                  "fmR1E+PylytV",
-                  "s34OY9/AH56/"
-                ]
-              },
-              {
-                "emojis": [
-                  "🌽",
-                  "🚀",
-                  "🕳️",
-                  "⏳",
-                  "👨‍👧"
-                ],
-                "sellos": [
-                  "cPJERzRRzFK0",
-                  "x5gF2q7EdeRw"
-                ]
-              },
-              {
-                "emojis": [
-                  "☄️",
-                  "🌍",
-                  "⛏️",
-                  "💥",
-                  "👨‍👧"
-                ],
-                "sellos": [
-                  "7rV6m8VwAQo9",
-                  "PwXHJsTyKkia"
-                ]
-              },
-              {
-                "emojis": [
-                  "🦝",
-                  "🌳",
-                  "🎧",
-                  "🚀",
-                  "🦸"
-                ],
-                "sellos": [
-                  "UcnDdgwpLT8e",
-                  "eM87g/X1IboS"
-                ]
-              },
-              {
-                "emojis": [
-                  "🤖",
-                  "🗑️",
-                  "🌍",
-                  "🌱",
-                  "❤️"
-                ],
-                "sellos": [
-                  "3V89gyADUNqL"
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
                 ]
               }
             ]
           },
-          "sal": "9a01c94f6059cbd162c354ac108360ee",
-          "huella": "48466e75311b9473029deab9fda971410f7580d51cf445ff7e8559b9d7fc76bf",
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
           "datoCifrado": [
-            "MJMyjGsmwwOLQmYWpNnwkuispf2/9E9zy+GPsyHBqEV0jfFpVujkHhSkmkPfgLQpww3IPkSbgDTKW7/PLLo+qpQT9RsF6sBL1y6ejxru6OdU3WT6mjHAtgwGDQwZsr8LNWC8Pxo+J3DyiZWMbBUpGkcyha/ObkLjU7fq154eMg=="
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
           ]
         },
         "6": {
@@ -1055,32 +1064,6 @@ window.GK_CONFIG = {
             "peliculas": [
               {
                 "emojis": [
-                  "☄️",
-                  "🔭",
-                  "📺",
-                  "🙄",
-                  "🌍"
-                ],
-                "sellos": [
-                  "PXS/GI4cmjSL",
-                  "ZYbNfO+2LWUz"
-                ]
-              },
-              {
-                "emojis": [
-                  "👽",
-                  "🚲",
-                  "🌕",
-                  "☎️",
-                  "🏠"
-                ],
-                "sellos": [
-                  "SdWPQZnWfCax",
-                  "XW8ortaAkFhk"
-                ]
-              },
-              {
-                "emojis": [
                   "⚔️",
                   "💡",
                   "🌌",
@@ -1088,241 +1071,10 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "/McMW28QSwEc",
-                  "nxuyWubfP7YC"
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
                 ]
               },
-              {
-                "emojis": [
-                  "🏜️",
-                  "🪱",
-                  "🌶️",
-                  "👑"
-                ],
-                "sellos": [
-                  "LgjtNoXtyMHW",
-                  "Usm99gzYhh+T"
-                ]
-              },
-              {
-                "emojis": [
-                  "👧",
-                  "👽",
-                  "🌺",
-                  "🏝️",
-                  "💙"
-                ],
-                "sellos": [
-                  "7gOzY0MR0uFg",
-                  "iv2Its3IGBqP",
-                  "y/DmedLsj4Uz"
-                ]
-              },
-              {
-                "emojis": [
-                  "☀️",
-                  "🦠",
-                  "🧑‍🏫",
-                  "🚀",
-                  "🕷️",
-                  "🤝"
-                ],
-                "sellos": [
-                  "5mxjc7tBScP3",
-                  "P2/tK1C2FESS",
-                  "h34xAPPvHM3O",
-                  "uJ3s5hr4u4CS"
-                ]
-              }
-            ]
-          },
-          "sal": "225c386935d904f6c625091083ef4fdc",
-          "huella": "ce13525681b19885641d1d16e094d73f815f7ac5a408cb9d964c5c1d6a208b40",
-          "datoCifrado": [
-            "PJsSuKMriW/kSep8XLXpmDrHQNxZ/T3JCuWAxC/WOYYp9kjDLlSytGpLKEAGMkzj783kEwtswNgAp/Iwgg4CY7oxNXhGaFPhOcJIj0+G7KdvJSU2x5Mp7bAuy6YGYt6h5gwgSntbW+jOWhnX+CczzMHqtgq/F9+fQaHAQiVwDw=="
-          ]
-        },
-        "7": {
-          "prueba": {
-            "peliculas": [
-              {
-                "emojis": [
-                  "👧",
-                  "👽",
-                  "🌺",
-                  "🏝️",
-                  "💙"
-                ],
-                "sellos": [
-                  "QSHasRJX3OAK",
-                  "gFIuUlt9OhIL",
-                  "zzHjI9VRTDlI"
-                ]
-              },
-              {
-                "emojis": [
-                  "🏜️",
-                  "🪱",
-                  "🌶️",
-                  "👑"
-                ],
-                "sellos": [
-                  "7xfj5WZiokw6",
-                  "Dq4nVar8c7D1"
-                ]
-              },
-              {
-                "emojis": [
-                  "🧑‍🚀",
-                  "🐱",
-                  "🤖",
-                  "⏱️",
-                  "🚀"
-                ],
-                "sellos": [
-                  "L0g0y3BxGSyD",
-                  "fBRKtu/5sFIl"
-                ]
-              },
-              {
-                "emojis": [
-                  "👩🏾‍🔬",
-                  "🧮",
-                  "🚀",
-                  "🇺🇸"
-                ],
-                "sellos": [
-                  "1OT4N5x4iwRd",
-                  "y+YfZZLo3E/I"
-                ]
-              },
-              {
-                "emojis": [
-                  "👩‍🚀",
-                  "💥",
-                  "🛰️",
-                  "🌀",
-                  "🌍"
-                ],
-                "sellos": [
-                  "ASN3Imrp37dD",
-                  "OHjduv3LlPh6"
-                ]
-              },
-              {
-                "emojis": [
-                  "🦝",
-                  "🌳",
-                  "🎧",
-                  "🚀",
-                  "🦸"
-                ],
-                "sellos": [
-                  "6+MCuuEszKZj",
-                  "eJd9J+A9bPXO"
-                ]
-              }
-            ]
-          },
-          "sal": "e2e45717bba0220e623a6501c2e1f423",
-          "huella": "57cfcd2f4c8a45aa062ca6a503109423fa131bff0721ba7ca5b0815bfd925d82",
-          "datoCifrado": [
-            "dWV6+3v1ds2xNvFtovFI8xs+/h0TjOTeEuMPd81kWYTtx20msyaaA5BRZ5FXOCDlr6lDgRygHuCJg6Op0CDvCcbyz/cs8gNlNfXdu3wxrbLkqCy43q8KOi7xUL6YFYgY31xlmZrbSOZ3snl5o6W2PwXFJVu9P/VQLomnyTqnEg=="
-          ]
-        },
-        "8": {
-          "prueba": {
-            "peliculas": [
-              {
-                "emojis": [
-                  "👩🏾‍🔬",
-                  "🧮",
-                  "🚀",
-                  "🇺🇸"
-                ],
-                "sellos": [
-                  "FoxhZBr48rL1",
-                  "S2qIDqrBWUQ0"
-                ]
-              },
-              {
-                "emojis": [
-                  "☀️",
-                  "🦠",
-                  "🧑‍🏫",
-                  "🚀",
-                  "🕷️",
-                  "🤝"
-                ],
-                "sellos": [
-                  "BUwCWZc3lWEo",
-                  "SpOKI1Mf6cyG",
-                  "Xw+em/K37P/1",
-                  "dzj+BV2lDog/"
-                ]
-              },
-              {
-                "emojis": [
-                  "🧑‍🚀",
-                  "🔴",
-                  "🥔",
-                  "🆘",
-                  "🛰️"
-                ],
-                "sellos": [
-                  "csLlhvIrE5dw",
-                  "sF+xYBANl1hZ"
-                ]
-              },
-              {
-                "emojis": [
-                  "🌳",
-                  "💙",
-                  "👽",
-                  "🪐",
-                  "🏹"
-                ],
-                "sellos": [
-                  "tMVw5Lw5Jx48"
-                ]
-              },
-              {
-                "emojis": [
-                  "⚔️",
-                  "💡",
-                  "🌌",
-                  "👨‍👦",
-                  "🤖"
-                ],
-                "sellos": [
-                  "irimE4nGhK/a",
-                  "uczloAytjZ7m"
-                ]
-              },
-              {
-                "emojis": [
-                  "👽",
-                  "🚲",
-                  "🌕",
-                  "☎️",
-                  "🏠"
-                ],
-                "sellos": [
-                  "cA9f93p4VEI5",
-                  "xT02iKSr5Xa3"
-                ]
-              }
-            ]
-          },
-          "sal": "da243a531e27177d9e838a7d278fbd3b",
-          "huella": "4acc9bd900faeddd5ba12bedbd812d19d1079d4d68643f462624c4353d057cc5",
-          "datoCifrado": [
-            "qYtdra4FCxVinvRZhxqHj+0rifVrtsbeWoRcoK57I9kEfWRBe3b0jRWVuBDJokktFtaHJnjHDbqbE212Xz9r3l//CaDMFXhAV/EA9up5RAmf1JpDa38QI8BO3LEWdj1k9tAava2RwxvaUcx375iNogEGyDkqwFjLQ+6akxAjLQ=="
-          ]
-        },
-        "9": {
-          "prueba": {
-            "peliculas": [
               {
                 "emojis": [
                   "🤖",
@@ -1332,46 +1084,20 @@ window.GK_CONFIG = {
                   "❤️"
                 ],
                 "sellos": [
-                  "3sDVmgCnG684"
+                  "rTSU4op0IrLw"
                 ]
               },
               {
                 "emojis": [
-                  "👩🏾‍🔬",
-                  "🧮",
-                  "🚀",
-                  "🇺🇸"
-                ],
-                "sellos": [
-                  "DWUugXqsaKEO",
-                  "O3ad0AwyRc2P"
-                ]
-              },
-              {
-                "emojis": [
-                  "👧",
                   "👽",
-                  "🌺",
-                  "🏝️",
-                  "💙"
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
                 ],
                 "sellos": [
-                  "AlgROtlyOh1x",
-                  "J6TbnQID9Tif",
-                  "rpQbpn419kml"
-                ]
-              },
-              {
-                "emojis": [
-                  "🧑‍🚀",
-                  "🐱",
-                  "🤖",
-                  "⏱️",
-                  "🚀"
-                ],
-                "sellos": [
-                  "Hy2ySf1hCKgy",
-                  "oUS8VGUIc0NS"
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
                 ]
               },
               {
@@ -1383,58 +1109,8 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "UJnYdQuD3Z/w",
-                  "zx8monyGOKFQ"
-                ]
-              },
-              {
-                "emojis": [
-                  "👩‍🚀",
-                  "💥",
-                  "🛰️",
-                  "🌀",
-                  "🌍"
-                ],
-                "sellos": [
-                  "7td4zorsV6Ci",
-                  "Gphcsl6we4Jt"
-                ]
-              }
-            ]
-          },
-          "sal": "c95c2a3c13985c8311e295aee21d963b",
-          "huella": "9a4755e9739ef1a433a64158c0a56d86d088577ce87c5d60710f5756b0328367",
-          "datoCifrado": [
-            "K+SA902gbUU9xbDeeb8GqpD3NmxDchhbQ7Uf+cz3smPHfhk0t0fqhHTzbUwxwts4ZD/2WlF07o3jC4MO+f5esXwjCW/ZwmcACwPhGy2cso5JhQfh22P43dtiQnHRFhf2CKDlkXt/UCHY0vg2Gps5sx7/5zWYAapTh2MQKsTMpA=="
-          ]
-        },
-        "10": {
-          "prueba": {
-            "peliculas": [
-              {
-                "emojis": [
-                  "☄️",
-                  "🌍",
-                  "⛏️",
-                  "💥",
-                  "👨‍👧"
-                ],
-                "sellos": [
-                  "BdUB5HYuGxJ5",
-                  "GGjHvVWuiCgl"
-                ]
-              },
-              {
-                "emojis": [
-                  "🌽",
-                  "🚀",
-                  "🕳️",
-                  "⏳",
-                  "👨‍👧"
-                ],
-                "sellos": [
-                  "6+R6E7RUvGTM",
-                  "vYljQWQelpbZ"
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
                 ]
               },
               {
@@ -1446,8 +1122,8 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "Ra5Cdg/AmtFL",
-                  "q6IjQdG0mhdG"
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
                 ]
               },
               {
@@ -1460,45 +1136,382 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "1ad5uN5Z9TKs",
-                  "OocB8ha4HQOV",
-                  "hOk9qnruAKgi",
-                  "ngAR4mbdcQZS"
-                ]
-              },
-              {
-                "emojis": [
-                  "👧",
-                  "👽",
-                  "🌺",
-                  "🏝️",
-                  "💙"
-                ],
-                "sellos": [
-                  "4h4kJ7lMdTe8",
-                  "pJ3tUpTEO/iN",
-                  "zAy0dMU9C0j4"
-                ]
-              },
-              {
-                "emojis": [
-                  "🧑‍🚀",
-                  "🐱",
-                  "🤖",
-                  "⏱️",
-                  "🚀"
-                ],
-                "sellos": [
-                  "eDYx6ffNTDhk",
-                  "y5l7CD/23avp"
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
                 ]
               }
             ]
           },
-          "sal": "47bb769e093a4e6ddf16f472e5455c44",
-          "huella": "947ed5e66402964eafe370701053086f2770542c7bc939b4bf66515074b82b9e",
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
           "datoCifrado": [
-            "1NlwOG0fAqcEky/48OcnR9IjPbyhbEBZq86LW5gYa9nbLXIzLNNDQUwMn54ookIzw5gOkc+xEIEzOBSOO3a4S76Gpulm5pjggp3wJlaDiQ351JAcfyPZ9BSlqItROvOwN0XI/UiG8Mdz0TxU4nK9zph2pA+6j+iEZW/3dqXDcQ=="
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
+          ]
+        },
+        "7": {
+          "prueba": {
+            "peliculas": [
+              {
+                "emojis": [
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
+                ],
+                "sellos": [
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
+                ]
+              },
+              {
+                "emojis": [
+                  "🦝",
+                  "🌳",
+                  "🎧",
+                  "🚀",
+                  "🦸"
+                ],
+                "sellos": [
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
+                ]
+              },
+              {
+                "emojis": [
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
+                ],
+                "sellos": [
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
+                ]
+              }
+            ]
+          },
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
+          "datoCifrado": [
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
+          ]
+        },
+        "8": {
+          "prueba": {
+            "peliculas": [
+              {
+                "emojis": [
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
+                ],
+                "sellos": [
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
+                ]
+              },
+              {
+                "emojis": [
+                  "🦝",
+                  "🌳",
+                  "🎧",
+                  "🚀",
+                  "🦸"
+                ],
+                "sellos": [
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
+                ]
+              },
+              {
+                "emojis": [
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
+                ],
+                "sellos": [
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
+                ]
+              }
+            ]
+          },
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
+          "datoCifrado": [
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
+          ]
+        },
+        "9": {
+          "prueba": {
+            "peliculas": [
+              {
+                "emojis": [
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
+                ],
+                "sellos": [
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
+                ]
+              },
+              {
+                "emojis": [
+                  "🦝",
+                  "🌳",
+                  "🎧",
+                  "🚀",
+                  "🦸"
+                ],
+                "sellos": [
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
+                ]
+              },
+              {
+                "emojis": [
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
+                ],
+                "sellos": [
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
+                ]
+              }
+            ]
+          },
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
+          "datoCifrado": [
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
+          ]
+        },
+        "10": {
+          "prueba": {
+            "peliculas": [
+              {
+                "emojis": [
+                  "⚔️",
+                  "💡",
+                  "🌌",
+                  "👨‍👦",
+                  "🤖"
+                ],
+                "sellos": [
+                  "KP72dAm5zHkx",
+                  "UkuN2AcVL54U"
+                ]
+              },
+              {
+                "emojis": [
+                  "🤖",
+                  "🗑️",
+                  "🌍",
+                  "🌱",
+                  "❤️"
+                ],
+                "sellos": [
+                  "rTSU4op0IrLw"
+                ]
+              },
+              {
+                "emojis": [
+                  "👽",
+                  "🚲",
+                  "🌕",
+                  "☎️",
+                  "🏠"
+                ],
+                "sellos": [
+                  "Fw/ZwtpCdjA5",
+                  "ltv4cFF8pjMG"
+                ]
+              },
+              {
+                "emojis": [
+                  "🌽",
+                  "🚀",
+                  "🕳️",
+                  "⏳",
+                  "👨‍👧"
+                ],
+                "sellos": [
+                  "NzyrjKWnX/yL",
+                  "xpXWmhsVGl+A"
+                ]
+              },
+              {
+                "emojis": [
+                  "🦝",
+                  "🌳",
+                  "🎧",
+                  "🚀",
+                  "🦸"
+                ],
+                "sellos": [
+                  "B7EZSrgb2vew",
+                  "o6qPtcYX1LA5"
+                ]
+              },
+              {
+                "emojis": [
+                  "☀️",
+                  "🦠",
+                  "🧑‍🏫",
+                  "🚀",
+                  "🕷️",
+                  "🤝"
+                ],
+                "sellos": [
+                  "CCkJWyCJ9ykq",
+                  "OEmk+JHOS7Ly",
+                  "OiM+fC4obiDU",
+                  "Xx/w30HTtGQn"
+                ]
+              }
+            ]
+          },
+          "sal": "4b53e66fd46fb7f7e435737913e8f35a",
+          "huella": "ab0a302d34b8f6ed36717922cc0fdf61b228484972258932e2442be83c146017",
+          "datoCifrado": [
+            "YzB2DAC14Y+00w5Ew1crMywOggoTwI5OCtF9eg+EEBXtpV/J3wLXTWxx6oloGDa/x23IP3S0HH7MYKoVI9aQzt/861H8upiKQav/DThkKmCmSaljNP2yKLs2fXLH1H0YL8ehecCgZwwaoiVPzOyVpEopP1HOU7n03N9ukElXrQ=="
           ]
         }
       }

@@ -60,6 +60,23 @@ test('Pelis espaciales: valen las variantes (otro idioma, artículo, mayúsculas
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
+test('Pelis espaciales: todos los equipos tienen las mismas 6 películas y la misma clave', () => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  test.skip(!e || !e.equipos, 'Sin Pelis espaciales');
+  const ids = Object.keys(e.equipos);
+  const emojis = (k) => e.equipos[k].prueba.peliculas.map((p) => p.emojis.join(' ')).join(' | ');
+  expect(e.equipos[ids[0]].prueba.peliculas).toHaveLength(6);
+  for (const k of ids) {
+    expect(emojis(k)).toBe(emojis(ids[0]));
+    expect(e.equipos[k].huella).toBe(e.equipos[ids[0]].huella);
+    expect(A.clave(e.id, k)).toBe(A.clave(e.id, ids[0]));
+  }
+  // El orden fijado: la 1.ª es Star Wars y la 6.ª Proyecto Salvación (comparando en el secreto, no en la web)
+  const titulos = A.respuestasPartes(e.id);
+  expect(titulos[0]).toBe('Star Wars');
+  expect(titulos[5]).toBe('Proyecto Salvación');
+});
+
 test('Pelis espaciales: un título equivocado se marca y no supera la estación', async ({ page }) => {
   const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
   test.skip(!e, 'Sin Pelis espaciales');

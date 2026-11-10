@@ -255,11 +255,19 @@ def contenido_morse(banco, eq: Equipo):
 
 
 def contenido_pelis(banco, eq: Equipo):
-    """B · Pelis: 6 películas con emojis (reparto por nivel: 3 fáciles, 2 medias, 1 difícil), barajadas."""
-    elegidas = []
-    for nivel, n in banco.get("reparto", {"fácil": 3, "media": 2, "difícil": 1}).items():
-        elegidas += eq.azar.sample([x for x in banco["peliculas"] if x["nivel"] == nivel], n)
-    eq.azar.shuffle(elegidas)
+    """B · Pelis: 6 películas con emojis. Con «lista_fija» (títulos, en orden), esas y en ese orden; si no, reparto por
+    nivel (3 fáciles, 2 medias, 1 difícil), barajadas."""
+    if banco.get("lista_fija"):
+        por_titulo = {x["titulo"]: x for x in banco["peliculas"]}
+        falta = [x for x in banco["lista_fija"] if x not in por_titulo]
+        if falta:
+            sys.exit(f"ERROR: en privado/bancos.json → pelis.lista_fija hay títulos que no están en «peliculas»: {falta}")
+        elegidas = [por_titulo[x] for x in banco["lista_fija"]]
+    else:
+        elegidas = []
+        for nivel, n in banco.get("reparto", {"fácil": 3, "media": 2, "difícil": 1}).items():
+            elegidas += eq.azar.sample([x for x in banco["peliculas"] if x["nivel"] == nivel], n)
+        eq.azar.shuffle(elegidas)
     publico, trozos = [], []
     for i, x in enumerate(elegidas):
         tr = eq.trozo(i)
@@ -606,8 +614,14 @@ def generar_por_equipo(e, s, bancos, semilla, n_eq, compartido):
     if tipo not in bancos:
         sys.exit(f"ERROR: falta el banco «{tipo}» en privado/bancos.json (estación {e['letra']}).")
     publico, secreto = {}, {}
+    # «igual_para_todos» en el banco: el mismo contenido, la misma sal y la misma clave para todos los equipos
+    igual = bool(bancos[tipo].get("igual_para_todos"))
+    comun = None
     for k in range(1, n_eq + 1):
-        eq = Equipo(semilla, e["id"], k, compartido.setdefault(k, {}), s)
+        if igual and comun:
+            publico[str(k)], secreto[str(k)] = comun
+            continue
+        eq = Equipo(semilla, e["id"], 0 if igual else k, compartido.setdefault(k, {}), s)
         c = CONTENIDO[tipo](bancos[tipo], eq)
         clave = normalizar(c["clave"])
         pub = {"prueba": c["prueba"], "sal": eq.sal, "huella": huella(clave, eq.sal)}
@@ -615,6 +629,8 @@ def generar_por_equipo(e, s, bancos, semilla, n_eq, compartido):
             pub["datoCifrado"] = [cifrar("gk:" + s["dato"], clave, eq.sal)]
         publico[str(k)] = pub
         secreto[str(k)] = {"clave": clave, **{x: v for x, v in c.items() if x not in ("prueba", "clave")}}
+        if igual:
+            comun = (publico[str(k)], secreto[str(k)])
     return publico, secreto
 
 
