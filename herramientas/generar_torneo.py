@@ -10,16 +10,19 @@ Crea o actualiza:
     web/assets/img/mapa.jpg            el mapa del Parque, ligero, para la app (necesita Pillow)
     generado/mapa_con_estaciones.png   el mapa original con las estaciones dibujadas (para los fragmentos SSTV)
     generado/rutas.txt                 resumen de las rutas calculadas
-    privado/secretos.json              códigos de equipo, de organización, tokens y claves de estación
+    privado/secretos.json              códigos de equipo, de organización, tokens y claves de estación (y de cada equipo)
     privado/firebase_importar.json     datos para importar en Firebase la primera vez (raíz de la base)
     privado/firebase_secretos.json     solo el nodo /secretos (para reimportar tras rotar códigos)
     privado/imprimir.html              carteles, etiquetas de código, tarjetas de equipo y hoja de organización
+
+Lee además privado/bancos.json: los bancos de contenido CON respuestas de las pruebas que cambian por equipo.
 
 La carpeta privado/ NO se sube a GitHub (.gitignore). Solo necesita la biblioteca estándar de Python;
 con Pillow instalado (pip install pillow) genera además las imágenes del mapa.
 """
 import base64
 import hashlib
+import hmac
 import itertools
 import json
 import math
@@ -132,7 +135,7 @@ def prueba_publica(e, s):
     alternativas = [normalizar(a) for a in s.get("alternativas", []) if normalizar(a)]
     if alternativas:
         p["huellasAlternativas"] = [huella(a, s["sal"]) for a in alternativas]
-    if p.get("tipo") == "wordle":
+    if p.get("tipo") == "wordle" and "clave" in s:  # (el Wordle por equipo lleva sus palabras en «equipos»)
         # EXCEPCIÓN DOCUMENTADA: para colorear las letras, el móvil necesita la palabra. Va ofuscada (XOR con una sal
         # pública + base64): no se lee a simple vista, pero alguien muy experto podría sacarla.
         sal_w = hashlib.sha256(("wordle:" + s["sal"]).encode()).hexdigest()[:16]
@@ -145,7 +148,7 @@ def prueba_publica(e, s):
     # Dato real que sale en «¡Estación superada!» (secretos → «dato», máx. 160 caracteres). Va cifrado porque alguno
     # delataría la respuesta. Uno por cada respuesta que vale (clave y sinónimos); «gk:» delante para saber en el móvil
     # cuál se ha descifrado bien.
-    if s.get("dato"):
+    if s.get("dato") and "clave" in s:  # las de contenido lo llevan por equipo
         if len(s["dato"]) > 160:
             print(f"  · OJO: el dato de la estación {e['letra']} pasa de 160 caracteres ({len(s['dato'])}).")
         p["datoCifrado"] = [cifrar("gk:" + s["dato"], k, s["sal"]) for k in [s["clave"], *s.get("alternativas", [])]]
@@ -167,6 +170,452 @@ def prueba_publica(e, s):
             print(f"  · OJO: el Morse de la estación {e['letra']} tiene símbolos que no conozco: «{pregunta}»")
         p["huellaPregunta"] = huella(pregunta, s["sal"])
     return p
+
+
+# ---------------------------------------------------------------------------------------------
+# Contenido y claves por equipo
+# ---------------------------------------------------------------------------------------------
+# Las pruebas de CONTENIDO (abajo) dan a cada equipo un contenido distinto, sacado de privado/bancos.json, y una clave
+# distinta. Todo es determinista a partir de la «semilla» secreta de privado/secretos.json: regenerar da lo mismo.
+#
+# Partes con varias respuestas válidas (por ejemplo «siete» o «7»): cada parte tiene un «trozo» secreto de la clave
+# y se publica «sellado» con la huella de cada respuesta válida (sellos). En el móvil, con una respuesta buena se
+# abre un sello y sale el trozo; la clave del equipo es la unión de los trozos. Así basta una sola clave en Firebase.
+MORSE_DE = {v: k for k, v in MORSE.items()}
+
+
+def derivar(semilla: str, texto: str) -> bytes:
+    return hmac.new(bytes.fromhex(semilla), texto.encode(), hashlib.sha256).digest()
+
+
+def trozo_clave(semilla: str, texto: str, n=6) -> str:
+    """Trozo de clave al azar (determinista): n caracteres del alfabeto de códigos, en minúsculas."""
+    return "".join(ALFABETO[b % len(ALFABETO)] for b in derivar(semilla, "trozo:" + texto)[:n]).lower()
+
+
+def sellar(texto: str, respuesta: str, sal_hex: str) -> str:
+    """Cifra «gk:» + texto con la huella (PBKDF2) de la respuesta. Igual que GK.abrirSello en web/js/util.js:
+    k = bytes de la huella; bloque i = SHA-256(k + i en 4 bytes); XOR y base64."""
+    k = bytes.fromhex(huella(respuesta, sal_hex))
+    b = ("gk:" + texto).encode("utf-8")
+    flujo = b"".join(hashlib.sha256(k + i.to_bytes(4, "big")).digest() for i in range(len(b) // 32 + 1))
+    return base64.b64encode(bytes(x ^ flujo[i] for i, x in enumerate(b))).decode()
+
+
+def a_morse(texto: str) -> str:
+    """«NO DE» → «-. --- / -.. .»"""
+    return " / ".join(" ".join(MORSE_DE[c] for c in w if c in MORSE_DE) for w in str(texto).upper().split())
+
+
+class Equipo:
+    """Lo que necesita cada prueba de contenido para un equipo: su azar, su sal y sus trozos de clave."""
+
+    def __init__(self, semilla, est_id, eq, compartido=None, estacion=None):
+        self.semilla, self.est, self.eq = semilla, est_id, eq
+        self.sal = derivar(semilla, f"sal:{est_id}:{eq}")[:16].hex()
+        self.azar = random.Random(derivar(semilla, f"azar:{est_id}:{eq}").hex())
+        self.compartido = compartido if compartido is not None else {}  # lo ya elegido para este equipo en otras estaciones
+        self.estacion = estacion or {}  # secretos de la estación (por ejemplo los textos de los QR impresos)
+
+    def permutacion(self, lista) -> list:
+        """La misma permutación para todos los equipos de esta estación (para repartir sin repetir entre equipos)."""
+        copia = list(lista)
+        random.Random(derivar(self.semilla, f"reparto:{self.est}").hex()).shuffle(copia)
+        return copia
+
+    def trozo(self, i) -> str:
+        return trozo_clave(self.semilla, f"{self.est}:{self.eq}:{i}")
+
+    def sellos(self, trozo, respuestas) -> list:
+        unicas = list(dict.fromkeys(normalizar(r) for r in respuestas if normalizar(r)))
+        return sorted(sellar(trozo, r, self.sal) for r in unicas)  # ordenados: no se sabe cuál es la principal
+
+
+def contenido_morse(banco, eq: Equipo):
+    """A · Morse: N preguntas del banco (3), en Morse en la pantalla. Cada una con sus sellos y la huella de la
+    pregunta (para avisar si escriben la pregunta en vez de la respuesta)."""
+    # Misma cantidad de trabajo para todos: entre «letras_min» y «letras_max» letras que traducir (si se puede)
+    n = int(banco.get("por_equipo", 3))
+    lo, hi = int(banco.get("letras_min", 44)), int(banco.get("letras_max", 50))
+    for _ in range(500):
+        elegidas = eq.azar.sample(banco["preguntas"], n)
+        if lo <= sum(len(normalizar(q["pregunta"])) for q in elegidas) <= hi:
+            break
+    publico, trozos = [], []
+    for i, q in enumerate(elegidas):
+        morse = a_morse(q["pregunta"])
+        if descifrar_morse(morse) != " ".join(q["pregunta"].upper().split()):
+            print(f"  · OJO: la pregunta Morse «{q['pregunta']}» tiene símbolos sin código Morse (tildes, eñes…).")
+        tr = eq.trozo(i)
+        trozos.append(tr)
+        publico.append({"morse": morse, "sellos": eq.sellos(tr, q["respuestas"]),
+                        "huellaPregunta": huella(q["pregunta"], eq.sal)})
+    return {"prueba": {"preguntas": publico}, "clave": "".join(trozos),
+            "partes": [{"pregunta": q["pregunta"], "respuestas": q["respuestas"]} for q in elegidas]}
+
+
+def contenido_pelis(banco, eq: Equipo):
+    """B · Pelis: 6 películas con emojis (reparto por nivel: 3 fáciles, 2 medias, 1 difícil), barajadas."""
+    elegidas = []
+    for nivel, n in banco.get("reparto", {"fácil": 3, "media": 2, "difícil": 1}).items():
+        elegidas += eq.azar.sample([x for x in banco["peliculas"] if x["nivel"] == nivel], n)
+    eq.azar.shuffle(elegidas)
+    publico, trozos = [], []
+    for i, x in enumerate(elegidas):
+        tr = eq.trozo(i)
+        trozos.append(tr)
+        titulos = [normalizar_titulo(y) for y in [x["titulo"], *x.get("tambien", [])]]
+        publico.append({"emojis": x["emojis"], "sellos": eq.sellos(tr, titulos)})
+    return {"prueba": {"peliculas": publico}, "clave": "".join(trozos),
+            "partes": [{"pregunta": " ".join(x["emojis"]), "respuestas": [x["titulo"], *x.get("tambien", [])]} for x in elegidas]}
+
+
+def contenido_wordle(banco, eq: Equipo):
+    """E · Wordle: una palabra de 5 letras y otra de 6. Se reparten en orden para que dos equipos seguidos nunca
+    tengan la misma. EXCEPCIÓN DOCUMENTADA: van ofuscadas (el móvil las necesita para colorear)."""
+    palabras = []
+    for lista in (banco["cinco"], banco["seis"]):
+        orden = eq.permutacion(lista)
+        palabras.append(orden[(eq.eq - 1) % len(orden)].upper())
+    eq.compartido.setdefault("palabras", set()).update(palabras)
+    publico = []
+    for i, w in enumerate(palabras):
+        sal_w = derivar(eq.semilla, f"wordle:{eq.est}:{eq.eq}:{i}")[:8].hex()
+        publico.append({"palabra": ofuscar(w, sal_w), "salPalabra": sal_w})
+    return {"prueba": {"palabras": publico}, "clave": "".join(palabras),
+            "partes": [{"pregunta": f"{len(w)} letras", "respuestas": [w.lower()]} for w in palabras]}
+
+
+def contenido_binario(banco, eq: Equipo):
+    """C · Binario: una palabra de cada lista (4, 5 y 6 letras), sin repetir las del Wordle del equipo. Cada letra es
+    una fila de 5 bombillas (A=1 … Z=26)."""
+    usadas = eq.compartido.get("palabras", set())
+    palabras = []
+    for lista in banco["palabras"]:
+        libres = [w.upper() for w in lista if w.upper() not in usadas] or [w.upper() for w in lista]
+        palabras.append(eq.azar.choice(libres))
+    publico, trozos = [], []
+    for i, w in enumerate(palabras):
+        tr = eq.trozo(i)
+        trozos.append(tr)
+        publico.append({"filas": [format(ord(c) - 64, "05b") for c in w], "sellos": eq.sellos(tr, [w])})
+    return {"prueba": {"palabras": publico}, "clave": "".join(trozos),
+            "partes": [{"pregunta": f"{len(w)} letras", "respuestas": [w.lower()]} for w in palabras]}
+
+
+def contenido_qr(banco, eq: Equipo):
+    """D · QR escondido: 3 QR impresos (los mismos para todos: secretos de la estación → qrs). Al escanear el QR i,
+    se abre (con su texto) la palabra de ESTE equipo para ese QR. Las 3 palabras, en orden, se escriben como clave."""
+    qrs = eq.estacion["qrs"]
+    palabras = eq.azar.sample([w.upper() for w in banco["palabras"]], len(qrs))
+    publico, trozos = [], []
+    for i, (qr, w) in enumerate(zip(qrs, palabras)):
+        tr = eq.trozo(i)
+        trozos.append(tr)
+        publico.append({"escaneo": sellar(w, qr, eq.sal), "sellos": eq.sellos(tr, [w])})
+    return {"prueba": {"qrs": publico}, "clave": "".join(trozos),
+            "partes": [{"pregunta": f"QR D{i + 1}", "respuestas": [w.lower()]} for i, w in enumerate(palabras)]}
+
+
+def contenido_geoguessr(banco, eq: Equipo):
+    """F · GeoGuessr: 5 fotos (1 de Granada, 2 de España, 2 del mundo), barajadas, con las opciones barajadas.
+    La clave son las letras de las correctas en orden («cabda»)."""
+    elegidas = []
+    for grupo, n in banco.get("reparto", {"granada": 1, "espana": 2, "mundo": 2}).items():
+        elegidas += eq.azar.sample([f for f in banco["fotos"] if f["grupo"] == grupo], n)
+    eq.azar.shuffle(elegidas)
+    imagenes, letras = [], ""
+    for f in elegidas:
+        opciones = list(f["opciones"])
+        eq.azar.shuffle(opciones)
+        letras += "abcd"[opciones.index(f["opciones"][0])]
+        imagenes.append({"src": f["src"], "credito": f.get("credito", ""), "opciones": opciones})
+    return {"prueba": {"imagenes": imagenes}, "clave": letras,
+            "partes": [{"pregunta": f["lugar"], "respuestas": [letras[i]]} for i, f in enumerate(elegidas)]}
+
+
+NUMEROS_TXT = ["Ninguna", "Una", "Dos", "Tres", "Cuatro", "Cinco"]
+
+
+def texto_pista(bien: int, mal: int) -> str:
+    """(2, 0) → «Dos cifras son correctas y están bien colocadas»…"""
+    total = bien + mal
+    if not total:
+        return "Ninguna cifra es correcta"
+    s = "s" if total > 1 else ""
+    base = f"{NUMEROS_TXT[total]} cifra{s} {'son' if total > 1 else 'es'} correcta{s}"
+    if not mal:
+        return base + (" y están bien colocadas" if total > 1 else " y está bien colocada")
+    if not bien:
+        return base + (" pero están mal colocadas" if total > 1 else " pero está mal colocada")
+    return (base + f": {NUMEROS_TXT[bien].lower()} bien colocada{'s' if bien > 1 else ''}"
+            f" y {'otra' if bien == 1 and mal == 1 else NUMEROS_TXT[mal].lower()} mal colocada{'s' if mal > 1 else ''}")
+
+
+def respuesta_pista(secreto: str, intento: str):
+    bien = sum(a == b for a, b in zip(secreto, intento))
+    return bien, len(set(secreto) & set(intento)) - bien
+
+
+def generar_escotilla(azar, cifras: int, n_pistas: int):
+    """Acertijo de la escotilla con UNA sola solución (cifras sin repetir), comprobada probando todas las
+    combinaciones. Siempre lleva una pista sin ninguna cifra correcta, ninguna pista con todas las cifras correctas
+    y ninguna sobra (quitando cualquiera, ya hay más de una solución): así la dificultad es parecida para todos."""
+    todos = ["".join(x) for x in itertools.permutations("0123456789", cifras)]
+    for _ in range(20000):
+        secreto = azar.choice(todos)
+        fuera = [d for d in "0123456789" if d not in secreto]
+        cero = "".join(azar.sample(fuera, cifras))
+        pistas = [cero]
+        cand = [c for c in todos if respuesta_pista(c, cero) == (0, 0)]
+        intentos = 0
+        while len(pistas) < n_pistas and intentos < 400:  # si se atasca (ya hay una sola solución), se empieza de nuevo
+            intentos += 1
+            g = azar.choice(todos)
+            r = respuesta_pista(secreto, g)
+            if g in pistas or sum(r) == 0 or sum(r) == cifras:
+                continue
+            nuevo = [c for c in cand if respuesta_pista(c, g) == r]
+            if len(nuevo) < len(cand) and (len(nuevo) > 1 or len(pistas) == n_pistas - 1):
+                pistas.append(g)
+                cand = nuevo
+        if cand != [secreto]:
+            continue
+        sobra = False
+        for i in range(len(pistas)):
+            resto = pistas[:i] + pistas[i + 1:]
+            if sum(all(respuesta_pista(c, g) == respuesta_pista(secreto, g) for g in resto) for c in todos) == 1:
+                sobra = True
+                break
+        if sobra:
+            continue
+        azar.shuffle(pistas)
+        return secreto, [{"codigo": g, "texto": texto_pista(*respuesta_pista(secreto, g))} for g in pistas]
+    raise RuntimeError(f"No encuentro una escotilla de {cifras} cifras con {n_pistas} pistas")
+
+
+def contenido_caja(banco, eq: Equipo):
+    """H · Escotilla: dos escotillas seguidas (3 cifras con 5 pistas y 4 cifras con 6), generadas por equipo. La
+    primera se comprueba en el móvil con su huella; la clave es la unión de los dos códigos."""
+    escotillas, codigos = [], []
+    for i, conf in enumerate(banco.get("escotillas", [{"cifras": 3, "pistas": 5}, {"cifras": 4, "pistas": 6}])):
+        codigo_e, pistas = generar_escotilla(eq.azar, int(conf["cifras"]), int(conf["pistas"]))
+        codigos.append(codigo_e)
+        escotillas.append({"cifras": len(codigo_e), "pistas": pistas,
+                           **({"huella": huella(codigo_e, eq.sal)} if i < len(banco.get("escotillas", [1, 1])) - 1 else {})})
+    return {"prueba": {"escotillas": escotillas}, "clave": "".join(codigos),
+            "partes": [{"pregunta": f"Escotilla {i + 1}", "respuestas": [c]} for i, c in enumerate(codigos)]}
+
+
+def contenido_bulo(banco, eq: Equipo):
+    """J · ¿Bulo o verdad?: 10 noticias (5 bulos y 5 verdades) en 2 rondas de 5, con 2 o 3 bulos por ronda. Cada
+    ronda tiene su patrón (b/v); la 1.ª se comprueba con su huella. Las explicaciones de cada ronda van cifradas con
+    lo acertado hasta esa ronda. Clave = los dos patrones seguidos."""
+    rondas, por_ronda = int(banco.get("rondas", 2)), int(banco.get("por_ronda", 5))
+    n_bulos = int(banco.get("bulos", 5))
+    bulos = eq.azar.sample([x for x in banco["noticias"] if x["es"] == "b"], n_bulos)
+    verdades = eq.azar.sample([x for x in banco["noticias"] if x["es"] == "v"], rondas * por_ronda - n_bulos)
+    # Bulos por ronda lo más parejos posible (5 en 2 rondas → 2 y 3, en orden al azar)
+    reparto = [n_bulos // rondas + (1 if i < n_bulos % rondas else 0) for i in range(rondas)]
+    eq.azar.shuffle(reparto)
+    publico, patrones, acumulado = [], [], ""
+    for r, nb in enumerate(reparto):
+        ronda = bulos[:nb] + verdades[:por_ronda - nb]
+        bulos, verdades = bulos[nb:], verdades[por_ronda - nb:]
+        eq.azar.shuffle(ronda)
+        patron = "".join(x["es"] for x in ronda)
+        patrones.append(patron)
+        acumulado += patron
+        expl = [("BULO: " if x["es"] == "b" else "VERDAD: ") + x["explicacion"] for x in ronda]
+        publico.append({"afirmaciones": [x["texto"] for x in ronda],
+                        "explicacionesCifradas": cifrar(json.dumps(expl, ensure_ascii=False), acumulado, eq.sal),
+                        **({"huella": huella(acumulado, eq.sal)} if r < rondas - 1 else {})})
+    return {"prueba": {"rondas": publico}, "clave": "".join(patrones),
+            "partes": [{"pregunta": f"Ronda {i + 1}", "respuestas": [p]} for i, p in enumerate(patrones)]}
+
+
+LETRAS_CLAVE = "ACEFHJKMNPRTUVWXY"  # letras que no se confunden
+
+
+def letras_equipo(eq: Equipo, n=4) -> list:
+    return eq.azar.sample(LETRAS_CLAVE, n)
+
+
+# ---------- G · Busca las diferencias ----------
+# Escena de 400 × 300 (4:3) dividida en 4 zonas de 200 × 150 (1 y 2 arriba, 3 y 4 abajo). Cada zona tiene 4 objetos
+# en una rejilla de 3 × 2 huecos; la «recibida» tiene 3 diferencias por zona. Todos los equipos tienen los mismos
+# TIPOS de diferencia (2 de cada), repartidos al azar entre las zonas: misma dificultad, distinto contenido.
+OBJETOS_DIF = {  # tipo: (tamaño, ¿se nota al girarlo?)
+    "planeta": (34, False), "luna": (30, True), "estrella": (24, False), "cohete": (36, True),
+    "cubesat": (32, True), "astronauta": (34, True), "cometa": (34, True), "antena": (32, True),
+}
+COLORES_DIF = {"ambar": "#ffb627", "azul": "#3d8bff", "blanco": "#eef1fa", "coral": "#ff6b5b", "fosforo": "#5ee6d0"}
+# Cambio de color siempre a uno con brillo muy distinto (que se note también sin distinguir bien los tonos)
+CAMBIO_COLOR = {"ambar": "azul", "azul": "blanco", "blanco": "azul", "coral": "blanco", "fosforo": "azul"}
+TIPOS_DIF = ["falta", "extra", "tamano", "girado", "color", "movido"]
+
+
+def contenido_diferencias(banco, eq: Equipo):
+    az = eq.azar
+    zonas = [(0, 0), (200, 0), (0, 150), (200, 150)]
+    estrellas = [[round(az.uniform(4, 396), 1), round(az.uniform(4, 296), 1), round(az.choice([0.6, 0.8, 1.1, 1.4]), 1)]
+                 for _ in range(int(banco.get("estrellas", 70)))]
+    # 12 diferencias: 2 de cada tipo, repartidas 3 por zona sin repetir tipo en la misma zona
+    while True:
+        bolsa = [x for x in TIPOS_DIF for _ in range(2)]
+        az.shuffle(bolsa)
+        por_zona = [bolsa[i * 3:(i + 1) * 3] for i in range(4)]
+        if all(len(set(z)) == 3 for z in por_zona):
+            break
+    original, recibida, difs = [], [], []
+    letras = letras_equipo(eq)
+    sellos = []
+    for z, (x0, y0) in enumerate(zonas):
+        huecos = [(c, f) for c in range(3) for f in range(2)]
+        az.shuffle(huecos)
+        usados, libres = huecos[:4], huecos[4:]
+        objs = []
+        for i, (c, f) in enumerate(usados):
+            tipo = az.choice(list(OBJETOS_DIF))
+            s = OBJETOS_DIF[tipo][0]
+            objs.append({"t": tipo, "x": round(x0 + 36 + c * 64 + az.uniform(-6, 6), 1), "y": round(y0 + 40 + f * 72 + az.uniform(-6, 6), 1),
+                         "s": s, "r": az.choice([0, 0, 15, -15, 30]), "c": az.choice(list(COLORES_DIF))})
+            if tipo == "planeta" and az.random() < 0.5:
+                objs[-1]["a"] = 1  # con anillo
+        nuevos = [dict(o) for o in objs]
+        candidatos = list(range(len(objs)))
+        az.shuffle(candidatos)
+        ids = []
+        for k, tipo_d in enumerate(por_zona[z]):
+            did = f"{z + 1}{'abc'[k]}{trozo_clave(eq.semilla, f'dif:{eq.est}:{eq.eq}:{z}:{k}', 3)}"
+            ids.append(did)
+            if tipo_d == "extra":
+                c, f = libres.pop()
+                tipo = az.choice(["estrella", "planeta", "luna", "cometa"])
+                o = {"t": tipo, "x": round(x0 + 36 + c * 64, 1), "y": round(y0 + 40 + f * 72, 1), "s": OBJETOS_DIF[tipo][0],
+                     "r": 0, "c": az.choice(list(COLORES_DIF))}
+                nuevos.append(o)
+                difs.append({"id": did, "x": o["x"], "y": o["y"], "r": 28})
+                continue
+            # Las demás cambian un objeto (uno distinto en cada diferencia; para girar, uno que se note girado)
+            i = next(j for j in candidatos if tipo_d != "girado" or OBJETOS_DIF[objs[j]["t"]][1])
+            candidatos.remove(i)
+            o, n = objs[i], nuevos[i]
+            if tipo_d == "falta":
+                n["oculto"] = 1
+            elif tipo_d == "tamano":
+                n["s"] = round(o["s"] * (1.7 if o["s"] < 32 else 0.55))
+            elif tipo_d == "girado":
+                n["r"] = o["r"] + az.choice([90, 180, -90])
+            elif tipo_d == "color":
+                n["c"] = CAMBIO_COLOR[o["c"]]
+            elif tipo_d == "movido":
+                dx = 30 if o["x"] - x0 < 100 else -30
+                n["x"], n["y"] = round(o["x"] + dx, 1), round(min(max(o["y"] + az.choice([-22, 22]), y0 + 22), y0 + 128), 1)
+            d = {"id": did, "x": n["x"], "y": n["y"], "r": 28}
+            if tipo_d == "movido":  # también vale tocar donde estaba
+                d["x2"], d["y2"] = o["x"], o["y"]
+            difs.append(d)
+        original += objs
+        recibida += [n for n in nuevos if not n.get("oculto")]
+        # La letra de la zona se abre con los ids de sus 3 diferencias (las encuentra quien las toca)
+        sellos.append(sellar(letras[z], f"zona{z + 1}" + "".join(sorted(ids)), eq.sal))
+    for o in original + recibida:
+        o["c"] = COLORES_DIF.get(o["c"], o["c"])
+    return {"prueba": {"estrellas": estrellas, "original": original, "recibida": recibida, "diferencias": difs,
+                       "sellosZona": sellos},
+            "clave": "".join(letras),
+            "partes": [{"pregunta": f"Zona {z + 1}", "respuestas": [letras[z].lower()]} for z in range(4)]}
+
+
+# ---------- I · Imagen SSTV desordenada ----------
+_PIEZAS_IGUALES = {}
+
+
+def piezas_iguales(src: str, umbral=9.0):
+    """Para cada hueco de cada cuadrante, qué (pieza, giro) se ven IGUAL que la buena (cielo negro, por ejemplo):
+    también valen, para que nadie se quede atascado con dos piezas negras «cambiadas». Necesita Pillow."""
+    if src in _PIEZAS_IGUALES:
+        return _PIEZAS_IGUALES[src]
+    res = None
+    try:
+        from PIL import Image, ImageChops, ImageStat
+        im = Image.open(WEB / src).convert("RGB").resize((6 * 24, 6 * 24))
+        tesela = lambda col, fila: im.crop((col * 24, fila * 24, col * 24 + 24, fila * 24 + 24))
+        res = []
+        for q in range(4):
+            qx, qy = q % 2, q // 2
+            piezas = [tesela(qx * 3 + p % 3, qy * 3 + p // 3) for p in range(9)]
+            cuad = []
+            for hueco in range(9):
+                bien = piezas[hueco]
+                vale = []
+                for p in range(9):
+                    for g in range(4):
+                        girada = piezas[p].rotate(-90 * g)  # g giros de 90° en el sentido de las agujas del reloj
+                        if (p, g) == (hueco, 0) or sum(ImageStat.Stat(ImageChops.difference(bien, girada)).mean) / 3 < umbral:
+                            vale.append([p, g])
+                cuad.append(vale)
+            res.append(cuad)
+    except Exception as ex:  # sin Pillow: solo vale la pieza buena sin girar
+        print(f"  · OJO: no puedo comparar las piezas de {src} ({type(ex).__name__}): solo valdrá la colocación exacta.")
+    if res is None:
+        res = [[[[h, 0]] for h in range(9)] for _ in range(4)]
+    _PIEZAS_IGUALES[src] = res
+    return res
+
+
+def contenido_sstv(banco, eq: Equipo):
+    az = eq.azar
+    foto = az.choice([f for f in banco["fotos"] if f.get("usar", True)])
+    validas = piezas_iguales(foto["src"])
+    letras = letras_equipo(eq)
+    cuadrantes = []
+    for q in range(4):
+        # Desordenadas y giradas, sin ninguna pieza ya en un sitio y giro que valgan
+        for _ in range(500):
+            orden = list(range(9))
+            az.shuffle(orden)
+            inicio = [[p, az.randrange(4)] for p in orden]
+            for h, (p, g) in enumerate(inicio):
+                if [p, g] in validas[q][h]:
+                    inicio[h][1] = next((x for x in (1, 2, 3, 0) if [p, x] not in validas[q][h]), g)
+            if not any(inicio[h] in validas[q][h] for h in range(9)):
+                break
+        else:
+            raise RuntimeError(f"No puedo desordenar el cuadrante {q + 1} de {foto['src']}")
+        cuadrantes.append({"inicio": inicio, "validas": validas[q],
+                           "sello": sellar(letras[q], f"cuadrante{q + 1}resuelto", eq.sal)})
+    return {"prueba": {"src": foto["src"], "credito": foto.get("credito", ""), "cuadrantes": cuadrantes},
+            "clave": "".join(letras),
+            "partes": [{"pregunta": f"Cuadrante {q + 1}", "respuestas": [letras[q].lower()]} for q in range(4)],
+            "foto": foto.get("credito", foto["src"])}
+
+
+# tipo de prueba → función que crea el contenido de un equipo a partir de su banco (privado/bancos.json → tipo)
+CONTENIDO = {"diferencias": contenido_diferencias, "sstv_puzle": contenido_sstv, "morse": contenido_morse, "pelis": contenido_pelis, "wordle": contenido_wordle, "binario": contenido_binario,
+             "qr_escondido": contenido_qr, "geoguessr": contenido_geoguessr, "caja_fuerte": contenido_caja,
+             "bulo_verdad": contenido_bulo}
+# Las que se generan antes que las demás (el Binario evita las palabras del Wordle de cada equipo)
+PRIMERO = ["wordle"]
+
+
+def generar_por_equipo(e, s, bancos, semilla, n_eq, compartido):
+    """Contenido y claves de cada equipo para una estación de CONTENIDO. Devuelve (público, secreto) por equipo."""
+    tipo = e["prueba"]["tipo"]
+    if tipo not in bancos:
+        sys.exit(f"ERROR: falta el banco «{tipo}» en privado/bancos.json (estación {e['letra']}).")
+    publico, secreto = {}, {}
+    for k in range(1, n_eq + 1):
+        eq = Equipo(semilla, e["id"], k, compartido.setdefault(k, {}), s)
+        c = CONTENIDO[tipo](bancos[tipo], eq)
+        clave = normalizar(c["clave"])
+        pub = {"prueba": c["prueba"], "sal": eq.sal, "huella": huella(clave, eq.sal)}
+        if s.get("dato"):
+            pub["datoCifrado"] = [cifrar("gk:" + s["dato"], clave, eq.sal)]
+        publico[str(k)] = pub
+        secreto[str(k)] = {"clave": clave, **{x: v for x, v in c.items() if x not in ("prueba", "clave")}}
+    return publico, secreto
 
 
 # ---------------------------------------------------------------------------------------------
@@ -354,7 +803,11 @@ def main():
     # (las claves de las pruebas y la palabra final): esas las escribís vosotros y se conservan siempre.
     previo = {} if rotar else todo_previo
 
+    ruta_bancos = PRIVADO / "bancos.json"
+    bancos = json.loads(ruta_bancos.read_text(encoding="utf-8")) if ruta_bancos.exists() else {}
     sec = {
+        # Semilla del contenido por equipo: se conserva siempre (también con --rotar) para que no cambie el contenido
+        "semilla": todo_previo.get("semilla") or secrets.token_hex(32),
         "organizacion": previo.get("organizacion") or {"codigo": codigo(8), "sal": secrets.token_hex(16)},
         "ntfy_tema": previo.get("ntfy_tema") or ("gymkhana-sstv-" + secrets.token_hex(8)),
         "equipos": {},
@@ -363,6 +816,19 @@ def main():
     for k in range(1, n_eq + 1):
         sec["equipos"][str(k)] = previo.get("equipos", {}).get(str(k)) or {"codigo": codigo(), "sal": secrets.token_hex(16)}
     claves_azar = []
+    publico_eq = {}  # id de estación → contenido público de cada equipo (pruebas de CONTENIDO)
+    secreto_eq = {}  # id de estación → secretos de cada equipo
+    compartido = {}  # equipo → lo ya elegido en otras estaciones (por ejemplo las palabras del Wordle)
+    de_contenido = [e for e in est if (e.get("prueba") or {}).get("tipo") in CONTENIDO]
+    for e in sorted(de_contenido, key=lambda e: 0 if e["prueba"]["tipo"] in PRIMERO else 1):
+        s_prev = todo_previo.get("estaciones", {}).get(str(e["id"])) or {}
+        if e["prueba"]["tipo"] == "qr_escondido":
+            # Los 3 QR impresos: el mismo texto para todos los equipos; se conservan (con --rotar, se renuevan)
+            n_qr = len(e["prueba"].get("escondites") or [1, 2, 3])
+            viejos = (previo.get("estaciones", {}).get(str(e["id"])) or {}).get("qrs") or []
+            s_prev = {**s_prev, "qrs": [viejos[i] if i < len(viejos) else f"GK-QR-{codigo()}-{i + 1}" for i in range(n_qr)]}
+        publico_eq[e["id"]], secreto_eq[e["id"]] = generar_por_equipo(e, s_prev, bancos, sec["semilla"], n_eq, compartido)
+        secreto_eq[e["id"]] = (s_prev.get("qrs"), secreto_eq[e["id"]])
     for e in est:
         tipo = (e.get("prueba") or {}).get("tipo", "codigo_estacion")
         siempre = todo_previo.get("estaciones", {}).get(str(e["id"])) or {}  # respuestas y sinónimos
@@ -372,7 +838,14 @@ def main():
             "token": p.get("token") or secrets.token_urlsafe(12),
             "sal": p.get("sal") or secrets.token_hex(16),
         }
-        if tipo == "codigo_estacion":
+        if tipo in CONTENIDO:
+            # Contenido y clave distintos para cada equipo (la estación no tiene clave propia)
+            for x in ("clave", "alternativas", "equipos", "qr", "peliculas", "explicaciones"):
+                s.pop(x, None)
+            qrs, s["equipos"] = secreto_eq[e["id"]]
+            if qrs:
+                s["qrs"] = qrs
+        elif tipo == "codigo_estacion":
             # El código de la etiqueta escondida en la estación (prueba de relleno)
             s["clave"] = p.get("clave") or codigo()
         elif tipo == "pelis" and siempre.get("peliculas"):
@@ -468,7 +941,9 @@ def main():
              "letraPalabra": letras_palabra[str(e["id"])],
              "token": sha256(sec["estaciones"][str(e["id"])]["token"]),
              "sal": sec["estaciones"][str(e["id"])]["sal"],
-             "huella": huella(sec["estaciones"][str(e["id"])]["clave"], sec["estaciones"][str(e["id"])]["sal"])}
+             # Pruebas de CONTENIDO: contenido, sal y huella de cada equipo; las demás, una huella para todos
+             **({"equipos": publico_eq[e["id"]]} if e["id"] in publico_eq else
+                {"huella": huella(sec["estaciones"][str(e["id"])]["clave"], sec["estaciones"][str(e["id"])]["sal"])})}
             for e in est
         ],
         # Palabra final: solo su huella (las letras sí son públicas: se ven en la app al superar cada estación).
@@ -486,17 +961,25 @@ def main():
     )
 
     # ---------- datos para Firebase ----------
+    def clave_fb(v):
+        """Clave y sinónimos (las reglas los miran en «alternativas»), ya normalizados."""
+        return {"clave": normalizar(v["clave"]),
+                **({"alternativas": {normalizar(a): True for a in v["alternativas"] if normalizar(a)}}
+                   if v.get("alternativas") else {})}
+
+    def estacion_fb(token, v):
+        """Las reglas comprueban la clave DEL EQUIPO (secretos/estaciones/$id/equipos/$equipo). En las pruebas de
+        contenido cada equipo tiene la suya; en las demás, la misma para todos."""
+        por_eq = v.get("equipos") or {}
+        return {"token": token, "equipos": {str(k): clave_fb(por_eq.get(str(k)) or v) for k in range(1, n_eq + 1)}}
+
     secretos_fb = {
         "organizacion": normalizar(sec["organizacion"]["codigo"]),
         "equipos": {k: normalizar(v["codigo"]) for k, v in sec["equipos"].items()},
-        "estaciones": {k: {"token": v["token"], "clave": normalizar(v["clave"]),
-                           # Sinónimos que también se aceptan (las reglas los miran en «alternativas»)
-                           **({"alternativas": {normalizar(a): True for a in v["alternativas"] if normalizar(a)}}
-                              if v.get("alternativas") else {})}
-                       for k, v in sec["estaciones"].items()},
+        "estaciones": {k: estacion_fb(v["token"], v) for k, v in sec["estaciones"].items()},
     }
-    secretos_fb["estaciones"]["final"] = {"token": TOKEN_FINAL, "clave": normalizar(sec["final"]["clave"])}
-    secretos_fb["estaciones"]["meta"] = {"token": sec["meta"]["token"], "clave": CLAVE_META}
+    secretos_fb["estaciones"]["final"] = estacion_fb(TOKEN_FINAL, {"clave": sec["final"]["clave"]})
+    secretos_fb["estaciones"]["meta"] = estacion_fb(sec["meta"]["token"], {"clave": CLAVE_META})
     rutas_fb = {}
     for i, r in enumerate(rutas):
         rutas_fb[str(i + 1)] = {str(s): {"anterior": "inicio" if j == 0 else str(r[j - 1]), "paso": j + 1} for j, s in enumerate(r)}
@@ -537,12 +1020,15 @@ def main():
         "estaciones": [{"id": e["id"], "letra": e["letra"], "nombre": e.get("nombre", f"Estación {e['letra']}"),
                         "tipo": e.get("prueba", {}).get("tipo", "codigo_estacion"),
                         "url": f"{base}#/e/{e['id']}/{sec['estaciones'][str(e['id'])]['token']}",
-                        "clave": sec["estaciones"][str(e["id"])]["clave"],
+                        "clave": sec["estaciones"][str(e["id"])].get("clave", "(una por equipo)"),
+                        "porEquipo": {k: {"clave": v["clave"], "partes": v.get("partes", [])}
+                                      for k, v in (sec["estaciones"][str(e["id"])].get("equipos") or {}).items()},
                         "alternativas": sec["estaciones"][str(e["id"])].get("alternativas", []),
                         "peliculas": sec["estaciones"][str(e["id"])].get("peliculas", []),
                         "prueba": e.get("prueba") or {},
                         "pregunta": descifrar_morse(e["prueba"]["cartel"]) if (e.get("prueba") or {}).get("tipo") == "morse" and e["prueba"].get("cartel") else "",
                         "qr": sec["estaciones"][str(e["id"])].get("qr", ""),
+                        "qrs": sec["estaciones"][str(e["id"])].get("qrs", []),
                         "letraPalabra": letras_palabra[str(e["id"])]} for e in est],
         "final": {"palabra": palabra, "clave": sec["final"]["clave"], "pista": pf.get("pista", "")},
         "meta": {"nombre": meta_cfg["nombre"], "url": f"{base}#/meta/{sec['meta']['token']}", "token": sec["meta"]["token"]},

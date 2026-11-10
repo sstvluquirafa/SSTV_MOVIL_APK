@@ -11,7 +11,15 @@ if (!fs.existsSync(rutaSecretos)) throw new Error('Faltan privado/secretos.json:
 const SEC = JSON.parse(fs.readFileSync(rutaSecretos, 'utf8'));
 
 const est = (id) => C.estaciones.find((e) => e.id === Number(id));
-const clave = (id) => String(SEC.estaciones[String(id)].clave);
+/** Secretos de la estación PARA UN EQUIPO: las pruebas de contenido tienen clave y partes distintas por equipo. */
+const secretoEquipo = (id, equipo = 1) => {
+  const s = SEC.estaciones[String(id)];
+  return (s.equipos && s.equipos[String(equipo)]) || s;
+};
+const clave = (id, equipo = 1) => String(secretoEquipo(id, equipo).clave);
+/** Respuestas de una prueba por partes (Morse…) para un equipo: la variante n de cada parte (0 = la principal). */
+const respuestasPartes = (id, equipo = 1, n = 0) => secretoEquipo(id, equipo).partes.map((p) => p.respuestas[Math.min(n, p.respuestas.length - 1)]);
+const idDeTipo = (tipo) => C.estaciones.find((x) => x.prueba.tipo === tipo).id;
 const token = (id) => SEC.estaciones[String(id)].token;
 /** La ruta que empieza por esa estación (las rutas son un cuadrado latino: hay exactamente una). */
 const rutaQueEmpiezaPor = (id) => C.rutas.find((r) => r.orden[0] === Number(id)).id;
@@ -61,22 +69,31 @@ async function abrirEstacion(page, id) {
 
 /* ---------- Cómo se responde cada tipo de prueba ---------- */
 const LETRAS = 'abcdefgh';
-/** Pelis espaciales: los títulos principales (o la variante n de cada película, si la hay). */
-function titulosPelis(n = 0) {
-  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
-  return SEC.estaciones[String(e.id)].peliculas.map((p) => p[Math.min(n, p.length - 1)]);
+/** Pelis espaciales: los títulos del equipo 1 (la variante n de cada película: 0 = el principal). */
+const titulosPelis = (n = 0) => respuestasPartes(idDeTipo('pelis'), 1, n);
+/** Avanza el reloj de la página (si las pruebas lo han instalado) o espera de verdad. */
+async function avanzar(page, ms) {
+  try { await page.clock.runFor(ms); } catch (e) { await page.waitForTimeout(ms); }
 }
+/** Respuestas del equipo 1 de una prueba por partes cuando r es su clave (o la lista tal cual). */
+const comoLista = (tipo, r) => (Array.isArray(r) ? r : r === clave(idDeTipo(tipo)) ? respuestasPartes(idDeTipo(tipo)) : [r]);
 /** Una respuesta incorrecta pero con la forma correcta (mismo largo / mismo número de opciones). */
 function respuestaMala(tipo, buena) {
   if (tipo === 'geoguessr' || tipo === 'real_o_ia') {
     const ult = buena.slice(-1);
     return buena.slice(0, -1) + (ult === 'a' ? 'b' : 'a');
   }
-  if (tipo === 'bulo_verdad') return buena.slice(0, -1) + (buena.slice(-1) === 'b' ? 'v' : 'b');
-  if (tipo === 'caja_fuerte') return buena.split('').map((d) => String((Number(d) + 1) % 10)).join('');
+  // Bulo: falla la 1.ª noticia (la 1.ª ronda no se supera)
+  if (tipo === 'bulo_verdad') return (buena[0] === 'b' ? 'v' : 'b') + buena.slice(1);
+  // Escotilla: la 1.ª escotilla con todas las cifras cambiadas
+  if (tipo === 'caja_fuerte') return [respuestasPartes(idDeTipo(tipo))[0].split('').map((d) => String((Number(d) + 1) % 10)).join('')];
+  if (tipo === 'binario' || tipo === 'qr_escondido') return respuestasPartes(idDeTipo(tipo)).map((r, i) => (i === 1 ? 'malo' : r));
+  // Morse: la 1.ª y la 3.ª bien y la 2.ª mal (las buenas salen de privado/secretos.json, equipo 1)
+  if (tipo === 'morse') return respuestasPartes(idDeTipo('morse')).map((r, i) => (i === 1 ? 'respuestamala' : r));
   // Pelis: la 1.ª y la 3.ª bien y la 2.ª con un título equivocado (los buenos salen de privado/secretos.json)
   if (tipo === 'pelis') return titulosPelis().map((t, i) => (i === 1 ? 'Titanic' : t));
-  if (tipo === 'wordle') return buena.split('').reverse().join('') === buena ? 'zzzzz' : buena.split('').reverse().join('');
+  // Wordle: la 1.ª palabra al revés (de 5 letras)
+  if (tipo === 'wordle') { const w = respuestasPartes(idDeTipo(tipo))[0]; return [w.split('').reverse().join('') === w ? 'zzzzz' : w.split('').reverse().join('')]; }
   return 'respuestamala';
 }
 
@@ -84,26 +101,47 @@ async function responder(page, tipo, r) {
   const prueba = page.locator('#prueba');
   switch (tipo) {
     case 'codigo_estacion': await page.fill('#codigo-estacion', r); await prueba.locator('form button').click(); break;
-    case 'morse': await page.fill('#resp-morse', r); await prueba.locator('form button').click(); break;
+    case 'morse': {
+      // r: lista de respuestas, o la clave del equipo 1: entonces se escriben sus respuestas principales
+      const rs = Array.isArray(r) ? r : respuestasPartes(idDeTipo('morse'));
+      for (let i = 0; i < rs.length; i++) await page.fill(`#resp-morse-${i}`, rs[i]);
+      await page.locator('#morse-comprobar').click();
+      break;
+    }
     case 'sstv_mano': await page.fill('#resp-sstv', r); await prueba.locator('form button').click(); break;
     case 'pelis': {
-      // r: lista de títulos, o la clave (la unión de los tres): entonces se escriben los títulos principales
-      const titulos = Array.isArray(r) ? r : titulosPelis();
+      // r: lista de títulos, o la clave del equipo 1: entonces se escriben sus títulos principales
+      const titulos = comoLista(tipo, r);
       for (let i = 0; i < titulos.length; i++) await page.fill(`#peli-${i}`, titulos[i]);
       await page.locator('#pelis-comprobar').click();
       break;
     }
-    case 'binario': await page.fill('#resp-bin', r); await prueba.locator('form button').click(); break;
+    case 'diferencias': await page.fill('#dif-clave', r); await page.locator('.dif-clave-form button').click(); break;
+    case 'sstv_puzle': await page.fill('#sstv-clave', r); await page.locator('.dif-clave-form button').click(); break;
+    case 'binario': {
+      const rs = comoLista(tipo, r);
+      for (let i = 0; i < rs.length; i++) await page.fill(`#resp-bin-${i}`, rs[i]);
+      await page.locator('#bin-comprobar').click();
+      break;
+    }
     case 'hackeo': await page.fill('#hack-clave', r); await page.locator('#hack-form button').click(); break;
-    case 'qr_escondido':
-      if (!(await page.locator('.plegable-simple').evaluate((d) => d.open))) await page.locator('.plegable-simple summary').click();
-      await page.fill('#resp-qr', r);
-      await prueba.locator('form button').click();
+    case 'qr_escondido': {
+      // Las palabras de los 3 QR (como si las hubieran juntado hablando)
+      const rs = comoLista(tipo, r);
+      for (let i = 0; i < rs.length; i++) await page.fill(`#resp-qr-${i}`, rs[i]);
+      await page.locator('#qr-comprobar').click();
       break;
-    case 'wordle':
-      for (const k of r.toUpperCase()) await page.locator(`.w-tecla[data-k="${k}"]`).click();
-      await page.locator('.w-tecla[data-k="ENTER"]').click();
+    }
+    case 'wordle': {
+      // Las palabras una tras otra; entre una y otra, la app espera 2,2 s antes de cambiar de tablero
+      const ws = comoLista(tipo, r);
+      for (let n = 0; n < ws.length; n++) {
+        if (n) { await avanzar(page, 2500); await expect(page.locator('#w-ronda')).toContainText(`Palabra ${n + 1}`); }
+        for (const k of ws[n].toUpperCase()) await page.locator(`.w-tecla[data-k="${k}"]`).click();
+        await page.locator('.w-tecla[data-k="ENTER"]').click();
+      }
       break;
+    }
     case 'geoguessr':
       for (let i = 0; i < r.length; i++) await page.locator(`.opcion[data-i="${i}"][data-j="${LETRAS.indexOf(r[i])}"]`).click();
       await page.locator('#geo-comprobar').click();
@@ -112,17 +150,36 @@ async function responder(page, tipo, r) {
       await page.locator(`.ia-foto[data-i="${LETRAS.indexOf(r)}"]`).click();
       await page.locator('#ia-comprobar').click();
       break;
-    case 'bulo_verdad':
-      for (let i = 0; i < r.length; i++) await page.locator(`.bulo[data-i="${i}"] .bulo-b[data-v="${r[i]}"]`).click();
-      await page.locator('#bulo-comprobar').click();
-      break;
-    case 'caja_fuerte':
-      for (let i = 0; i < r.length; i++) {
-        const actual = Number(await page.locator(`#rueda-${i}`).innerText());
-        for (let k = 0; k < (Number(r[i]) - actual + 10) % 10; k++) await page.locator(`.rueda-b[data-r="${i}"][data-d="1"]`).click();
+    case 'bulo_verdad': {
+      // Por rondas de 5: si una ronda sale bien y quedan más, «Siguiente ronda»; si sale mal, se para ahí
+      const rondas = r.match(/.{1,5}/g);
+      for (let n = 0; n < rondas.length; n++) {
+        const ronda = rondas[n];
+        for (let i = 0; i < ronda.length; i++) await page.locator(`.bulo[data-i="${i}"] .bulo-b[data-v="${ronda[i]}"]`).click();
+        await page.locator('#bulo-comprobar').click();
+        if (n === rondas.length - 1) break;
+        // Se espera al resultado de la ronda (bien o mal) sin perder tiempo: el reloj de la página sigue corriendo
+        await expect(page.locator('#bulo-falta')).toContainText(/Ronda superada|no es correcta/);
+        if (!(await page.locator('#bulo-falta').innerText()).includes('Ronda superada')) break;
+        await page.locator('#bulo-comprobar').click();
+        await expect(page.locator('.escotilla-paso')).toContainText(`Ronda ${n + 2}`);
       }
-      await page.locator('#caja-abrir').click();
       break;
+    }
+    case 'caja_fuerte': {
+      // Una escotilla tras otra; al abrir una, la app espera 2 s antes de enseñar la siguiente
+      const codigos = comoLista(tipo, r);
+      for (let n = 0; n < codigos.length; n++) {
+        if (n) { await avanzar(page, 2500); await expect(page.locator('.escotilla-paso')).toContainText(`Escotilla ${n + 1}`); }
+        const c = codigos[n];
+        for (let i = 0; i < c.length; i++) {
+          const actual = Number(await page.locator(`#rueda-${i}`).innerText());
+          for (let k = 0; k < (Number(c[i]) - actual + 10) % 10; k++) await page.locator(`.rueda-b[data-r="${i}"][data-d="1"]`).click();
+        }
+        await page.locator('#caja-abrir').click();
+      }
+      break;
+    }
     default: throw new Error('Tipo de prueba sin respuesta en las pruebas: ' + tipo);
   }
 }
@@ -149,4 +206,4 @@ async function sinScrollHorizontal(page) {
   expect(ancho, 'la página no debe tener scroll horizontal').toBeLessThanOrEqual(vista + 1);
 }
 
-module.exports = { C, SEC, titulosPelis, est, clave, token, rutaQueEmpiezaPor, empezar, ponerRuta, hechas, abrirEstacion, respuestaMala, responder, continuarSiHaceFalta, superar, sinScrollHorizontal };
+module.exports = { C, SEC, titulosPelis, secretoEquipo, respuestasPartes, idDeTipo, avanzar, est, clave, token, rutaQueEmpiezaPor, empezar, ponerRuta, hechas, abrirEstacion, respuestaMala, responder, continuarSiHaceFalta, superar, sinScrollHorizontal };

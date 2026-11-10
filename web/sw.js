@@ -3,7 +3,7 @@
  * Estrategia: responde desde la caché y, a la vez, busca la versión nueva en la red para la próxima vez.
  * Si añades archivos (por ejemplo una prueba nueva), ponlos en ARCHIVOS y sube VERSION.
  */
-const VERSION = 'gk-v18';
+const VERSION = 'gk-v20';
 const ARCHIVOS = [
   './',
   'index.html',
@@ -27,6 +27,8 @@ const ARCHIVOS = [
   'js/pruebas/morse.js',
   'js/pruebas/sstv_mano.js',
   'js/pruebas/pelis.js',
+  'js/pruebas/diferencias.js',
+  'js/pruebas/sstv_puzle.js',
   'js/pruebas/binario.js',
   'js/pruebas/qr_escondido.js',
   'js/pruebas/wordle.js',
@@ -35,9 +37,19 @@ const ARCHIVOS = [
   'js/pruebas/caja_fuerte.js',
   'js/pruebas/hackeo.js',
   'js/pruebas/bulo_verdad.js',
-  'assets/img/pruebas/geo1.jpg',
-  'assets/img/pruebas/geo2.jpg',
-  'assets/img/pruebas/geo3.jpg',
+  'assets/img/pruebas/geo-01.jpg',
+  'assets/img/pruebas/geo-02.jpg',
+  'assets/img/pruebas/geo-03.jpg',
+  'assets/img/pruebas/geo-04.jpg',
+  'assets/img/pruebas/geo-05.jpg',
+  'assets/img/pruebas/geo-06.jpg',
+  'assets/img/pruebas/geo-07.jpg',
+  'assets/img/pruebas/geo-08.jpg',
+  'assets/img/pruebas/geo-09.jpg',
+  'assets/img/pruebas/sstv-1.jpg',
+  'assets/img/pruebas/sstv-2.jpg',
+  'assets/img/pruebas/sstv-3.jpg',
+  'assets/img/pruebas/sstv-4.jpg',
   'assets/img/pruebas/ia-a.jpg',
   'assets/img/pruebas/ia-b.jpg',
   'assets/img/pruebas/ia-c.jpg',

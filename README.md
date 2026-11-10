@@ -87,11 +87,11 @@ web/                       ← lo que se publica en GitHub Pages
       registro.js          interfaz de pruebas (léelo antes de crear una)
       _plantilla.js        plantilla para pruebas nuevas
       codigo_estacion.js   prueba de relleno: código escondido en la estación
-      morse.js, binario.js, qr_escondido.js                        pruebas de papel
-      pelis.js, wordle.js, geoguessr.js, real_o_ia.js, caja_fuerte.js,
-      hackeo.js, bulo_verdad.js                                    pruebas de la app
-      sstv_mano.js         en el banquillo (sin estación; su configuración, en torneo.json → banquillo)
-  assets/img/pruebas/      imágenes de GeoGuessr y ¿Real o IA?
+      morse.js, pelis.js, binario.js, qr_escondido.js, wordle.js, geoguessr.js,
+      diferencias.js, caja_fuerte.js, sstv_puzle.js, bulo_verdad.js       las 10 pruebas
+      sstv_mano.js, real_o_ia.js, hackeo.js   en el banquillo (sin estación; configuración en torneo.json → banquillo)
+  assets/img/pruebas/      fotos de GeoGuessr (geo-01…09), de la Imagen SSTV (sstv-1…4) y de ¿Real o IA?
+                           (nombres neutros: el nombre del archivo no delata la respuesta)
   vendor/                  jsQR (leer QR) y qrcode-generator (crear QR); licencias en LICENCIAS.txt
   assets/img/mapa.jpg      GENERADO: el mapa del Parque, ligero (≈190 KB)
 herramientas/
@@ -106,7 +106,7 @@ generado/
 firebase/
   reglas.json              reglas de seguridad de la base de datos
 pruebas/                   pruebas automáticas (Playwright) y comprobación de las reglas
-privado/                   (NO se sube) secretos.json, firebase_importar.json, imprimir.html
+privado/                   (NO se sube) bancos.json (contenido con respuestas), secretos.json, firebase_importar.json, imprimir.html
 ```
 
 ---
@@ -238,15 +238,17 @@ python herramientas/generar_torneo.py
 Abre `privado/imprimir.html` con doble clic. Tiene un botón para imprimir cada parte por separado:
 
 - **Carteles A4 de estación**, con la letra y el QR.
-- **Carteles de prueba** (A4): Morse (la pregunta), Binario (las bombillas) y QR
-  escondido (la pista de dónde está). Van **junto al cartel de la estación**.
-- **QR escondidos**: etiquetas pequeñas con el QR y «GranaSAT · Gymkhana». Escondedlas a menos de 10–15 pasos.
+- **Carteles de prueba** (A4): Morse (la tabla Morse en grande; las preguntas están en la app) y QR escondido
+  (las pistas de los 3 escondites). Van **junto al cartel de la estación**.
+- **QR escondidos**: etiquetas pequeñas con el QR y «GranaSAT · Gymkhana»: D1, D2 y D3 (número pequeño en gris para
+  saber dónde va cada una) y un juego de repuesto. Escondedlas a menos de 10–15 pasos del cartel.
 - **Cartel de la meta** (A4), con su QR grande.
 - **Etiquetas de código**: solo para las estaciones que sigan con la prueba de relleno (`codigo_estacion`).
 - **Tarjetas de equipo** (4 por hoja), con el QR para unirse y el código.
-- **Hoja de organización** (2 páginas):
+- **Hoja de organización**:
   - el código del panel y el tema de ntfy, con su QR;
   - la respuesta y la letra de cada estación, la palabra final y el token de la meta;
+  - un **solucionario por estación** con las respuestas de cada equipo (las pruebas que cambian por equipo);
   - los códigos de cada equipo;
   - las 10 rutas con su distancia.
 
@@ -256,20 +258,32 @@ Antes de imprimir, comprueba que `url_publica` es la buena: va dentro de los QR.
 
 ## Las pruebas
 
+Cada estación lleva unos 4–5 minutos, con varias partes o rondas. **El contenido y la clave cambian para cada equipo**
+(pasarse respuestas no sirve) y la dificultad es la misma para todos. Se puede hacer con un solo móvil; con varios va
+más rápido: en las pruebas por partes cada parte da un trozo (una palabra, una letra) y el equipo los junta hablando.
+
+- El contenido sale de los **bancos con respuestas de `privado/bancos.json`** (no se sube). El generador elige el de
+  cada equipo con la `semilla` secreta de `privado/secretos.json`: regenerar da siempre lo mismo.
+- En `web/js/config.js` va el contenido de cada equipo (`estaciones[].equipos[n]`) con huellas y «sellos», nunca las
+  respuestas en claro. Las respuestas de cada equipo, en `privado/secretos.json` → `estaciones[id].equipos[n]` y en el
+  solucionario de `privado/imprimir.html`.
+- En Firebase, cada estación tiene la clave **de cada equipo** (`secretos/estaciones/$id/equipos/$equipo/clave`) y las
+  reglas comprueban la del equipo que envía.
+
 Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].prueba`):
 
-| Est. | Prueba | Dónde | Lo público (`torneo.json` → `prueba`) | Lo secreto (`privado/secretos.json`) |
-|---|---|---|---|---|
-| A | Morse (`morse`) | cartel + app | `cartel`: la pregunta en Morse (letras con espacios, palabras con « / ») | `clave`: la respuesta |
-| B | Pelis espaciales (`pelis`) | app | `peliculas`: `[{ emojis: [...] }]` (3, sin títulos) | `peliculas`: títulos que valen de cada una (la `clave` y las `alternativas` las calcula el script) |
-| C | Binario (`binario`) | cartel + app | `cartel`: filas de 5 bombillas («01100»…) | `clave`: la palabra |
-| D | QR escondido (`qr_escondido`) | cartel + QR + app | `escondite`: pista del cartel | `qr` y `clave` (los genera el script) |
-| E | Wordle (`wordle`) | app | — | `clave`: palabra de 5 letras |
-| F | GeoGuessr (`geoguessr`) | app | `imagenes`: `[{ src, credito, opciones: [4] }]` | `clave`: letras de las correctas (por ejemplo «cab») |
-| G | ¿Real o IA? (`real_o_ia`) | app | `imagenes`: `[{ src }]` (4, nombres neutros), `nota` | `clave`: letra de la falsa; `explicaciones`: `[explicación, [créditos]]` |
-| H | Caja fuerte (`caja_fuerte`) | app | `pistas`: `[{ codigo, texto }]` | `clave`: el código |
-| I | Hackea el satélite (`hackeo`) | app | `sistema`, `usuario`, `ayudaContrasena`, `perfil`, `leccion` | `clave`: la contraseña |
-| J | ¿Bulo o verdad? (`bulo_verdad`) | app | `afirmaciones` (textos), `leccion` | `clave`: patrón de b/v; `explicaciones` (una por afirmación) |
+| Est. | Prueba | Dónde | Qué cambia por equipo (banco de `privado/bancos.json`) |
+|---|---|---|---|
+| A | Morse (`morse`) | app + cartel con la tabla | 3 preguntas en Morse |
+| B | Pelis espaciales (`pelis`) | app | 6 películas con emojis (3 fáciles, 2 medias, 1 difícil) |
+| C | Binario (`binario`) | app | 3 palabras (4, 5 y 6 letras) en bombillas |
+| D | QR escondido (`qr_escondido`) | 3 QR + app | la palabra que da cada QR (los QR impresos son los mismos); `escondites` en `torneo.json` |
+| E | Wordle (`wordle`) | app | 2 palabras (5 y 6 letras) |
+| F | GeoGuessr (`geoguessr`) | app | 5 fotos de 9 (1 de Granada, 2 de España, 2 del mundo) |
+| G | Busca las diferencias (`diferencias`) | app | la escena y sus 12 diferencias (generadas) |
+| H | Escotilla (`caja_fuerte`) | app | 2 acertijos (3 y 4 cifras) generados con solución única |
+| I | Imagen SSTV desordenada (`sstv_puzle`) | app | la foto y el desorden de las piezas |
+| J | ¿Bulo o verdad? (`bulo_verdad`) | app | 10 noticias de 20, en 2 rondas |
 
 Todas llevan además `pista` en `torneo.json`: el texto del botón «Pista» de los 60 s.
 
@@ -277,7 +291,8 @@ Y cada estación tiene en `privado/secretos.json` un **`dato`**: un dato real y 
 en «¡Estación superada!». Va **cifrado con la respuesta** porque alguno delataría la respuesta de su prueba,
 así que solo se lee al acertar. Si una estación la marca la organización, no sale el dato.
 
-- **Las respuestas solo van en `privado/secretos.json`.** Se comparan en minúsculas, sin tildes ni espacios.
+- **Las respuestas solo van en `privado/`** (`bancos.json` y `secretos.json`). Se comparan en minúsculas, sin tildes ni
+  espacios.
 - **Letras y palabra final:** `torneo.json` → `palabra_final` (`palabra`, `pista` y la letra de cada estación).
   La respuesta que vale es `final.clave` de `secretos.json`. Si cambiáis la palabra, cambiad las dos.
 - **Meta:** `torneo.json` → `meta` (`nombre`, `x`, `y`). Colocadla con el editor de estaciones (la M verde).
@@ -416,8 +431,8 @@ El logo es provisional (`web/assets/img/logo.svg`). Para poner el de GranaSAT:
     - es miembro del equipo;
     - la gymkhana está en marcha;
     - ya tiene hecha la estación anterior **de su ruta asignada**;
-    - envía el token del QR y la clave de la prueba, y ambos coinciden con `/secretos` (o la clave es uno de sus
-      sinónimos en `alternativas`).
+    - envía el token del QR y la clave de la prueba **de su equipo**, y ambos coinciden con `/secretos` (la clave,
+      en `secretos/estaciones/$id/equipos/$equipo`, o uno de sus sinónimos en `alternativas`).
 
     La hora la pone el servidor.
 - **Probado** con un simulador de Firebase local. Pruebas superadas:
@@ -440,7 +455,7 @@ El logo es provisional (`web/assets/img/logo.svg`). Para poner el de GranaSAT:
     - editor de estaciones;
     - imprimibles (16 páginas en PDF).
   - Vistas a 375 px y 1920×1080.
-  - Las 10 pruebas, la palabra final y la meta: las pruebas automáticas de `pruebas/` (42 casos en un móvil de 360 px
+  - Las 10 pruebas, la palabra final y la meta: las pruebas automáticas de `pruebas/` (50 casos en un móvil de 360 px
     y en 1920×1080).
 
   **No se ha probado:**

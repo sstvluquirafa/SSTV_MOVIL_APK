@@ -23,6 +23,9 @@
  *       // ctx.ayuda(texto, tipo?) → muestra un aviso amable bajo la prueba (tipo: 'error', 'info' u 'ok').
  *       // ctx.esperar(segundos, boton) → Promise. Tras un fallo en pruebas de opciones (donde se podría acertar
  *       //                    probando al azar): bloquea el botón con cuenta atrás y un mensaje amable.
+ *       // ctx.parte(texto, sellos) → Promise<string|null>. Pruebas por partes con contenido por equipo: si la
+ *       //                    respuesta de una parte es válida, devuelve su trozo de clave. Clave = unión de trozos.
+ *       // ctx.estacion.prueba ya trae mezclado el contenido DE ESTE EQUIPO (config → estaciones[].equipos[n]).
  *       // ctx.coincide(texto, huella) → Promise<boolean>. Compara con otra huella de la prueba (misma sal que la
  *       //                    estación), por ejemplo para avisar «eso es la pregunta, no la respuesta».
  *       // La PISTA no la pinta la prueba: la app muestra el botón «Pista» a los 60 s con el texto de

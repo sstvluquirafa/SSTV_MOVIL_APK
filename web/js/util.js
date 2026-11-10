@@ -47,9 +47,22 @@
    * Igual que cifrar() en generar_torneo.py. Con una respuesta incorrecta sale basura (o null).
    */
   GK.descifrar = async function (b64, respuesta, salHex) {
+    const enc = new TextEncoder();
+    return descifrarCon(new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(`gk-explicacion:${GK.normalizar(respuesta)}:${salHex}`))), b64);
+  };
+
+  /**
+   * Abre un «sello» de una parte de prueba (igual que sellar() en generar_torneo.py): va cifrado con la huella de una
+   * respuesta válida. Devuelve el trozo de clave que guarda, o null si la huella no es la de esa respuesta.
+   */
+  GK.abrirSello = async function (b64, huellaHex) {
+    const t = await descifrarCon(deHex(huellaHex), b64);
+    return t && t.startsWith('gk:') ? t.slice(3) : null;
+  };
+
+  /** Flujo SHA-256(k + i) en modo contador, XOR con los datos. */
+  async function descifrarCon(k, b64) {
     try {
-      const enc = new TextEncoder();
-      const k = new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(`gk-explicacion:${GK.normalizar(respuesta)}:${salHex}`)));
       const datos = deB64(b64);
       const flujo = new Uint8Array(Math.ceil((datos.length + 1) / 32) * 32);
       for (let i = 0; i * 32 < flujo.length; i++) {
@@ -58,9 +71,9 @@
         new DataView(bloque.buffer).setUint32(k.length, i);
         flujo.set(new Uint8Array(await crypto.subtle.digest('SHA-256', bloque)), i * 32);
       }
-      return new TextDecoder().decode(datos.map((x, i) => x ^ flujo[i]));
+      return new TextDecoder('utf-8', { fatal: true }).decode(datos.map((x, i) => x ^ flujo[i]));
     } catch (e) { return null; }
-  };
+  }
 
   /** localStorage a prueba de navegadores privados o bloqueados. */
   GK.guardar = function (clave, valor) {
@@ -192,6 +205,73 @@
     const m = Math.floor((s % 3600) / 60);
     const ss = String(s % 60).padStart(2, '0');
     return h > 0 ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${String(m).padStart(2, '0')}:${ss}`;
+  };
+
+  /**
+   * Pruebas por partes (Morse, Pelis…): cada parte es un <section class="parte"> con un .campo y un .parte-marca.
+   * Devuelve { campos, marcar(i, 'ok' | 'no' | null) }. Al escribir en una parte que no está acertada, se le quita
+   * la marca y se llama a alEscribir(i, valor) (para guardar lo escrito en el móvil).
+   */
+  GK.partes = function (contenedor, alEscribir) {
+    const tarjetas = [...contenedor.querySelectorAll('.parte')];
+    const campos = tarjetas.map((t) => t.querySelector('.campo'));
+    const marcar = (i, estado) => {
+      const t = tarjetas[i];
+      t.classList.toggle('acierto', estado === 'ok');
+      t.classList.toggle('fallo', estado === 'no');
+      t.querySelector('.parte-marca').innerHTML = estado === 'ok' ? '<span aria-hidden="true">✓</span> Acertada'
+        : estado === 'no' ? '<span aria-hidden="true">✗</span> Todavía no' : '';
+      if (campos[i]) campos[i].setAttribute('aria-invalid', String(estado === 'no'));
+    };
+    campos.forEach((c, i) => c && c.addEventListener('input', () => {
+      if (!tarjetas[i].classList.contains('acierto')) marcar(i, null);
+      if (alEscribir) alEscribir(i, c.value);
+    }));
+    return { campos, marcar };
+  };
+
+  /**
+   * Formulario de una prueba por partes con sellos (Morse, Pelis, Binario, QR): marca ✓ / ✗ en cada parte, guarda lo
+   * escrito en el móvil y, cuando están todas bien, supera la estación con la unión de los trozos.
+   *   opciones.ctx, opciones.contenedor (con un <form> y <section class="parte"> con su .campo), opciones.sellos (uno
+   *   por parte), opciones.guardado (clave de GK.guardar), opciones.limpiar (texto → lo que se comprueba; por defecto
+   *   el texto tal cual), opciones.extra(textos, trozos) → Promise<mensaje|null> (aviso especial antes del genérico),
+   *   opciones.nombre ('pregunta', 'película'…) y opciones.consejo (qué revisar cuando alguna está mal).
+   */
+  GK.formularioPartes = function (o) {
+    const { ctx, contenedor } = o;
+    const escrito = GK.leer(o.guardado, []);
+    const partes = GK.partes(contenedor, (i, valor) => { escrito[i] = valor; GK.guardar(o.guardado, escrito); ctx.ayuda(''); });
+    partes.campos.forEach((c, i) => { if (escrito[i] && !c.value) c.value = escrito[i]; });
+    const form = contenedor.querySelector('form.partes');
+    const boton = form.querySelector('button[type="submit"]');
+    const limpiar = o.limpiar || ((x) => x);
+    const n = o.sellos.length;
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const textos = partes.campos.map((c) => limpiar(c.value));
+      if (!textos.some((x) => GK.normalizar(x))) return ctx.ayuda('Escribid al menos una respuesta antes de comprobar.', 'info');
+      boton.disabled = true;
+      const textoBoton = boton.textContent;
+      boton.textContent = 'Comprobando…';
+      const trozos = await Promise.all(textos.map((x, i) => ctx.parte(x, o.sellos[i])));
+      trozos.forEach((tr, i) => partes.marcar(i, !GK.normalizar(textos[i]) ? null : tr ? 'ok' : 'no'));
+      const bien = trozos.filter(Boolean).length;
+      const extra = bien < n && o.extra ? await o.extra(textos, trozos) : null;
+      if (bien === n) {
+        if (await ctx.intentar(trozos.join(''))) { GK.borrar(o.guardado); return; }
+        ctx.ayuda('Están todas bien, pero no se ha podido guardar. Avisad a la organización.');
+      } else if (extra) {
+        ctx.ayuda(extra, 'info');
+      } else if (textos.some((x) => !GK.normalizar(x))) {
+        ctx.ayuda(`Lleváis ${bien} de ${n}. Os falta alguna ${o.nombre || 'respuesta'}.`, 'info');
+      } else {
+        ctx.ayuda(`Lleváis ${bien} de ${n}. Revisad las marcadas con ✗${o.consejo ? ': ' + o.consejo : '.'}`);
+      }
+      boton.disabled = false;
+      boton.textContent = textoBoton;
+    });
+    return partes;
   };
 
   GK.html = function (cadena) {

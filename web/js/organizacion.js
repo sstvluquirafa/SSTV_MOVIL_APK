@@ -90,8 +90,8 @@
     };
     for (const e of C.estaciones) {
       const p = e.prueba || {};
-      if (p.tipo === 'qr_escondido' && [p.escondite, p.pista].some((t) => !t || /^\s*ESCRIBE AQU/i.test(t))) {
-        faltan.push(`Falta el escondite de la estación ${e.letra}: escribidlo en torneo.json (escondite y pista).`);
+      if (p.tipo === 'qr_escondido' && [...(p.escondites || [p.escondite]), p.pista].some((t) => !t || /^\s*ESCRIBE AQU/i.test(t))) {
+        faltan.push(`Faltan los escondites de los QR de la estación ${e.letra}: escribidlos en torneo.json (escondites y pista).`);
       }
       if (p.tipo === 'real_o_ia') {
         // Las imágenes que no cargan (la falsa la genera la organización): ver ia-falsa-AQUI.txt

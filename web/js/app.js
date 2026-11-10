@@ -659,6 +659,11 @@
 
     const tipo = (est.prueba && est.prueba.tipo) || 'codigo_estacion';
     const prueba = GK.pruebas.obtener(tipo) || GK.pruebas.obtener('codigo_estacion');
+    // Pruebas de contenido: cada equipo tiene su contenido, su sal y su huella (config → estaciones[].equipos)
+    const propio = (est.equipos && est.equipos[eq.id]) || null;
+    const datosPrueba = propio ? { ...est.prueba, ...propio.prueba, datoCifrado: propio.datoCifrado } : (est.prueba || {});
+    const sal = propio ? propio.sal : est.sal;
+    const huellaClave = propio ? propio.huella : est.huella;
     vista.innerHTML = `
       <section class="pantalla">
         <div id="mensaje-org"></div>
@@ -672,7 +677,7 @@
             </div>
           </div>
         </header>
-        ${htmlObjetivo(prueba, est.prueba)}
+        ${htmlObjetivo(prueba, datosPrueba)}
         <div id="prueba"></div>
         <div id="ayuda-prueba" aria-live="polite"></div>
         <div id="pista"></div>
@@ -684,9 +689,8 @@
     pintarMensaje();
     estacionEnCurso = { id: est.id, equipo: eq.id };
     const limpiezas = [];
-    const datosPrueba = est.prueba || {};
     const ctx = {
-      estacion: { id: est.id, letra: est.letra, nombre: est.nombre, prueba: datosPrueba, sal: est.sal },
+      estacion: { id: est.id, letra: est.letra, nombre: est.nombre, prueba: datosPrueba, sal },
       equipo: { id: eq.id, nombre: GK.equipo(eq.id).nombre },
       /** ctx.ayuda(texto, tipo?): aviso bajo la prueba. tipo: 'error' (por defecto), 'info' u 'ok'. */
       ayuda(texto, tipo) {
@@ -700,9 +704,9 @@
        */
       async intentar(respuesta, opciones) {
         if (!GK.normalizar(respuesta)) return false;
-        const h = await GK.huella(respuesta, est.sal);
-        if (h !== est.huella && !(datosPrueba.huellasAlternativas || []).includes(h)) return false;
-        await guardarDato(eq.id, est.id, datosPrueba, respuesta, est.sal);
+        const h = await GK.huella(respuesta, sal);
+        if (h !== huellaClave && !(datosPrueba.huellasAlternativas || []).includes(h)) return false;
+        await guardarDato(eq.id, est.id, datosPrueba, respuesta, sal);
         completar(eq.id, est.id, token, GK.normalizar(respuesta), opciones && opciones.quedarse);
         return true;
       },
@@ -710,7 +714,21 @@
       continuar() { ir('#/superada/' + est.id); },
       /** ¿La respuesta coincide con otra huella de la prueba (misma sal que la estación)? Sin superar nada. */
       async coincide(respuesta, huella) {
-        return !!GK.normalizar(respuesta) && (await GK.huella(respuesta, est.sal)) === huella;
+        return !!GK.normalizar(respuesta) && (await GK.huella(respuesta, sal)) === huella;
+      },
+      /**
+       * ctx.parte(respuesta, sellos) → Promise<string|null>. Comprueba UNA parte de una prueba por partes: si la
+       * respuesta es válida, devuelve su trozo de la clave (si no, null). La clave del equipo es la unión de los trozos
+       * de todas las partes, en orden: ctx.intentar(trozos.join('')).
+       */
+      async parte(respuesta, sellos) {
+        if (!GK.normalizar(respuesta)) return null;
+        const h = await GK.huella(respuesta, sal);
+        for (const s of sellos || []) {
+          const t = await GK.abrirSello(s, h);
+          if (t) return t;
+        }
+        return null;
       },
       /** ctx.esperar(segundos, boton): espera tras fallo, con cuenta atrás. */
       esperar: crearEsperar($('#ayuda-prueba'), (f) => limpiezas.push(f)),

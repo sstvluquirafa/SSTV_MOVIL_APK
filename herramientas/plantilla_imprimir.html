@@ -50,6 +50,13 @@
   .bombillas .fila-b { display: flex; gap: 7mm; justify-content: center; }
   .bombillas span { width: 22mm; height: 22mm; border-radius: 50%; border: 1.2mm solid var(--marino); background: #f1f5f9; }
   .bombillas span.on { background: radial-gradient(circle at 40% 35%, #fff7d6, #fde047 45%, #f59e0b); }
+  .tabla-morse-cartel { align-self: stretch; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4mm 4mm; margin: 2mm 0 4mm; }
+  .tabla-morse-cartel div { display: flex; align-items: center; gap: 3mm; border: .5mm solid #cbd5e1; border-radius: 3mm; padding: 1.6mm 3mm; }
+  .tabla-morse-cartel b { font-family: Merriweather, serif; font-size: 19pt; width: 9mm; text-align: center; }
+  .tabla-morse-cartel span { font-size: 19pt; font-weight: 700; letter-spacing: .08em; }
+  .escondites { align-self: stretch; display: grid; gap: 4mm; margin: 4mm 0; text-align: left; }
+  .escondites div { border: 1.2mm dashed var(--marino); border-radius: 5mm; padding: 6mm 7mm; font-size: 15pt; font-weight: 700; }
+  .escondites b { color: var(--naranja); margin-right: 3mm; }
   .escondite { align-self: stretch; border: 1.2mm dashed var(--marino); border-radius: 6mm; padding: 14mm 10mm; font-size: 24pt; font-weight: 700; margin: 6mm 0; }
   /* Etiquetas de QR escondido: 6 por hoja, sin pistas de qué son */
   .qr-esc { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 92mm; padding: 8mm; }
@@ -58,6 +65,12 @@
   .qr-esc .qr svg { width: 100%; height: 100%; display: block; }
   .qr-esc p { margin: 0; font-size: 10pt; letter-spacing: .15em; font-weight: 700; }
   .qr-esc small { font-size: 7pt; color: #94a3b8; }
+  .qr-esc .num { font-size: 7pt; color: #94a3b8; letter-spacing: .1em; }
+  /* Solucionario por equipo (hoja de organización) */
+  .monitores table.sol { font-size: 9pt; margin: 2mm 0 5mm; }
+  .monitores table.sol td { padding: 1.2mm 2.5mm; vertical-align: top; }
+  .monitores table.sol td.mono { font-size: 9pt; letter-spacing: .04em; }
+  .monitores h2 { font-size: 13pt; margin: 5mm 0 1mm; }
   .cartel .pie { position: absolute; bottom: 8mm; left: 0; right: 0; font-size: 8pt; color: #64748b; }
 
   /* Tarjetas de equipo: 4 por hoja */
@@ -160,6 +173,10 @@ html += `<section class="hoja cartel cartel-meta">
 
 // Carteles de las pruebas en papel (el contenido sale de torneo.json → prueba.cartel / prueba.escondite)
 // Las pruebas solo de app (Pelis espaciales, Wordle…) no llevan cartel de prueba: solo el cartel normal de estación.
+const TABLA_MORSE = [['A', '.-'], ['B', '-...'], ['C', '-.-.'], ['D', '-..'], ['E', '.'], ['F', '..-.'], ['G', '--.'], ['H', '....'],
+  ['I', '..'], ['J', '.---'], ['K', '-.-'], ['L', '.-..'], ['M', '--'], ['N', '-.'], ['O', '---'], ['P', '.--.'], ['Q', '--.-'], ['R', '.-.'],
+  ['S', '...'], ['T', '-'], ['U', '..-'], ['V', '...-'], ['W', '.--'], ['X', '-..-'], ['Y', '-.--'], ['Z', '--..'],
+  ['0', '-----'], ['1', '.----'], ['2', '..---'], ['3', '...--'], ['4', '....-'], ['5', '.....'], ['6', '-....'], ['7', '--...'], ['8', '---..'], ['9', '----.']];
 const dibujarMorse = (t) => String(t).replace(/\./g, '•').replace(/-/g, '–');
 const cabPrueba = (e, que) => `<div class="cartel-cab"><span class="mono">GRANASAT · PRUEBA · ${que}</span><span class="titulo">${tituloHTML}</span></div>
   <div class="cartel-num">${esc(e.letra)}</div><h1 class="titulo">${esc(e.nombre)}</h1>`;
@@ -167,21 +184,26 @@ for (const e of D.estaciones) {
   const P = e.prueba || {};
   let cuerpo = '';
   if (e.tipo === 'morse') {
+    // Las preguntas están en la app (distintas para cada equipo); el cartel es la tabla para traducirlas
     cuerpo = `${cabPrueba(e, 'MORSE')}
-      <p class="instr">Esta pregunta está en <b>código Morse</b>. Descifradla con la tabla de la app y escribid en la app la <b>respuesta</b> a la pregunta.</p>
-      <div class="morse-cartel mono">${String(P.cartel || '').split('/').map((w) => `<div>${w.trim().split(/\s+/).map((l) => `<span>${esc(dibujarMorse(l))}</span>`).join('')}</div>`).join('')}</div>
-      <p class="leyenda">• = punto (corto) · – = raya (largo) · letras separadas por espacios · cada línea es una palabra</p>`;
+      <p class="instr">Las preguntas están en la app, en <b>código Morse</b>. Traducidlas con esta tabla y escribid en la app la <b>respuesta</b> de cada una.</p>
+      <div class="tabla-morse-cartel mono">${TABLA_MORSE.map(([l, c]) => `<div><b>${l}</b><span>${esc(dibujarMorse(c))}</span></div>`).join('')}</div>
+      <p class="leyenda">• = punto (corto) · – = raya (largo) · en la app, las palabras van separadas por «/»</p>`;
   } else if (e.tipo === 'sstv_mano') {
     const filas = P.cartel || [];
     cuerpo = `${cabPrueba(e, 'SSTV A MANO')}
       <p class="instr">Una imagen SSTV viaja <b>línea a línea</b>. En la app, pintad en cada fila las casillas que dice esta tabla (de arriba abajo). <b>¿Qué aparece?</b></p>
       <table class="coord"><tbody>${filas.map((f, i) => `<tr><td>Fila ${i + 1}</td><td class="mono">${f && f.length ? f.join(', ') : '— (ninguna)'}</td></tr>`).join('')}</tbody></table>
       <p class="leyenda">La cuadrícula tiene ${esc(P.columnas || 11)} casillas de ancho y ${esc(P.filas || filas.length)} filas.</p>`;
-  } else if (e.tipo === 'binario') {
+  } else if (e.tipo === 'binario' && (P.cartel || []).length) {
     cuerpo = `${cabPrueba(e, 'BINARIO')}
       <p class="instr">Cada fila es un <b>número en binario</b>: bombilla encendida = 1, apagada = 0. Cada número es una letra: <b>A=1, B=2 … Z=26</b>. ¿Qué palabra forman?</p>
       <div class="bombillas">${(P.cartel || []).map((f) => `<div class="fila-b">${String(f).split('').map((b) => `<span class="${b === '1' ? 'on' : ''}"></span>`).join('')}</div>`).join('')}</div>
       <p class="leyenda">Escribid la palabra en la app.</p>`;
+  } else if (e.tipo === 'qr_escondido' && (P.escondites || []).length) {
+    cuerpo = `${cabPrueba(e, 'QR ESCONDIDOS')}
+      <p class="instr">Cerca de aquí hay <b>${P.escondites.length} QR escondidos</b>. Escaneadlos <b>desde la app</b>: cada uno os da una palabra. Repartíos la búsqueda.</p>
+      <div class="escondites">${P.escondites.map((x, i) => `<div><b>D${i + 1}</b>${esc(x)}</div>`).join('')}</div>`;
   } else if (e.tipo === 'qr_escondido') {
     cuerpo = `${cabPrueba(e, 'QR ESCONDIDO')}
       <p class="instr">Cerca de aquí hay un <b>QR escondido</b>. Encontradlo y escaneadlo <b>desde la app</b> (botón «Escanear QR escondido»).</p>
@@ -189,10 +211,15 @@ for (const e of D.estaciones) {
   } else continue;
   html += `<section class="hoja cartel cartel-prueba">${cuerpo}<div class="pie">${esc(D.lugar)}</div></section>`;
 }
-const conQR = D.estaciones.filter((e) => e.tipo === 'qr_escondido' && e.qr);
-for (let i = 0; i < conQR.length; i += 6) {
+// Etiquetas de los QR escondidos: cada QR con su número pequeño (para saber dónde va) y un juego de repuesto
+const etiquetasQR = [];
+for (const e of D.estaciones.filter((x) => x.tipo === 'qr_escondido')) {
+  const lista = e.qrs && e.qrs.length ? e.qrs : (e.qr ? [e.qr] : []);
+  for (const rep of ['', ' · repuesto']) lista.forEach((t, i) => etiquetasQR.push({ texto: t, num: `${e.letra}${lista.length > 1 ? i + 1 : ''}${rep}` }));
+}
+for (let i = 0; i < etiquetasQR.length; i += 6) {
   html += '<section class="hoja hoja-qr"><div class="qr-esc">';
-  for (const e of conQR.slice(i, i + 6)) html += `<div><div class="qr">${qr(e.qr)}</div><p>GRANASAT · GYMKHANA</p></div>`;
+  for (const q of etiquetasQR.slice(i, i + 6)) html += `<div><div class="qr">${qr(q.texto)}</div><p>GRANASAT · GYMKHANA</p><span class="num">${esc(q.num)}</span></div>`;
   html += '</div></section>';
 }
 
@@ -234,7 +261,7 @@ html += `<section class="hoja monitores">
       o lleve demasiado rato sin completar una estación.</div>
   </div>
   <table><thead><tr><th>ESTACIÓN</th><th>NOMBRE</th><th>PRUEBA</th><th>CÓDIGO / CLAVE</th><th>LETRA</th></tr></thead><tbody>
-  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${e.peliculas && e.peliculas.length ? e.peliculas.map((p, i) => `${i + 1}. ${esc(p[0])}${p.length > 1 ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(p.slice(1).join(', '))}</small>` : ''}`).join('<br>') : `${esc(e.clave)}${e.alternativas && e.alternativas.length ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(e.alternativas.join(', '))}</small>` : ''}`}</td><td class="mono">${esc(e.letraPalabra)}</td></tr>`).join('')}
+  ${D.estaciones.map((e) => `<tr><td><b>${esc(e.letra)}</b></td><td>${esc(e.nombre)}</td><td>${esc(e.tipo)}</td><td class="mono">${Object.keys(e.porEquipo || {}).length ? '<small style="letter-spacing:0;font-size:9pt">una por equipo · ver el solucionario</small>' : e.peliculas && e.peliculas.length ? e.peliculas.map((p, i) => `${i + 1}. ${esc(p[0])}${p.length > 1 ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(p.slice(1).join(', '))}</small>` : ''}`).join('<br>') : `${esc(e.clave)}${e.alternativas && e.alternativas.length ? `<br><small style="letter-spacing:0;font-size:8pt">también: ${esc(e.alternativas.join(', '))}</small>` : ''}`}</td><td class="mono">${esc(e.letraPalabra)}</td></tr>`).join('')}
   <tr><td><b>★</b></td><td>Última transmisión</td><td>palabra final</td><td class="mono">${esc(D.final.clave)}</td><td></td></tr>
   <tr><td><b>🏁</b></td><td>${esc(D.meta.nombre)}</td><td>QR de la meta</td><td class="mono" style="font-size:9pt;letter-spacing:0">${esc(D.meta.token)}</td><td></td></tr>
   </tbody></table>
@@ -243,6 +270,16 @@ html += `<section class="hoja monitores">
   </tbody></table>
   <p style="font-size:9pt;color:#475569">Enlace de la app: ${esc(D.base)} · Ranking: ${esc(D.base)}ranking.html · Panel: ${esc(D.base)}organizacion.html</p>
 </section>
+${D.estaciones.filter((e) => Object.keys(e.porEquipo || {}).length).map((e) => `
+<section class="hoja monitores">
+  <h1 class="titulo">Solucionario · <span class="ambar">estación ${esc(e.letra)}</span></h1>
+  <p>${esc(e.tipo)} · el contenido y la clave cambian para cada equipo. La «clave» es lo que comprueba el servidor; las respuestas de cada parte, lo que escriben o eligen.</p>
+  <table class="sol"><thead><tr><th>EQUIPO</th><th>RESPUESTAS</th><th>CLAVE</th></tr></thead><tbody>
+  ${Object.entries(e.porEquipo).map(([k, v]) => `<tr><td><b>${esc((D.equipos.find((x) => String(x.id) === k) || {}).nombre || 'Equipo ' + k)}</b></td>
+    <td>${(v.partes || []).map((p) => `${esc(p.pregunta)} → <b>${esc((p.respuestas || [])[0] || '')}</b>${(p.respuestas || []).length > 1 ? ` <small>(también ${esc(p.respuestas.slice(1).join(', '))})</small>` : ''}`).join('<br>')}</td>
+    <td class="mono">${esc(v.clave)}</td></tr>`).join('')}
+  </tbody></table>
+</section>`).join('')}
 <section class="hoja monitores">
   <h1 class="titulo">Las <span class="ambar">rutas</span></h1>
   <p>Se reparten por orden de llegada: la ruta 1 (la más corta) para el primer equipo que se une con el mapa montado, la 2 para el segundo…

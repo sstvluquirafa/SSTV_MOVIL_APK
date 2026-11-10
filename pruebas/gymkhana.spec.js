@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const A = require('./ayudas');
 const { C, SEC } = A;
 
-const OPCIONES = ['geoguessr', 'real_o_ia', 'bulo_verdad'];
+const OPCIONES = ['geoguessr', 'bulo_verdad'];
 
 /* ---------- Cada prueba: falla con otra respuesta, se supera con la suya y muestra la pista a los 60 s ---------- */
 for (const e of C.estaciones) {
@@ -50,11 +50,13 @@ test('Pelis espaciales: valen las variantes (otro idioma, artículo, mayúsculas
   await A.empezar(page);
   await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
   await A.abrirEstacion(page, e.id);
-  // 1.ª: «El …» + mayúsculas · 2.ª: su segunda variante · 3.ª: «The …» delante de la variante sin artículo
-  const [t1] = A.titulosPelis(0);
-  const [, t2, t3] = A.titulosPelis(1);
+  // 1.ª: «El …» + mayúsculas · 2.ª: sin tildes ni mayúsculas · 3.ª: con signos alrededor · resto: su 2.ª variante
+  const principales = A.titulosPelis(0);
+  const variantes = A.titulosPelis(1);
   const quitarTildes = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
-  await A.responder(page, 'pelis', ['El ' + t1.toUpperCase(), quitarTildes(t2).toLowerCase(), '  ' + t3 + '!']);
+  const respuestas = variantes.map((v, i) => (i === 0 ? 'El ' + principales[0].toUpperCase()
+    : i === 1 ? quitarTildes(v).toLowerCase() : i === 2 ? '  ' + v + '!' : v));
+  await A.responder(page, 'pelis', respuestas);
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
@@ -65,10 +67,11 @@ test('Pelis espaciales: un título equivocado se marca y no supera la estación'
   await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
   await A.abrirEstacion(page, e.id);
   await A.responder(page, 'pelis', A.respuestaMala('pelis'));
-  await expect(page.locator('.peli[data-i="1"]')).toHaveClass(/fallo/);
-  await expect(page.locator('.peli[data-i="0"]')).toHaveClass(/acierto/);
-  await expect(page.locator('.peli[data-i="2"]')).toHaveClass(/acierto/);
-  await expect(page.locator('#ayuda-prueba')).toContainText('Lleváis 2 de 3');
+  const n = A.titulosPelis().length;
+  await expect(page.locator('.parte[data-i="1"]')).toHaveClass(/fallo/);
+  await expect(page.locator('.parte[data-i="0"]')).toHaveClass(/acierto/);
+  await expect(page.locator('.parte.acierto')).toHaveCount(n - 1);
+  await expect(page.locator('#ayuda-prueba')).toContainText(`Lleváis ${n - 1} de ${n}`);
   await expect(page).toHaveURL(new RegExp(`#/e/${e.id}/`));
   // Corrigen solo la que falla y la estación se supera
   await page.fill('#peli-1', A.titulosPelis(0)[1]);
@@ -76,16 +79,130 @@ test('Pelis espaciales: un título equivocado se marca y no supera la estación'
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
-test('Morse: si escriben la pregunta, se les dice que es la pregunta', async ({ page }) => {
-  const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
-  test.skip(!e, 'Sin Morse');
-  const pregunta = require('child_process').execFileSync('python', ['-c',
-    `import sys; sys.path.insert(0, '../herramientas'); import generar_torneo as g; print(g.descifrar_morse(sys.argv[1]))`, e.prueba.cartel]).toString().trim();
+test('QR escondido: leer un QR da la palabra de ESE equipo y la apunta en su casilla', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'qr_escondido');
+  test.skip(!e || !e.equipos, 'Sin QR por equipo');
+  const qrs = SEC.estaciones[String(e.id)].qrs;
+  const palabras = A.respuestasPartes(e.id);
   await A.empezar(page);
   await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
   await A.abrirEstacion(page, e.id);
-  await A.responder(page, 'morse', pregunta);
+  await page.locator('.plegable-simple summary').click();
+  // Un texto cualquiera no es un QR escondido
+  await page.fill('#texto-qr', 'GK-QR-FALSO-1');
+  await page.locator('#qr-manual button').click();
+  await expect(page.locator('#ayuda-prueba')).toContainText('no es uno de los QR');
+  // El QR D2 da la 2.ª palabra del equipo 1 y la escribe en su casilla
+  await page.fill('#texto-qr', qrs[1]);
+  await page.locator('#qr-manual button').click();
+  await expect(page.locator('#ayuda-prueba')).toContainText('QR D2');
+  await expect(page.locator('#resp-qr-1')).toHaveValue(new RegExp(palabras[1], 'i'));
+  await expect(page.locator('#qr-cuenta')).toContainText('1 de 3');
+  // Con las 3 palabras se supera
+  await A.responder(page, 'qr_escondido', palabras);
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+});
+
+/** Toca un punto (x, y) de un SVG en sus coordenadas internas (viewBox). */
+async function tocarSvg(page, selector, x, y) {
+  const p = await page.evaluate(({ selector, x, y }) => {
+    const svg = document.querySelector(selector);
+    svg.scrollIntoView({ block: 'center' });
+    const pt = svg.createSVGPoint(); pt.x = x; pt.y = y;
+    const s = pt.matrixTransform(svg.getScreenCTM());
+    return { x: s.x, y: s.y };
+  }, { selector, x, y });
+  await page.mouse.click(p.x, p.y);
+}
+
+test('Busca las diferencias: tocar las 3 de una zona da su letra; tocar donde no hay nada bloquea 3 s', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'diferencias');
+  test.skip(!e, 'Sin Busca las diferencias');
+  const P = e.equipos['1'].prueba;
+  const letras = A.respuestasPartes(e.id);
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.sinScrollHorizontal(page);
+  await page.locator('.dif-zona[data-z="0"]').click();
+  // Un toque en un sitio sin diferencias (lejos de todas): bloqueo con cuenta atrás
+  let vacio = null;
+  for (let x = 8; x < 200 && !vacio; x += 6) for (let y = 8; y < 150 && !vacio; y += 6) {
+    if (P.diferencias.every((d) => Math.hypot(d.x - x, d.y - y) > 40 && (d.x2 == null || Math.hypot(d.x2 - x, d.y2 - y) > 40))) vacio = [x, y];
+  }
+  await tocarSvg(page, '#dif-recibida', ...vacio);
+  await expect(page.locator('#dif-bloqueo')).toContainText('Ahí no hay ninguna diferencia');
+  await expect(page.locator('#dif-bloqueo')).toBeHidden({ timeout: 6000 });
+  // Las 3 diferencias de la zona 1
+  for (const d of P.diferencias.filter((x) => x.id[0] === '1')) await tocarSvg(page, '#dif-recibida', d.x, d.y);
+  await expect(page.locator('.dif-marca')).toHaveCount(3);
+  await expect(page.locator('#dif-z0')).toHaveText(letras[0].toUpperCase());
+  // Con la clave del equipo se supera
+  await A.responder(page, 'diferencias', A.clave(e.id));
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+});
+
+test('Imagen SSTV: resolver un cuadrante tocando piezas da su letra', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'sstv_puzle');
+  test.skip(!e, 'Sin Imagen SSTV');
+  const Q = e.equipos['1'].prueba.cuadrantes[0];
+  const letras = A.respuestasPartes(e.id);
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.sinScrollHorizontal(page);
+  await expect(page.locator('#sstv-letra-0')).toHaveText('');
+  // Como lo haría un equipo: para cada hueco, traer su pieza (dos toques) y girarla (tocar la elegida)
+  const piezas = Q.inicio.map((x) => [...x]);
+  const tocar = (h) => page.locator(`.sstv-pieza[data-q="0"][data-h="${h}"]`).click();
+  for (let h = 0; h < 9; h++) {
+    const donde = piezas.findIndex((x) => x[0] === h);
+    if (donde !== h) {
+      await tocar(donde); await tocar(h);
+      [piezas[h], piezas[donde]] = [piezas[donde], piezas[h]];
+    }
+    if (piezas[h][1] !== 0 && !(await page.locator('#sstv-letra-0').innerText())) {
+      await tocar(h);
+      while (piezas[h][1] !== 0) { await tocar(h); piezas[h][1] = (piezas[h][1] + 1) % 4; if (await page.locator('#sstv-letra-0').innerText()) break; }
+      // deseleccionar (elegir otra pieza de otro cuadrante no cambia nada)
+      if (!(await page.locator('#sstv-letra-0').innerText())) await page.locator('.sstv-pieza[data-q="1"][data-h="0"]').click();
+    }
+  }
+  await expect(page.locator('#sstv-letra-0')).toHaveText(letras[0].toUpperCase());
+  await A.responder(page, 'sstv_puzle', A.clave(e.id));
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+});
+
+test('Morse: si escriben la pregunta, se les dice que es la pregunta', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
+  test.skip(!e, 'Sin Morse');
+  const partes = A.secretoEquipo(e.id).partes;
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.responder(page, 'morse', [partes[0].pregunta.toLowerCase(), '', '']);
   await expect(page.locator('#ayuda-prueba')).toContainText('eso es la pregunta');
+});
+
+test('Morse: cada equipo tiene sus preguntas y su clave; la de otro equipo no vale', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
+  test.skip(!e || !e.equipos, 'Morse sin contenido por equipo');
+  // Contenido distinto: no todos los equipos tienen las mismas tres preguntas
+  const juegos = new Set(Object.values(e.equipos).map((q) => q.prueba.preguntas.map((p) => p.morse).join('|')));
+  expect(juegos.size).toBeGreaterThan(1);
+  expect(A.clave(e.id, 1)).not.toBe(A.clave(e.id, 2));
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  // Se marca cada parte; las respuestas del equipo 2 no abren las preguntas del equipo 1 (salvo que coincidan)
+  const mias = A.respuestasPartes(e.id, 1);
+  const otras = A.respuestasPartes(e.id, 2).map((r, i) => (r === mias[i] ? 'respuestamala' : r));
+  await A.responder(page, 'morse', otras);
+  await expect(page.locator('.parte.acierto')).toHaveCount(otras.filter((r, i) => r !== 'respuestamala' && r === mias[i]).length);
+  await expect(page).toHaveURL(new RegExp(`#/e/${e.id}/`));
+  // Con las suyas (y una variante: «7» por «siete», mayúsculas…) se supera
+  await A.responder(page, 'morse', A.respuestasPartes(e.id, 1, 1).map((r) => r.toUpperCase()));
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
 /* ---------- Espera de 15 s en las pruebas de opciones ---------- */
