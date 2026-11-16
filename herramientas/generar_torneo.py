@@ -810,6 +810,47 @@ def generar_mapas(torneo):
 
 
 # ---------------------------------------------------------------------------------------------
+# Colores de estación (torneo.json → estaciones[].color) con contraste WCAG garantizado
+# ---------------------------------------------------------------------------------------------
+BANDA = ["#E9E9E2", "#F2CF4A", "#59D2D9", "#62CF83", "#CF63CC", "#E45B55", "#5670E0", "#FF9A3C", "#9B7BFF", "#B6E35A"]
+TEXTO_OSCURO, TEXTO_CLARO = "#0A1128", "#FFFFFF"
+SUPERFICIE = "#121A35"  # tarjetas de la app (el fondo es aún más oscuro)
+
+
+def _rgb(h):
+    h = h.lstrip("#")
+    return [int(h[i:i + 2], 16) for i in (0, 2, 4)]
+
+
+def luminancia(h):
+    def canal(c):
+        c /= 255
+        return c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = (canal(c) for c in _rgb(h))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def contraste(a, b):
+    la, lb = sorted((luminancia(a), luminancia(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+def colores_estacion(color):
+    """Color de la estación + texto que va ENCIMA (oscuro o claro, ≥ 4,5:1) + versión para
+    usarlo como texto o borde SOBRE las tarjetas oscuras (se aclara hacia el blanco hasta llegar a 4,5:1)."""
+    color = color.upper()
+    # Por orden de preferencia: azul marino, blanco y, si ninguno llega (el azul de la G), negro puro
+    texto = next((t for t in (TEXTO_OSCURO, TEXTO_CLARO, "#000000") if contraste(color, t) >= 4.5), None)         or max((TEXTO_OSCURO, TEXTO_CLARO, "#000000"), key=lambda t: contraste(color, t))
+    if contraste(color, texto) < 4.5:
+        print(f"  · OJO: el color {color} no llega a 4,5:1 ni con texto oscuro ni claro ({contraste(color, texto):.2f}).")
+    claro, t = color, 0.0
+    while contraste(claro, SUPERFICIE) < 4.5 and t < 1:
+        t += 0.05
+        claro = "#" + "".join(f"{round(c + (255 - c) * t):02X}" for c in _rgb(color))
+    return {"color": color, "colorTexto": texto, "colorClaro": claro}
+
+
+# ---------------------------------------------------------------------------------------------
 def colocar_imagen_falsa(est, sec):
     """«¿Real o IA?»: la organización deja la foto hecha con IA como web/assets/img/pruebas/ia-falsa.jpg (no se sube a
     GitHub) y aquí se copia con el nombre neutro de su posición (el «src» de la imagen cuya letra es la clave), para
@@ -995,6 +1036,7 @@ def main():
         "rutas": [{"id": i + 1, "orden": r, "metros": metros[i]} for i, r in enumerate(rutas)],
         "estaciones": [
             {"id": e["id"], "letra": e["letra"], "nombre": e.get("nombre", f"Estación {e['letra']}"), "x": e["x"], "y": e["y"],
+             **colores_estacion(e.get("color") or BANDA[(e["id"] - 1) % len(BANDA)]),
              "prueba": prueba_publica(e, sec["estaciones"][str(e["id"])]),
              "letraPalabra": letras_palabra[str(e["id"])],
              "token": sha256(sec["estaciones"][str(e["id"])]["token"]),

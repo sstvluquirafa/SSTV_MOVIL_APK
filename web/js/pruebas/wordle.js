@@ -59,7 +59,7 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <p class="texto-2 mono w-ronda" id="w-ronda"></p>
+            <p class="w-ronda" id="w-ronda"></p>
             <div class="w-tablero" id="w-tablero" role="grid" aria-label="Tablero"></div>
             <p class="w-leyenda"><span><span class="w-ej ok">A</span> en su sitio</span><span><span class="w-ej casi">A</span> en otro sitio</span><span><span class="w-ej no">A</span> no está</span></p>
             <p class="w-msg" id="w-msg" aria-live="polite"></p>
@@ -98,7 +98,8 @@
           const c = estado.teclado[b.dataset.k];
           if (c) b.classList.add(c);
         });
-        contenedor.querySelector('#w-ronda').textContent = `Palabra ${estado.i + 1} de ${palabras.length} · ${estado.ronda > 1 ? `ronda ${estado.ronda} · ` : ''}intento ${Math.min(estado.intentos.length + 1, INTENTOS)} de ${INTENTOS}`;
+        contenedor.querySelector('#w-ronda').innerHTML = GK.puntos(estado.i, palabras.length, 'Palabra',
+          `intento ${Math.min(estado.intentos.length + 1, INTENTOS)} de ${INTENTOS}`);
       }
 
       async function enviar() {

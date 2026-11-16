@@ -37,11 +37,13 @@
             <div id="qr-visor"></div>
             <button class="boton boton-ancho boton-grande" type="button" id="qr-escanear">${GK.icono('qr')} Escanear un QR escondido</button>
             <button class="boton-sec boton-ancho oculto" type="button" id="qr-parar">Cancelar</button>
-            <form class="partes" autocomplete="off" novalidate>
+            <form class="partes partes-balizas" autocomplete="off" novalidate>
               ${qrs.map((q, i) => `
-                <section class="parte" data-i="${i}">
+                <section class="parte baliza${escaneadas[i] ? ' encontrada' : ''}" data-i="${i}">
+                  <i class="baliza-luz" aria-hidden="true"></i>
                   <div class="parte-cab">
                     <label class="parte-titulo" for="resp-qr-${i}">QR D${i + 1}</label>
+                    <span class="baliza-estado" aria-hidden="true"><span class="be-buscando">Buscando</span><span class="be-encontrada">Encontrada</span></span>
                     <span class="parte-marca" aria-live="polite"></span>
                   </div>
                   <p class="qr-escondite">${GK.html(escondites[i] || 'Buscadlo cerca del cartel.')}</p>
@@ -87,6 +89,7 @@
           const visto = contenedor.querySelector(`#qr-visto-${i}`);
           visto.querySelector('b').textContent = palabra;
           visto.classList.remove('oculto');
+          visto.closest('.baliza').classList.add('encontrada');
           if (!partes.campos[i].value) {
             partes.campos[i].value = palabra;
             partes.campos[i].dispatchEvent(new Event('input'));

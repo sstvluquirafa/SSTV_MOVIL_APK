@@ -27,7 +27,6 @@
                 <div class="visor-sat">
                   <img src="${GK.html(im.src)}" alt="Foto ${i + 1} de ${imagenes.length}, tomada desde el espacio" loading="lazy">
                   <i class="esq esq-1"></i><i class="esq esq-2"></i><i class="esq esq-3"></i><i class="esq esq-4"></i>
-                  <span class="visor-dato visor-pase mono" aria-hidden="true">PASE ${i + 1}/${imagenes.length}</span>
                   <span class="visor-dato visor-tel mono" aria-hidden="true">${telemetria(i)}</span>
                 </div>
                 ${im.credito ? `<figcaption class="credito">${GK.html(im.credito)}</figcaption>` : ''}

@@ -4,6 +4,37 @@
   const GK = (window.GK = window.GK || {});
   const C = window.GK_CONFIG;
 
+  /*
+   * Color de cada estación (torneo.json → estaciones[].color; el generador añade colorTexto y colorClaro con contraste
+   * 4,5:1). Se vuelcan una sola vez como variables CSS: cualquier elemento con data-est="<id>" tiene --est (el color),
+   * --est-texto (texto encima) y --est-claro (para texto o bordes sobre las tarjetas oscuras). --banda es la banda SSTV.
+   */
+  (function coloresEstaciones() {
+    if (!C || !C.estaciones || !document.head) return;
+    const reglas = C.estaciones.filter((e) => e.color).map((e) =>
+      `[data-est="${e.id}"]{--est:${e.color};--est-texto:${e.colorTexto || '#0a1128'};--est-claro:${e.colorClaro || e.color}}`);
+    const cols = C.estaciones.filter((e) => e.color).map((e) => e.color);
+    if (cols.length) {
+      const paso = 100 / cols.length;
+      reglas.push(`:root{--banda:linear-gradient(90deg,${cols.map((c, i) => `${c} ${(i * paso).toFixed(2)}% ${((i + 1) * paso).toFixed(2)}%`).join(',')})}`);
+    }
+    const el = document.createElement('style');
+    el.id = 'colores-estaciones';
+    el.textContent = reglas.join(' ');
+    document.head.appendChild(el);
+  })();
+  /**
+   * Banda SSTV: una franja por estación, con su color. Si se da idEst, esa franja se destaca (más ancha) y las demás se
+   * atenúan.
+   */
+  GK.banda = function (idEst, clase = 'senal-banda') {
+    const est = (C && C.estaciones) || [];
+    const propia = (e) => idEst != null && e.id === Number(idEst);
+    const cols = est.map((e) => (propia(e) ? '2.6fr' : '1fr')).join(' ');
+    return `<div class="${clase}${idEst != null ? ' con-propia' : ''}" aria-hidden="true" style="grid-template-columns:${cols}">${est
+      .map((e) => `<i class="${propia(e) ? 'propia' : ''}" style="background:${e.color || '#888'}"></i>`).join('')}</div>`;
+  };
+
   /** Minúsculas, sin tildes, solo letras y cifras (igual que normalizar() en generar_torneo.py). */
   GK.normalizar = function (texto) {
     return String(texto ?? '')
@@ -272,6 +303,18 @@
       boton.textContent = textoBoton;
     });
     return partes;
+  };
+
+  /**
+   * Indicador de progreso: puntos del color de la estación (● ● ○) y, como mucho, una palabra («Ronda 2»).
+   * actual empieza en 0. El resto («de 3», y extra si se da) solo lo leen los lectores de pantalla.
+   */
+  GK.puntos = function (actual, total, palabra = 'Paso', extra = '') {
+    const p = [];
+    for (let i = 0; i < total; i++) p.push(`<i class="${i < actual ? 'hecho' : i === actual ? 'actual' : ''}"></i>`);
+    return `<span class="progreso"><span class="progreso-palabra">${GK.html(palabra)} ${actual + 1}`
+      + `<span class="solo-lector"> de ${total}${extra ? ', ' + GK.html(extra) : ''}</span></span>`
+      + `<span class="progreso-puntos" aria-hidden="true">${p.join('')}</span></span>`;
   };
 
   GK.html = function (cadena) {

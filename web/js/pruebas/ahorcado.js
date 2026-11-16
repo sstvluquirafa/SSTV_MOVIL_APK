@@ -135,7 +135,7 @@
           <div class="reto-cuerpo ah" id="ah-juego">
             <div class="ah-cab">
               <span class="ah-categoria" id="ah-categoria"></span>
-              <span class="ah-ronda mono" id="ah-ronda"></span>
+              <span class="ah-ronda" id="ah-ronda"></span>
             </div>
             <div class="ah-escena" id="ah-escena"></div>
             <div class="ah-palabra" id="ah-palabra" aria-live="polite"></div>
@@ -185,7 +185,7 @@
         juego.dataset.ronda = String(v.ronda);
         juego.dataset.palabra = String(v.palabra);
         elCategoria.textContent = rondas[v.ronda].categoria;
-        elRonda.textContent = `Ronda ${v.ronda + 1} de ${rondas.length}`;
+        elRonda.innerHTML = GK.puntos(v.ronda, rondas.length, 'Ronda');
         const animo = v.fin === 'bien' || v.fin === 'todo' ? 'fiesta' : v.fin === 'sin' ? 'sin'
           : quedan <= 2 ? 'agobiado' : quedan <= 4 ? 'nervioso' : 'tranquilo';
         escena.className = `ah-escena animo-${animo}`;

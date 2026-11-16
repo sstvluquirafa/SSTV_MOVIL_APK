@@ -35,12 +35,11 @@
         contenedor.innerHTML = `
           <div class="reto">
             <div class="reto-cuerpo">
-              ${rondas.length > 1 ? `<p class="escotilla-paso mono">Ronda ${r + 1} de ${rondas.length}</p>` : ''}
+              ${rondas.length > 1 ? `<p class="escotilla-paso">${GK.puntos(r, rondas.length, 'Ronda')}</p>` : ''}
               <ol class="bulos">
                 ${afirmaciones.map((a, i) => `
-                  <li class="bulo" data-i="${i}">
+                  <li class="bulo titular" data-i="${i}">
                     <p>${GK.html(a)}</p>
-                    <p class="parte-cab" aria-hidden="true">${GK.icono('satelite')} Parte ${r * afirmaciones.length + i + 1} de ${rondas.reduce((s, x) => s + (x.afirmaciones || []).length, 0)} · noticias de la misión</p>
                     <div class="bulo-botones" role="radiogroup" aria-label="Noticia ${i + 1}">
                       <button type="button" role="radio" aria-checked="false" class="bulo-b b-bulo" data-v="b">Bulo</button>
                       <button type="button" role="radio" aria-checked="false" class="bulo-b b-verdad" data-v="v">Verdad</button>

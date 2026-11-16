@@ -36,9 +36,10 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <form class="partes" autocomplete="off" novalidate>
+            <form class="partes partes-entradas" autocomplete="off" novalidate>
               ${pelis.map((p, i) => `
-                <section class="parte" data-i="${i}">
+                <section class="parte entrada" data-i="${i}">
+                  <div class="entrada-talon" aria-hidden="true"><b>${i + 1}</b></div>
                   <div class="parte-cab">
                     <label class="parte-titulo" for="peli-${i}">Película ${i + 1}</label>
                     <span class="parte-marca" aria-live="polite"></span>

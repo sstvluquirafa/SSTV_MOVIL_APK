@@ -50,7 +50,7 @@
       const i = enRuta.has(e.id) ? enRuta.get(e.id) : -1;
       const estado = i < 0 ? 'neutra' : i < hechas ? 'hecha' : i === hechas ? 'siguiente' : 'pendiente';
       const r = estado === 'siguiente' ? R * 1.25 : R;
-      marcas += `<g class="m m-${estado}" data-x="${e.x}" data-y="${e.y}" style="transform-origin:${e.x}px ${e.y}px">
+      marcas += `<g class="m m-${estado}" data-est="${e.id}" data-x="${e.x}" data-y="${e.y}" style="transform-origin:${e.x}px ${e.y}px">
         ${estado === 'siguiente' ? `<circle class="m-pulso" cx="${e.x}" cy="${e.y}" r="${r}"/>` : ''}
         <circle class="m-fondo" cx="${e.x}" cy="${e.y}" r="${r}"/>
         <path class="m-estrella" d="${estrella(e.x, e.y, r * 0.92)}"/>

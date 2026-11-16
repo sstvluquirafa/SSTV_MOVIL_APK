@@ -58,9 +58,9 @@
               </div>
               <p class="radio-nota">La misma que en el cartel. Tocad una letra para sentir su ritmo.</p>
             </details>
-            <form class="partes" autocomplete="off" novalidate>
+            <form class="partes partes-telegrama" autocomplete="off" novalidate>
               ${preguntas.map((q, i) => `
-                <section class="parte" data-i="${i}">
+                <section class="parte telegrama" data-i="${i}">
                   <div class="parte-cab">
                     <label class="parte-titulo" for="resp-morse-${i}">Pregunta ${i + 1}</label>
                     <span class="parte-marca" aria-live="polite"></span>

@@ -36,7 +36,7 @@
         contenedor.innerHTML = `
           <div class="reto">
             <div class="reto-cuerpo">
-              ${escotillas.length > 1 ? `<p class="escotilla-paso mono">Escotilla ${k + 1} de ${escotillas.length} · ${n} cifras</p>` : ''}
+              ${escotillas.length > 1 ? `<p class="escotilla-paso">${GK.puntos(k, escotillas.length, 'Escotilla', `de ${n} cifras`)}</p>` : ''}
               <p class="nota-prueba">El código tiene ${n} cifras distintas: ninguna se repite.</p>
               <ul class="caja-pistas">
                 ${(E.pistas || []).map((p) => `<li><span class="caja-cod mono" aria-label="Código ${GK.html(String(p.codigo).split('').join(' '))}">${String(p.codigo).split('').map((d) => `<i>${GK.html(d)}</i>`).join('')}</span><span>${GK.html(p.texto)}</span></li>`).join('')}

@@ -255,6 +255,9 @@ window.GK_CONFIG = {
       "nombre": "Estación A",
       "x": 765,
       "y": 996,
+      "color": "#E9E9E2",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#E9E9E2",
       "prueba": {
         "tipo": "morse",
         "_ayuda": "Contenido por equipo: 3 preguntas del banco de privado/bancos.json → morse (las elige el generador).",
@@ -595,6 +598,9 @@ window.GK_CONFIG = {
       "nombre": "Estación B",
       "x": 1352,
       "y": 925,
+      "color": "#F2CF4A",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#F2CF4A",
       "prueba": {
         "tipo": "pelis",
         "_ayuda": "Las mismas 6 películas para todos los equipos (privado/bancos.json → pelis → lista_fija), con la misma clave.",
@@ -1522,6 +1528,9 @@ window.GK_CONFIG = {
       "nombre": "Estación C",
       "x": 1566,
       "y": 943,
+      "color": "#59D2D9",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#59D2D9",
       "prueba": {
         "tipo": "ahorcado",
         "_ayuda": "Igual para todos: 3 rondas (una palabra, dos palabras, una frase) de privado/bancos.json → ahorcado; 6 fallos por palabra. Se completa sola al resolver la 3.ª ronda.",
@@ -2189,6 +2198,9 @@ window.GK_CONFIG = {
       "nombre": "Estación D",
       "x": 2099,
       "y": 729,
+      "color": "#62CF83",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#62CF83",
       "prueba": {
         "tipo": "qr_escondido",
         "_ayuda": "Tres QR escondidos (D1, D2, D3) alrededor del cartel. Cada uno da a cada equipo una palabra (privado/bancos.json → qr_escondido). Escribid dónde está cada uno.",
@@ -2501,6 +2513,9 @@ window.GK_CONFIG = {
       "nombre": "Estación E",
       "x": 2259,
       "y": 587,
+      "color": "#CF63CC",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#CF63CC",
       "prueba": {
         "tipo": "wordle",
         "_ayuda": "Contenido por equipo: lo elige el generador del banco de privado/bancos.json → wordle.",
@@ -2708,6 +2723,9 @@ window.GK_CONFIG = {
       "nombre": "Estación F",
       "x": 2330,
       "y": 860,
+      "color": "#E45B55",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#E45B55",
       "prueba": {
         "tipo": "geoguessr",
         "_ayuda": "Contenido por equipo: lo elige el generador del banco de privado/bancos.json → geoguessr (5 fotos de un banco de 9).",
@@ -3335,6 +3353,9 @@ window.GK_CONFIG = {
       "nombre": "Estación G",
       "x": 1708,
       "y": 409,
+      "color": "#5670E0",
+      "colorTexto": "#000000",
+      "colorClaro": "#677EE3",
       "prueba": {
         "tipo": "mas_menos",
         "_ayuda": "Igual para todos: parejas de privado/bancos.json → mas_menos; hay que encadenar «racha» aciertos (8).",
@@ -7102,6 +7123,9 @@ window.GK_CONFIG = {
       "nombre": "Estación H",
       "x": 1975,
       "y": 302,
+      "color": "#FF9A3C",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#FF9A3C",
       "prueba": {
         "tipo": "caja_fuerte",
         "_ayuda": "Dos acertijos fijos, iguales para todos (privado/bancos.json → caja_fuerte → escotillas_fijas), comprobados por fuerza bruta al generar.",
@@ -7739,6 +7763,9 @@ window.GK_CONFIG = {
       "nombre": "Estación I",
       "x": 2846,
       "y": 587,
+      "color": "#9B7BFF",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#9B7BFF",
       "prueba": {
         "tipo": "sstv_puzle",
         "_ayuda": "Cuatro puzles de 3 × 3 con ilustraciones propias (privado/bancos.json → sstv_puzle), la misma mezcla y la misma clave para todos.",
@@ -9546,6 +9573,9 @@ window.GK_CONFIG = {
       "nombre": "Estación J",
       "x": 3024,
       "y": 890,
+      "color": "#B6E35A",
+      "colorTexto": "#0A1128",
+      "colorClaro": "#B6E35A",
       "prueba": {
         "tipo": "bulo_verdad",
         "_ayuda": "Contenido por equipo: lo elige el generador del banco de privado/bancos.json → bulo_verdad (10 noticias de un banco de 20).",

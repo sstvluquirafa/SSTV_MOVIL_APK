@@ -86,7 +86,7 @@
       const seguir = contenedor.querySelector('#mm-seguir');
 
       function pintarRacha() {
-        elRacha.textContent = `Racha: ${paso} de ${META}`;
+        elRacha.innerHTML = `Racha<span class="solo-lector">: ${paso} de ${META}</span>`;
         puntos.forEach((p, i) => p.classList.toggle('on', i < paso));
       }
       function nuevaRonda() {

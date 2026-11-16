@@ -335,7 +335,7 @@
     });
   }
 
-  const insignia = (idEst, clase = 'siguiente-num') => `<div class="${clase}" aria-hidden="true">${GK.html(GK.letra(idEst))}</div>`;
+  const insignia = (idEst, clase = 'siguiente-num') => `<div class="${clase}" data-est="${GK.html(idEst)}" aria-hidden="true">${GK.html(GK.letra(idEst))}</div>`;
 
   /* ---------- Pantalla: unirse a un equipo ---------- */
   function pantallaUnirse(idEq, codigo) {
@@ -477,7 +477,7 @@
         <div class="seccion">
           <div class="seccion-cab"><h2>Orden de estaciones</h2><span class="seccion-dato">${sit.hechas}/${sit.total}</span></div>
           <ol class="ruta-lista" aria-label="Orden de vuestra ruta">
-            ${sit.orden.map((s, i) => `<li class="${i < sit.hechas ? 'hecha' : i === sit.hechas && !sit.completas ? 'actual' : ''}" title="${GK.html(GK.estacion(s).nombre)}"><span>${GK.html(GK.letra(s))}</span></li>`).join('')}
+            ${sit.orden.map((s, i) => `<li class="${i < sit.hechas ? 'hecha' : i === sit.hechas && !sit.completas ? 'actual' : ''}" data-est="${s}" title="${GK.html(GK.estacion(s).nombre)}"><span>${GK.html(GK.letra(s))}</span></li>`).join('')}
           </ol>
         </div>
         <div class="seccion">${filaLetras(sit)}</div>` : ''}
@@ -665,10 +665,10 @@
     const sal = propio ? propio.sal : est.sal;
     const huellaClave = propio ? propio.huella : est.huella;
     vista.innerHTML = `
-      <section class="pantalla">
+      <section class="pantalla pantalla-estacion" data-est="${est.id}">
         <div id="mensaje-org"></div>
         <header class="senal" style="--barras:${est.id}">
-          <div class="senal-banda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          ${GK.banda(est.id)}
           <div class="senal-cuerpo">
             ${insignia(est.id, 'senal-letra')}
             <div>
@@ -677,6 +677,12 @@
             </div>
           </div>
         </header>
+        <div class="senal-mini" id="senal-mini" aria-hidden="true">
+          <div class="senal-mini-int">
+            ${GK.banda(est.id, 'senal-mini-banda')}
+            <div class="senal-mini-cuerpo">${insignia(est.id, 'senal-mini-letra')}<span class="senal-mini-titulo">${GK.html(prueba.titulo || est.nombre)}</span></div>
+          </div>
+        </div>
         ${htmlObjetivo(prueba, datosPrueba)}
         <div id="prueba"></div>
         <div id="ayuda-prueba" aria-live="polite"></div>
@@ -734,12 +740,30 @@
       esperar: crearEsperar($('#ayuda-prueba'), (f) => limpiezas.push(f)),
     };
     limpiezas.push(montarPista($('#pista'), `${eq.id}:${est.id}`, datosPrueba.pista));
+    limpiezas.push(cabeceraCompacta($('.senal'), $('#senal-mini')));
     const limpiar = prueba.montar($('#prueba'), ctx);
     limpiarVista = () => {
       estacionEnCurso = null;
       limpiezas.forEach((f) => f());
       if (typeof limpiar === 'function') limpiar();
     };
+  }
+  /**
+   * Cabecera de estación compacta: cuando la cabecera grande sale por arriba al hacer scroll, aparece una barra fina
+   * pegada bajo la barra superior (franja SSTV, letra y nombre de la prueba); al volver arriba, desaparece.
+   */
+  function cabeceraCompacta(cabecera, mini) {
+    if (!cabecera || !mini || !('IntersectionObserver' in window)) return () => {};
+    const barra = document.querySelector('.barra-sup');
+    const alto = 60;
+    const obs = new IntersectionObserver(([e]) => {
+      const fuera = !e.isIntersecting && e.boundingClientRect.top < alto;
+      // Justo debajo de la barra superior tal como está ahora (pegada arriba)
+      if (fuera && barra) mini.style.top = Math.max(0, Math.round(barra.getBoundingClientRect().bottom)) + 'px';
+      mini.classList.toggle('visible', fuera);
+    }, { rootMargin: `-${alto}px 0px 0px 0px`, threshold: 0 });
+    obs.observe(cabecera);
+    return () => obs.disconnect();
   }
   /**
    * Qué hay que hacer en la prueba, igual en todas: el objetivo (una frase) y 2 o 3 pasos cortos. Cada prueba lo
@@ -898,7 +922,7 @@
       <section class="pantalla">
         <div id="mensaje-org"></div>
         <header class="senal senal-final">
-          <div class="senal-banda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          ${GK.banda(null)}
           <div class="senal-cuerpo">
             <div class="senal-letra insignia-final" aria-hidden="true">${GK.icono('satelite')}</div>
             <div>
