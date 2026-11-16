@@ -87,9 +87,9 @@ web/                       ← lo que se publica en GitHub Pages
       registro.js          interfaz de pruebas (léelo antes de crear una)
       _plantilla.js        plantilla para pruebas nuevas
       codigo_estacion.js   prueba de relleno: código escondido en la estación
-      morse.js, pelis.js, binario.js, qr_escondido.js, wordle.js, geoguessr.js,
+      morse.js, pelis.js, ahorcado.js, qr_escondido.js, wordle.js, geoguessr.js,
       mas_menos.js, caja_fuerte.js, sstv_puzle.js, bulo_verdad.js         las 10 pruebas
-      sstv_mano.js, real_o_ia.js, hackeo.js, diferencias.js   en el banquillo (sin estación; configuración en torneo.json → banquillo)
+      sstv_mano.js, real_o_ia.js, hackeo.js, diferencias.js, binario.js   en el banquillo (sin estación; configuración en torneo.json → banquillo)
   assets/img/pruebas/      fotos de GeoGuessr (geo-01…09), ilustraciones de la Imagen SSTV (puzle-1…4.svg) y fotos de ¿Real o IA?
                            (nombres neutros: el nombre del archivo no delata la respuesta)
   vendor/                  jsQR (leer QR) y qrcode-generator (crear QR); licencias en LICENCIAS.txt
@@ -276,7 +276,7 @@ Asignación actual (cámbiala en `herramientas/torneo.json` → `estaciones[].pr
 |---|---|---|---|
 | A | Morse (`morse`) | app + cartel con la tabla | 3 preguntas en Morse |
 | B | Pelis espaciales (`pelis`) | app | nada: las mismas 6 películas y la misma clave para todos (`igual_para_todos` en el banco) |
-| C | Binario (`binario`) | app | 3 palabras (4, 5 y 6 letras) en bombillas |
+| C | Ahorcado espacial (`ahorcado`) | app | nada: 3 rondas (palabra, dos palabras, frase) iguales para todos; se completa sola |
 | D | QR escondido (`qr_escondido`) | 3 QR + app | la palabra que da cada QR (los QR impresos son los mismos); `escondites` en `torneo.json` |
 | E | Wordle (`wordle`) | app | 2 palabras (5 y 6 letras) |
 | F | GeoGuessr (`geoguessr`) | app | 5 fotos de 9 (1 de Granada, 2 de España, 2 del mundo) |

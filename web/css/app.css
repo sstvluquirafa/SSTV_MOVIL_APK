@@ -1451,3 +1451,52 @@ body.sin-scroll { overflow: hidden; }
 .mm-dato { min-height: 2.6em; margin: 14px 4px 0; text-align: center; font-size: 1rem; line-height: 1.35; color: var(--texto-2); }
 .mm-dato.ok { color: var(--fosforo); }
 .mm-dato.no { color: #ffb4aa; }
+
+/* ---------- Ahorcado espacial (C): astronauta arriba, palabra en grande y teclado abajo, todo a la vista ---------- */
+.ah { display: flex; flex-direction: column; gap: 8px; }
+.ah-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ah-categoria {
+  display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--ambar-suave); color: var(--ambar);
+  font-weight: 700; font-size: .92rem;
+}
+.ah-ronda { color: var(--texto-3); font-size: .82rem; white-space: nowrap; }
+.ah-escena { display: flex; align-items: flex-end; justify-content: center; gap: 10px; height: 138px; }
+.ah-astro { width: 128px; height: 128px; overflow: visible; animation: ah-flotar 3.2s ease-in-out infinite; }
+.ah-botella { width: 40px; height: 120px; }
+.ah-o2 { fill: var(--texto-3); font: 700 9px var(--mono); }
+.animo-agobiado .ah-astro { animation: ah-flotar 3.2s ease-in-out infinite, ah-tiritar .35s linear infinite; }
+.animo-nervioso .ah-gota, .animo-agobiado .ah-gota { animation: ah-gota 1.4s ease-in infinite; }
+.animo-sin .ah-astro { animation: ah-deriva 4s ease-in-out infinite; opacity: .85; }
+.animo-fiesta .ah-astro { animation: ah-salto .7s ease-in-out infinite alternate; }
+.animo-fiesta .ah-chispas { animation: ah-brillo .9s ease-in-out infinite alternate; transform-origin: center; }
+@keyframes ah-flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ah-tiritar { 0%, 100% { translate: 0 0; } 25% { translate: -1.5px 0; } 75% { translate: 1.5px 0; } }
+@keyframes ah-gota { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
+@keyframes ah-deriva { 0%, 100% { transform: rotate(-8deg) translateY(0); } 50% { transform: rotate(8deg) translateY(-4px); } }
+@keyframes ah-salto { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-9px) rotate(3deg); } }
+@keyframes ah-brillo { from { opacity: .35; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ah-astro, .ah-gota, .ah-chispas { animation: none !important; } }
+.ah-palabra {
+  --celda: 34px; display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 10px 18px;
+  min-height: 96px; padding: 4px 0;
+}
+.ah-grupo { display: inline-flex; gap: 4px; }
+.ah-letra {
+  display: grid; place-items: center; width: var(--celda); height: calc(var(--celda) * 1.25);
+  border-bottom: 3px solid #6d7aa6; font: 700 calc(var(--celda) * .8)/1 var(--display); color: var(--texto);
+}
+.ah-letra.acertada { color: var(--fosforo); border-bottom-color: var(--fosforo); animation: ah-aparecer .25s ease-out; }
+.ah-letra.revelada { color: var(--interferencia); border-bottom-color: var(--interferencia); }
+.ah-letra.fija { border-bottom-color: transparent; }
+@keyframes ah-aparecer { from { transform: translateY(6px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ah-letra.acertada { animation: none; } }
+.ah-msg { min-height: 1.35em; margin: 0; text-align: center; font-size: .92rem; color: var(--texto-2); }
+.ah-msg.ok { color: var(--fosforo); font-weight: 700; }
+.ah-msg.no { color: #ffb4aa; font-weight: 700; }
+.ah-zona-teclado { position: relative; }
+.ah-teclado { gap: 6px; }
+.app .ah-teclado .w-tecla { height: 46px; }
+.ah-teclado .w-tecla:disabled { cursor: default; }
+.ah-teclado.apagado { opacity: .3; pointer-events: none; }
+/* Centrado sin transform: .boton:active usa transform y, si no, el botón saltaría al pulsarlo */
+.ah-seguir { position: absolute; inset: 0; margin: auto; width: max-content; height: max-content; min-width: 200px; z-index: 1; }

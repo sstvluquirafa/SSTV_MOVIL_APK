@@ -616,8 +616,34 @@ def contenido_mas_menos(banco, eq: Equipo):
                        for x in banco["parejas"]]}
 
 
+# ---------- C · Ahorcado espacial ----------
+def contenido_ahorcado(banco, eq: Equipo):
+    """3 rondas (una palabra, dos palabras, una frase), con 3 palabras posibles en cada una, iguales para todos. Si se
+    acaba el oxígeno sale la siguiente palabra de la ronda. EXCEPCIÓN DOCUMENTADA (como el Wordle): el móvil necesita
+    las palabras para descubrir las letras, así que van ofuscadas. La clave se revela al resolver la 3.ª ronda (también
+    ofuscada, como en «¿Más o menos?»)."""
+    rondas = []
+    for r, ronda in enumerate(banco["rondas"]):
+        palabras = []
+        for i, w in enumerate(ronda["palabras"]):
+            w = " ".join(str(w).upper().split())
+            if not normalizar(w) or any(not (c == " " or c.isalpha()) for c in w):
+                sys.exit(f"ERROR: palabra rara en privado/bancos.json → ahorcado (ronda {r + 1}): «{w}»")
+            sal_w = derivar(eq.semilla, f"ahorcado:{eq.est}:{r}:{i}")[:8].hex()
+            palabras.append({"palabra": ofuscar(w, sal_w), "salPalabra": sal_w})
+        rondas.append({"categoria": ronda.get("categoria", ""), "palabras": palabras})
+    clave = trozo_clave(eq.semilla, f"ahorcado:{eq.est}", 8)
+    sal_c = derivar(eq.semilla, f"ahorcado-sal:{eq.est}")[:8].hex()
+    return {"prueba": {"fallos": int(banco.get("fallos", 6)), "rondas": rondas,
+                       "clave": ofuscar(clave, sal_c), "salClave": sal_c},
+            "clave": clave,
+            "partes": [{"pregunta": f"Ronda {r + 1} · {ronda.get('categoria', '')} (sale una de estas)",
+                        "respuestas": [str(w).upper() for w in ronda["palabras"]]}
+                       for r, ronda in enumerate(banco["rondas"])]}
+
+
 # tipo de prueba → función que crea el contenido de un equipo a partir de su banco (privado/bancos.json → tipo)
-CONTENIDO = {"mas_menos": contenido_mas_menos, "diferencias": contenido_diferencias, "sstv_puzle": contenido_sstv, "morse": contenido_morse, "pelis": contenido_pelis, "wordle": contenido_wordle, "binario": contenido_binario,
+CONTENIDO = {"ahorcado": contenido_ahorcado, "mas_menos": contenido_mas_menos, "diferencias": contenido_diferencias, "sstv_puzle": contenido_sstv, "morse": contenido_morse, "pelis": contenido_pelis, "wordle": contenido_wordle, "binario": contenido_binario,
              "qr_escondido": contenido_qr, "geoguessr": contenido_geoguessr, "caja_fuerte": contenido_caja,
              "bulo_verdad": contenido_bulo}
 # Las que se generan antes que las demás (el Binario evita las palabras del Wordle de cada equipo)

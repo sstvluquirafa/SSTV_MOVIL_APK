@@ -272,6 +272,84 @@ test('¿Más o menos?: acertar sube la racha, fallar la pone a cero, y con 8 seg
   await A.continuarSiHaceFalta(page, 'mas_menos', e.id);
 });
 
+test('Ahorcado espacial: tildes, huecos, sin oxígeno sale la siguiente palabra, progreso guardado y se completa sola', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'ahorcado');
+  test.skip(!e, 'Sin Ahorcado espacial');
+  const P = e.equipos['1'].prueba;
+  expect(P.rondas).toHaveLength(3);
+  expect(P.fallos).toBe(6);
+  for (const k of Object.keys(e.equipos)) expect(A.clave(e.id, k)).toBe(A.clave(e.id, 1));
+  // Ninguna palabra en claro en la configuración pública
+  const publico = JSON.stringify(e);
+  for (const parte of A.secretoEquipo(e.id).partes) for (const w of parte.respuestas) expect(publico).not.toContain(w);
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.sinScrollHorizontal(page);
+  const juego = page.locator('#ah-juego');
+  await expect(page.locator('#ah-ronda')).toHaveText('Ronda 1 de 3');
+  await expect(page.locator('#ah-categoria')).toHaveText(P.rondas[0].categoria);
+  // El juego entero (astronauta, palabra y teclado) cabe en la pantalla
+  const alto = await juego.evaluate((n) => n.getBoundingClientRect().height);
+  expect(alto, 'el juego debe caber sin scroll').toBeLessThanOrEqual(page.viewportSize().height - 70);
+
+  // Ronda 1, palabra 1: la «E» descubre también la «É» (SATÉLITE); un fallo gasta un tramo y se marca en gris
+  let w = await A.palabraAhorcado(page);
+  expect(w.palabra).toBe(0);
+  const { estan, noEstan } = A.letrasAhorcado(w.texto);
+  const conTilde = [...w.texto].find((c) => /[ÁÉÍÓÚ]/.test(c));
+  if (conTilde) {
+    const b = conTilde.normalize('NFD')[0];
+    await A.tocarLetra(page, b);
+    await expect(page.locator('.ah-letra.acertada').filter({ hasText: conTilde })).not.toHaveCount(0);
+  }
+  await A.tocarLetra(page, estan.find((k) => !conTilde || k !== conTilde.normalize('NFD')[0]));
+  await expect(page.locator('.ah-teclado .w-tecla.ok')).toHaveCount(conTilde ? 2 : 1);
+  await A.tocarLetra(page, noEstan[0]);
+  await expect(page.locator(`.ah-teclado [data-k="${noEstan[0]}"]`)).toHaveClass(/\bno\b/);
+  await expect(page.locator('.ah-escena')).toHaveAttribute('aria-label', 'Oxígeno: quedan 5 de 6');
+
+  // El progreso sigue ahí al volver a abrir la app
+  await page.reload();
+  await A.abrirEstacion(page, e.id);
+  await expect(page.locator('.ah-escena')).toHaveAttribute('aria-label', 'Oxígeno: quedan 5 de 6');
+  await expect(page.locator('.ah-teclado .w-tecla.ok')).toHaveCount(conTilde ? 2 : 1);
+
+  // Sin oxígeno: se enseña la palabra, aviso, y sale la SIGUIENTE de la ronda; tras la 3.ª vuelve la 1.ª
+  for (const siguiente of [1, 2, 0]) {
+    await A.responder(page, 'ahorcado', 'sin-oxigeno');
+    await expect(page.locator('#ah-msg')).toHaveText('Sin oxígeno: probad otra.');
+    await expect(page.locator('.ah-letra:not(.fija):not(.acertada):not(.revelada)')).toHaveCount(0);
+    await page.locator('#ah-seguir').click();
+    await expect(juego).toHaveAttribute('data-palabra', String(siguiente));
+    await expect(juego).toHaveAttribute('data-ronda', '0');
+    await expect(page.locator('.ah-escena')).toHaveAttribute('aria-label', 'Oxígeno: quedan 6 de 6');
+  }
+
+  // Ronda 2 (dos palabras): el espacio es un hueco, no hay que adivinarlo
+  await A.tocarLetra(page, 'A'); // (aunque falle: que haya algo en la palabra)
+  w = await A.palabraAhorcado(page);
+  for (const k of A.letrasAhorcado(w.texto).estan) if (await page.locator(`.ah-teclado [data-k="${k}"]`).isEnabled()) await A.tocarLetra(page, k);
+  await page.locator('#ah-seguir').click();
+  await expect(juego).toHaveAttribute('data-ronda', '1');
+  await expect(page.locator('#ah-ronda')).toHaveText('Ronda 2 de 3');
+  await expect(page.locator('.ah-grupo')).toHaveCount((await A.palabraAhorcado(page)).texto.split(' ').length);
+
+  // Ronda 3 (la frase): también cabe entera, sin scroll horizontal
+  w = await A.palabraAhorcado(page);
+  for (const k of A.letrasAhorcado(w.texto).estan) if (await page.locator(`.ah-teclado [data-k="${k}"]`).isEnabled()) await A.tocarLetra(page, k);
+  await page.locator('#ah-seguir').click();
+  await expect(page.locator('#ah-ronda')).toHaveText('Ronda 3 de 3');
+  await A.sinScrollHorizontal(page);
+  const alto3 = await juego.evaluate((n) => n.getBoundingClientRect().height);
+  expect(alto3, 'la ronda 3 debe caber sin scroll').toBeLessThanOrEqual(page.viewportSize().height - 70);
+
+  // Al resolver la 3.ª ronda, la estación se completa sola
+  await A.responder(page, 'ahorcado', A.clave(e.id));
+  await A.continuarSiHaceFalta(page, 'ahorcado', e.id);
+  await expect(page.locator('.letra-grande')).toHaveText(e.letraPalabra);
+});
+
 test('Morse: si escriben la pregunta, se les dice que es la pregunta', async ({ page }) => {
   const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
   test.skip(!e, 'Sin Morse');

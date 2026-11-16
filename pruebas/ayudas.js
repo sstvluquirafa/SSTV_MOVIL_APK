@@ -87,6 +87,8 @@ function respuestaMala(tipo, buena) {
   if (tipo === 'bulo_verdad') return (buena[0] === 'b' ? 'v' : 'b') + buena.slice(1);
   // Escotilla: la 1.ª escotilla con todas las cifras cambiadas
   if (tipo === 'caja_fuerte') return [respuestasPartes(idDeTipo(tipo))[0].split('').map((d) => String((Number(d) + 1) % 10)).join('')];
+  // Ahorcado: se gasta el oxígeno de la palabra que salga (6 letras que no están)
+  if (tipo === 'ahorcado') return 'sin-oxigeno';
   if (tipo === 'binario' || tipo === 'qr_escondido') return respuestasPartes(idDeTipo(tipo)).map((r, i) => (i === 1 ? 'malo' : r));
   // Morse: la 1.ª y la 3.ª bien y la 2.ª mal (las buenas salen de privado/secretos.json, equipo 1)
   if (tipo === 'morse') return respuestasPartes(idDeTipo('morse')).map((r, i) => (i === 1 ? 'respuestamala' : r));
@@ -96,6 +98,25 @@ function respuestaMala(tipo, buena) {
   if (tipo === 'wordle') { const w = respuestasPartes(idDeTipo(tipo))[0]; return [w.split('').reverse().join('') === w ? 'zzzzz' : w.split('').reverse().join('')]; }
   return 'respuestamala';
 }
+
+/* ---------- Ahorcado espacial ---------- */
+const TECLAS_AHORCADO = [...'QWERTYUIOPASDFGHJKLÑZXCVBNM'];
+/** Letra base (sin tildes, la Ñ se queda) de un carácter, como en ahorcado.js. */
+const baseAhorcado = (c) => (c === 'Ñ' ? 'Ñ' : c.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Z]/g, ''));
+/** La palabra que se ve ahora (sale de privado/secretos.json → partes, con la ronda y la palabra que marca la app). */
+async function palabraAhorcado(page) {
+  const juego = page.locator('#ah-juego');
+  const r = Number(await juego.getAttribute('data-ronda'));
+  const i = Number(await juego.getAttribute('data-palabra'));
+  return { ronda: r, palabra: i, texto: A_partes('ahorcado')[r].respuestas[i] };
+}
+const A_partes = (tipo) => secretoEquipo(idDeTipo(tipo)).partes;
+/** Letras (base) de la palabra y letras que NO están. */
+function letrasAhorcado(texto) {
+  const estan = [...new Set([...texto].map(baseAhorcado).filter(Boolean))];
+  return { estan, noEstan: TECLAS_AHORCADO.filter((k) => !estan.includes(k)) };
+}
+async function tocarLetra(page, k) { await page.locator(`.ah-teclado [data-k="${k}"]`).click(); }
 
 async function responder(page, tipo, r) {
   const prueba = page.locator('#prueba');
@@ -133,6 +154,33 @@ async function responder(page, tipo, r) {
         const i = r === clave(idDeTipo(tipo)) ? nombres.indexOf(ok) : 1 - nombres.indexOf(ok);
         await page.locator(`.mm-carta[data-i="${i}"]`).click();
         await expect(page.locator('#mm-dato')).not.toHaveText('');
+      }
+      break;
+    }
+    case 'ahorcado': {
+      // r = la clave: se resuelven las rondas que falten; cualquier otra cosa: se gasta el oxígeno de la palabra actual
+      const seguir = page.locator('#ah-seguir');
+      if (await seguir.isVisible() && /Otra palabra|Ronda/.test(await seguir.innerText())) await seguir.click();
+      if (r !== clave(idDeTipo(tipo))) {
+        const { texto } = await palabraAhorcado(page);
+        const malas = letrasAhorcado(texto).noEstan.filter((k) => !/[ÑQWXK]/.test(k));
+        for (const k of malas) {
+          if (await seguir.isVisible()) break; // ya sin oxígeno
+          if (await page.locator(`.ah-teclado [data-k="${k}"]`).isEnabled()) await tocarLetra(page, k);
+        }
+        await expect(seguir).toHaveText('Otra palabra');
+        break;
+      }
+      const total = A_partes(tipo).length;
+      for (;;) {
+        const { ronda, texto } = await palabraAhorcado(page);
+        for (const k of letrasAhorcado(texto).estan) {
+          if (await page.locator(`.ah-teclado [data-k="${k}"]`).isEnabled()) await tocarLetra(page, k);
+        }
+        if (ronda + 1 >= total) break;
+        await expect(seguir).toHaveText(`Ronda ${ronda + 2} de ${total}`);
+        await seguir.click();
+        await expect(page.locator('#ah-juego')).toHaveAttribute('data-ronda', String(ronda + 1));
       }
       break;
     }
@@ -208,6 +256,7 @@ async function continuarSiHaceFalta(page, tipo, id) {
   if (tipo === 'bulo_verdad') { await expect(page.locator('#bulo-comprobar')).toHaveText('Continuar'); await page.locator('#bulo-comprobar').click(); }
   if (tipo === 'hackeo') await page.locator('#hack-seguir').click();
   if (tipo === 'mas_menos') { await expect(page.locator('#mm-seguir')).toHaveText('Continuar'); await page.locator('#mm-seguir').click(); }
+  if (tipo === 'ahorcado') { await expect(page.locator('#ah-seguir')).toHaveText('Continuar'); await page.locator('#ah-seguir').click(); }
   await expect(page).toHaveURL(new RegExp(`#/superada/${id}$`), { timeout: 8000 });
 }
 
@@ -225,4 +274,4 @@ async function sinScrollHorizontal(page) {
   expect(ancho, 'la página no debe tener scroll horizontal').toBeLessThanOrEqual(vista + 1);
 }
 
-module.exports = { C, SEC, titulosPelis, secretoEquipo, respuestasPartes, idDeTipo, avanzar, est, clave, token, rutaQueEmpiezaPor, empezar, ponerRuta, hechas, abrirEstacion, respuestaMala, responder, continuarSiHaceFalta, superar, sinScrollHorizontal };
+module.exports = { palabraAhorcado, letrasAhorcado, tocarLetra, C, SEC, titulosPelis, secretoEquipo, respuestasPartes, idDeTipo, avanzar, est, clave, token, rutaQueEmpiezaPor, empezar, ponerRuta, hechas, abrirEstacion, respuestaMala, responder, continuarSiHaceFalta, superar, sinScrollHorizontal };

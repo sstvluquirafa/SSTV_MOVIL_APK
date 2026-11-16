@@ -1523,9 +1523,9 @@ window.GK_CONFIG = {
       "x": 1566,
       "y": 943,
       "prueba": {
-        "tipo": "binario",
-        "_ayuda": "Contenido por equipo: lo elige el generador del banco de privado/bancos.json → binario. Las bombillas se ven en la pantalla.",
-        "pista": "Cada bombilla vale 16, 8, 4, 2 y 1. Sumad las encendidas de cada fila"
+        "tipo": "ahorcado",
+        "_ayuda": "Igual para todos: 3 rondas (una palabra, dos palabras, una frase) de privado/bancos.json → ahorcado; 6 fallos por palabra. Se completa sola al resolver la 3.ª ronda.",
+        "pista": "Empezad por las vocales y luego probad con S, R, N y L"
       },
       "letraPalabra": "T",
       "token": "6a0c4e7ad7d858d348ce13240d184b24d539e692ad1f06c0552831c5cc06fe54",
@@ -1533,472 +1533,652 @@ window.GK_CONFIG = {
       "equipos": {
         "1": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "00101"
-                ],
-                "sellos": [
-                  "Z7ya+2DmZKdf"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10101",
-                  "10010",
-                  "00001",
-                  "01110",
-                  "01111"
-                ],
-                "sellos": [
-                  "r5UYuLRjmTi6"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "01001",
-                  "10100",
-                  "00001"
-                ],
-                "sellos": [
-                  "nUACQijtcAXc"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "0d33462518bdf376ebe94ccb9df547bd",
-          "huella": "26e7d6572ec7fdebef9ac081c9597fdc386155c90bd3e07d3b3e849a00eea7e9",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "sB1+OxjrS0GECgx4uEHv9FW72FhsoQ2cGaR/0WzkTGfZtR7HhYWNiJnf6dTkDhbdQ4JVxQASD3CJjt9RTMtKxoYHcMTpLXnFii93t76wtDOJ4tyJJxzaDFQTCQ8rVCwpE2RADhFb+uToWMLSinGSnlrGtPGxAn8I3mNDhQmPpGJu92bvdkvpdr+fW+U="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "2": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "10010",
-                  "01111",
-                  "00011",
-                  "00001"
-                ],
-                "sellos": [
-                  "/C6JW+sKgzae"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "01001",
-                  "01111",
-                  "01110"
-                ],
-                "sellos": [
-                  "P9v53PShzvTe"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "00011",
-                  "01111",
-                  "01101",
-                  "00101",
-                  "10100",
-                  "00001"
-                ],
-                "sellos": [
-                  "Pn1jyIfncaWO"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "1704c4004e4e2dba6b5107c5fcbb8acf",
-          "huella": "16bcd4b1c05d141da0ef2dcc1474117ce0aa563cea400b23598a7629d900709f",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "zd4Z1mkfI7TlkoRZZ3B9CYjouiurx12ajV+zCkz3GfuMkLynV2cVdBA2HuYzfKrCjmhUiPrLR2CphGmFqgKtfBTQgZft4N/OsIuePEIcfooknfWpF8cn+9RSCe7rpNfDH6OWdYlO5RGB/bjq6bDbBDpkPSKgbTyiV3GBfmGlPfQnxhRjw56+eHcUjkE="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "3": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "01110",
-                  "00001",
-                  "10110",
-                  "00101"
-                ],
-                "sellos": [
-                  "y0YauFd+UZiE"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10101",
-                  "10010",
-                  "00001",
-                  "01110",
-                  "01111"
-                ],
-                "sellos": [
-                  "I1kR1s90o0Y5"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "01001",
-                  "10100",
-                  "00001"
-                ],
-                "sellos": [
-                  "rvkA5Hga7liA"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "d175dcd3b6f710caca3b4a5da799ed28",
-          "huella": "25688f982b7634d3caffeb6e520642006a27fbdb01953e0f76ddc48e33e672eb",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "2Nfg2zvWKeacqI+c/td0H91r5RQxvZ3+pubWG56uZoQsSbKs5g5bsgJG+zpyjGuXLVl7oqqjVZQMpDiaXzQ6V9iVz+kPvoRi9OlIGKlSOT6nFpb11J4ECtD5erC+drpNfy2u59zRJV1skiL+bBXd6FLUefxOV8SbKu+GvoCs4fRHc5jtusQmuN0JLmg="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "4": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "00101"
-                ],
-                "sellos": [
-                  "q10V5BF6L05x"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10011",
-                  "01111",
-                  "01110",
-                  "00100",
-                  "00001"
-                ],
-                "sellos": [
-                  "4RtA3w/S50LM"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "00011",
-                  "01111",
-                  "01000",
-                  "00101",
-                  "10100",
-                  "00101"
-                ],
-                "sellos": [
-                  "y4FNODKnmhqi"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "849d55ea6afe6ce5bef68556d21a2c9b",
-          "huella": "d722502a762d040de24a154c735ead47b72dd81290d18811325faa84bd2b41fa",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "womHHm+DACRMWiXhqZmcwaE9kCaaFeq3weCiNsVycV9pyFNUorKwHVZFkTpFJUkhxQkrqTwMss/Kja84p9oD/Kxa5/aNG0fepwFnI/cX+p4ThO3pgOdYt9MQh3PLKAi0un4GmdVGHa+iE3X2cMo2M/f5ApIb8A8wGBGCVDjx6PUZ9S7ZQvAgvrKcxDc="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "5": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "01110",
-                  "00001",
-                  "10110",
-                  "00101"
-                ],
-                "sellos": [
-                  "c3GEuw4/NhXg"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "01001",
-                  "01111",
-                  "01110"
-                ],
-                "sellos": [
-                  "38TwwqnqXEtH"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "00011",
-                  "01111",
-                  "01000",
-                  "00101",
-                  "10100",
-                  "00101"
-                ],
-                "sellos": [
-                  "99pOUrYSrzD7"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "c3c3d903dbf33a75cb1acd3640e8d12b",
-          "huella": "0186f67a064856e6a52101e53586e2edac622b0765856e26570f7e884450cf97",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "WKh9FY13NQ4aBTvuoPwTO4PjyWpxpSJ4qVtDE4sCidX6ffw2GTtIxsIweHTCzh9qO8+zHK4DG+r9F7hxDliA09wfb/5rILrhlm7aqderDBpE+yNjVOwVmn7hgH1XK30MJBVlbMYJIttUFRxr0/qgmBE6IPfgCE7uKO/owB2NX4G5YecQ7jPA/SWXQUc="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "6": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "10000",
-                  "01111",
-                  "01100",
-                  "01111"
-                ],
-                "sellos": [
-                  "o8THn3FaT58X"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10101",
-                  "10010",
-                  "00001",
-                  "01110",
-                  "01111"
-                ],
-                "sellos": [
-                  "2V37BgW+UdRc"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "00011",
-                  "01111",
-                  "01000",
-                  "00101",
-                  "10100",
-                  "00101"
-                ],
-                "sellos": [
-                  "pv0/SLwh/1iG"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "0d588f5ced9af655957543e5014af8e0",
-          "huella": "33f601f2eb6168ce3a0bef7e70f70bb7b9b1ba9c096258daf3bff170ad5decfd",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "psUEHwfNzLg0Fx3HrS0FPM3rnDhUdFReifhA+cORZyFtDTtOUhkndgamwrfnC5oh+FUtdgWEyeY1oVpDf89abufMdhGAWd5xyRGz8mWr1Mc2bhFJR63+ieKoaJpdOgfnjHW0JTbLIYMdAr5F8RJGFSfteNS7DeY5peuxfG+l69cfsN+5RolGbHWm3+0="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "7": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "10000",
-                  "01111",
-                  "01100",
-                  "01111"
-                ],
-                "sellos": [
-                  "LhNfbJhDOK6s"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10110",
-                  "00101",
-                  "01110",
-                  "10101",
-                  "10011"
-                ],
-                "sellos": [
-                  "pGBnLfZ1Kigy"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "01001",
-                  "10100",
-                  "00001"
-                ],
-                "sellos": [
-                  "Nhgpg52OK8/v"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "139faa8d98eb9505e6959474ee62c9be",
-          "huella": "18eeef3d6212eb314056e972d956330611c520dd731031652ab26e3d414f5957",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "TT8+BBg/FqwohIXVzrT8dxWQ+XmmwTI4G85sLSgEzPBZDp/pgS8EPr9dyaxUMHk03OHM79fDG8QZS3RTiZzCP690q35u8Mms/Jp8J6RUvKZV/AOQMymzamtZUKX5kzl0G+Qq/Kb4iPqagJy6H7n6hCdulHC/x1m01mSOlyShQzSa3SPa9u2ird1fJ8U="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "8": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "00101"
-                ],
-                "sellos": [
-                  "g4QCdckiptv6"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10110",
-                  "00101",
-                  "01110",
-                  "10101",
-                  "10011"
-                ],
-                "sellos": [
-                  "DivY27czoT+I"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "01001",
-                  "10100",
-                  "00001"
-                ],
-                "sellos": [
-                  "0nt6dkYa1qoU"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "19e2248bf20537e5706d87d7eadde00e",
-          "huella": "0f19c6fb46c1ae6462558b77d926234593c44bd2fc572371801fdc2f8c430571",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "+EQgeWQABJyB7wwXeT6v3dMIkZi8AkGYK7zdkkmFVbRmYpNCQ3hpnRKOHWRCs8K11OIn72w4j9y3QMlrxgJ4SXlxkPpCwlEQ1FNeG/fY96RYgeDg5M4pYMhltf8W1yS/ojZSmJpJYqO1eauE3qjld5mYWHo6+t5oVRPr18EoBlx0Fphfq+gQgLPYV+w="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "9": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "01111",
-                  "10010",
-                  "00010",
-                  "00101"
-                ],
-                "sellos": [
-                  "lfVBrFif5nFI"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "10101",
-                  "10010",
-                  "00001",
-                  "01110",
-                  "01111"
-                ],
-                "sellos": [
-                  "3Y4kxxufda6G"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "00011",
-                  "01111",
-                  "01000",
-                  "00101",
-                  "10100",
-                  "00101"
-                ],
-                "sellos": [
-                  "dmJjxM1ZKZys"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "2977888bb17102b23a1069eb8e324ef0",
-          "huella": "1642d0cb1ad62f8bbbd57814d38c195828443e6b89dc4d92bafc1f08135e4d75",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "HGOAahxk5lHGWci4X5VWh5PcxG8omQ8P5PAlaJsYHgg3tOSv28QTYXcbyOkegE3IQkEDSvu9gXQETRCkuMndiAr+Ilc+nhVdMUvLwQJx4P43FXYPVMa8ZL5voVj/YOsIJ3+63gcmyAnNz8p3RkwUlL3llsOXdZ8mEhZuE0RLwFrHV8Uf9CvhEQt9O6k="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         },
         "10": {
           "prueba": {
-            "palabras": [
+            "fallos": 6,
+            "rondas": [
               {
-                "filas": [
-                  "10010",
-                  "01111",
-                  "00011",
-                  "00001"
-                ],
-                "sellos": [
-                  "3bkfQjTWXyMI"
+                "categoria": "Algo del espacio",
+                "palabras": [
+                  {
+                    "palabra": "xDuepEXIZs3S",
+                    "salPalabra": "977aca67cc842f99"
+                  },
+                  {
+                    "palabra": "VIQnxJETgStBlg==",
+                    "salPalabra": "15d77396de5dc07e"
+                  },
+                  {
+                    "palabra": "Qw0kihdtnU5eBw==",
+                    "salPalabra": "174868cf442ed21e"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "01101",
-                  "00001",
-                  "10010",
-                  "10100",
-                  "00101"
-                ],
-                "sellos": [
-                  "k1lx0Rxyausl"
+                "categoria": "Dos palabras",
+                "palabras": [
+                  {
+                    "palabra": "+CvuTzXuLqH3KfxXPw==",
+                    "salPalabra": "b96cbb0570bc6181"
+                  },
+                  {
+                    "palabra": "8ZQeF7slW3zkA9YX",
+                    "salPalabra": "a75793569b6998fd"
+                  },
+                  {
+                    "palabra": "hbjo9Lwa7eOFvvfhqw==",
+                    "salPalabra": "d6f1bba0f957acc3"
+                  }
                 ]
               },
               {
-                "filas": [
-                  "00001",
-                  "01110",
-                  "10100",
-                  "00101",
-                  "01110",
-                  "00001"
-                ],
-                "sellos": [
-                  "HLpcfXm7q1si"
+                "categoria": "Una frase",
+                "palabras": [
+                  {
+                    "palabra": "shRc2jmOWDO5Z03IKobY6bYLKNI0k97yuQZL0jWJ2uw=",
+                    "salPalabra": "f747089b7ac79ba0"
+                  },
+                  {
+                    "palabra": "Y2rkj/7QH0N+YIiA7N4VQBd47Yjv",
+                    "salPalabra": "372fa8caad935013"
+                  },
+                  {
+                    "palabra": "0fsqH6zvfUrA+ixyrPN9VsCJLwen/A==",
+                    "salPalabra": "81a96352e9bd5d1a"
+                  }
                 ]
               }
-            ]
+            ],
+            "clave": "xfVsFOi10Jo=",
+            "salClave": "f28701719dccb5a9"
           },
-          "sal": "55bd6fba06b5d0801d3ebe92e310ac69",
-          "huella": "6173be4f298b3ddce834c601637ae09cba4ab1f301af69131204d8343abc4dd9",
+          "sal": "be30f5c1046a9a8bc11b76b91de96c99",
+          "huella": "16717739c1570a9e08098c649c28ddde0a5f2c4982eb441e8a9c5cb8f77b227e",
           "datoCifrado": [
-            "FW7SMxU7i9v/9xzUGET9iek0pfahgcqTitNXDlnpsXrS9Qroh4YG1/A/UfZ30Y4aTQ8AR616gIw6RIGa0u9M0q7I83MtNBSsrYulTUePvu9iR/pE3n5ygX+udGOP7ph2JyD+UCMMfe2OCOfFGNrA787/TVSxLxxRPnLs8lPq5SPXmyzyhanOB+7F07M="
+            "VFSUpuwXi0viU/FxNUIod/fTyqd7Vzm9MEoIMaOE9LpQ6ZEI0BzDdmB5HLYN+2R8x/nN3hIeNISXIcbUrvqf4Nwg79tagC0Q4j3dRQvgmz5rxQTVGcfmjL2vvsMUftMFViqguzsgv6zKOfLcaqU="
           ]
         }
       }

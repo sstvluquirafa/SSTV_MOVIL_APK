@@ -46,10 +46,6 @@
   table.coord td { border-bottom: .3mm solid #cbd5e1; padding: 1.3mm 5mm; text-align: left; }
   table.coord td:first-child { font-weight: 700; color: var(--naranja); white-space: nowrap; }
   table.coord td.mono { font-size: 15pt; letter-spacing: .08em; }
-  .bombillas { display: grid; gap: 5mm; margin: 4mm 0 8mm; }
-  .bombillas .fila-b { display: flex; gap: 7mm; justify-content: center; }
-  .bombillas span { width: 22mm; height: 22mm; border-radius: 50%; border: 1.2mm solid var(--marino); background: #f1f5f9; }
-  .bombillas span.on { background: radial-gradient(circle at 40% 35%, #fff7d6, #fde047 45%, #f59e0b); }
   .tabla-morse-cartel { align-self: stretch; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4mm 4mm; margin: 2mm 0 4mm; }
   .tabla-morse-cartel div { display: flex; align-items: center; gap: 3mm; border: .5mm solid #cbd5e1; border-radius: 3mm; padding: 1.6mm 3mm; }
   .tabla-morse-cartel b { font-family: Merriweather, serif; font-size: 19pt; width: 9mm; text-align: center; }
@@ -195,11 +191,6 @@ for (const e of D.estaciones) {
       <p class="instr">Una imagen SSTV viaja <b>línea a línea</b>. En la app, pintad en cada fila las casillas que dice esta tabla (de arriba abajo). <b>¿Qué aparece?</b></p>
       <table class="coord"><tbody>${filas.map((f, i) => `<tr><td>Fila ${i + 1}</td><td class="mono">${f && f.length ? f.join(', ') : '— (ninguna)'}</td></tr>`).join('')}</tbody></table>
       <p class="leyenda">La cuadrícula tiene ${esc(P.columnas || 11)} casillas de ancho y ${esc(P.filas || filas.length)} filas.</p>`;
-  } else if (e.tipo === 'binario' && (P.cartel || []).length) {
-    cuerpo = `${cabPrueba(e, 'BINARIO')}
-      <p class="instr">Cada fila es un <b>número en binario</b>: bombilla encendida = 1, apagada = 0. Cada número es una letra: <b>A=1, B=2 … Z=26</b>. ¿Qué palabra forman?</p>
-      <div class="bombillas">${(P.cartel || []).map((f) => `<div class="fila-b">${String(f).split('').map((b) => `<span class="${b === '1' ? 'on' : ''}"></span>`).join('')}</div>`).join('')}</div>
-      <p class="leyenda">Escribid la palabra en la app.</p>`;
   } else if (e.tipo === 'qr_escondido' && (P.escondites || []).length) {
     cuerpo = `${cabPrueba(e, 'QR ESCONDIDOS')}
       <p class="instr">Cerca de aquí hay <b>${P.escondites.length} QR escondidos</b>. Escaneadlos <b>desde la app</b>: cada uno os da una palabra. Repartíos la búsqueda.</p>
