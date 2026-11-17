@@ -83,6 +83,7 @@
           const ok = ultima
             ? await ctx.intentar(acumulado, { quedarse: true })
             : !!R.huella && (await ctx.coincide(acumulado, R.huella));
+          if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
           if (ok) {
             hecho = true;
             if (ultima) GK.borrar(claveGuardado);
@@ -90,6 +91,7 @@
             let expl = [];
             if (R.explicacionesCifradas) {
               try { expl = JSON.parse(await GK.descifrar(R.explicacionesCifradas, acumulado, ctx.estacion.sal)) || []; } catch (e) { expl = []; }
+              if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
             }
             contenedor.querySelectorAll('.bulo').forEach((li, i) => {
               li.classList.add(marcas[i] === 'b' ? 'es-bulo' : 'es-verdad');
@@ -106,6 +108,7 @@
           esperando = true;
           falta.innerHTML = '<span class="error-suave">Alguna no es correcta.</span>';
           await ctx.esperar(15, boton);
+          if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
           esperando = false;
           actualizar();
         });

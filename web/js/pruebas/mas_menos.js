@@ -119,8 +119,10 @@
         botones.forEach((c) => { c.disabled = true; });
         b.classList.add('elegida');
         const acierto = await ctx.coincide(x.opciones[i].nombre, x.huella);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         const buena = acierto ? i : 1 - i;
         const texto = await GK.descifrar(x.datoCifrado, x.opciones[buena].nombre, ctx.estacion.sal);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         botones[buena].classList.add('correcta');
         if (acierto) {
           paso++;
@@ -155,7 +157,9 @@
         terminado = true;
         let clave = '';
         try { clave = GK.desofuscar(P.clave, P.salClave); } catch (e) { /* configuración rota */ }
-        if (clave && (await ctx.intentar(clave, { quedarse: true }))) {
+        const ok = !!clave && (await ctx.intentar(clave, { quedarse: true }));
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) {
           contenedor.querySelector('.mm-racha').classList.add('completa');
           ctx.ayuda(`¡${META} de ${META}! Racha completa: señal recibida.`, 'ok');
           seguir.textContent = 'Continuar';

@@ -162,6 +162,7 @@
         if (terminado) return;
         terminado = true;
         const ok = await ctx.intentar(respuestas.map((r) => r.v[0]).join(''));
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         if (ok) GK.borrar(claveGuardado);
         else {
           terminado = false;

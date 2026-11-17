@@ -31,6 +31,7 @@
         boton.disabled = true;
         boton.textContent = 'Comprobando…';
         const ok = await ctx.intentar(campo.value);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         if (!ok) {
           boton.disabled = false;
           boton.textContent = 'Validar código';

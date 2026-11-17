@@ -65,7 +65,9 @@
         if (elegida == null) return;
         const respuesta = LETRAS[elegida];
         boton.disabled = true;
-        if (await ctx.intentar(respuesta, { quedarse: true })) {
+        const ok = await ctx.intentar(respuesta, { quedarse: true });
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) {
           hecho = true;
           let explicacion = '';
           let creditos = [];
@@ -75,6 +77,7 @@
               explicacion = typeof datos[0] === 'string' ? datos[0] : '';
               creditos = Array.isArray(datos[1]) ? datos[1] : [];
             } catch (e) { /* sin explicación */ }
+            if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
           }
           contenedor.querySelectorAll('.ia-foto').forEach((f, i) => {
             if (creditos[i]) f.querySelector('.credito').textContent = creditos[i];
@@ -92,6 +95,7 @@
         }
         esperando = true;
         await ctx.esperar(15, boton);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         esperando = false;
         boton.disabled = elegida == null;
       });

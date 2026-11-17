@@ -357,11 +357,15 @@
       const textoBoton = boton.textContent;
       boton.textContent = 'Comprobando…';
       const trozos = await Promise.all(textos.map((x, i) => ctx.parte(x, o.sellos[i])));
+      if (ctx.montada && !ctx.montada()) return; // la pantalla cambió mientras se esperaba
       trozos.forEach((tr, i) => partes.marcar(i, !GK.normalizar(textos[i]) ? null : tr ? 'ok' : 'no'));
       const bien = trozos.filter(Boolean).length;
       const extra = bien < n && o.extra ? await o.extra(textos, trozos) : null;
+      if (ctx.montada && !ctx.montada()) return;
       if (bien === n) {
-        if (await ctx.intentar(trozos.join(''))) { GK.borrar(o.guardado); return; }
+        const ok = await ctx.intentar(trozos.join(''));
+        if (ctx.montada && !ctx.montada()) return;
+        if (ok) { GK.borrar(o.guardado); return; }
         ctx.ayuda('Están todas bien, pero no se ha podido guardar. Avisad a la organización.');
       } else if (extra) {
         ctx.ayuda(extra, 'info');

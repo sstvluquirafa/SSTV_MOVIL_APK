@@ -83,6 +83,7 @@
         if (String(texto).includes('#/')) { ctx.ayuda('Ese es el QR de una estación, no uno de los escondidos.'); return false; }
         for (let i = 0; i < qrs.length; i++) {
           const palabra = await ctx.parte(texto, [qrs[i].escaneo]);
+          if (!ctx.montada()) return false; // la pantalla cambió mientras se esperaba
           if (!palabra) continue;
           escaneadas[i] = palabra;
           GK.guardar(claveEscaneos, escaneadas);
@@ -129,7 +130,9 @@
         ev.preventDefault();
         const b = manual.querySelector('button');
         b.disabled = true;
-        if (await leerQR(manual.querySelector('input').value)) manual.reset();
+        const leido = await leerQR(manual.querySelector('input').value);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (leido) manual.reset();
         b.disabled = false;
       });
       return cerrar;

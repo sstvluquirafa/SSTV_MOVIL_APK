@@ -94,6 +94,7 @@
           const ok = ultima
             ? await ctx.intentar([...abiertas.slice(0, k), codigo].join(''), { quedarse: true })
             : !!E.huella && (await ctx.coincide(codigo, E.huella));
+          if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
           if (ok) {
             caja.classList.add('abierta');
             boton.textContent = '¡Abierta!';
@@ -135,7 +136,7 @@
             }
             k++;
           }
-          if (!cerrado) montarEscotilla(k);
+          if (!cerrado && ctx.montada()) montarEscotilla(k);
         })();
       }
       return () => { cerrado = true; clearTimeout(temporizador); };

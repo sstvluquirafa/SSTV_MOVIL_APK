@@ -111,6 +111,7 @@
       async function comprobar(q) {
         if (estado.letras[q] || !resuelto(q)) return;
         const letra = await ctx.parte(`puzle${q + 1}resuelto`, [puzles[q].sello]);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         if (!letra) return;
         estado.letras[q] = letra.toUpperCase();
         guardar();
@@ -233,7 +234,9 @@
         if (GK.normalizar(campo.value).length < puzles.length) return ctx.ayuda(`La palabra tiene ${puzles.length} letras: una por imagen.`, 'info');
         b.disabled = true;
         b.textContent = 'Comprobando…';
-        if (await ctx.intentar(campo.value)) { GK.borrar(claveGuardado); return; }
+        const ok = await ctx.intentar(campo.value);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) { GK.borrar(claveGuardado); return; }
         b.disabled = false;
         b.textContent = 'Comprobar';
         ctx.ayuda('Esa palabra no es. Revisad el orden: imagen 1, 2, 3 y 4.');

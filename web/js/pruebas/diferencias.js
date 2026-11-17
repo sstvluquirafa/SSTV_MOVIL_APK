@@ -119,6 +119,7 @@
       async function zonaCompleta(z) {
         const ids = porZona[z].map((d) => d.id).sort().join('');
         const letra = await ctx.parte(`zona${z + 1}${ids}`, [(P.sellosZona || [])[z]]);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         if (letra) {
           estado.letras[z] = letra.toUpperCase();
           guardar();
@@ -163,7 +164,9 @@
         if (GK.normalizar(campo.value).length < ZONAS.length) return ctx.ayuda(`La clave tiene ${ZONAS.length} letras: una por zona.`, 'info');
         b.disabled = true;
         b.textContent = 'Comprobando…';
-        if (await ctx.intentar(campo.value)) { GK.borrar(claveGuardado); return; }
+        const ok = await ctx.intentar(campo.value);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) { GK.borrar(claveGuardado); return; }
         b.disabled = false;
         b.textContent = 'Comprobar';
         ctx.ayuda('Esas letras no son. Revisad el orden: zona 1, 2, 3 y 4.');

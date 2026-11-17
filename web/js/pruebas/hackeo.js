@@ -60,7 +60,9 @@
         const boton = form.querySelector('button');
         boton.disabled = true;
         const clave = campo.value;
-        if (await ctx.intentar(clave, { quedarse: true })) {
+        const ok = await ctx.intentar(clave, { quedarse: true });
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) {
           terminal.classList.add('concedido');
           // «ACCESO CONCEDIDO» llena la pantalla un segundo (no tapa los toques: pointer-events none)
           const total = document.createElement('div');

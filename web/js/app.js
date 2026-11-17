@@ -704,7 +704,12 @@
     pintarMensaje();
     estacionEnCurso = { id: est.id, equipo: eq.id };
     const limpiezas = [];
+    // Si la pantalla cambia (p. ej. otro móvil del equipo supera la estación), la prueba queda DESMONTADA: sus
+    // handlers async pueden seguir vivos, pero ya no deben tocar la pantalla ni superar nada.
+    let montada = true;
     const ctx = {
+      /** ctx.montada() → true hasta que se ejecuta la limpieza de la prueba. Miradlo después de cada await. */
+      montada: () => montada,
       estacion: { id: est.id, letra: est.letra, nombre: est.nombre, prueba: datosPrueba, sal },
       /**
        * Versión del progreso guardado en el móvil (GK.claveProgreso): ronda del torneo + huella corta del contenido de
@@ -714,8 +719,10 @@
       equipo: { id: eq.id, nombre: GK.equipo(eq.id).nombre },
       /** ctx.ayuda(texto, tipo?): aviso bajo la prueba. tipo: 'error' (por defecto), 'info' u 'ok'. */
       ayuda(texto, tipo) {
+        const caja = $('#ayuda-prueba');
+        if (!montada || !caja) return;
         const t = ['info', 'ok'].includes(tipo) ? tipo : 'error';
-        $('#ayuda-prueba').innerHTML = texto ? `<div class="aviso aviso-${t}">${GK.html(texto)}</div>` : '';
+        caja.innerHTML = texto ? `<div class="aviso aviso-${t}">${GK.html(texto)}</div>` : '';
       },
       /**
        * Comprueba la respuesta. También valen los sinónimos de privado/secretos.json → «alternativas».
@@ -723,15 +730,17 @@
        * puede enseñar algo más (una explicación, una animación) y después llamar a ctx.continuar().
        */
       async intentar(respuesta, opciones) {
-        if (!GK.normalizar(respuesta)) return false;
+        if (!montada || !GK.normalizar(respuesta)) return false;
         const h = await GK.huella(respuesta, sal);
+        if (!montada) return false;
         if (h !== huellaClave && !(datosPrueba.huellasAlternativas || []).includes(h)) return false;
         await guardarDato(eq.id, est.id, datosPrueba, respuesta, sal);
+        if (!montada) return false;
         completar(eq.id, est.id, token, GK.normalizar(respuesta), opciones && opciones.quedarse);
         return true;
       },
       /** Tras un intentar(…, { quedarse: true }): pasa a la pantalla de «estación superada». */
-      continuar() { ir('#/superada/' + est.id); },
+      continuar() { if (montada) ir('#/superada/' + est.id); },
       /** ¿La respuesta coincide con otra huella de la prueba (misma sal que la estación)? Sin superar nada. */
       async coincide(respuesta, huella) {
         return !!GK.normalizar(respuesta) && (await GK.huella(respuesta, sal)) === huella;
@@ -757,6 +766,7 @@
     limpiezas.push(cabeceraCompacta($('.senal'), $('#senal-mini')));
     const limpiar = prueba.montar($('#prueba'), ctx);
     limpiarVista = () => {
+      montada = false;
       estacionEnCurso = null;
       limpiezas.forEach((f) => f());
       if (typeof limpiar === 'function') limpiar();
@@ -980,6 +990,8 @@
       if (!GK.normalizar(texto)) return;
       boton.disabled = true; boton.textContent = 'Descifrando…';
       const ok = (await GK.huella(texto, F.sal)) === F.huella;
+      // Mientras se comprobaba, la pantalla pudo cambiar (otro móvil del equipo acertó la palabra): no se toca nada
+      if (!form.isConnected) return;
       if (ok) {
         GK.guardar(`p:palabra:${eq.id}`, texto.trim().toUpperCase()); // para la cinemática
         return completar(eq.id, 'final', F.token, GK.normalizar(texto));

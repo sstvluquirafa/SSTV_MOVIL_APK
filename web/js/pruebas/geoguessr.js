@@ -60,10 +60,13 @@
       boton.addEventListener('click', async () => {
         const respuesta = elegidas.map((j) => LETRAS[j]).join('');
         boton.disabled = true;
-        if (await ctx.intentar(respuesta)) return;
+        const ok = await ctx.intentar(respuesta);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) return;
         esperando = true;
         falta.innerHTML = '<span class="error-suave">Alguna no es correcta.</span>';
         await ctx.esperar(15, boton);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         esperando = false;
         falta.textContent = '';
         actualizar();

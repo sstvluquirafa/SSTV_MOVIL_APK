@@ -35,6 +35,7 @@
       form.addEventListener('submit', async (ev) => {
         ev.preventDefault();
         const ok = await ctx.intentar(form.querySelector('input').value);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
         if (!ok) ctx.ayuda('Todavía no. ¡Probad otra vez!');
         // Si es correcta, la app pasa sola a la pantalla de «estación superada».
       });

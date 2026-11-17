@@ -288,7 +288,9 @@
         aviso('¡Misión cumplida! El astronauta respira tranquilo.', 'ok');
         let clave = '';
         try { clave = GK.desofuscar(P.clave, P.salClave); } catch (e) { /* configuración rota */ }
-        if (clave && (await ctx.intentar(clave, { quedarse: true }))) {
+        const ok = !!clave && (await ctx.intentar(clave, { quedarse: true }));
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) {
           GK.borrar(claveGuardado);
           ctx.ayuda('¡Tres de tres! Señal recibida.', 'ok');
           pintar();

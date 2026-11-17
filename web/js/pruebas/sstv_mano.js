@@ -99,7 +99,7 @@
       contenedor.querySelector('#sstv-borrar').onclick = async () => {
         if (!pintadas.size) return;
         const ok = await GK.modal('<p>¿Borrar todo el dibujo?</p>', [['Cancelar', false], ['Borrar', true, 'boton-sec boton-peligro']]);
-        if (!ok) return;
+        if (!ok || !ctx.montada()) return;
         rejilla.querySelectorAll('.sstv-celda.on').forEach((b) => poner(b, false));
         pintadas = new Set();
         guardar(); contar();
@@ -112,7 +112,9 @@
         const boton = form.querySelector('button');
         boton.disabled = true;
         boton.textContent = 'Comprobando…';
-        if (await ctx.intentar(campo.value)) return;
+        const ok = await ctx.intentar(campo.value);
+        if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
+        if (ok) return;
         boton.disabled = false;
         boton.textContent = 'Comprobar';
         campo.select();

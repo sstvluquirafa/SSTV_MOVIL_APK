@@ -140,6 +140,7 @@
           aviso('¡Señal recibida! Habéis encontrado las dos palabras.');
           msg.classList.add('ok');
           const ok = await ctx.intentar(palabras.join(''), { quedarse: true });
+          if (!ctx.montada()) return; // la pantalla cambió mientras se esperaba
           if (ok) {
             GK.borrar(claveGuardado);
             setTimeout(() => ctx.continuar(), 1800);

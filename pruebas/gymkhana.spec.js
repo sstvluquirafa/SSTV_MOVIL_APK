@@ -6,6 +6,61 @@ const { C, SEC } = A;
 const OPCIONES = ['geoguessr', 'bulo_verdad'];
 const nombreEquipo = (id) => C.equipos.find((e) => e.id === id).nombre;
 
+/* ---------- Carrera: otro móvil del equipo supera la estación mientras esta prueba está comprobando ---------- */
+for (const tipo of ['mas_menos', 'pelis']) {
+  test(`Carrera (${tipo}): otro móvil supera la estación a mitad de una comprobación y no salta ningún error`, async ({ page }) => {
+    const e = C.estaciones.find((x) => x.prueba.tipo === tipo);
+    test.skip(!e, `Sin ${tipo}`);
+    const errores = [];
+    page.on('pageerror', (err) => errores.push(err.message));
+    await A.empezar(page);
+    await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+    await A.abrirEstacion(page, e.id);
+    // Las comprobaciones (PBKDF2) tardan 1 s: así seguro que «otro móvil» registra la estación mientras tanto
+    await page.evaluate(() => {
+      const huella = GK.huella;
+      GK.huella = async (...a) => { await new Promise((r) => setTimeout(r, 1000)); return huella(...a); };
+    });
+    // Se empieza una comprobación que FALLA (después avisaría con ctx.ayuda) y, mientras, el otro móvil la supera
+    if (tipo === 'mas_menos') {
+      const partes = A.secretoEquipo(e.id).partes;
+      const nombres = await page.locator('.mm-nombre').allInnerTexts();
+      const buena = partes.find((p) => p.opciones.includes(nombres[0]) && p.opciones.includes(nombres[1])).respuestas[0];
+      await page.locator(`.mm-carta[data-i="${1 - nombres.indexOf(buena)}"]`).click({ noWaitAfter: true });
+    } else {
+      await page.fill('#peli-0', 'Titanic');
+      await page.locator('#pelis-comprobar').click({ noWaitAfter: true });
+    }
+    await page.evaluate(({ id, token, clave }) => GK.datos.encolar({ tipo: 'completar', equipo: 1, estacion: id, token, clave }),
+      { id: e.id, token: A.token(e.id), clave: A.clave(e.id) });
+    await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+    await page.waitForTimeout(1500); // a que terminen las comprobaciones que quedaban en marcha
+    await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+    expect(errores).toEqual([]);
+  });
+}
+
+test('Carrera (palabra final): otro móvil acierta la palabra a mitad de una comprobación y no salta ningún error', async ({ page }) => {
+  const errores = [];
+  page.on('pageerror', (err) => errores.push(err.message));
+  await A.empezar(page);
+  const ruta = C.rutas[0];
+  await A.ponerRuta(page, ruta.id, A.hechas(ruta.id, 10));
+  await page.evaluate(() => { location.hash = '#/final'; });
+  await page.evaluate(() => {
+    const huella = GK.huella;
+    GK.huella = async (...a) => { await new Promise((r) => setTimeout(r, 1000)); return huella(...a); };
+  });
+  // Este móvil prueba una palabra equivocada y, mientras se comprueba, el otro móvil acierta
+  await page.fill('#palabra-final', SEC.final.clave.split('').reverse().join(''));
+  await page.locator('#form-final button').click({ noWaitAfter: true });
+  await page.evaluate((clave) => GK.datos.encolar({ tipo: 'completar', equipo: 1, estacion: 'final', token: 'palabra', clave }), SEC.final.clave);
+  await expect(page).toHaveURL(/#\/superada\/final$/);
+  await page.waitForTimeout(1500);
+  await expect(page).toHaveURL(/#\/superada\/final$/);
+  expect(errores).toEqual([]);
+});
+
 /* ---------- Progreso de las pruebas guardado en el móvil ---------- */
 /** Claves de progreso de pruebas que hay en el móvil (las nuevas «gk:p:…» y las antiguas sin versión). */
 const clavesProgreso = (page) => page.evaluate(() => Object.keys(localStorage).filter((k) =>
