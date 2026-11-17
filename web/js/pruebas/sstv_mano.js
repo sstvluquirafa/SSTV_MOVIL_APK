@@ -14,7 +14,7 @@
       const P = ctx.estacion.prueba;
       const cols = Math.max(1, Math.min(30, Number(P.columnas) || 11));
       const filas = Math.max(1, Math.min(30, Number(P.filas) || 14));
-      const claveGuardado = `sstv:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'sstv');
       // El dibujo se guarda en el móvil: si salen de la pantalla, no lo pierden.
       let pintadas = new Set(GK.leer(claveGuardado, []));
       const guardar = () => GK.guardar(claveGuardado, [...pintadas]);

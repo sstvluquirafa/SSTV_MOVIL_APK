@@ -70,6 +70,7 @@
     GK.borrar('progreso:' + eq.id);
     GK.borrar('avisosAtasco');
     GK.borrar('pistas');
+    GK.borrarProgresoPruebas(); // escotillas, ahorcado, ¿quién soy?, lo escrito en Morse/Pelis…
     GK.datos.vaciarCola();
     cancelar.forEach((f) => f());
     cancelar = [];
@@ -383,7 +384,11 @@
       boton.disabled = false; boton.textContent = 'Unirse';
       if (!ok) { msg.innerHTML = '<div class="aviso aviso-error">Ese código no corresponde a ese equipo. Revisad la tarjeta.</div>'; return; }
       const anterior = miEquipo();
-      if (anterior && anterior.id !== elegido) GK.datos.vaciarCola();
+      if (anterior && anterior.id !== elegido) {
+        GK.datos.vaciarCola();
+        GK.borrar('pistas');
+        GK.borrarProgresoPruebas();
+      }
       GK.borrar('avisoReinicio');
       GK.guardar('equipo', { id: elegido, codigo: GK.normalizar(cod), ronda });
       GK.datos.encolar({ tipo: 'unirse', equipo: elegido, codigo: GK.normalizar(cod) });
@@ -697,6 +702,11 @@
     const limpiezas = [];
     const ctx = {
       estacion: { id: est.id, letra: est.letra, nombre: est.nombre, prueba: datosPrueba, sal },
+      /**
+       * Versión del progreso guardado en el móvil (GK.claveProgreso): ronda del torneo + huella corta del contenido de
+       * la prueba. Si se reinicia el torneo o cambia el contenido, el progreso viejo no vale.
+       */
+      version: `${eq.ronda || 0}-${GK.huellaCorta(JSON.stringify(datosPrueba) + sal)}`,
       equipo: { id: eq.id, nombre: GK.equipo(eq.id).nombre },
       /** ctx.ayuda(texto, tipo?): aviso bajo la prueba. tipo: 'error' (por defecto), 'info' u 'ok'. */
       ayuda(texto, tipo) {

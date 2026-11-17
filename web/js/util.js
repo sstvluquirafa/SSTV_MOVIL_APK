@@ -159,6 +159,38 @@
     try { localStorage.removeItem('gk:' + clave); } catch (e) { /* nada */ }
   };
 
+  /* ---------- Progreso de las pruebas guardado en el móvil ----------
+   * Clave: «p:<nombre>:<equipo>:<estación>:<versión>», donde la versión es la ronda del torneo y una huella corta del
+   * contenido de la prueba (ctx.version, de app.js). Si se reinicia el torneo o cambia el contenido, la clave cambia y
+   * el progreso viejo se ignora (y se borra). */
+  /** Huella corta (FNV-1a de 32 bits, en base 36) de un texto: solo para distinguir versiones, no es secreta. */
+  GK.huellaCorta = function (texto) {
+    let h = 0x811c9dc5;
+    const s = String(texto ?? '');
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h.toString(36);
+  };
+  // Claves de progreso de versiones anteriores de la app (sin versión): «<prefijo>:<equipo>:<estación>»
+  const PREFIJOS_VIEJOS = ['ahorcado', 'binario', 'bulo', 'escotilla', 'dif', 'morse', 'pelis', 'pelis-pistas', 'qr',
+    'qr-palabras', 'quien', 'sstv', 'pz', 'pz-demo', 'wordle'];
+  const RE_VIEJA = new RegExp(`^gk:(${PREFIJOS_VIEJOS.join('|')}):\\d+:\\d+$`);
+  const clavesGk = () => {
+    try { return Object.keys(localStorage).filter((k) => k.startsWith('gk:')); } catch (e) { return []; }
+  };
+  const quitar = (k) => { try { localStorage.removeItem(k); } catch (e) { /* nada */ } };
+  /** Clave de guardado del progreso de una prueba. Borra las de otras versiones y la antigua sin versión. */
+  GK.claveProgreso = function (ctx, nombre) {
+    const base = `p:${nombre}:${ctx.equipo.id}:${ctx.estacion.id}:`;
+    const clave = base + (ctx.version || '0');
+    clavesGk().filter((k) => k.startsWith('gk:' + base) && k !== 'gk:' + clave).forEach(quitar);
+    GK.borrar(`${nombre}:${ctx.equipo.id}:${ctx.estacion.id}`);
+    return clave;
+  };
+  /** Borra TODO el progreso de pruebas guardado en el móvil (al desvincular el equipo o cambiar de equipo). */
+  GK.borrarProgresoPruebas = function () {
+    clavesGk().filter((k) => k.startsWith('gk:p:') || RE_VIEJA.test(k)).forEach(quitar);
+  };
+
   /* ---------- Torneo ---------- */
   GK.equipo = (id) => C.equipos.find((e) => e.id === Number(id));
   GK.estacion = (id) => C.estaciones.find((e) => e.id === Number(id));

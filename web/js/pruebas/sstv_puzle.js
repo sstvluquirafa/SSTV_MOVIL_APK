@@ -30,8 +30,8 @@
         contenedor.innerHTML = '<div class="aviso aviso-error">Falta configurar las imágenes de esta prueba. Avisad a la organización.</div>';
         return;
       }
-      const claveGuardado = `pz:${ctx.equipo.id}:${ctx.estacion.id}`;
-      const claveDemo = `pz-demo:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'pz');
+      const claveDemo = GK.claveProgreso(ctx, 'pz-demo');
       const firma = puzles.map((p) => p.src + JSON.stringify(p.inicio)).join('|');
       let estado = GK.leer(claveGuardado, null);
       if (!estado || estado.firma !== firma) estado = { firma, piezas: puzles.map((p) => p.inicio.map((x) => [...x])), letras: {} };

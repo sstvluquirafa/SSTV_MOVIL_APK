@@ -44,7 +44,7 @@
         contenedor.innerHTML = '<div class="aviso aviso-error">Falta configurar las escenas de esta prueba. Avisad a la organización.</div>';
         return;
       }
-      const claveGuardado = `dif:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'dif');
       const estado = GK.leer(claveGuardado, null) || { encontradas: [], letras: {} };
       const guardar = () => GK.guardar(claveGuardado, estado);
       const zonaDe = (d) => Number(String(d.id)[0]) - 1;

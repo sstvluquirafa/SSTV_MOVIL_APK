@@ -44,7 +44,7 @@
         contenedor.innerHTML = '<div class="aviso aviso-error">Falta configurar las palabras de esta prueba. Avisad a la organización.</div>';
         return;
       }
-      const claveGuardado = `wordle:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'wordle');
       const estado = GK.leer(claveGuardado, null) || { i: 0, intentos: [], teclado: {}, ronda: 1 };
       if (!(estado.i >= 0 && estado.i < palabras.length)) Object.assign(estado, { i: 0, intentos: [], teclado: {}, ronda: 1 });
       let palabra;

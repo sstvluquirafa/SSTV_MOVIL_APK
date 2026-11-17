@@ -24,7 +24,7 @@
         return;
       }
       // El patrón de las rondas ya acertadas se guarda en el móvil: si salen de la pantalla, no lo pierden
-      const claveGuardado = `bulo:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'bulo');
       const acertadas = GK.leer(claveGuardado, []);
 
       function montarRonda(r) {

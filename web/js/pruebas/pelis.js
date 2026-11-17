@@ -49,14 +49,14 @@
           </div>
         </div>`;
       GK.formularioPartes({
-        ctx, contenedor, guardado: `pelis:${ctx.equipo.id}:${ctx.estacion.id}`, sellos: pelis.map((p) => p.sellos),
+        ctx, contenedor, guardado: GK.claveProgreso(ctx, 'pelis'), sellos: pelis.map((p) => p.sellos),
         // Si se parece mucho a un título que vale, se comprueba el canónico (abre el sello); si no, tal cual (fallará)
         limpiar: (texto, i) => (GK.nombreParecido(texto, respuestas[i].v, respuestas[i].no) ? respuestas[i].v[0] : texto),
         nombre: 'película', consejo: 'decid en voz alta lo que cuenta cada emoji.',
       });
 
       // ---------- Una pista por película, a los 45 s de entrar (se recuerda en el móvil) ----------
-      const clavePistas = `pelis-pistas:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const clavePistas = GK.claveProgreso(ctx, 'pelis-pistas');
       const estado = GK.leer(clavePistas, null) || {};
       if (!estado.inicio) estado.inicio = Date.now();
       if (!Array.isArray(estado.vistas)) estado.vistas = [];

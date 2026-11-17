@@ -25,7 +25,7 @@
         return;
       }
       // Las palabras que ha escaneado ESTE móvil (por QR), para no perderlas al salir de la pantalla
-      const claveEscaneos = `qr:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveEscaneos = GK.claveProgreso(ctx, 'qr');
       const escaneadas = GK.leer(claveEscaneos, {});
       contenedor.innerHTML = `
         <div class="reto">
@@ -69,7 +69,7 @@
       const radar = contenedor.querySelector('#qr-radar');
       const cuenta = contenedor.querySelector('#qr-cuenta');
       const partes = GK.formularioPartes({
-        ctx, contenedor, guardado: `qr-palabras:${ctx.equipo.id}:${ctx.estacion.id}`, sellos: qrs.map((q) => q.sellos),
+        ctx, contenedor, guardado: GK.claveProgreso(ctx, 'qr-palabras'), sellos: qrs.map((q) => q.sellos),
         nombre: 'palabra', consejo: 'cada palabra va en su QR (D1, D2, D3).',
       });
       const contar = () => {

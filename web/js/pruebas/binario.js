@@ -56,7 +56,7 @@
           </div>
         </div>`;
       GK.formularioPartes({
-        ctx, contenedor, guardado: `binario:${ctx.equipo.id}:${ctx.estacion.id}`, sellos: palabras.map((p) => p.sellos),
+        ctx, contenedor, guardado: GK.claveProgreso(ctx, 'binario'), sellos: palabras.map((p) => p.sellos),
         nombre: 'palabra', consejo: 'sumad solo los valores de las bombillas encendidas de cada fila.',
       });
     },

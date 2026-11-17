@@ -44,7 +44,7 @@
         return;
       }
       // Lo escrito se guarda en el móvil: si salen de la pantalla, no lo pierden.
-      const claveGuardado = `morse:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'morse');
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">

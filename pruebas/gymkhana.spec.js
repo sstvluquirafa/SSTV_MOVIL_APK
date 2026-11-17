@@ -5,6 +5,78 @@ const { C, SEC } = A;
 
 const OPCIONES = ['geoguessr', 'bulo_verdad'];
 
+/* ---------- Progreso de las pruebas guardado en el móvil ---------- */
+/** Claves de progreso de pruebas que hay en el móvil (las nuevas «gk:p:…» y las antiguas sin versión). */
+const clavesProgreso = (page) => page.evaluate(() => Object.keys(localStorage).filter((k) =>
+  k.startsWith('gk:p:') || /^gk:(ahorcado|binario|bulo|escotilla|dif|morse|pelis|pelis-pistas|qr|qr-palabras|quien|sstv|pz|pz-demo|wordle):\d+:\d+$/.test(k)));
+
+test('Escotilla: un código viejo guardado en el móvil se descarta y se vuelve a la escotilla 1', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'caja_fuerte');
+  test.skip(!e, 'Sin escotilla');
+  const codigos = A.respuestasPartes(e.id);
+  test.skip(codigos.length < 2, 'Una sola escotilla');
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  // 1) Progreso de una versión anterior de la app (clave sin versión), con un código de otro acertijo
+  await page.evaluate((id) => localStorage.setItem(`gk:escotilla:1:${id}`, JSON.stringify(['147'])), e.id);
+  await A.abrirEstacion(page, e.id);
+  await expect(page.locator('.escotilla-paso')).toContainText('Escotilla 1');
+  expect(await page.evaluate((id) => localStorage.getItem(`gk:escotilla:1:${id}`), e.id)).toBeNull();
+  // 2) Abren la 1.ª de verdad, y se cambia a mano el código guardado (de la versión actual) por uno que no vale
+  await A.responder(page, 'caja_fuerte', [codigos[0]]);
+  await expect(page.locator('.escotilla-paso')).toContainText('Escotilla 2', { timeout: 8000 });
+  const [clave] = await clavesProgreso(page);
+  expect(clave).toMatch(new RegExp(`^gk:p:escotilla:1:${e.id}:`));
+  await page.evaluate((k) => localStorage.setItem(k, JSON.stringify(['147'])), clave);
+  await page.reload();
+  // La app comprueba el código guardado con la huella de la escotilla 1, lo descarta y vuelve a empezar
+  await expect(page.locator('.escotilla-paso')).toContainText('Escotilla 1');
+  expect(await page.evaluate((k) => localStorage.getItem(k), clave)).toBeNull();
+  // Y con los códigos buenos (528 + 3609) se supera
+  await A.responder(page, 'caja_fuerte', codigos);
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`), { timeout: 8000 });
+});
+
+test('Escotilla: un progreso guardado bueno se conserva (se sigue en la escotilla 2)', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'caja_fuerte');
+  test.skip(!e, 'Sin escotilla');
+  const codigos = A.respuestasPartes(e.id);
+  test.skip(codigos.length < 2, 'Una sola escotilla');
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.responder(page, 'caja_fuerte', [codigos[0]]);
+  await expect(page.locator('.escotilla-paso')).toContainText('Escotilla 2', { timeout: 8000 });
+  await page.reload();
+  await expect(page.locator('.escotilla-paso')).toContainText('Escotilla 2');
+  for (const c of codigos.slice(1)) await A.responder(page, 'caja_fuerte', [c]);
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`), { timeout: 8000 });
+});
+
+test('Reiniciar todo: el móvil se desvincula y no queda progreso de ninguna prueba', async ({ page }) => {
+  const q = C.estaciones.find((x) => x.prueba.tipo === 'quien_soy');
+  const h = C.estaciones.find((x) => x.prueba.tipo === 'caja_fuerte');
+  test.skip(!q || !h, 'Faltan pruebas');
+  await A.empezar(page);
+  // Progreso en ¿Quién soy? (un acierto) y en la escotilla (la 1.ª abierta), más uno antiguo sin versión
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(q.id));
+  await A.abrirEstacion(page, q.id);
+  await page.fill('#qs-0', A.respuestasPartes(q.id)[0]);
+  await page.locator('.qs[data-i="0"] .qs-form button').click();
+  await expect(page.locator('.qs[data-i="0"]')).toHaveClass(/acierto/);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(h.id));
+  await A.abrirEstacion(page, h.id);
+  await A.responder(page, 'caja_fuerte', [A.respuestasPartes(h.id)[0]]);
+  await expect(page.locator('.escotilla-paso')).toContainText('Escotilla 2', { timeout: 8000 });
+  await page.evaluate(() => localStorage.setItem('gk:ahorcado:1:3', JSON.stringify({ r: 1 })));
+  expect((await clavesProgreso(page)).length).toBeGreaterThanOrEqual(3);
+  // La organización reinicia: el móvil vuelve a «Unirse» y el progreso de las pruebas desaparece
+  await page.evaluate(() => GK.datos.organizacion.reiniciar());
+  await expect(page).toHaveURL(/#\/unirse/, { timeout: 15000 });
+  expect(await clavesProgreso(page)).toEqual([]);
+  expect(await page.evaluate(() => localStorage.getItem('gk:pistas'))).toBeNull();
+});
+
 /* ---------- Cada prueba: falla con otra respuesta, se supera con la suya y muestra la pista a los 60 s ---------- */
 for (const e of C.estaciones) {
   const tipo = e.prueba.tipo;

@@ -24,8 +24,8 @@
         return;
       }
       // Los códigos de las escotillas ya abiertas se guardan en el móvil: si salen de la pantalla, no las pierden
-      const claveGuardado = `escotilla:${ctx.equipo.id}:${ctx.estacion.id}`;
-      const abiertas = GK.leer(claveGuardado, []);
+      const claveGuardado = GK.claveProgreso(ctx, 'escotilla');
+      let abiertas = GK.leer(claveGuardado, []) || [];
       let temporizador = null;
 
       function montarEscotilla(k) {
@@ -116,11 +116,29 @@
         });
       }
 
-      // Se empieza por la primera escotilla que falte por abrir
-      let k = 0;
-      while (k < escotillas.length - 1 && abiertas[k]) k++;
-      montarEscotilla(k);
-      return () => clearTimeout(temporizador);
+      // Se empieza por la primera escotilla que falte por abrir. Cada código guardado se comprueba con la huella de su
+      // escotilla: si alguno no vale (progreso de otra versión de la prueba), se descarta todo y se empieza por la 1.ª.
+      let cerrado = false;
+      if (!Array.isArray(abiertas) || !abiertas.length) {
+        if (!Array.isArray(abiertas)) { GK.borrar(claveGuardado); abiertas = []; }
+        montarEscotilla(0);
+      } else {
+        (async () => {
+          let k = 0;
+          while (k < escotillas.length - 1 && abiertas[k]) {
+            const E = escotillas[k];
+            if (!E.huella || !(await ctx.coincide(String(abiertas[k]), E.huella))) {
+              abiertas.length = 0;
+              GK.borrar(claveGuardado);
+              k = 0;
+              break;
+            }
+            k++;
+          }
+          if (!cerrado) montarEscotilla(k);
+        })();
+      }
+      return () => { cerrado = true; clearTimeout(temporizador); };
     },
   });
 })();

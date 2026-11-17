@@ -118,7 +118,7 @@
       }
 
       // Progreso en el móvil: ronda (0…), palabra de esa ronda (0…) y letras probadas. ronda = nº de rondas → terminada.
-      const claveGuardado = `ahorcado:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'ahorcado');
       const estado = GK.leer(claveGuardado, null) || {};
       if (!(estado.ronda >= 0 && estado.ronda <= rondas.length)) estado.ronda = 0;
       if (!(estado.palabra >= 0 && estado.ronda < rondas.length && estado.palabra < rondas[estado.ronda].palabras.length)) estado.palabra = 0;

@@ -36,7 +36,7 @@
         return;
       }
       const ESPERA = (Number(P.espera) || 20) * 1000;
-      const claveGuardado = `quien:${ctx.equipo.id}:${ctx.estacion.id}`;
+      const claveGuardado = GK.claveProgreso(ctx, 'quien');
       const ahora = Date.now();
       const estado = GK.leer(claveGuardado, null) || {};
       if (!Array.isArray(estado.p) || estado.p.length !== personajes.length) {
