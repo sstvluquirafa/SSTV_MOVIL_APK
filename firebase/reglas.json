@@ -32,7 +32,7 @@
         "$equipo": {
           "$estacion": {
             ".write": "auth != null && !data.exists() && root.child('miembros').child($equipo).child(auth.uid).exists() && root.child('vivo/estado/iniciada').val() === true && root.child('vivo/asignacion/equipos').child($equipo).exists() && root.child('rutas').child(root.child('vivo/asignacion/equipos').child($equipo).val()).child($estacion).exists() && (root.child('rutas').child(root.child('vivo/asignacion/equipos').child($equipo).val()).child($estacion).child('anterior').val() === 'inicio' || data.parent().child(root.child('rutas').child(root.child('vivo/asignacion/equipos').child($equipo).val()).child($estacion).child('anterior').val()).exists()) && newData.parent().parent().parent().parent().child('pruebas').child($equipo).child($estacion).child('token').val() === root.child('secretos/estaciones').child($estacion).child('token').val() && (newData.parent().parent().parent().parent().child('pruebas').child($equipo).child($estacion).child('clave').val() === root.child('secretos/estaciones').child($estacion).child('equipos').child($equipo).child('clave').val() || (newData.parent().parent().parent().parent().child('pruebas').child($equipo).child($estacion).child('clave').val().matches(/^[a-z0-9]+$/) && root.child('secretos/estaciones').child($estacion).child('equipos').child($equipo).child('alternativas').child(newData.parent().parent().parent().parent().child('pruebas').child($equipo).child($estacion).child('clave').val()).val() === true))",
-            ".validate": "newData.hasChildren(['t']) && newData.child('t').isNumber() && newData.child('t').val() <= now",
+            ".validate": "newData.hasChildren(['t']) && newData.child('t').isNumber() && newData.child('t').val() === now",
             "t": {
               ".validate": true
             },
@@ -50,7 +50,7 @@
         "$equipo": {
           "$id": {
             ".write": "auth != null && !data.exists() && root.child('miembros').child($equipo).child(auth.uid).exists()",
-            ".validate": "newData.hasChildren(['t', 'motivo']) && newData.child('t').isNumber() && newData.child('t').val() <= now && newData.child('motivo').isString() && newData.child('motivo').val().length <= 40",
+            ".validate": "newData.hasChildren(['t', 'motivo']) && newData.child('t').isNumber() && (newData.child('t').val() === now || newData.child('t').val() === data.child('t').val()) && newData.child('motivo').isString() && newData.child('motivo').val().length <= 40",
             "t": {
               ".validate": true
             },

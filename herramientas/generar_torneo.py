@@ -83,11 +83,13 @@ def tolerancia(n: int) -> int:
 
 
 def nombre_parecido(texto: str, respuestas, no_valen=()) -> bool:
-    """¿Vale el texto como alguna de las respuestas (ya limpias)? Igual que GK.nombreParecido."""
+    """¿Vale el texto como alguna de las respuestas (ya limpias)? Igual que GK.nombreParecido. Vale también si EMPIEZA
+    por una respuesta de 5 letras o más seguida de más texto («Star Wars Episodio IV»)."""
     t = normalizar_nombre(texto)
     if not t or t in no_valen:
         return False
-    return any(r and distancia(t, r) <= tolerancia(len(r)) for r in respuestas)
+    return any(r and (distancia(t, r) <= tolerancia(len(r))
+                      or (len(r) >= 5 and len(t) > len(r) and t.startswith(r))) for r in respuestas)
 
 
 def respuestas_nombre(principal: str, tambien=(), no_valen=()) -> dict:

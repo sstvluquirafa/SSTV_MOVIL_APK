@@ -271,6 +271,38 @@ test('Pelis espaciales: valen títulos mal escritos y palabras clave; «wally» 
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
+test('Pelis y ¿Quién soy?: vale una respuesta que EMPIEZA por un título o nombre válido de 5 letras o más', async ({ page }) => {
+  const pelis = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  const quien = C.estaciones.find((x) => x.prueba.tipo === 'quien_soy');
+  test.skip(!pelis || !quien, 'Sin Pelis espaciales o sin ¿Quién soy?');
+  await A.empezar(page);
+  /** Índices de las partes para las que vale el texto. */
+  const valenPara = async (e, lista, texto) => {
+    const n = await page.evaluate(({ id, lista }) => window.GK_CONFIG.estaciones.find((x) => x.id === id).equipos['1'].prueba[lista].length, { id: e.id, lista });
+    const r = [];
+    for (let k = 0; k < n; k++) if (await valeNombre(page, e.id, lista, k, texto)) r.push(k);
+    return r;
+  };
+  // Con más texto detrás vale, y solo para la que toca (la misma que el título bien escrito)
+  const casos = [
+    [pelis, 'peliculas', 'Star Wars Episodio IV', 'Star Wars'],
+    [pelis, 'peliculas', 'Guardianes de la galaxia vol 2', 'Guardianes de la Galaxia'],
+    [pelis, 'peliculas', 'Interstellar 2014', 'Interstellar'],
+    [quien, 'personajes', 'Albert Einstein, el de la relatividad', 'Albert Einstein'],
+    [quien, 'personajes', 'Neil Armstrong astronauta', 'Neil Armstrong'],
+  ];
+  for (const [e, lista, texto, bueno] of casos) {
+    const esperado = await valenPara(e, lista, bueno);
+    expect(esperado, bueno).toHaveLength(1);
+    expect(await valenPara(e, lista, texto), texto).toEqual(esperado);
+  }
+  // No vale si lo de delante tiene menos de 5 letras ni si no es un título válido
+  for (const texto of ['Wally y sus amigos', 'Wall de la tierra', 'ET 2', 'Galaxia muy lejana', 'Star']) {
+    expect(await valenPara(pelis, 'peliculas', texto), texto).toEqual([]);
+  }
+  for (const texto of ['Neil el de la Luna', 'Elon de Tesla']) expect(await valenPara(quien, 'personajes', texto), texto).toEqual([]);
+});
+
 test('Pelis espaciales: cada película tiene su propia pista, que se activa a los 45 s', async ({ page }) => {
   const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
   test.skip(!e, 'Sin Pelis espaciales');

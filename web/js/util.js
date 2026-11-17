@@ -98,11 +98,13 @@
   /** Fallos que se perdonan según el largo de la respuesta buena: hasta 3 letras, ninguno; hasta 5, 1; hasta 10, 2;
    *  más, 3. (Con 2 o 3 letras, un fallo ya es otra palabra: «et» no puede valer «es».) */
   GK.tolerancia = (n) => (n <= 3 ? 0 : n <= 5 ? 1 : n <= 10 ? 2 : 3);
-  /** ¿Vale el texto como alguna de las respuestas (ya limpias)? «noValen»: parecidos que NO valen (por ejemplo «wally»). */
+  /** ¿Vale el texto como alguna de las respuestas (ya limpias)? «noValen»: parecidos que NO valen (por ejemplo «wally»).
+   *  Vale también si EMPIEZA por una respuesta de 5 letras o más seguida de más texto («Star Wars Episodio IV»). */
   GK.nombreParecido = function (texto, respuestas, noValen) {
     const t = GK.limpiarNombre(texto);
     if (!t || (noValen || []).includes(t)) return false;
-    return (respuestas || []).some((r) => r && GK.distancia(t, r) <= GK.tolerancia(r.length));
+    return (respuestas || []).some((r) => r && (GK.distancia(t, r) <= GK.tolerancia(r.length)
+      || (r.length >= 5 && t.length > r.length && t.startsWith(r))));
   };
   /** Respuestas de una parte, ofuscadas como las palabras del Wordle: { v: [canónica, …otras que valen], no: […] }. */
   GK.respuestasOfuscadas = function (b64, salHex) {
