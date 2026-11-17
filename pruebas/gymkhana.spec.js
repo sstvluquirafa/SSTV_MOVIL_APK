@@ -4,6 +4,7 @@ const A = require('./ayudas');
 const { C, SEC } = A;
 
 const OPCIONES = ['geoguessr', 'bulo_verdad'];
+const nombreEquipo = (id) => C.equipos.find((e) => e.id === id).nombre;
 
 /* ---------- Progreso de las pruebas guardado en el móvil ---------- */
 /** Claves de progreso de pruebas que hay en el móvil (las nuevas «gk:p:…» y las antiguas sin versión). */
@@ -554,8 +555,9 @@ test('Ahorcado espacial: tildes, huecos, sin oxígeno sale la siguiente palabra,
   await expect(page.locator('.ah-escena')).toHaveAttribute('aria-label', 'Oxígeno: quedan 5 de 6');
   await expect(page.locator('.ah-teclado .w-tecla.ok')).toHaveCount(conTilde ? 2 : 1);
 
-  // Sin oxígeno: se enseña la palabra, aviso, y sale la SIGUIENTE de la ronda; tras la 3.ª vuelve la 1.ª
-  for (const siguiente of [1, 2, 0]) {
+  // Sin oxígeno: se enseña la palabra, aviso, y sale la SIGUIENTE de la ronda; tras la última vuelve la 1.ª
+  const enRonda1 = A.secretoEquipo(e.id).partes[0].respuestas.length;
+  for (const siguiente of [...Array.from({ length: enRonda1 - 1 }, (_, i) => i + 1), 0]) {
     await A.responder(page, 'ahorcado', 'sin-oxigeno');
     await expect(page.locator('#ah-msg')).toHaveText('Sin oxígeno: probad otra.');
     await expect(page.locator('.ah-letra:not(.fija):not(.acertada):not(.revelada)')).toHaveCount(0);
@@ -692,16 +694,202 @@ test('Palabra final y meta: la meta no vale antes de tiempo, aparece al acertar 
   await expect(page.locator('#ayuda-prueba')).toContainText('Esa no es la palabra');
   await page.fill('#palabra-final', palabra.toUpperCase());
   await page.locator('#form-final button').click();
+  // Cinemática «¡Rumbo a la meta!» y, con «Ir a la meta», la pantalla de ir a la meta
+  await expect(page).toHaveURL(/#\/rumbo$/);
+  await page.locator('.cin-saltar').click();
+  await page.locator('.cin-final .boton').click();
   await expect(page).toHaveURL(/#\/superada\/final$/);
   await expect(page.locator('.m-meta')).toHaveCount(1); // ya aparece en el mapa
   await expect(page.locator('.l-meta')).toHaveCount(1); // con el tramo desde la última estación
 
   // Meta
   await page.evaluate((h) => { location.hash = h; }, metaURL);
-  await expect(page).toHaveURL(/#\/$/);
+  await expect(page).toHaveURL(/#\/llegada$/); // cinemática «Podio»
+  await page.locator('.cin-saltar').click();
+  await expect(page.locator('.cin-puesto')).toHaveText('1.º puesto');
+  await page.evaluate(() => { location.hash = '#/'; });
   await expect(page.locator('h1')).toContainText('Misión completada');
   const p = await page.evaluate(() => JSON.parse(localStorage.getItem('gk:demo:bd')).vivo.progreso[1]);
   expect(p.final && p.meta).toBeTruthy();
+});
+
+/* ---------- Cinemáticas: «¡Rumbo a la meta!» (palabra final) y «Podio» (meta) ---------- */
+/** Equipo 1 con las 10 estaciones; opcionalmente, otros equipos ya en la meta (antes que él). */
+async function antesDeLaPalabra(page, otrosEnMeta = 0) {
+  await A.empezar(page);
+  const ruta = C.rutas[0];
+  await A.ponerRuta(page, ruta.id, A.hechas(ruta.id, 10));
+  if (otrosEnMeta) {
+    await page.evaluate(({ n, C }) => {
+      const bd = JSON.parse(localStorage.getItem('gk:demo:bd'));
+      const t0 = Date.now() - 3600000;
+      for (let eq = 2; eq < 2 + n; eq++) {
+        const p = {};
+        C.rutas[eq - 1].orden.forEach((s, i) => { p[s] = { t: t0 + i * 1000 }; });
+        p.final = { t: t0 + 20000 + eq };
+        p.meta = { t: t0 + 30000 + eq };
+        bd.vivo.progreso[eq] = p;
+      }
+      localStorage.setItem('gk:demo:bd', JSON.stringify(bd));
+    }, { n: otrosEnMeta, C });
+    await page.reload();
+  }
+}
+async function acertarPalabra(page) {
+  await page.evaluate(() => { location.hash = '#/final'; });
+  await page.fill('#palabra-final', SEC.final.clave);
+  await page.locator('#form-final button').click();
+}
+const escanearMeta = (page) => page.evaluate((h) => { location.hash = h; }, `#/meta/${SEC.meta.token}`);
+
+test('Cinemática «¡Rumbo a la meta!»: sale al acertar la palabra, una sola vez, y lleva a la pantalla de la meta', async ({ page }) => {
+  await antesDeLaPalabra(page);
+  await acertarPalabra(page);
+  await expect(page).toHaveURL(/#\/rumbo$/);
+  const cin = page.locator('.cin-rumbo');
+  await expect(cin).toBeVisible();
+  await expect(page.locator('.cin-saltar')).toBeVisible(); // «Saltar» desde el principio
+  await expect(page.locator('.cin-letra')).toHaveCount(SEC.final.clave.length);
+  await expect(page.locator('.cin-palabra')).toHaveAttribute('aria-label', SEC.final.clave.toUpperCase());
+  await expect(page.locator('.cin-tramo')).toHaveCount(1); // línea de la última estación a la meta
+  await expect(page.locator('.cin-meta')).toHaveCount(1);
+  // Se deja terminar sola (6–8 s): queda el texto final y el botón
+  await expect(cin).toHaveClass(/cin-fin/, { timeout: 10000 });
+  await expect(page.locator('.cin-final')).toContainText('¡Rumbo a la meta!');
+  await expect(page.locator('.cin-final')).toContainText('El primer equipo en escanear su QR gana');
+  await expect(page.locator('.cin-saltar')).toBeHidden();
+  await page.locator('.cin-final .boton').click();
+  await expect(page).toHaveURL(/#\/superada\/final$/);
+  await expect(page.locator('.cin')).toHaveCount(0);
+  await expect(page.locator('a[href="#/escanear"]').first()).toBeVisible();
+  // Ya vista: al volver a esta pantalla no sale; con «Ver de nuevo», sí
+  await page.reload();
+  await expect(page.locator('.cin')).toHaveCount(0);
+  await page.locator('#ver-rumbo').click();
+  await expect(page).toHaveURL(/#\/rumbo$/);
+  await expect(page.locator('.cin-rumbo')).toBeVisible();
+  await A.sinScrollHorizontal(page);
+});
+
+test('Cinemáticas: «Saltar» va al final enseguida (rumbo y podio)', async ({ page }) => {
+  await antesDeLaPalabra(page);
+  await acertarPalabra(page);
+  await page.locator('.cin-saltar').click();
+  await expect(page.locator('.cin-rumbo')).toHaveClass(/cin-fin/, { timeout: 1000 });
+  await expect(page.locator('.cin-final .boton')).toBeVisible({ timeout: 1000 });
+  await expect(page.locator('.cin-cohete')).toBeHidden();
+  await page.locator('.cin-final .boton').click();
+  await escanearMeta(page);
+  await expect(page).toHaveURL(/#\/llegada$/);
+  await page.locator('.cin-saltar').click();
+  await expect(page.locator('.cin-podio')).toHaveClass(/cin-fin/, { timeout: 1000 });
+  await expect(page.locator('.cin-final .boton')).toBeVisible({ timeout: 1000 });
+  await expect(page.locator('.cin-cuenta')).toBeHidden();
+});
+
+test('Cinemática «Podio»: el primero en llegar sube al 1.er escalón con su medalla de oro y su tiempo', async ({ page }) => {
+  await antesDeLaPalabra(page);
+  await acertarPalabra(page);
+  await page.locator('.cin-saltar').click();
+  await page.locator('.cin-final .boton').click();
+  await escanearMeta(page);
+  await expect(page).toHaveURL(/#\/llegada$/);
+  await expect(page.locator('.cin-cuenta b')).toHaveText(['3', '2', '1']);
+  await expect(page.locator('.cin-capsula')).toHaveCount(1);
+  await expect(page.locator('.cin-podio')).toHaveClass(/cin-fin/, { timeout: 10000 });
+  await expect(page.locator('.cin-puesto')).toHaveText('1.º puesto');
+  await expect(page.locator('.cin-peldano')).toHaveCount(3);
+  await expect(page.locator('.cin-equipo.p1 .cin-medalla.oro')).toHaveCount(1);
+  await expect(page.locator('.cin-peldano.p1')).toHaveClass(/propio/);
+  await expect(page.locator('.cin-resultado .cin-titulo')).toHaveText(nombreEquipo(1));
+  await expect(page.locator('.cin-tiempo')).toContainText(/\d\d:\d\d/);
+  await expect(page.locator('.cin-lluvia .cin-estrella').first()).toBeAttached();
+  await page.locator('.cin-final .boton').click();
+  await expect(page).toHaveURL(/#\/ranking$/);
+  // Una sola vez: en la ruta no vuelve a salir, pero está «Ver de nuevo la llegada»
+  await page.evaluate(() => { location.hash = '#/'; });
+  await expect(page.locator('.cin')).toHaveCount(0);
+  await page.locator('#ver-llegada').click();
+  await expect(page.locator('.cin-podio')).toBeVisible();
+});
+
+test('Cinemática «Podio»: con tres equipos antes, «Misión completada · puesto 4», sin podio', async ({ page }) => {
+  await antesDeLaPalabra(page, 3);
+  await acertarPalabra(page);
+  await page.locator('.cin-saltar').click();
+  await page.locator('.cin-final .boton').click();
+  await escanearMeta(page);
+  await page.locator('.cin-saltar').click();
+  await expect(page.locator('.cin-puesto')).toHaveText('Misión completada · puesto 4');
+  await expect(page.locator('.cin-peldanos')).toHaveCount(0);
+  await expect(page.locator('.cin-llegada')).toHaveCount(1);
+  await expect(page.locator('.cin-podio')).toHaveClass(/cin-sin-podio/);
+});
+
+test('Cinemática «Podio»: sin la llegada en el servidor, «Calculando vuestro puesto…», y se actualiza sola', async ({ page }) => {
+  await A.empezar(page);
+  const ruta = C.rutas[0];
+  await A.ponerRuta(page, ruta.id, { ...A.hechas(ruta.id, 10), final: { t: Date.now() - 1000 } });
+  // En el móvil ya consta la meta, pero en el servidor todavía no (como sin cobertura)
+  await page.evaluate(() => {
+    const l = JSON.parse(localStorage.getItem('gk:progreso:1'));
+    l.meta = { t: Date.now() };
+    localStorage.setItem('gk:progreso:1', JSON.stringify(l));
+    location.hash = '#/llegada';
+  });
+  await page.locator('.cin-saltar').click();
+  await expect(page.locator('.cin-calculando')).toContainText('Calculando vuestro puesto');
+  // Llega la meta al servidor (vuelve la cobertura): el puesto aparece solo
+  await page.evaluate((token) => GK.datos.encolar({ tipo: 'completar', equipo: 1, estacion: 'meta', token, clave: 'llegada' }), SEC.meta.token);
+  await expect(page.locator('.cin-puesto')).toHaveText('1.º puesto');
+});
+
+test('Cinemáticas con prefers-reduced-motion: versión estática (el final con un fundido)', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await antesDeLaPalabra(page);
+  await acertarPalabra(page);
+  await expect(page.locator('.cin-rumbo')).toHaveClass(/cin-estatica/);
+  await expect(page.locator('.cin-rumbo')).toHaveClass(/cin-fin/);
+  await expect(page.locator('.cin-final .boton')).toBeVisible({ timeout: 1500 });
+  await expect(page.locator('.cin-cohete')).toBeHidden();
+  await expect(page.locator('.cin-meta-pulso').first()).toBeHidden();
+  await page.locator('.cin-final .boton').click();
+  await escanearMeta(page);
+  await expect(page.locator('.cin-podio')).toHaveClass(/cin-estatica/);
+  await expect(page.locator('.cin-puesto')).toHaveText('1.º puesto', { timeout: 1500 });
+  await expect(page.locator('.cin-lluvia')).toBeHidden();
+  await expect(page.locator('.cin-cuenta')).toBeHidden();
+});
+
+test('Ranking: aviso grande «¡Equipo N llega a la meta! · N.º puesto», uno detrás de otro', async ({ page }) => {
+  await A.empezar(page);
+  await page.goto('/ranking.html');
+  await expect(page.locator('#podio .podio-equipo')).toHaveCount(3);
+  // Llegan dos equipos a la vez (se escribe desde otra pestaña: el ranking se entera como con el servidor)
+  const otra = await page.context().newPage();
+  await otra.goto('/?demo=1');
+  await otra.evaluate((C) => {
+    const bd = JSON.parse(localStorage.getItem('gk:demo:bd'));
+    const t0 = Date.now() - 3600000;
+    bd.vivo.estado = { iniciada: true, inicio: t0 };
+    const A = (bd.vivo.asignacion = { equipos: {}, rutas: {} });
+    for (const [eq, m] of [[4, 2400000], [2, 2600000]]) {
+      A.equipos[eq] = String(eq); A.rutas[eq] = String(eq);
+      const p = {};
+      C.rutas[eq - 1].orden.forEach((s, i) => { p[s] = { t: t0 + (i + 1) * 60000 }; });
+      p.final = { t: t0 + m - 100000 };
+      p.meta = { t: t0 + m };
+      bd.vivo.progreso[eq] = p;
+    }
+    localStorage.setItem('gk:demo:bd', JSON.stringify(bd));
+  }, C);
+  const aviso = page.locator('.llegada-grande');
+  await expect(aviso).toHaveCount(1, { timeout: 8000 });
+  await expect(aviso).toContainText(`¡${nombreEquipo(4)} llega a la meta!`);
+  await expect(aviso).toContainText('1.º puesto');
+  await expect(aviso).toContainText(nombreEquipo(2), { timeout: 8000 });
+  await expect(aviso).toContainText('2.º puesto');
+  await expect(aviso).toHaveCount(0, { timeout: 8000 });
 });
 
 test('Ranking: un equipo termina al llegar a la meta y va por delante', async ({ page }) => {

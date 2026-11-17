@@ -214,6 +214,7 @@
     if (!forzar && vista.dataset.ruta === location.hash) {
       if ((r.nombre === 'e' || r.nombre === 'final') && estacionEnCurso) { actualizarEstacionEnCurso(); return; }
       if (r.nombre === 'escanear' || r.nombre === 'unirse' || r.nombre === 'ranking') return;
+      if (r.nombre === 'rumbo' || r.nombre === 'llegada') return; // cinemática en marcha: no se reinicia
       if (document.querySelector('.modal')) return;
     }
     if (vista.dataset.ruta !== location.hash) {
@@ -234,6 +235,8 @@
       case 'superada': pantallaSuperada(r.args[0] === 'final' ? 'final' : Number(r.args[0])); break;
       case 'final': pantallaFinal(); break;
       case 'meta': pantallaMeta(r.args[0]); break;
+      case 'rumbo': pantallaRumbo(); break;
+      case 'llegada': pantallaLlegada(); break;
       case 'mapa': if (eq) pantallaMapa(); else pantallaUnirse(); break;
       case 'ranking': if (eq) pantallaRanking(); else pantallaUnirse(); break;
       case 'ayuda': if (eq) pantallaAyuda(); else pantallaUnirse(); break;
@@ -429,6 +432,7 @@
         <div class="foco-cuerpo">${icoGrande('bandera', 'insignia-meta')}
           <div><h1 class="foco-titulo">Misión completada</h1><p class="foco-texto">¡Habéis llegado a la meta! Mirad el ranking para ver vuestro puesto.</p></div></div>
         <a class="boton boton-ancho" href="#/ranking">${GK.icono('podio')} Ver el ranking</a>
+        <a class="boton-sec boton-ancho" href="#/llegada" id="ver-llegada">${GK.icono('play')} Ver de nuevo la llegada</a>
       </article>`;
     } else if (sit.completas && !sit.palabraHecha) {
       foco = `<article class="foco">
@@ -824,7 +828,10 @@
     GK.datos.encolar({ tipo: 'completar', equipo: idEq, estacion: idEst, token, clave });
     if (quedarse) { pintarCabecera(); return; }
     estacionEnCurso = null;
-    ir(idEst === 'meta' ? '#/' : '#/superada/' + idEst);
+    // Palabra final y meta: la primera vez, con su cinemática
+    if (idEst === 'final') return ir(cinematicaVista('rumbo', idEq) ? '#/superada/final' : '#/rumbo');
+    if (idEst === 'meta') return ir(cinematicaVista('llegada', idEq) ? '#/' : '#/llegada');
+    ir('#/superada/' + idEst);
   }
 
   function mensaje(titulo, html, tipo, accion) {
@@ -860,6 +867,7 @@
             <p class="texto-2">Escanead su QR para parar vuestro tiempo.</p></div></div>
           <a class="boton boton-ancho boton-grande" href="#/escanear">${GK.icono('qr')} Escanear QR de la meta</a>
           <a class="boton-sec boton-ancho" href="#/">Ver mi ruta</a>
+          <a class="boton-sec boton-ancho" href="#/rumbo" id="ver-rumbo">${GK.icono('play')} Ver de nuevo</a>
         </section>`;
       GK.activarMapa(vista);
       GK.vibrar([80, 60, 120, 60, 200]);
@@ -972,7 +980,10 @@
       if (!GK.normalizar(texto)) return;
       boton.disabled = true; boton.textContent = 'Descifrando…';
       const ok = (await GK.huella(texto, F.sal)) === F.huella;
-      if (ok) return completar(eq.id, 'final', F.token, GK.normalizar(texto));
+      if (ok) {
+        GK.guardar(`p:palabra:${eq.id}`, texto.trim().toUpperCase()); // para la cinemática
+        return completar(eq.id, 'final', F.token, GK.normalizar(texto));
+      }
       boton.disabled = false; boton.textContent = 'Enviar transmisión';
       campo.select();
       $('#ayuda-prueba').innerHTML = `<div class="aviso aviso-error">${GK.normalizar(texto).length !== F.longitud
@@ -984,7 +995,10 @@
   /* ---------- Pantalla: meta (QR fijo; escanearlo termina la partida del equipo) ---------- */
   async function pantallaMeta(token) {
     vista.innerHTML = '<section class="pantalla"><p class="texto-2">Comprobando el QR…</p></section>';
-    if (!token || (await GK.sha256(token)) !== C.meta.token) {
+    const valido = !!token && (await GK.sha256(token)) === C.meta.token;
+    // Mientras se comprobaba, la app pudo cambiar de pantalla (p. ej. a la cinemática de llegada): no se pisa
+    if (ruta().nombre !== 'meta') return;
+    if (!valido) {
       return mensaje('QR no válido', 'Este QR no es de ninguna estación de la gymkhana.', 'error');
     }
     const eq = miEquipo();
@@ -1007,6 +1021,62 @@
     }
     GK.vibrar([120, 60, 120, 60, 300]);
     completar(eq.id, 'meta', token, 'llegada');
+  }
+
+  /* ---------- Cinemáticas (js/cinematicas.js): «¡Rumbo a la meta!» y «Podio» ---------- */
+  /** Se ven una sola vez por equipo y momento (y ronda del torneo); se borran al desvincular (prefijo «p:»). */
+  function claveCinematica(tipo, idEq) {
+    const eq = miEquipo();
+    return `p:cin:${tipo}:${idEq}:${(eq && eq.ronda) || 0}`;
+  }
+  const cinematicaVista = (tipo, idEq) => !!GK.leer(claveCinematica(tipo, idEq), false);
+
+  function pantallaRumbo() {
+    const eq = miEquipo();
+    if (!eq) return ir('#/');
+    const sit = situacion();
+    if (!sit.ruta || !sit.palabraHecha) return ir('#/');
+    GK.guardar(claveCinematica('rumbo', eq.id), true);
+    // La palabra la escribió el equipo; si la acertó otro móvil, las letras de las estaciones en orden de id
+    const palabra = GK.leer(`p:palabra:${eq.id}`, '') ||
+      [...C.estaciones].sort((a, b) => a.id - b.id).map((e) => e.letraPalabra).join('');
+    const u = GK.estacion(sit.orden[sit.orden.length - 1]);
+    vista.innerHTML = '<section class="pantalla"></section>';
+    const c = GK.cinematicas.rumbo({
+      palabra, equipo: eq.id, ultima: { x: u.x, y: u.y, letra: u.letra }, meta: C.meta,
+      alIr: () => ir('#/superada/final'),
+    });
+    limpiarVista = () => c.limpiar();
+  }
+
+  /** Puesto del equipo en la meta con las llegadas guardadas en el servidor (null si aún no está la suya). */
+  function puestoEnMeta(progresoTodos, idEq) {
+    const llegada = (p) => (p && p.final && p.meta ? Number(p.meta.t) : null);
+    const mia = llegada((progresoTodos || {})[idEq]);
+    if (mia == null) return null;
+    const antes = Object.entries(progresoTodos).filter(([k, p]) => {
+      const t = llegada(p);
+      return Number(k) !== Number(idEq) && t != null && (t < mia || (t === mia && Number(k) < Number(idEq)));
+    }).length;
+    return { puesto: antes + 1, t: mia };
+  }
+
+  function pantallaLlegada() {
+    const eq = miEquipo();
+    if (!eq) return ir('#/');
+    const sit = situacion();
+    if (!sit.ruta || !sit.enMeta) return ir('#/');
+    GK.guardar(claveCinematica('llegada', eq.id), true);
+    vista.innerHTML = '<section class="pantalla"></section>';
+    const c = GK.cinematicas.podio({ equipo: { id: eq.id, nombre: GK.equipo(eq.id).nombre }, alRanking: () => ir('#/ranking') });
+    // Sin cobertura, «Calculando vuestro puesto…»; se actualiza solo cuando el servidor tiene la llegada
+    let ultimo = null;
+    const pintar = () => {
+      const r = puestoEnMeta(ultimo, eq.id);
+      c.puesto(r ? r.puesto : null, r && estadoTorneo && estadoTorneo.inicio ? GK.formatoTiempo(GK.tiempoJuego(estadoTorneo, r.t)) : '');
+    };
+    const dejar = GK.datos.escuchar('progreso', (v) => { ultimo = v || {}; pintar(); });
+    limpiarVista = () => { dejar(); c.limpiar(); };
   }
 
   /* ---------- Arranque ---------- */

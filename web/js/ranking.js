@@ -105,7 +105,8 @@
         const n = nodos.get(id);
         n.classList.remove('destello'); void n.offsetWidth; n.classList.add('destello');
         if (s.terminado) {
-          aviso(`🏁 ${nombre(s.equipo)} llega a la meta en ${tiempo(s) || '—'}`, 'final');
+          // Aviso grande encima del ranking (uno detrás de otro si llegan varios a la vez)
+          llegadaGrande(nombre(s.equipo), s.puesto, s);
           celebrar(n);
         } else if (s.palabraHecha && !p.palabraHecha) {
           aviso(`★ ${nombre(s.equipo)} descifra la palabra final${s.puesto < p.puesto ? ` y sube al ${s.puesto}º puesto` : ''}`);
@@ -125,6 +126,35 @@
     setTimeout(() => a.classList.add('fuera'), 5200);
     setTimeout(() => a.remove(), 6000);
     while ($('#avisos').children.length > 4) $('#avisos').lastChild.remove();
+  }
+
+  /* ---------- Aviso grande de llegada a la meta: «¡Equipo 4 llega a la meta! · 2.º puesto» ---------- */
+  const colaLlegadas = [];
+  let mostrandoLlegada = false;
+  const DURACION_LLEGADA = 4800;
+  function llegadaGrande(quien, puesto, sit) {
+    colaLlegadas.push({ quien, puesto, sit });
+    // Un instante después: así ya ha llegado también el estado de la partida (para el tiempo, sin pausas)
+    if (!mostrandoLlegada) { mostrandoLlegada = true; setTimeout(siguienteLlegada, 150); }
+  }
+  function siguienteLlegada() {
+    const l = colaLlegadas.shift();
+    if (!l) { mostrandoLlegada = false; return; }
+    mostrandoLlegada = true;
+    l.t = tiempo(l.sit);
+    const caja = document.createElement('div');
+    caja.className = `llegada-grande${l.puesto <= 3 ? ' p' + l.puesto : ''}`;
+    caja.setAttribute('role', 'status');
+    caja.innerHTML = `
+      <div class="llegada-caja">
+        <div class="llegada-banda" aria-hidden="true">${GK.banda(null, 'llegada-banda-int')}</div>
+        <div class="llegada-bandera" aria-hidden="true">🏁</div>
+        <p class="llegada-texto">¡${GK.html(l.quien)} llega a la meta!</p>
+        <p class="llegada-puesto"><span class="llegada-medalla" aria-hidden="true">${l.puesto}</span> ${l.puesto}.º puesto${l.t ? ` <span class="mono">· ⏱ ${GK.html(l.t)}</span>` : ''}</p>
+      </div>`;
+    document.body.appendChild(caja);
+    setTimeout(() => caja.classList.add('fuera'), DURACION_LLEGADA - 500);
+    setTimeout(() => { caja.remove(); siguienteLlegada(); }, DURACION_LLEGADA);
   }
 
   function celebrar(nodo) {
