@@ -1304,12 +1304,24 @@ body.app #cielo { opacity: 1; }
 .mx { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 13px; margin: 10px 0 12px; font-family: var(--mono); color: var(--ambar); }
 .mx-letra { font-size: 1.4rem; font-weight: 700; line-height: 1.1; letter-spacing: .08em; white-space: nowrap; }
 .mx-sep { font-size: 1.4rem; line-height: 1.1; color: var(--atmosfera-texto); font-weight: 400; }
-/* Tabla Morse plegable (la grande está en el cartel) */
-.radio-plegable > summary { list-style: none; cursor: pointer; min-height: 48px; align-items: center; }
+/* Tabla Morse plegable, ABIERTA por defecto (la grande está en el cartel). La cabecera es un botón de ancho completo:
+   «Ocultar tabla Morse ▴» abierta y «Ver tabla Morse ▾» cerrada; la flecha gira. */
+.radio-plegable > summary { list-style: none; cursor: pointer; }
 .radio-plegable > summary::-webkit-details-marker { display: none; }
-.radio-plegable > summary .radio-titulo::after { content: ' ▾'; color: var(--texto-3); }
-.radio-plegable[open] > summary .radio-titulo::after { content: ' ▴'; }
-.radio-plegable:not([open]) > summary { padding-bottom: 0; }
+.radio-boton {
+  display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 10px 16px;
+  border-radius: 14px; background: rgba(255, 255, 255, .11); border: 1px solid rgba(255, 255, 255, .18);
+  font-family: var(--cuerpo); font-weight: 700; font-size: 1rem; color: var(--texto);
+  transition: background .12s, transform .12s; -webkit-tap-highlight-color: transparent; user-select: none;
+}
+.radio-boton:hover { background: rgba(255, 255, 255, .16); }
+.radio-boton:active { transform: scale(.98); }
+.rb-flecha { display: inline-block; font-size: 1.15rem; line-height: 1; color: var(--est-claro, var(--ambar)); transition: transform .2s; }
+.radio-plegable[open] .rb-flecha { transform: rotate(180deg); }
+.radio-plegable:not([open]) .rb-abierta, .radio-plegable[open] .rb-cerrada { display: none; }
+.radio-plegable[open] > .radio-boton { margin-bottom: 12px; }
+.radio-plegable > .radio-leyenda { display: flex; justify-content: center; margin: 0 0 10px; }
+@media (prefers-reduced-motion: reduce) { .rb-flecha, .radio-boton { transition: none; } }
 
 /* Binario: una placa de LED por palabra (una fila de bombillas por letra) */
 .placa-palabra { margin: 10px 0 12px; padding: 14px 10px 12px; }
@@ -1615,7 +1627,7 @@ body.sin-scroll { overflow: hidden; }
 }
 .app .entrada > :not(.entrada-talon) { grid-column: 2; }
 .entrada-talon {
-  grid-column: 1; grid-row: 1 / span 3; display: grid; place-items: center;
+  grid-column: 1; grid-row: 1 / span 4; display: grid; place-items: center;
   border-right: 2px dotted color-mix(in srgb, var(--est, #f2cf4a) 55%, transparent);
 }
 .entrada-talon b {
@@ -1628,6 +1640,54 @@ body.sin-scroll { overflow: hidden; }
 .app .entrada.fallo { background: color-mix(in srgb, var(--interferencia) 14%, #18213f); }
 .app .entrada.acierto .campo { border-color: rgba(94, 230, 208, .55); }
 .app .entrada.fallo .campo { border-color: rgba(255, 107, 91, .6); }
+/* Pista de cada película: botón dentro de su entrada (se activa a los 45 s) y, al tocarlo, el texto */
+.peli-pista { margin-top: 10px; }
+.app .peli-pista-b { min-height: 48px; font-size: .95rem; }
+.app .peli-pista-b:disabled { opacity: .6; cursor: default; color: var(--texto-2); border-color: rgba(255, 255, 255, .14); background: rgba(255, 255, 255, .04); }
+.app .peli-pista-b:disabled .icono { opacity: .7; }
+.peli-pista-texto {
+  margin: 0; padding: 10px 12px; border-radius: 12px; border: 1.5px dashed rgba(255, 182, 39, .5);
+  background: var(--ambar-suave); font-size: .95rem; line-height: 1.4; color: var(--texto);
+}
+.peli-pista-texto .antetitulo { display: inline-flex; align-items: center; gap: 5px; color: var(--ambar); font-weight: 700; margin-right: 2px; }
+.peli-pista-texto .icono { width: 16px; height: 16px; }
+.app .entrada.acierto .peli-pista { display: none; }
+
+/* ---------- ¿Quién soy?: una tarjeta por personaje (silueta, pistas, «Otra pista» y su campo) ---------- */
+.qs-lista { gap: 14px; }
+.app .qs { padding: 14px 14px 16px; border-radius: 16px; background: color-mix(in srgb, var(--est, #62cf83) 7%, var(--superficie)); }
+.qs-cab { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 12px; margin-bottom: 10px; }
+.qs-silueta { width: 48px; height: 48px; display: block; }
+.qs-fondo { fill: color-mix(in srgb, var(--est, #62cf83) 22%, #0b1230); stroke: color-mix(in srgb, var(--est, #62cf83) 60%, transparent); stroke-width: 1.5; }
+.qs-busto { fill: #0b1230; }
+.qs-interrogacion { fill: var(--est-claro, #62cf83); font-family: var(--display); font-weight: 800; font-size: 13px; }
+.qs-titulo { display: grid; gap: 6px; min-width: 0; }
+.app .qs .parte-titulo { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.08rem; line-height: 1.15; }
+.qs-progreso .progreso-puntos i { width: 10px; height: 10px; }
+.qs .parte-marca { white-space: nowrap; }
+.qs-pistas { margin: 0 0 12px; padding: 0; list-style: none; display: grid; gap: 6px; counter-reset: pista; }
+.qs-pistas li {
+  counter-increment: pista; position: relative; padding: 9px 12px 9px 40px; border-radius: 12px;
+  background: rgba(4, 8, 22, .4); font-size: 1rem; line-height: 1.4; color: var(--texto-2);
+}
+.qs-pistas li::before {
+  content: counter(pista); position: absolute; left: 10px; top: 9px; width: 21px; height: 21px; border-radius: 50%;
+  display: grid; place-items: center; font-size: .78rem; font-weight: 800; font-family: var(--cuerpo);
+  background: color-mix(in srgb, var(--est, #62cf83) 22%, transparent); color: var(--est-claro, #62cf83);
+}
+.qs-pistas li.nueva { color: var(--texto); background: color-mix(in srgb, var(--est, #62cf83) 13%, rgba(4, 8, 22, .4)); }
+.qs-pistas li.nueva::before { background: var(--est, #62cf83); color: var(--est-texto, #0b1230); }
+.app .qs-otra { min-height: 48px; margin: 0 0 12px; font-size: .95rem; }
+.app .qs-otra:disabled { opacity: .6; cursor: default; color: var(--texto-2); }
+.qs-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.app .qs-form .campo { margin: 0; min-width: 0; background: rgba(4, 8, 22, .45); }
+.app .qs-form .boton { min-height: 54px; height: auto; margin: 0; padding: 0 16px; align-self: stretch; }
+.app .qs.acierto { background: color-mix(in srgb, var(--fosforo) 12%, var(--superficie)); }
+.app .qs.acierto .qs-form { grid-template-columns: 1fr; }
+.app .qs.acierto .qs-fondo { fill: color-mix(in srgb, var(--fosforo) 30%, #0b1230); stroke: var(--fosforo); }
+.app .qs.acierto .qs-interrogacion { fill: var(--fosforo); }
+.app .qs.acierto .qs-form .campo { border-color: rgba(94, 230, 208, .55); color: var(--fosforo); font-weight: 700; }
+.app .qs.fallo .qs-form .campo { border-color: rgba(255, 107, 91, .6); }
 
 /* ---------- ¿Bulo o verdad?: cada noticia, un titular de periódico ---------- */
 .app .bulos { gap: 22px; }

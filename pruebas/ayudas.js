@@ -89,6 +89,8 @@ function respuestaMala(tipo, buena) {
   if (tipo === 'caja_fuerte') return [respuestasPartes(idDeTipo(tipo))[0].split('').map((d) => String((Number(d) + 1) % 10)).join('')];
   // Ahorcado: se gasta el oxígeno de la palabra que salga (6 letras que no están)
   if (tipo === 'ahorcado') return 'sin-oxigeno';
+  // ¿Quién soy?: todos bien menos el 2.º
+  if (tipo === 'quien_soy') return respuestasPartes(idDeTipo(tipo)).map((r, i) => (i === 1 ? 'Marie Curie' : r));
   if (tipo === 'binario' || tipo === 'qr_escondido') return respuestasPartes(idDeTipo(tipo)).map((r, i) => (i === 1 ? 'malo' : r));
   // Morse: la 1.ª y la 3.ª bien y la 2.ª mal (las buenas salen de privado/secretos.json, equipo 1)
   if (tipo === 'morse') return respuestasPartes(idDeTipo('morse')).map((r, i) => (i === 1 ? 'respuestamala' : r));
@@ -196,6 +198,18 @@ async function responder(page, tipo, r) {
       const rs = comoLista(tipo, r);
       for (let i = 0; i < rs.length; i++) await page.fill(`#resp-qr-${i}`, rs[i]);
       await page.locator('#qr-comprobar').click();
+      break;
+    }
+    case 'quien_soy': {
+      // Un nombre por personaje, cada uno con su «Comprobar» (los ya acertados no se tocan)
+      const rs = comoLista(tipo, r);
+      // (se miran antes: al acertar el último, la app cambia de pantalla)
+      const hechos = await page.locator('.qs').evaluateAll((xs) => xs.map((x) => x.classList.contains('acierto')));
+      for (let i = 0; i < rs.length; i++) {
+        if (hechos[i]) continue;
+        await page.fill(`#qs-${i}`, rs[i]);
+        await page.locator(`.qs[data-i="${i}"] .qs-form button`).click();
+      }
       break;
     }
     case 'wordle': {

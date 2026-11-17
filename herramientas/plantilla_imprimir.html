@@ -281,6 +281,8 @@ ${D.estaciones.filter((e) => Object.keys(e.porEquipo || {}).length).map((e) => `
 </section>`;
 
 document.getElementById('hojas').innerHTML = html;
+// Sin ninguna estación de QR escondido (ahora está en el banquillo), no hay etiquetas QR que imprimir
+if (!etiquetasQR.length) document.querySelector('[data-solo="qr-escondido"]').remove();
 document.querySelectorAll('[data-solo]').forEach((b) => b.addEventListener('click', () => {
   document.body.className = b.dataset.solo ? 'solo-' + b.dataset.solo : '';
   window.print();

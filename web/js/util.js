@@ -73,6 +73,45 @@
     return new TextDecoder().decode(b);
   };
 
+  /* ---------- Nombres mal escritos: la MISMA regla para Pelis espaciales y ¿Quién soy? ----------
+   * Igual que normalizar_nombre(), tolerancia() y nombre_parecido() en generar_torneo.py (el generador la usa para
+   * comprobar que ninguna variante sirve para dos respuestas a la vez). */
+  /** Como GK.normalizar, pero quitando antes un artículo al principio («el», «la», «los», «las», «the»). */
+  GK.limpiarNombre = function (texto) {
+    const t = String(texto ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/^[^a-z0-9]+/, '')
+      .replace(/^(el|la|los|las|the)\s+/, '');
+    return GK.normalizar(t);
+  };
+  /** Distancia de edición (Levenshtein): letras que hay que cambiar, quitar o poner para pasar de a a b. */
+  GK.distancia = function (a, b) {
+    let fila = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const nueva = [i];
+      for (let j = 1; j <= b.length; j++) {
+        nueva[j] = Math.min(fila[j] + 1, nueva[j - 1] + 1, fila[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      }
+      fila = nueva;
+    }
+    return fila[b.length];
+  };
+  /** Fallos que se perdonan según el largo de la respuesta buena: hasta 3 letras, ninguno; hasta 5, 1; hasta 10, 2;
+   *  más, 3. (Con 2 o 3 letras, un fallo ya es otra palabra: «et» no puede valer «es».) */
+  GK.tolerancia = (n) => (n <= 3 ? 0 : n <= 5 ? 1 : n <= 10 ? 2 : 3);
+  /** ¿Vale el texto como alguna de las respuestas (ya limpias)? «noValen»: parecidos que NO valen (por ejemplo «wally»). */
+  GK.nombreParecido = function (texto, respuestas, noValen) {
+    const t = GK.limpiarNombre(texto);
+    if (!t || (noValen || []).includes(t)) return false;
+    return (respuestas || []).some((r) => r && GK.distancia(t, r) <= GK.tolerancia(r.length));
+  };
+  /** Respuestas de una parte, ofuscadas como las palabras del Wordle: { v: [canónica, …otras que valen], no: […] }. */
+  GK.respuestasOfuscadas = function (b64, salHex) {
+    try {
+      const o = JSON.parse(GK.desofuscar(b64, salHex));
+      return { v: Array.isArray(o.v) ? o.v : [], no: Array.isArray(o.no) ? o.no : [] };
+    } catch (e) { return { v: [], no: [] }; }
+  };
+
   /**
    * Descifra un texto cifrado con la respuesta de la prueba (explicaciones que se enseñan al acertar).
    * Igual que cifrar() en generar_torneo.py. Con una respuesta incorrecta sale basura (o null).
@@ -265,8 +304,8 @@
    * Formulario de una prueba por partes con sellos (Morse, Pelis, Binario, QR): marca ✓ / ✗ en cada parte, guarda lo
    * escrito en el móvil y, cuando están todas bien, supera la estación con la unión de los trozos.
    *   opciones.ctx, opciones.contenedor (con un <form> y <section class="parte"> con su .campo), opciones.sellos (uno
-   *   por parte), opciones.guardado (clave de GK.guardar), opciones.limpiar (texto → lo que se comprueba; por defecto
-   *   el texto tal cual), opciones.extra(textos, trozos) → Promise<mensaje|null> (aviso especial antes del genérico),
+   *   por parte), opciones.guardado (clave de GK.guardar), opciones.limpiar ((texto, i) → lo que se comprueba; por
+   *   defecto el texto tal cual), opciones.extra(textos, trozos) → Promise<mensaje|null> (aviso especial antes del genérico),
    *   opciones.nombre ('pregunta', 'película'…) y opciones.consejo (qué revisar cuando alguna está mal).
    */
   GK.formularioPartes = function (o) {
@@ -280,7 +319,7 @@
     const n = o.sellos.length;
     form.addEventListener('submit', async (ev) => {
       ev.preventDefault();
-      const textos = partes.campos.map((c) => limpiar(c.value));
+      const textos = partes.campos.map((c, i) => limpiar(c.value, i));
       if (!textos.some((x) => GK.normalizar(x))) return ctx.ayuda('Escribid al menos una respuesta antes de comprobar.', 'info');
       boton.disabled = true;
       const textoBoton = boton.textContent;

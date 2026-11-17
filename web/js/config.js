@@ -603,8 +603,7 @@ window.GK_CONFIG = {
       "colorClaro": "#F2CF4A",
       "prueba": {
         "tipo": "pelis",
-        "_ayuda": "Las mismas 6 películas para todos los equipos (privado/bancos.json → pelis → lista_fija), con la misma clave.",
-        "pista": "Son películas muy conocidas: tres de ellas son de animación o para todos los públicos"
+        "_ayuda": "Las mismas 6 películas para todos los equipos (privado/bancos.json → pelis → lista_fija), con la misma clave. Sin pista general: cada película tiene la suya (bancos.json → pelis → pista), a los 45 s."
       },
       "letraPalabra": "S",
       "token": "2e7b8cde50e8bee45672069fcf42c0293a2b3dd9a8b24ee9b891f07a38a66594",
@@ -622,9 +621,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -636,7 +637,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -647,9 +651,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -660,9 +666,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -673,9 +681,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -687,11 +697,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -713,9 +723,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -727,7 +739,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -738,9 +753,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -751,9 +768,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -764,9 +783,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -778,11 +799,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -804,9 +825,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -818,7 +841,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -829,9 +855,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -842,9 +870,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -855,9 +885,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -869,11 +901,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -895,9 +927,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -909,7 +943,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -920,9 +957,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -933,9 +972,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -946,9 +987,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -960,11 +1003,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -986,9 +1029,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -1000,7 +1045,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -1011,9 +1059,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -1024,9 +1074,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -1037,9 +1089,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -1051,11 +1105,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -1077,9 +1131,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -1091,7 +1147,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -1102,9 +1161,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -1115,9 +1176,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -1128,9 +1191,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -1142,11 +1207,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -1168,9 +1233,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -1182,7 +1249,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -1193,9 +1263,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -1206,9 +1278,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -1219,9 +1293,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -1233,11 +1309,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -1259,9 +1335,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -1273,7 +1351,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -1284,9 +1365,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -1297,9 +1380,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -1310,9 +1395,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -1324,11 +1411,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -1350,9 +1437,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -1364,7 +1453,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -1375,9 +1467,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -1388,9 +1482,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -1401,9 +1497,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -1415,11 +1513,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -1441,9 +1539,11 @@ window.GK_CONFIG = {
                   "🤖"
                 ],
                 "sellos": [
-                  "KP72dAm5zHkx",
-                  "UkuN2AcVL54U"
-                ]
+                  "KP72dAm5zHkx"
+                ],
+                "pista": "Espadas de luz y una galaxia muy, muy lejana",
+                "respuestas": "Um3895OJba5dLviiyKA8/wVt7aDMoD28TSrmtNq1LrFIN+O02vBj/04676fbsyi8RS7yvMihbYAFbeS6i+gUgFQ=",
+                "salRespuestas": "294f8ad5a9d24fdd"
               },
               {
                 "emojis": [
@@ -1455,7 +1555,10 @@ window.GK_CONFIG = {
                 ],
                 "sellos": [
                   "rTSU4op0IrLw"
-                ]
+                ],
+                "pista": "Un robot de Pixar que limpia la Tierra llena de basura",
+                "respuestas": "ptOJzrXXMcW8nZOJraAxxbydk87SoDHcstPFt637ct6xiN2x8g==",
+                "salRespuestas": "ddf1ffec8f8c13b2"
               },
               {
                 "emojis": [
@@ -1466,9 +1569,11 @@ window.GK_CONFIG = {
                   "🏠"
                 ],
                 "sellos": [
-                  "Fw/ZwtpCdjA5",
-                  "ltv4cFF8pjMG"
-                ]
+                  "Fw/ZwtpCdjA5"
+                ],
+                "pista": "Un extraterrestre que quiere llamar a su casa",
+                "respuestas": "DvNL1cpY8tIBtFGSiHei1gG0T4WVcKTFEPMR1ZV38ptXtEmSiHei1gG0T4WVcKTFEPMR1ZV7pMUUpViFgmajwwe0H6rcIb7YV+tmqo0=",
+                "salRespuestas": "75d13df7f003d0b7"
               },
               {
                 "emojis": [
@@ -1479,9 +1584,11 @@ window.GK_CONFIG = {
                   "👨‍👧"
                 ],
                 "sellos": [
-                  "NzyrjKWnX/yL",
                   "xpXWmhsVGl+A"
-                ]
+                ],
+                "pista": "Astronautas que buscan un nuevo hogar al otro lado de un agujero de gusano",
+                "respuestas": "4iVpYnNmo533c3oyOknkmPVmbWJlH+ia7WJtJTpJ5Jj4dT1sa1TvgPx1bDQsUeCGu1ozYidSo87CWmI=",
+                "salRespuestas": "99071f40493d81f4"
               },
               {
                 "emojis": [
@@ -1492,9 +1599,11 @@ window.GK_CONFIG = {
                   "🦸"
                 ],
                 "sellos": [
-                  "B7EZSrgb2vew",
-                  "o6qPtcYX1LA5"
-                ]
+                  "B7EZSrgb2vew"
+                ],
+                "pista": "Un mapache que habla, un árbol que solo dice su nombre y música de los 80",
+                "respuestas": "7KJHLdWoMHfi4UNrhpJ8deTkVGOOlHN89vhYbs3fMHfi4UNrhpJ8Y/jmRWeKlHN89vhILcPRdWX28lVmjp13Y7WsE2iakmB0/uFfapyUc3z2+Fhuza4+MvnvEzW0rm8=",
+                "salRespuestas": "9780310feff31210"
               },
               {
                 "emojis": [
@@ -1506,11 +1615,11 @@ window.GK_CONFIG = {
                   "🤝"
                 ],
                 "sellos": [
-                  "CCkJWyCJ9ykq",
-                  "OEmk+JHOS7Ly",
-                  "OiM+fC4obiDU",
                   "Xx/w30HTtGQn"
-                ]
+                ],
+                "pista": "Un profesor se despierta solo en una nave y se hace amigo de un extraterrestre. Es de 2026",
+                "respuestas": "U7BshQHjOXBa/WPCWMx0c0n+bMZY0XRuCr4410nXcWVL5nLGUtR2YVrrOIsZ0HppRP971UKaNyJY4HXeXttvb077dMNe1HZ1RvZ1hReaaGFE5HvEUtd1InW+OMlUmiFbde8=",
+                "salRespuestas": "28921aa73bb81b00"
               }
             ]
           },
@@ -2202,14 +2311,8 @@ window.GK_CONFIG = {
       "colorTexto": "#0A1128",
       "colorClaro": "#62CF83",
       "prueba": {
-        "tipo": "qr_escondido",
-        "_ayuda": "Tres QR escondidos (D1, D2, D3) alrededor del cartel. Cada uno da a cada equipo una palabra (privado/bancos.json → qr_escondido). Escribid dónde está cada uno.",
-        "escondites": [
-          "ESCRIBE AQUÍ dónde está escondido el QR D1 (a menos de 15 pasos del cartel), por ejemplo «Bajo el banco que mira al pabellón 3».",
-          "ESCRIBE AQUÍ dónde está escondido el QR D2 (a menos de 15 pasos del cartel), por ejemplo «Bajo el banco que mira al pabellón 3».",
-          "ESCRIBE AQUÍ dónde está escondido el QR D3 (a menos de 15 pasos del cartel), por ejemplo «Bajo el banco que mira al pabellón 3»."
-        ],
-        "pista": "ESCRIBE AQUÍ una pista más concreta del escondite (sale con el botón «Pista» a los 60 s)."
+        "tipo": "quien_soy",
+        "_ayuda": "Igual para todos: 5 personajes de privado/bancos.json → quien_soy, con 4 pistas cada uno («Otra pista» a los 20 s). Sin pista general: cada personaje tiene las suyas."
       },
       "letraPalabra": "R",
       "token": "9b1c1dabd1d5ab959b07ebdb6dea753de442da7c2946d87cbd9f23b87f47ee2d",
@@ -2217,292 +2320,622 @@ window.GK_CONFIG = {
       "equipos": {
         "1": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "/XlETPpLhrJJ7g==",
-                "sellos": [
-                  "er5TlbBf0B5z"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "XHjEuKCwMSTN5Ks=",
-                "sellos": [
-                  "KXMYgqwo0RTM"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "QO1nyvO90fM=",
-                "sellos": [
-                  "XmNLRGYa4YrZ"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "8479bbac6ed2eb6874334f3b6253076a",
-          "huella": "acd90ddfc84f823d022af0dc4e3da40b6a57c48ee970e7a8c496755777ced233",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "rKtYJ50POUxiJXKNFa7p81KeJhWMNvWj+XcEbAFZXuGTLUe71e8+V3MNeXzdWAGwkakgGPmWyFmA9Nf7tauDrjpJYZYtslm08NkjNBqzyxCQJcGsHZ+jG9wB7QcpiT2/n39GmaHSEG7L+Yb26nkTwqk1ZO+dwnkeoayzOoJl5GKfmDjn398waB/L2j2Oo2f2W4aNwMo="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "2": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "7ozpT+NFCyoiug==",
-                "sellos": [
-                  "LDCMGNCIowFj"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "8NfRlZCS/VzjtQ==",
-                "sellos": [
-                  "MD+35oS9EOOa"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "7Q/3XnqhgJDF",
-                "sellos": [
-                  "t7E99l1OfqCN"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "1443aca5b202046910f9358668193e7e",
-          "huella": "5a3dbf274ae0b37c52be07649fb7aed93d9b1dc6ae60e8468d7fa2334a676756",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "b18onVnmkr+DF47o/n9B7KM3FeopLycM4NCbttE/90Otsb+j4TAjkc9ZSQ/UgmdOaVov5L/hgtZH8xxisyS5L3a2zxszADSXfro9P3oEYAtD/ZjZLOXgyujNO4/vblFK6BUMyCsG7oZhf+J6yRyI18r6UrbQVqOBb+ynf/nhYOmGdKAlrh3IwFd6TDVCNTlVwG10o/Y="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "3": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "0DDzra7UQ6S4+XA=",
-                "sellos": [
-                  "jw+6qyjprfQc"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "7RfDxMcgMwFZqwJS",
-                "sellos": [
-                  "B8rxEm+OtypY"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "i4U/cHuhTFBGHIc/qw==",
-                "sellos": [
-                  "5+HZ/wGiUYlU"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "06b25c061e1dc3e50baf70ac8687bf4d",
-          "huella": "ed93b2d6638e7b2cf445d9a7561d53f3cc9c2cda9a5e4d807a17e4f0940d3538",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "sI7BbcWi/PkhePlSQ2DstB1nSsvrFsvHM7FK6AfsXqwRP3650FeIAGbEdb2dPOmzJbi7BrbjsCIawfVcUzHSl1btngOxc9m1tFX9Wt/N1KHS9/EfE8vafuk7fEbuPmgHbGSYxbLLxxc7lOHBaTVIDsAY/+D9/rvEnCy8K9nACw8ykQmVX5ubadYz6HriPmUtXVPYgRw="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "4": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "g5G6Frtigl9c",
-                "sellos": [
-                  "uGgJjyTow5hx"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "HjlUEOPdX7pGPw==",
-                "sellos": [
-                  "LPZ0hvQHz11+"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "ZaL7pv/CCUn9",
-                "sellos": [
-                  "DDbbOrllp1vw"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "ad045cb17fa7701713632fea1751b7df",
-          "huella": "4809ccf66a8551efc739bca50370b037f56cf8585f103edd18b553c07a94b83f",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "M075v8VHbRMcSE1H2TeR8i6QXaE72ceagUCiy8CCK8+JHCSbG1n8i1vH1eclKdgzzP66V66iJ/c1KoZlWWfvcXZ3ibY3c25LlyRCz15gbzUMey52rBJVPUw5yaj0vm0soMOhlIs66/6XPohbk8nyTfKf+UQaFjqXvOV8MjqI1QiC166ZnQSmA5/VHCyooMW73HGiyZc="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "5": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "Qdxicgqj2iJs",
-                "sellos": [
-                  "AnTHtiJYUdeq"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "ABn2I7Gcrgbmhs8=",
-                "sellos": [
-                  "WvnljnbpJUEc"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "RAUkijCFCFI=",
-                "sellos": [
-                  "qOR2Ukph4Jhy"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "2c2e21545649581b14c3f244f4fd6613",
-          "huella": "dcdd1533312e50c5fb7ca4f3edeeb5fc97c954ae17f2a0abfee171baa166158f",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "L24GVhzgTk66/To3x8XQ1yGw3NW5rbOH6mE37OsVv3FEqvClhvRtS/akGrXMh34RcygBcwhU/ZbK8rqmYcOL6/9jomxrJ+xEdvNBxNFOAEMMJL1EgLTZFNc8Tn1p+qG8bHnMkBiy51qpvmZykF2TkIQbGE70s1qUZAJ2vxSdfGmHIqxE5ekmYEBO0dcyWlyhTOHH7rQ="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "6": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "DO+Lx+SP",
-                "sellos": [
-                  "JOQdX7JHlo+Z"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "tdxb2fXUnzFt",
-                "sellos": [
-                  "7fFldmJdUw6Z"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "jxa3dFR/ziaG",
-                "sellos": [
-                  "XMvocUrBWqqG"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "3ff044b29a214477303b62e20b7f079c",
-          "huella": "0d10bd6ce98cc61172c867b9e2d6f1075d86e1b7665664ca9dc01f03ca4ac862",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "QAJOyuJcTGD2UFPws/r7FafCOwibmennahnKq1UfjxQEO+l9lMrIyGv1vgCsMizYQkmLeyQV4YUUJMTKGnLFrM+etrSSGYeKz+Rd+5+X0BKZss3WoxcuChGK9tSplMTMmODfuaN+tJvWBg91KaD03pmeCWOxKXNLHkfAyI/eUK1WmGBH4hjbvFms3cSNeoxS/rII61o="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "7": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "pjDxXbZI",
-                "sellos": [
-                  "az5U+q+46pwC"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "H6qJ6wE04NyP",
-                "sellos": [
-                  "juxz3cj2IdaD"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "5ZnwqFAAbKI8zmWtVA==",
-                "sellos": [
-                  "uFPahPnHbTkm"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "4b1bf23ffa0c003e0ea272177cfdf2d8",
-          "huella": "37575c4e25b5726c6c917ff4f2e59c46b41559d1a275dcb1360c5412dc5c47a3",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "tp5wEsgDoIfOpnyOidWP2tyz5d/zKjmZ103U+aXl8Qwmtilhcmed298qrLNCqIYklO1x98NYcQgapCRq9b5Y1Hb0It/zAIVp4F1E5eD40xO3MyjeCyDV0qAIqFH4x0PiKicO1rrsmmuNjTVx6xLjeHVP1wIb3aAU292GJKpz2Fk4TWw5PEnrT0SDyr7ecZFPjkQ0oGY="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "8": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "wbYN0AL3gB89",
-                "sellos": [
-                  "+ZLzCZJ0QKR+"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "ng4TO4Odbpc=",
-                "sellos": [
-                  "W3QpFK/6dZEJ"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "HZxLjwvT1lb8/3kFXg==",
-                "sellos": [
-                  "a5MREB+Qi7+J"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "f9b1e18bfd72d021cd183637281225b3",
-          "huella": "310e7636eccec20f80842382a59ccfb76e5175dd42f7dabd8465d6a28957b810",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "O2rNVms2Q7xbWEWOtrReCtk5CcjHJZ8tCH0tPvSoTyzoHViSb+dLr1ncvXy9dyYJzAckXnGrsPGUKTSB6WYmwRlXMsfL2JynAU+3EBsjU4FGDtKWUA2SuUZSlRhpPn8lTVYy+B0PAOOvxRuyOxhxw2DteTtG39SNLSRsfb1/5O3ULp9nN6MRUnzIlVrNID1fEiFBE5o="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "9": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "VWxxY3t2/g8=",
-                "sellos": [
-                  "776YKQcvb4c8"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "P38V9coiKl2t",
-                "sellos": [
-                  "8BeyqSjuXgRQ"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "VxkdOM+BmAs/lFM=",
-                "sellos": [
-                  "rl6Ud3yJYAbI"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "6d3ec1b4e812253626867f0de153707c",
-          "huella": "4086940a5b26989258447f8459745b7ba6813b2d51cfa8a324b24e611fd7124f",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "Cy+f6f6kcWFMzq0y9Xp7/sRklmsqn6JBQsVeH4idm4sjvU89V8jVAf4iAP8XPWqTozCfnSY0yW7INSmxIsTQfDk222yo7zpAgU/+dydjUi4s+cuenhDawECFZqbLCNi7TFOMoZ9uXnwyEIbWDYVbX3Qz7NbwRbHwUowt8HKcQqqGL/FNloMxc9Zp5l5tyQnVKsP+5gY="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         },
         "10": {
           "prueba": {
-            "qrs": [
+            "personajes": [
               {
-                "escaneo": "QkZkdTBO/g5j",
-                "sellos": [
-                  "RXgy00mUEVGW"
-                ]
+                "pistas": [
+                  "Nací en Alemania en 1879.",
+                  "Gané el Premio Nobel de Física en 1921.",
+                  "Mi teoría más famosa es la de la relatividad.",
+                  "Mi fórmula es E = mc² y hay una foto mía muy famosa sacando la lengua."
+                ],
+                "respuestas": "UT8Mpl4PBu9Gfx/2EDFN4FlpH+0KdgisT3QU9xAxTeAIQFamCjsGtHFABw==",
+                "salRespuestas": "2a1d7a846454248e"
               },
               {
-                "escaneo": "x10sfHZnH3he",
-                "sellos": [
-                  "AI+2YXdkVvo4"
-                ]
+                "pistas": [
+                  "Nací en Inglaterra en 1643.",
+                  "Construí un telescopio con espejos.",
+                  "Descubrí la ley de la gravedad.",
+                  "Dicen que se me ocurrió al ver caer una manzana."
+                ],
+                "respuestas": "hsbnoxLFYXKOhfDiRvs0b5KKs60K8CZsiYv/o3WyYXWSxqvadeM=",
+                "salRespuestas": "fde49181289e431b"
               },
               {
-                "escaneo": "W8Pat1AuJA==",
-                "sellos": [
-                  "UJsUxRc6ESc2"
-                ]
+                "pistas": [
+                  "Nací en Estados Unidos en 1930 y fui piloto de pruebas.",
+                  "Viajé en la misión Apolo 11.",
+                  "Dije: “Es un pequeño paso para el hombre…”.",
+                  "Fui la primera persona en pisar la Luna."
+                ],
+                "respuestas": "6emJZeZ6H3r3opMmrkxOYOCkkSD+DR914KaMM65OU3Ow590puUhRNs/n3SmzAwdPz7Y=",
+                "salRespuestas": "92cbff47dc213d14"
+              },
+              {
+                "pistas": [
+                  "Nací en Italia en 1564.",
+                  "Descubrí cuatro lunas de Júpiter.",
+                  "Tuve problemas por decir que la Tierra gira alrededor del Sol.",
+                  "Apunté al cielo con un telescopio; el sistema de navegación europeo lleva mi nombre."
+                ],
+                "respuestas": "8GdqUnsrVxjqKXUcJB8SHucscBUoUlld7CRwGS0VGl3WaT4eLlJPJNY4",
+                "salRespuestas": "8b451c704170757f"
+              },
+              {
+                "pistas": [
+                  "Nací en Sudáfrica en 1971.",
+                  "Mi empresa lanza cohetes que vuelven a aterrizar.",
+                  "Mi empresa de coches eléctricos se llama Tesla.",
+                  "Fundé SpaceX y soy el dueño de la red social X."
+                ],
+                "respuestas": "YW/dWPkbQcJ2IsUXtjMIhTZvxg+wK0GLOCjHFa1iPos4I8RY+Rs+2g==",
+                "salRespuestas": "1a4dab7ac34063a7"
               }
-            ]
+            ],
+            "espera": 20
           },
-          "sal": "f357e9fd212cd7776a6be13d3e781e6f",
-          "huella": "132c9440b829ac5641540749e7eadd75147781f5bd14431fe20c3f9b10e69854",
+          "sal": "415f3c19c83715c3cbbbd6a4cce01480",
+          "huella": "6c54f26d00652b47bd3ee9af3a8255d57bfb4b253d633f45be6e36f4825cd148",
           "datoCifrado": [
-            "yBRxUSjG0MQOA7n1b9YM5j6h3p+OOvZmxW3UX/MV8NBxkvX8x9ja4inYeKznbjm/lxlDJfCVPcq1WibimGkUec2cu7sZsDobjUvSc02c8TUsXFA7lF6rqxNlF1GJSCsN2fTabZNcBTR8wOcORZFazTeS6cYcVTePvEAF8TdklQeDGhpl7X3SKc8q+R/Km0sYEAloH94="
+            "OemGe9G4UWpfC9ZqRsQTzDRMVRtF0bOte3o6+sdIm7LpIm9r5oR2zxi7VsBcfmbGjb62MoqK15FikyJHfsYI5Mkx55LbF1kPl79sOGlKFJ/GCxZjjijsiUZJhbz4rRXH4pUh10dNR9XCsBhQlrpZ7Js/tVh2QDLRJ8P4ySTIkfU="
           ]
         }
       }
@@ -2529,7 +2962,7 @@ window.GK_CONFIG = {
           "prueba": {
             "palabras": [
               {
-                "palabra": "t/9yl2c=",
+                "palabra": "qfFuh2M=",
                 "salPalabra": "e4b03cd326eff834"
               },
               {
@@ -2539,92 +2972,92 @@ window.GK_CONFIG = {
             ]
           },
           "sal": "5c616520614dd5a433f048898779267e",
-          "huella": "8b7680ccabdc14d5d6748854b6c91d6af902564648b2050b3b026d46fe04c924",
+          "huella": "55cd411471027b4cce2d7dfcae4c0f4c8ffc220009332ca69400b71140cd5f32",
           "datoCifrado": [
-            "O6cdt6pX2avufnmUqa1ZCWnoxRfpOYyzL+qc/7+fB23FqMGJVk40N1X6A/4QPox1qcmPO3a+6WlxgQKoV0iXD6xUxvqKCa+F3xdR2fygJQ5Bf8tw0o7MMs6q8FZL98ENiFB5fX0ivk9mwftJKFQTUQsHlZSPKOvKoMcEPKLSvLkhlw=="
+            "4q7YhVVSZG3zTlhjXDqGdCueOUwJRAWGjVtXP02nNMTuJ7+mOuekZqixF8CbXsz2QxAM3gGQJCty9Rbc86vSY4/uod/N5x2lalv8azLVYY3LSvUFesNgQglveNHyPQZO/UpS6TjaV2O80aZ4L8bqSk6ZhMfEv7+H4Nx+OlzyNEYVOA=="
           ]
         },
         "2": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "zJzq/kA=",
+                "palabra": "zYj261c=",
                 "salPalabra": "81ddb8aa0542e24e"
               },
               {
-                "palabra": "lp/t8hzK",
+                "palabra": "mIP7/gbK",
                 "salPalabra": "d9cdafbb488beeea"
               }
             ]
           },
           "sal": "cfcc6951e67dac81b094aa6e48fd4407",
-          "huella": "5e5375c8d672d6cb260f0f9ecc9ed049793cb1dd06db666830b5dae7a12de535",
+          "huella": "0d39759d458fdbade45f3963785a939c2590ff88e22dcafecf627e03f2008dbd",
           "datoCifrado": [
-            "UJ39Ns/+RjAQGabIRuX8uaGlGIUeXuorkl8kltm167CXRN6dfoi22kZtLWTgViO4QxsuC5HBDybOPeASKf750RiEBRQJKkxFA301TsOazA+xZScOfozt4CPdvVoq0v7AEn4yagwvW7CtWzJVu16otK6hnrlajfGpp3DuvKsmjnXUkQ=="
+            "gfjsBHFU4Rl7VtCjEPCYROW8k7skbNS5ithJREhZygnD8FFCICBTeXvnUzPvXr3H44/CthxtSSB800iyEoNWENbOzj/cZjCHfNy0lAc/g1cptYDq4yWr9+4ef3l9NiqtvljPnz2pFj0u0TejeCWb97J31GruIddv7MbLWP5UOE6mLA=="
           ]
         },
         "3": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "8TYYez4=",
+                "palabra": "6TIAaz4=",
                 "salPalabra": "a773562e6de06cbb"
               },
               {
-                "palabra": "YGwdrMsV",
+                "palabra": "c3IJrMEJ",
                 "salPalabra": "233e5cf88e47be8a"
               }
             ]
           },
           "sal": "ce243df72ae4c60fee9542f89a07e569",
-          "huella": "3fb631706be6b568d4515f0c1882d43038df11414ad8056d7e9c0c64b9e8cf7b",
+          "huella": "a2de52d4049044d73c4518d317ec8449b1b9b3429b641509c9b5d42e1ef6b094",
           "datoCifrado": [
-            "1IPXjjLkGKZgTRDaRd4hrUzjB7itM/cyEOclxZVDkKk1DV6vOZweK5ehn9ADkMn48rO0Ro4SMibSZk4+RwcBibhWAUX0LCSh0yW1i0cwPZmhKaS7rRhUOhsKUJEatxnh5Ykeaueq80HWKvTqyc7haPcvUlvQlVcIlflTNu/g9kO+Sg=="
+            "eo9CcqgOXnAKxWSSQBkNXsHjRob9kweGAihfF701QISZzwHARIkPPsTG/WreXvqc7SWR2TTBGXYzQRSyhhD4dLWZV9iBZ83weQMdVPfOVkUlSenTjom/w9gV5GZQHTbcrIoDksm3uiCGFxujfzFTn+bpDxOjrooaLKcIuUyRXWfcpg=="
           ]
         },
         "4": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "rEStG4Y=",
+                "palabra": "s16vG4Y=",
                 "salPalabra": "e011e35ad4b7f0f0"
               },
               {
-                "palabra": "uDvJ3ZAF",
+                "palabra": "rTzYyowF",
                 "salPalabra": "f9759d98de44d931"
               }
             ]
           },
           "sal": "4ea84ab2755a4949b8707f9aca631f20",
-          "huella": "a54a8c26a0460e4391f7841fc7366b2f64d5ad0c378cd49e7ca42067dff1f83d",
+          "huella": "7defaa6811355d724ab144aaf3866931e23ad093cfc4a8160137b61a1b34118d",
           "datoCifrado": [
-            "e9Cga8MtSrMX103RYHFgcQfpCoK+4Hr8IsX4Moy/8TrONR9fmTrVjFQ6wXFgUe4XCKgwdu+RqB0+SOw/4eWTdoix86lhx5FF/L45JvjIGjp98+OWKI4pa05WqowvfU4FhJXqVPeB+oNh2Uaxja0wqLjG+zFkHWCPiC7nqWh6pB28ZQ=="
+            "diubi89hoMCOohtaUOfJv0BHGwbb/QZg2SAVgf5hoioBc/pcicrz7SrvrJy13v4skpvLqv5LTEWv2Nu6yQg31Mre1gcSySwLBc498ZfvGzMJuz2zAsOgYXvR1rBD86FINrKbMmOcLuPNp2Bn0GgQJfX68QZzzjaYPewcp/v1sR8cig=="
           ]
         },
         "5": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "+ITAxIs=",
+                "palabra": "+ZPYyIs=",
                 "salPalabra": "b6c59681d8fdc13a"
               },
               {
-                "palabra": "6qKyhddz",
+                "palabra": "57+8hcd9",
                 "salPalabra": "a8edfecc933c24a2"
               }
             ]
           },
           "sal": "c44ae484a73baaa8b1dee028cb0ecc9d",
-          "huella": "bbed50d6893213a78952e27973c197ac2ab2b2aba10e8410eafce2a7a01fc245",
+          "huella": "1fb50a83f9ac85f9da86dff18233cd323b5844a35093071ad5d6f4f30a754b88",
           "datoCifrado": [
-            "bzMZIo8dOytaz42hG99sn7Vpg+czIJZ6iJhKeG2i0N1rCZZrXOXU6+r8yHXrWvyTQTygDqxAtEj3Qy8U7cjIHfpq1UK0dxeci9MlAeq812KVIbsTtNSU87emj4cFVAnFLkPvxVTVD/keN8OJhay68qKdcVtSLZUJAwRTQGN/ksYKDg=="
+            "KgMrk/W2/4Sf4CZ2D1AOuP2/RhwTQW5yhnfSpkXRsYdVKh5qsZKqC8cIYD6h5uNUPZAd/91TqVLyZI1Oqmn1GKlvYq2QA6ruYgIeAfXQn99j99lW/aSXRITL1G87MOpwR+ff5OTXgiP2e+h3W13GOFU00Eo5vUtp30+SWL+LAFibug=="
           ]
         },
         "6": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "eWjV4WY=",
+                "palabra": "fGLX9Wc=",
                 "salPalabra": "2a2799a0347fbc80"
               },
               {
@@ -2634,85 +3067,85 @@ window.GK_CONFIG = {
             ]
           },
           "sal": "7ceb629567fd4b768f1e56fc8d054d01",
-          "huella": "861b485e33fa3fb84da5ffefd8fa85a10db8c2db3024dd3eb754f7a5b992a66c",
+          "huella": "ca175f5ea39a25ed54a3ab3257c39febf43a564772d845c6a22f1cb26dff5a93",
           "datoCifrado": [
-            "DG5NbOhV8K47gFefiLdezo7wY4XdhjBTMHCah8x3AJIbynS2DzFTnLQiUT3/rWkSkU/CpWiNLzp3Dnh1NkW5YqWZ4clVrkkmqaBK/gapq6TZO2YHYV1m4ZusHGNDEd59380MpmWffSfDHyLRHfkc5X9hheRibgHLhrXQUfontAc/Lg=="
+            "PLbHvP6emyaa4dseYhFMGdC/jWwh8Y7qf1xmJ7y7qH5KK8n7qpv5mYtUjn+hW+17irASSO7WmZun8ZWL1nOIrwH58DzdZ2n7RQkUG6NZi+1CLwa8L/wCiONRH7QByK/Z1tP1Dap6azBautBjGCgLVuu2YSDF0KdgGiuV4uq+rJHYgA=="
           ]
         },
         "7": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "K9ehjOw=",
+                "palabra": "JtG7n/A=",
                 "salPalabra": "6a84f5dea3af08d6"
               },
               {
-                "palabra": "Ox2s1Eut",
+                "palabra": "PQGw1FOp",
                 "salPalabra": "7e4ef89107ec8a39"
               }
             ]
           },
           "sal": "9fc69b747e0ca32ab06e57dfc1414ae4",
-          "huella": "777ec7b24fa29d562a51f228863ccd04e7376410f0b65f8705d83612a3ac4f85",
+          "huella": "d4356fa5928a4a85634e56d048ce288e3b89d96b8984241cd1f3b0dc23e3c815",
           "datoCifrado": [
-            "lHsWUfrphM9C4WWdIfgB2PxWHF451dfzimr+wTEJirJKpln3TnnQ8t/i7XnI9EEtVkxcwDmqjRcpR3OY1O1pJH5ZZ8Ucg4YEQlI0I+AP2bvo0+pZ92hKI5EEwSSuIWytJKg64DSRYk4k1Zb5AMEVKuw0aV1W5QqsrNiA6e/2sekQyQ=="
+            "HVLAEgC6+3tvva3/oNIfYQd4J7GQJy68a3dfAVYnyRsYdbqtaJNmbGeMTiGUNel1SpMFk4DzO6lWrVDVtNh4Q42TGQb5nZXFi7kuTN517de9eCpRNnVju1Xk/YSYyl4xOQuhMW5qZLurqp9QQc4HhXe6G0QzKyBEmmhMQOGdb1+fRg=="
           ]
         },
         "8": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "WruZRJE=",
+                "palabra": "QqiKXps=",
                 "salPalabra": "0fe9d80ade4964d2"
               },
               {
-                "palabra": "idOWQuhT",
+                "palabra": "i9KKQvJX",
                 "salPalabra": "ca9cde07bc169447"
               }
             ]
           },
           "sal": "8749ecdf2d4b9b8deff9ba0982e14d52",
-          "huella": "94e86cafcd03b4521c4d821097f396db738c95f8b358121626d0f86fa8019190",
+          "huella": "c90ae0519b7cd653d449e1f143b483b47effffe090c2b2b6d9fdb8c27a18dd26",
           "datoCifrado": [
-            "9W55fA+7/4yaRxlzyraubIJEdiOglnin3IeuDKW/qtfBs+ju8dha5mkZLktCZrNZXN2Swd7KTz7Oqg/GXr9mV31WddBpyIBZ1xuFAoS6RHYVR888EOqAPrLsXeSJDw76VTQizKzUT4QL/rpqx0eglkWkYCGmVlQqCQw7N7nv9TkISg=="
+            "+lsGxAnhJqx3Mlwur2dKMqef19Q17293wNNxT4jdHZImEVp/drUCOyBhlYk8f7nSJ1AXorM6RK+oXSyE0nX5TchHVr0NCOvEppBuxv9NyrFAxzT5V0TwcA74faOLL1lEMJtc82vWfLky+wXlObMzl8pThmb3YagO3NoXTuKyKth0QQ=="
           ]
         },
         "9": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "LFjj9+A=",
+                "palabra": "L1/k+fw=",
                 "salPalabra": "630aaab8aeb2a6eb"
               },
               {
-                "palabra": "8cszQ5Ru",
+                "palabra": "7tUkXo9h",
                 "salPalabra": "be99710ac02fd31c"
               }
             ]
           },
           "sal": "33dd09f908242d31c73317d8a03d7654",
-          "huella": "03b6fe06cc0da5783ada25ca4140c568b39e5bba3c50e76533ff6f0ed06459b0",
+          "huella": "8c555b6d66763125a83261c5722f09fff9e7d38ef4734eb6816ee0cd23014ed6",
           "datoCifrado": [
-            "WXDybtpqy5DC0W80Ezrfjta8xuSUUy0hMzXEZdcTfuimlAhizi7JqJEgtySe/9RbSBvFpuLecgksdWkG2fEYB2iFhqAKjfbdPv9SRuxlzsuLvUJZNA1tqnX3USoA0LURXwqLoZu4GYNfNMYlfJFzKWBOQVfHF/dYp8fJF3CIkYk3dw=="
+            "CELYSyEzmJvbEeuyYyovGUqMqQXSLBl05Mp68FQYL3CXuhwGoX6zKD7XmdfFHPe6uO63AVuGSavS8GzxII5SoGM+pOu4T2Bsq8qY/mZcgVPImp6AvdKbuN6UJxQRwdJtlRyrjBETbFwR8Zv1RfHr9j3wtiLr37ZlWX9dMqHcMlgjDA=="
           ]
         },
         "10": {
           "prueba": {
             "palabras": [
               {
-                "palabra": "QuRJg5s=",
+                "palabra": "X+pRgok=",
                 "salPalabra": "11ab07c7daac94c0"
               },
               {
-                "palabra": "IpVtJfiD",
+                "palabra": "NY5pI++Q",
                 "salPalabra": "61c72c71bdd1da1e"
               }
             ]
           },
           "sal": "1cee69365b0b930e6598be549c425f68",
-          "huella": "5635e4636d94d3a751bd36413fa727113ec2c9909e5560240ffb01e3d34dad6a",
+          "huella": "5bef994f0a1870ec80e0a20ed95b545106297c9ed9a5e257fa0abc8637979338",
           "datoCifrado": [
-            "5iFyyjxUcsHHv7nCuzB4gpKZeO3oe91d1Ufc2kyOOII/irAHNVlyqR33XmUy0wySNly0m5WOW6TbkPMsRiEsU2RoI95JY78ui/lIJatr+XUZXFP7WZHCk16WZxzjVzvrGL/uTnFD6pMiGNe+TnHXZeCNqDwypKRLrxF7hbPNTAgjxw=="
+            "KdGlsma0lxjl1bbXCd3DxuR6CDQpYDR0qG2nervapoghj5jqH5SEKoEACQImQvvzw8tbmkrakqpVpGGrEt1La1Cf5rtF2VLsLCaPC6Erp1wqe2zgozb9UJsRJeoqVAMuoFiVlnju84Dj/UxkQcrWgIKeLHDgzB68PJ+9UbQmnO/KYA=="
           ]
         }
       }

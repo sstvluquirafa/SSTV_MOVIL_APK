@@ -53,12 +53,70 @@ ARTICULOS = re.compile(r"^(el|la|los|las|the)\s+")
 
 
 def normalizar_titulo(texto: str) -> str:
-    """Igual que tituloLimpio en web/js/pruebas/pelis.js: como normalizar() pero quitando antes un artículo al
+    """Igual que GK.limpiarNombre en web/js/util.js: como normalizar() pero quitando antes un artículo al
     principio («el», «la», «los», «las», «the»). Así «The Martian» y «Martian» valen igual."""
     t = unicodedata.normalize("NFD", str(texto).lower())
     t = "".join(c for c in t if unicodedata.category(c) != "Mn")
     t = re.sub(r"^[^a-z0-9]+", "", t)
     return normalizar(ARTICULOS.sub("", t))
+
+
+# ---------- Nombres mal escritos: la MISMA regla para Pelis espaciales y ¿Quién soy? (igual que en util.js) ----------
+normalizar_nombre = normalizar_titulo
+
+
+def distancia(a: str, b: str) -> int:
+    """Distancia de edición (Levenshtein). Igual que GK.distancia."""
+    fila = list(range(len(b) + 1))
+    for i in range(1, len(a) + 1):
+        nueva = [i]
+        for j in range(1, len(b) + 1):
+            nueva.append(min(fila[j] + 1, nueva[j - 1] + 1, fila[j - 1] + (a[i - 1] != b[j - 1])))
+        fila = nueva
+    return fila[len(b)]
+
+
+def tolerancia(n: int) -> int:
+    """Fallos que se perdonan según el largo de la respuesta buena. Igual que GK.tolerancia: hasta 3 letras, ninguno
+    (con 2 o 3 letras un fallo ya es otra palabra); hasta 5, 1; hasta 10, 2; más, 3."""
+    return 0 if n <= 3 else 1 if n <= 5 else 2 if n <= 10 else 3
+
+
+def nombre_parecido(texto: str, respuestas, no_valen=()) -> bool:
+    """¿Vale el texto como alguna de las respuestas (ya limpias)? Igual que GK.nombreParecido."""
+    t = normalizar_nombre(texto)
+    if not t or t in no_valen:
+        return False
+    return any(r and distancia(t, r) <= tolerancia(len(r)) for r in respuestas)
+
+
+def respuestas_nombre(principal: str, tambien=(), no_valen=()) -> dict:
+    """{ v: [canónica, …otras que valen], no: [parecidos que no valen] }, todo ya limpio y sin repetir."""
+    v = list(dict.fromkeys(x for x in (normalizar_nombre(y) for y in [principal, *tambien]) if x))
+    return {"v": v, "no": list(dict.fromkeys(x for x in (normalizar_nombre(y) for y in no_valen) if x))}
+
+
+def comprobar_sin_ambiguedad(donde: str, items) -> None:
+    """items: [(nombre, {v, no})]. Corta si alguna variante que vale para una respuesta valdría también para otra (por
+    parecido, con la misma regla de la app). Avisa también si algún «no valen» ya no se parecía a nada (sobra) y corta
+    si coincide con una respuesta que vale (no tendría sentido)."""
+    for (n1, r1), (n2, r2) in itertools.permutations(items, 2):
+        for a in r1["v"]:
+            if nombre_parecido(a, r2["v"], r2["no"]):
+                sys.exit(f"ERROR: en {donde}, «{a}» vale para «{n1}» y también se parece a «{n2}». "
+                         "Quitad esa variante en privado/bancos.json (o añadidla a «no_valen» de la otra).")
+    for n, r in items:
+        for x in r["no"]:
+            if x in r["v"]:
+                sys.exit(f"ERROR: en {donde}, «{x}» ({n}) está a la vez en las que valen y en «no_valen».")
+            if not nombre_parecido(x, r["v"]):
+                print(f"  · OJO: en {donde}, «{x}» ({n}) está en «no_valen» pero ya no se parecía a ninguna respuesta.")
+
+
+def publicar_respuestas(r: dict, sal_hex: str) -> dict:
+    """Respuestas de una parte OFUSCADAS (como las palabras del Wordle): el móvil las necesita para comparar por
+    parecido. No se leen a simple vista en config.js, pero alguien muy experto podría sacarlas."""
+    return {"respuestas": ofuscar(json.dumps(r, ensure_ascii=False, separators=(",", ":")), sal_hex), "salRespuestas": sal_hex}
 
 
 def combinaciones_pelis(peliculas) -> list:
@@ -268,12 +326,17 @@ def contenido_pelis(banco, eq: Equipo):
         for nivel, n in banco.get("reparto", {"fácil": 3, "media": 2, "difícil": 1}).items():
             elegidas += eq.azar.sample([x for x in banco["peliculas"] if x["nivel"] == nivel], n)
         eq.azar.shuffle(elegidas)
+    # Títulos mal escritos: valen si se parecen mucho (nombre_parecido). Las respuestas van OFUSCADAS al móvil; un título
+    # que se parece se cambia allí por el canónico, que es el que abre el sello de su trozo de clave.
+    resp = [respuestas_nombre(x["titulo"], x.get("tambien", []), x.get("no_valen", [])) for x in elegidas]
+    comprobar_sin_ambiguedad("Pelis espaciales", [(x["titulo"], r) for x, r in zip(elegidas, resp)])
     publico, trozos = [], []
-    for i, x in enumerate(elegidas):
+    for i, (x, r) in enumerate(zip(elegidas, resp)):
         tr = eq.trozo(i)
         trozos.append(tr)
-        titulos = [normalizar_titulo(y) for y in [x["titulo"], *x.get("tambien", [])]]
-        publico.append({"emojis": x["emojis"], "sellos": eq.sellos(tr, titulos)})
+        sal_r = derivar(eq.semilla, f"pelis-respuestas:{eq.est}:{eq.eq}:{i}")[:8].hex()
+        publico.append({"emojis": x["emojis"], "sellos": eq.sellos(tr, [r["v"][0]]),
+                        **({"pista": x["pista"]} if x.get("pista") else {}), **publicar_respuestas(r, sal_r)})
     return {"prueba": {"peliculas": publico}, "clave": "".join(trozos),
             "partes": [{"pregunta": " ".join(x["emojis"]), "respuestas": [x["titulo"], *x.get("tambien", [])]} for x in elegidas]}
 
@@ -642,10 +705,30 @@ def contenido_ahorcado(banco, eq: Equipo):
                        for r, ronda in enumerate(banco["rondas"])]}
 
 
+# ---------- D · ¿Quién soy? ----------
+def contenido_quien_soy(banco, eq: Equipo):
+    """5 personajes, cada uno con 4 pistas de más difícil a más fácil (públicas: se enseñan poco a poco). El nombre se
+    acepta mal escrito con la MISMA regla que las Pelis (nombre_parecido), así que las respuestas van OFUSCADAS al
+    móvil. La clave es la unión de los nombres canónicos: la app la envía cuando los 5 están bien."""
+    personajes = banco["personajes"]
+    resp = [respuestas_nombre(p["nombre"], p.get("tambien", []), p.get("no_valen", [])) for p in personajes]
+    comprobar_sin_ambiguedad("¿Quién soy?", [(p["nombre"], r) for p, r in zip(personajes, resp)])
+    publico = []
+    for i, (p, r) in enumerate(zip(personajes, resp)):
+        if len(p.get("pistas", [])) < 2:
+            sys.exit(f"ERROR: en privado/bancos.json → quien_soy, «{p['nombre']}» necesita al menos 2 pistas.")
+        sal_r = derivar(eq.semilla, f"quien:{eq.est}:{eq.eq}:{i}")[:8].hex()
+        publico.append({"pistas": p["pistas"], **publicar_respuestas(r, sal_r)})
+    return {"prueba": {"personajes": publico, "espera": int(banco.get("espera", 20))},
+            "clave": "".join(r["v"][0] for r in resp),
+            "partes": [{"pregunta": f"Personaje {i + 1}", "respuestas": [p["nombre"], *p.get("tambien", [])]}
+                       for i, p in enumerate(personajes)]}
+
+
 # tipo de prueba → función que crea el contenido de un equipo a partir de su banco (privado/bancos.json → tipo)
 CONTENIDO = {"ahorcado": contenido_ahorcado, "mas_menos": contenido_mas_menos, "diferencias": contenido_diferencias, "sstv_puzle": contenido_sstv, "morse": contenido_morse, "pelis": contenido_pelis, "wordle": contenido_wordle, "binario": contenido_binario,
              "qr_escondido": contenido_qr, "geoguessr": contenido_geoguessr, "caja_fuerte": contenido_caja,
-             "bulo_verdad": contenido_bulo}
+             "bulo_verdad": contenido_bulo, "quien_soy": contenido_quien_soy}
 # Las que se generan antes que las demás (el Binario evita las palabras del Wordle de cada equipo)
 PRIMERO = ["wordle"]
 
@@ -927,7 +1010,8 @@ def main():
             viejos = (previo.get("estaciones", {}).get(str(e["id"])) or {}).get("qrs") or []
             s_prev = {**s_prev, "qrs": [viejos[i] if i < len(viejos) else f"GK-QR-{codigo()}-{i + 1}" for i in range(n_qr)]}
         publico_eq[e["id"]], secreto_eq[e["id"]] = generar_por_equipo(e, s_prev, bancos, sec["semilla"], n_eq, compartido)
-        secreto_eq[e["id"]] = (s_prev.get("qrs"), secreto_eq[e["id"]])
+        # Los textos de los QR escondidos solo se guardan si la estación sigue siendo de QR escondido
+        secreto_eq[e["id"]] = (s_prev.get("qrs") if e["prueba"]["tipo"] == "qr_escondido" else None, secreto_eq[e["id"]])
     for e in est:
         tipo = (e.get("prueba") or {}).get("tipo", "codigo_estacion")
         siempre = todo_previo.get("estaciones", {}).get(str(e["id"])) or {}  # respuestas y sinónimos
@@ -939,7 +1023,7 @@ def main():
         }
         if tipo in CONTENIDO:
             # Contenido y clave distintos para cada equipo (la estación no tiene clave propia)
-            for x in ("clave", "alternativas", "equipos", "qr", "peliculas", "explicaciones"):
+            for x in ("clave", "alternativas", "equipos", "qr", "qrs", "peliculas", "explicaciones"):
                 s.pop(x, None)
             qrs, s["equipos"] = secreto_eq[e["id"]]
             if qrs:

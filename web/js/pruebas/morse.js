@@ -1,7 +1,7 @@
 /*
  * Prueba MORSE (cartel + app). Cada equipo recibe 3 PREGUNTAS distintas en Morse, en la pantalla (las elige el
  * generador del banco de privado/bancos.json → morse). El cartel de la estación lleva la tabla Morse en grande; la
- * app la tiene también, plegada. Una respuesta por pregunta, con su ✓, y un único botón «Comprobar».
+ * app la tiene también, abierta (se puede plegar con el botón «Ocultar tabla Morse»). Una respuesta por pregunta, con su ✓, y un único botón «Comprobar».
  *
  * Contenido de este equipo: prueba.preguntas = [{ morse, sellos, huellaPregunta }]. Cada respuesta válida abre un
  * «sello» con un trozo de la clave (ctx.parte); la clave del equipo es la unión de los 3 trozos. Si escriben la
@@ -48,11 +48,12 @@
       contenedor.innerHTML = `
         <div class="reto">
           <div class="reto-cuerpo">
-            <details class="radio-panel radio-plegable">
-              <summary class="radio-cab">
-                <span class="radio-titulo">Tabla Morse</span>
-                <span class="radio-leyenda" aria-hidden="true"><i class="p-punto"></i> corto <i class="p-raya"></i> largo</span>
+            <details class="radio-panel radio-plegable" open>
+              <summary class="radio-boton">
+                <span class="rb-texto rb-abierta">Ocultar tabla Morse</span><span class="rb-texto rb-cerrada">Ver tabla Morse</span>
+                <span class="rb-flecha" aria-hidden="true">▾</span>
               </summary>
+              <p class="radio-leyenda" aria-hidden="true"><i class="p-punto"></i> corto <i class="p-raya"></i> largo</p>
               <div class="tabla-morse">
                 ${TABLA.map(([l, c]) => `<button type="button" class="tecla-morse" data-c="${c}" aria-label="${l}: ${leer(c)}"><b>${l}</b><span class="pulsos" aria-hidden="true">${pulsos(c)}</span></button>`).join('')}
               </div>

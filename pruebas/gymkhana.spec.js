@@ -96,6 +96,173 @@ test('Pelis espaciales: un título equivocado se marca y no supera la estación'
   await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
 });
 
+/** ¿Vale el texto para la parte i de la estación (equipo 1)? Con la regla común de la app (GK.nombreParecido). */
+async function valeNombre(page, idEst, lista, i, texto) {
+  return page.evaluate(({ idEst, lista, i, texto }) => {
+    const p = window.GK_CONFIG.estaciones.find((x) => x.id === idEst).equipos['1'].prueba[lista][i];
+    const r = window.GK.respuestasOfuscadas(p.respuestas, p.salRespuestas);
+    return window.GK.nombreParecido(texto, r.v, r.no);
+  }, { idEst, lista, i, texto });
+}
+
+test('Pelis espaciales: valen títulos mal escritos y palabras clave; «wally» y «Galaxia» no', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  test.skip(!e, 'Sin Pelis espaciales');
+  // Los títulos no van en claro en la configuración pública (van ofuscados)
+  expect(JSON.stringify(e).toLowerCase()).not.toMatch(/interstellar|guardianes|salvaci|star ?wars|wall-?e/);
+  const titulos = A.respuestasPartes(e.id);
+  const i = (t) => titulos.indexOf(t);
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  const escritos = {
+    'Star Wars': 'Starwars', 'Wall-E': 'wally', 'E.T. el extraterrestre': 'ET', Interstellar: 'Interestellar',
+    'Guardianes de la Galaxia': 'Galaxia', 'Proyecto Salvación': 'Proyecto salbacion',
+  };
+  for (const [t, x] of Object.entries(escritos)) await page.fill(`#peli-${i(t)}`, x);
+  await page.locator('#pelis-comprobar').click();
+  for (const t of ['Star Wars', 'E.T. el extraterrestre', 'Interstellar', 'Proyecto Salvación']) {
+    await expect(page.locator(`.parte[data-i="${i(t)}"]`)).toHaveClass(/acierto/);
+  }
+  await expect(page.locator(`.parte[data-i="${i('Wall-E')}"]`)).toHaveClass(/fallo/);
+  await expect(page.locator(`.parte[data-i="${i('Guardianes de la Galaxia')}"]`)).toHaveClass(/fallo/);
+  await expect(page).toHaveURL(new RegExp(`#/e/${e.id}/`));
+  // «Galaxia» sola no vale para ninguna (es ambigua entre Star Wars y Guardianes)
+  for (let k = 0; k < titulos.length; k++) expect(await valeNombre(page, e.id, 'peliculas', k, 'Galaxia')).toBe(false);
+  // Ninguna palabra clave sirve para dos películas
+  const partes = A.secretoEquipo(e.id).partes;
+  for (let a = 0; a < partes.length; a++) {
+    for (const v of partes[a].respuestas) {
+      for (let b = 0; b < partes.length; b++) expect(await valeNombre(page, e.id, 'peliculas', b, v), `«${v}» en la película ${b + 1}`).toBe(a === b);
+    }
+  }
+  // Corrigen las dos que fallan (con palabra clave y bien escrita) y la estación se supera
+  await page.fill(`#peli-${i('Wall-E')}`, 'Wall-e');
+  await page.fill(`#peli-${i('Guardianes de la Galaxia')}`, 'Guardianes');
+  await page.locator('#pelis-comprobar').click();
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+});
+
+test('Pelis espaciales: cada película tiene su propia pista, que se activa a los 45 s', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'pelis');
+  test.skip(!e, 'Sin Pelis espaciales');
+  const pistas = e.equipos['1'].prueba.peliculas.map((p) => p.pista);
+  expect(pistas.every(Boolean)).toBe(true);
+  expect(new Set(pistas).size).toBe(pistas.length);
+  await page.clock.install();
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await expect(page.locator('#pista')).toBeEmpty(); // sin pista general de la estación
+  const botones = page.locator('.peli-pista-b');
+  await expect(botones).toHaveCount(pistas.length);
+  await expect(botones.first()).toBeDisabled();
+  await expect(botones.first()).toContainText('Pista en 0:4');
+  await page.clock.fastForward(46000);
+  await expect(botones.nth(2)).toBeEnabled();
+  await expect(botones.nth(2)).toHaveText(/^\s*Pista\s*$/);
+  await botones.nth(2).click();
+  await expect(page.locator('.parte[data-i="2"] .peli-pista-texto')).toContainText(pistas[2]);
+  await expect(page.locator('.peli-pista-texto')).toHaveCount(1);
+  await A.sinScrollHorizontal(page);
+});
+
+test('Morse: la tabla sale abierta y el botón la pliega y la despliega', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'morse');
+  test.skip(!e, 'Sin Morse');
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  const tabla = page.locator('details.radio-plegable');
+  const boton = page.locator('.radio-boton');
+  await expect(tabla).toHaveAttribute('open', '');
+  await expect(page.locator('.rb-abierta')).toBeVisible();
+  await expect(page.locator('.rb-cerrada')).toBeHidden();
+  await expect(page.locator('.tecla-morse').first()).toBeVisible();
+  const caja = await boton.boundingBox();
+  expect(caja.height).toBeGreaterThanOrEqual(48);
+  expect(caja.width).toBeGreaterThan(250); // ancho completo
+  await boton.click();
+  await expect(tabla).not.toHaveAttribute('open', '');
+  await expect(page.locator('.rb-cerrada')).toBeVisible();
+  await expect(page.locator('.tecla-morse').first()).toBeHidden();
+  await boton.click();
+  await expect(tabla).toHaveAttribute('open', '');
+});
+
+test('Wordle: solo palabras del banco nuevo (sin ORION, SONDA, URANO, ASTRO, CRATER, BOLIDO ni ESTELA)', () => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'wordle');
+  test.skip(!e, 'Sin Wordle');
+  const banco = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '../privado/bancos.json'), 'utf8')).wordle;
+  const quitadas = ['ORION', 'SONDA', 'URANO', 'ASTRO', 'CRATER', 'BOLIDO', 'ESTELA'];
+  for (const w of quitadas) expect([...banco.cinco, ...banco.seis]).not.toContain(w);
+  for (const k of Object.keys(e.equipos)) {
+    const [cinco, seis] = A.respuestasPartes(e.id, k).map((w) => w.toUpperCase());
+    expect(banco.cinco).toContain(cinco);
+    expect(banco.seis).toContain(seis);
+    expect(e.equipos[k].prueba.palabras).toHaveLength(2);
+  }
+});
+
+test('¿Quién soy?: pistas cada 20 s, nombres mal escritos valen y el progreso se guarda', async ({ page }) => {
+  const e = C.estaciones.find((x) => x.prueba.tipo === 'quien_soy');
+  test.skip(!e, 'Sin ¿Quién soy?');
+  expect(e.letraPalabra).toBe('R');
+  expect(e.prueba.pista).toBeFalsy(); // sin pista general
+  // Los nombres no van en claro en la configuración pública (van ofuscados)
+  expect(JSON.stringify(e).toLowerCase()).not.toMatch(/einstein|newton|armstrong|galile|musk/);
+  const P = e.equipos['1'].prueba;
+  await page.clock.install();
+  await A.empezar(page);
+  await A.ponerRuta(page, A.rutaQueEmpiezaPor(e.id));
+  await A.abrirEstacion(page, e.id);
+  await A.sinScrollHorizontal(page);
+  await expect(page.locator('.qs')).toHaveCount(5);
+  await expect(page.locator('#pista')).toBeEmpty();
+  // La 1.ª pista se ve al entrar; «Otra pista» espera 20 s (con cuenta atrás)
+  const t0 = page.locator('.qs[data-i="0"]');
+  await expect(t0.locator('.qs-pistas li')).toHaveCount(1);
+  await expect(t0.locator('.qs-pistas li')).toHaveText(P.personajes[0].pistas[0]);
+  await expect(t0.locator('.qs-otra')).toBeDisabled();
+  await expect(t0.locator('.qs-otra')).toContainText('Otra pista en 0:');
+  await page.clock.fastForward(21000);
+  await expect(t0.locator('.qs-otra')).toBeEnabled();
+  await t0.locator('.qs-otra').click();
+  await expect(t0.locator('.qs-pistas li')).toHaveCount(2);
+  await expect(t0.locator('.qs-pistas li').nth(1)).toHaveText(P.personajes[0].pistas[1]);
+  await expect(t0.locator('.progreso-puntos i.hecho')).toHaveCount(2);
+  await expect(t0.locator('.progreso-puntos i')).toHaveCount(4);
+  await expect(t0.locator('.qs-otra')).toBeDisabled(); // otros 20 s para la siguiente
+  // Nombres mal escritos que valen
+  const escritos = ['Einstien', 'Nuton', 'Neil Amstrong', 'Galileo Galiley'];
+  for (let i = 0; i < escritos.length; i++) {
+    await page.fill(`#qs-${i}`, escritos[i]);
+    await page.locator(`.qs[data-i="${i}"] .qs-form button`).click();
+    await expect(page.locator(`.qs[data-i="${i}"]`)).toHaveClass(/acierto/);
+  }
+  // Uno equivocado: se marca y la estación sigue abierta
+  await page.fill('#qs-4', 'Marie Curie');
+  await page.locator('.qs[data-i="4"] .qs-form button').click();
+  await expect(page.locator('.qs[data-i="4"]')).toHaveClass(/fallo/);
+  await expect(page.locator('#ayuda-prueba')).toContainText('no es ese');
+  await expect(page).toHaveURL(new RegExp(`#/e/${e.id}/`));
+  // Ninguna variante sirve para dos personajes
+  const partes = A.secretoEquipo(e.id).partes;
+  for (let a = 0; a < partes.length; a++) {
+    for (const v of partes[a].respuestas) {
+      for (let b = 0; b < partes.length; b++) expect(await valeNombre(page, e.id, 'personajes', b, v), `«${v}» en el personaje ${b + 1}`).toBe(a === b);
+    }
+  }
+  // Si se cierra y se vuelve a abrir, se conservan las pistas y los aciertos
+  await page.reload();
+  await expect(page.locator('.qs.acierto')).toHaveCount(4);
+  await expect(t0.locator('.qs-pistas li')).toHaveCount(2);
+  await page.fill('#qs-4', 'elon musk');
+  await page.locator('.qs[data-i="4"] .qs-form button').click();
+  await expect(page).toHaveURL(new RegExp(`#/superada/${e.id}$`));
+  await expect(page.locator('.letra-grande')).toHaveText('R');
+});
+
 test('QR escondido: leer un QR da la palabra de ESE equipo y la apunta en su casilla', async ({ page }) => {
   const e = C.estaciones.find((x) => x.prueba.tipo === 'qr_escondido');
   test.skip(!e || !e.equipos, 'Sin QR por equipo');
